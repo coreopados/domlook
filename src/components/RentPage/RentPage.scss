@@ -1,0 +1,14 @@
+@import "../../styles/utils";
+
+.rent-main {
+  background: #fff;
+}
+
+.rent {
+  &__wrapper {
+    @include flex-style(flex);
+  }
+  &__block {
+    width: 100%;
+  }
+}

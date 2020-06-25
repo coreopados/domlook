@@ -1,0 +1,23 @@
+@import "../../../styles/utils";
+
+.common-pagination {
+  margin: 0px 0 20px;
+  @include flex-style(flex, row, center, center);
+  &__wrapper {
+    @include flex-style(flex, row, center, center);
+  }
+  &__button {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    border: 1px solid $pagination-button-border-color-grey;
+    line-height: 42px;
+    text-align: center;
+    &--active {
+      background: $pagination-active-color-blue;
+    }
+  }
+  &__button:not(:last-child) {
+    margin-right: 10px;
+  }
+}

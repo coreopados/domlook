@@ -1,0 +1,42 @@
+@import "../../../styles/utils";
+
+.home-news {
+  @include flex-style(flex, column);
+  margin-bottom: 40px;
+  &__title {
+    margin-bottom: 3px;
+    color: $section-title-color-black;
+    font-family: "HelveticaNeueCyr", sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+  }
+  &__allnews-link {
+    position: relative;
+    align-self: flex-end;
+    margin-bottom: 8px;
+    color: $text-color-blue;
+    font-family: "HelveticaNeueCyr", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    &:hover {
+      color: $darkblue-hover-color;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: $text-color-blue;
+    }
+    &:hover::after {
+      background: $darkblue-hover-color;
+    }
+  }
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0 20px;
+  }
+}

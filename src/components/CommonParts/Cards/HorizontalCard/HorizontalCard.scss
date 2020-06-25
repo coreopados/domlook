@@ -1,0 +1,113 @@
+@import "../../../../styles/utils";
+
+.horizontal-card {
+  position: relative;
+  height: 200px;
+  border: 1px solid $card-border-color-lightblue;
+  @include flex-style(flex);
+  &__price {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    @include flex-style(flex, row, center, center);
+    height: 40px;
+    padding: 0 10px;
+    background: $price-bg-color;
+    color: #fff;
+    font-size: 21px;
+  }
+  &__photo-wrapper {
+    height: 100%;
+    max-width: 280px;
+    min-width: 280px;
+  }
+  &__photo {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  &__block {
+    @include flex-style(flex, column, space-between);
+    width: 100%;
+  }
+  &__inner {
+    @include flex-style(flex, column, space-between);
+    height: 100%;
+    padding: 20px 30px 40px 20px;
+  }
+  &__title {
+    color: $section-title-color-black;
+    font-size: 18px;
+  }
+  &__location {
+    color: $salecard-secondary-color-grey;
+    font-size: 14px;
+  }
+  &__middle-part {
+    @include flex-style(flex, row, space-between);
+    font-size: 14px;
+  }
+  &__description {
+    max-width: 415px;
+  }
+  &__details {
+    @include flex-style(flex, column, space-between);
+  }
+  &__post-date,
+  &__id {
+    color: $salecard-secondary-color-grey;
+  }
+  &__bottom-part {
+    @include flex-style(flex, row, space-between, center);
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 15px;
+    border-top: 1px solid $card-border-color-lightblue;
+  }
+  &__specification {
+    @include flex-style(flex, row, space-between);
+  }
+  &__area,
+  &__floor,
+  &__rooms {
+    @include flex-style(flex, row, flex-start, center);
+    position: relative;
+    height: 22px;
+    padding-left: 25px;
+    color: $card-secondary-color-black;
+    font-size: 13px;
+    font-weight: 500;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      transform: translateY(-50%);
+      height: 17px;
+      width: 19px;
+    }
+  }
+  &__area {
+    margin-right: 5px;
+    &:before {
+      background: url("/domlook/img/card-icons/apartment-area-icon.png")
+        no-repeat;
+    }
+  }
+  &__floor {
+    margin-right: 10px;
+    &:before {
+      background: url("/domlook/img/card-icons/floor-icon.png") no-repeat;
+    }
+  }
+  &__rooms {
+    &:before {
+      background: url("/domlook/img/card-icons/rooms-icon.png") no-repeat;
+    }
+  }
+  &__to-favourites {
+    color: $section-title-color-black;
+    font-size: 13px;
+    border-bottom: 1px solid $section-title-color-black;
+  }
+}

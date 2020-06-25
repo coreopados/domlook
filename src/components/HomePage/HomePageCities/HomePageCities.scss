@@ -1,0 +1,59 @@
+@import "../../../styles/utils";
+
+.homepage-cities {
+  width: 100%;
+  margin-top: 50px;
+  padding: 30px 0;
+  background: $secondary-bg-color-lightblue;
+  border-top: 1px solid $border-color-lightblue;
+  border-bottom: 1px solid $border-color-lightblue;
+  &__wrapper {
+    @include flex-style(flex, column, flex-start, center);
+  }
+  &__block {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+  }
+  &__title {
+    margin-bottom: 25px;
+    color: $text-color-blue;
+    font-size: 20px;
+    font-family: "HelveticaNeueCyr", sans-serif;
+    font-weight: normal;
+  }
+}
+
+.cities-card {
+  @include flex-style(flex, column, flex-start, center);
+  &__icon-wrapper {
+    display: flex;
+    height: 98px;
+    margin-bottom: 5px;
+  }
+  &__icon { 
+    margin-top: auto;
+  }
+  &__title {
+    margin-bottom: 5px;
+  }
+  &__link-wrapper {
+    position: relative;
+    @include flex-style(flex, row, space-between);
+    width: 70%;
+    margin: 0 auto;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 47%;
+      transform: translate(-50%, -50%);
+      height: 75%;
+      width: 2px;
+      background: $text-color-blue;
+    }
+  }
+  &__link {
+    color: $text-color-blue;
+  }
+}

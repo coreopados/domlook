@@ -1,0 +1,28 @@
+@import "../../../styles/utils";
+
+.common-nav {
+  margin-bottom: 15px;
+  &__link {
+    color: $news-card-color-black;
+  }
+  &__wrapper {
+    @include flex-style(flex, row, flex-start, center);
+    height: 60px;
+  }
+  &__page-name {
+    position: relative;
+    padding-left: 22px;
+    color: $secondary-navigation-color-black;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 7px;
+      // transform: translateY(-50%);
+      height: 100%;
+      width: 30px;
+      background: url("/domlook/img/common-section-icons/section-nav-arrow.png") no-repeat;
+      background-size: 8px;
+    }
+  }
+}

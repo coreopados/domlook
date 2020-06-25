@@ -1,0 +1,48 @@
+@import "../../../../styles/utils";
+
+.home-news-card {
+  position: relative;
+  @include flex-style(flex, column);
+  text-align: center;
+  &__post-date {
+    @include flex-style(flex, row, center, center);
+    position: absolute;
+    right: 0;
+    top: 20px;
+    height: 40px;
+    padding: 0 10px;
+    background: $price-bg-color;
+    color: #fff;
+    font-size: 21px;
+  }
+  &__photo-wrapper {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+  }
+  &__photo {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  &__text-wrapper {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  &__title {
+    margin-bottom: 15px;
+    color: $text-color-blue;
+    font-size: 14px;
+    font-weight: bold;
+    &:hover {
+      color: $darkblue-hover-color;
+    }
+  }
+  &__description {
+    color: $news-card-color-black;
+    font-size: 14px;
+    font-weight: 300;
+    // overflow-wrap: break-word;
+    // white-space: pre-wrap;
+  }
+}

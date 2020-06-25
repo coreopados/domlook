@@ -1,0 +1,97 @@
+@import "../../../styles/utils";
+
+.common-top-filters {
+  @include flex-style(flex, column);
+  &__block {
+    @include flex-style(flex, row, space-between);
+    margin-bottom: 25px;
+    align-items: center;
+  }
+  &__title {
+    color: $section-title-color-black;
+    font-family: "HelveticaNeueCyr", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &__button {
+    position: relative;
+    height: 35px;
+    color: $secondary-button-color-darkblue;
+    padding-left: 30px;
+    padding-right: 5px;
+    &--active {
+      border: 1px solid $price-bg-color;
+    }
+    &--list {
+      margin-right: 15px;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 11px;
+        left: 6px;
+        height: 13px;
+        width: 17px;
+        background: url("/domlook/img/common-section-icons/list-button-icon.png")
+          no-repeat;
+      }
+    }
+    &--grid {
+      &:before {
+        content: "";
+        position: absolute;
+        top: 11px;
+        left: 6px;
+        height: 13px;
+        width: 17px;
+        background: url("/domlook/img/common-section-icons/grid-button-icon.png")
+          no-repeat;
+      }
+    }
+  }
+  &__amount,
+  &__sort,
+  &__post-date {
+    font-weight: 300;
+  }
+  &__post-date,
+  &__sort{
+    display: flex;
+    align-items: center;
+    .select-wrap{
+      position: relative;
+      margin-left: 15px;
+      select{
+        border:0;
+        
+        -webkit-appearance: none;
+        outline:none;
+        font-size:16px;
+        padding:4px 25px 4px  6px;
+      }
+    }
+    .select-wrap:before{
+      content: '';
+      position: absolute;
+      width: 85%;
+      bottom: 5px;
+      border-bottom: 1px dotted #4dc7ec;
+      left: 7px;
+    }
+    .select-wrap:after{
+      content: "▼";
+      font-size: 12px;
+      position: absolute;
+      right: 8px;
+      top: 6px;
+      z-index: 1;
+      color: rgb(77, 199, 236);
+      text-align: center;
+      width: 10%;
+      height: 100%;
+      pointer-events: none;
+      box-sizing: border-box;
+      padding: 0px 8px;
+    }
+  }
+
+}

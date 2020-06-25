@@ -1,0 +1,21 @@
+@import "../../../styles/fonts";
+
+.home-filters {
+  width: 100%;
+  margin-top: 50px;
+  &__title {
+    margin-bottom: 50px;
+    color: #fff;
+    font-size: 32px;
+    font-family: "HelveticaNeueCyr", sans-serif;
+    font-weight: normal;
+    text-align: center;
+  }
+}
+
+.home-filters-form {
+  height: 385px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+}

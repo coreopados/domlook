@@ -1,0 +1,31 @@
+@import "../../../styles/utils";
+
+.secondary-info {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 25px 0 40px;
+  background: $secondary-bg-color-lightblue;
+  border-top: 1px solid $border-color-lightblue;
+  border-bottom: 1px solid $border-color-lightblue;
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.secondary-info-card {
+  @include flex-style(flex, column, flex-start, center);
+  &__title {
+    margin-bottom: 8px;
+    color: $text-color-blue;
+    font-size: 16px;
+    font-family: "HelveticaNeueCyr", sans-serif;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__text {
+    width: 250px;
+    font-size: 14px;
+    text-align: center;
+  }
+}

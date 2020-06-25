@@ -1,0 +1,57 @@
+@import "../../styles/utils";
+
+.footer {
+  padding: 35px 0 10px;
+  background: $footer-bg-color-blue;
+  color: #fff;
+  &__wrapper {
+    @include flex-style(flex, column);
+  }
+  &__block {
+    @include flex-style(flex);
+    margin-bottom: 45px;
+    font-size: 14px;
+  }
+}
+
+.footer-socials {
+  @include flex-style(flex, column);
+  &__logo-link {
+    padding-right: 10px;
+  }
+  &__list {
+    @include flex-style(flex, row, space-between);
+  }
+}
+
+.footer-cities {
+  @include flex-style(flex);
+}
+
+.footer-list {
+  padding-left: 20px;
+  &__item {
+    margin-bottom: 5px;
+  }
+}
+
+.footer-settings {
+  @include flex-style(flex, row, space-around);
+  margin-bottom: 25px;
+  &__button {
+    font-size: 17px;
+    font-weight: bold;
+  }
+}
+
+.footer-copyrights {
+  @include flex-style(flex, column, flex-start, center);
+  padding-top: 20px;
+  border-top: 1px solid $secondary-border-color;
+  &__text {
+    color: $copyrights-color-lightblue;
+  }
+  &__link {
+    margin-top: 7px;
+  }
+}
