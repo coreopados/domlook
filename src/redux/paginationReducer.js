@@ -5,7 +5,7 @@ import {
     PAGINATE_NEWS,
 } from './constants';
 
-const initialState = {
+export const initialState = {
     itemsPerPage: 9,
     currentPageSale: 1,
     currentPageRent: 1,

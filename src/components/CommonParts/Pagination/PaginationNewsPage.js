@@ -40,7 +40,7 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   // totalItemsCount: state.mainReducer.totalItemsCount,
   // currentPageNews: state.paginationReducer.currentPageNews,
-  currentPageNews: state.filterCategoryReducer.currentPageNews,
+  currentPageNews: state.paginationReducer.currentPageNews,
 });
 
 const mapDispatchToProps = (dispatch) => ({

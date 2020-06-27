@@ -26,6 +26,7 @@ const SalePage = ({
   active_top_filter,
 
   statusFilter,
+  locationFilter
 }) => {
   useEffect(() => {
     loadData();
@@ -41,6 +42,23 @@ const SalePage = ({
   } else if (statusFilter === 'house') {
     saleAds = saleAds.filter((ad) => ad.prop_type === "house")
   }
+
+
+  if (locationFilter === "Kiev") {
+    saleAds = saleAds.filter((ad) => ad.location.trim().match('Киев '))
+  } else if (locationFilter === "Kharkov") {
+    saleAds = saleAds.filter((ad) => ad.location.trim().match('Харьков '))
+  } else if (locationFilter === "Odessa") {
+    saleAds = saleAds.filter((ad) => ad.location.trim().match('Одесса '))
+  } else if (locationFilter === "Dnepr") {
+    saleAds = saleAds.filter((ad) => ad.location.trim().match('Днепр '))
+  } else if (locationFilter === "Lvov") {
+    saleAds = saleAds.filter((ad) => ad.location.trim().match('Львов '))
+  }
+
+
+
+  console.log(locationFilter)
 
 
   const indexOfLastAd = currentPageSale * itemsPerPage;
@@ -63,6 +81,7 @@ const SalePage = ({
                 </div>
               )}
               {isLoaded && <List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />}
+              {/* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
 
               {(saleAds.length > 9) && <PaginationSale totalItems={saleAds.length} />}
               <About title="Продажа жилья в Украине">
@@ -143,7 +162,8 @@ const mapStateToProps = (state) => ({
 
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
-  // findedAdsLength: state.filterReducer.findedAdsLength,
+  locationFilter: state.filterReducer.locationFilter,
+  findedAdsLength: state.filterReducer.findedAdsLength,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -180,4 +200,5 @@ SalePage.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   currentPageSale: PropTypes.number.isRequired,
   statusFilter: PropTypes.string.isRequired,
+  locationFilter: PropTypes.string.isRequired,
 };

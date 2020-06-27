@@ -10,7 +10,7 @@ import HomeFiltersForm from "../ReduxForms/HomeFiltersForm/HomeFiltersForm";
 import SecondaryInfo from "./SecondaryInfo/SecondaryInfo";
 import { HomeNews } from "./HomeNews/HomeNews";
 import About from "../CommonParts/About/About";
-import HomePageCities from "./HomePageCities/HomePageCities";
+import { HomePageCities } from "./HomePageCities/HomePageCities";
 import { HomeAdsList } from "./HomeAdsList/HomeAdsList";
 import { handleLoadNewsAds } from "../../redux/actionCreators";
 import { filterTypeRentCreator, filterTypeSellCreator, filterStatusApartmentCreator, filterStatusHouseCreator } from "../../redux/actionFilterCreators";
@@ -170,7 +170,8 @@ const mapStateToProps = (state) => ({
   isLoaded: state.mainReducer.isLoaded,
   isLoading: state.mainReducer.isLoading,
   typeFilter: state.filterReducer.typeFilter,
-  statusFilter: state.filterReducer.statusFilter
+  statusFilter: state.filterReducer.statusFilter,
+  locationFilter: state.filterReducer.locationFilter
 });
 
 const mapDispatchToProps = (dispatch) => ({

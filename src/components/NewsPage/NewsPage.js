@@ -16,7 +16,7 @@ const NewsPage = ({
   itemsPerPage,
   // currentPageNews,
   currentPageNews,
-  filterCategoryNews
+  filterCategoryNews, state
 }) => {
   useEffect(() => {
     loadData();
@@ -114,6 +114,7 @@ const mapStateToProps = (state) => ({
   // currentPageNews: state.paginationReducer.currentPageNews,
   currentPageNews: state.paginationReducer.currentPageNews,
   filterCategoryNews: state.filterCategoryReducer.filterCategoryNews,
+  state: state.filterCategoryReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({

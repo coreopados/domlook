@@ -25,6 +25,7 @@ const RentPage = ({
 
   typeFilter,
   statusFilter,
+  locationFilter
 }) => {
   useEffect(() => {
     loadData();
@@ -38,6 +39,19 @@ const RentPage = ({
     rentAds = rentAds.filter((ad) => ad.prop_type === "apartment")
   } else if (statusFilter === 'house') {
     rentAds = rentAds.filter((ad) => ad.prop_type === "house")
+  }
+
+
+  if (locationFilter === "Kiev") {
+    rentAds = rentAds.filter((ad) => ad.location.match('Киев'))
+  } else if (locationFilter === "Kharkov") {
+    rentAds = rentAds.filter((ad) => ad.location.match('Харьков'))
+  } else if (locationFilter === "Odessa") {
+    rentAds = rentAds.filter((ad) => ad.location.match('Одесса'))
+  } else if (locationFilter === "Dnepr") {
+    rentAds = rentAds.filter((ad) => ad.location.match('Днепр'))
+  } else if (locationFilter === "Lvov") {
+    rentAds = rentAds.filter((ad) => ad.location.match('Львов'))
   }
 
   const indexOfLastAd = currentPageRent * itemsPerPage;
@@ -138,6 +152,7 @@ const mapStateToProps = (state) => ({
 
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
+  locationFilter: state.filterReducer.locationFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

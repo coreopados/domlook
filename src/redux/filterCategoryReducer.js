@@ -11,10 +11,8 @@ import {
 
 } from './constants';
 
-
 const initialState = {
     filterCategoryNews: '',
-
 };
 
 export const filterCategoryReducer = (state = initialState, action) => {
@@ -30,43 +28,43 @@ export const filterCategoryReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filterCategoryNews: 'Новости',
-                // currentPageNews: 1
+
             };
         case FILTER_CATEGORY_NEWS_BY_ANLITIC:
             return {
                 ...state,
                 filterCategoryNews: 'Аналитика',
-                // currentPageNews: 1
+
             };
         case FILTER_CATEGORY_NEWS_BY_TIPSGKH:
             return {
                 ...state,
                 filterCategoryNews: 'Новости и советы ЖКХ',
-                // currentPageNews: 1
+
             };
         case FILTER_CATEGORY_NEWS_BY_NEWBUILD:
             return {
                 ...state,
                 filterCategoryNews: 'Новости новостроек',
-                // currentPageNews: 1
+
             };
         case FILTER_CATEGORY_NEWS_BY_MARKET:
             return {
                 ...state,
                 filterCategoryNews: 'Новости рынка',
-                // currentPageNews: 1
+
             };
         case FILTER_CATEGORY_NEWS_BY_TIPS_ARRANGEMENT:
             return {
                 ...state,
                 filterCategoryNews: 'Советы по обустройству',
-                // currentPageNews: 1
+
             };
         case FILTER_CATEGORY_NEWS_BY_FINANCE:
             return {
                 ...state,
                 filterCategoryNews: 'Финансы',
-                // currentPageNews: 1
+
             };
 
         default:

@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import "./AdsList.scss";
 import { HorizontalCard } from "../../Cards/HorizontalCard/HorizontalCard";
 
-export const AdsList = ({ ads, match, sortPrice }) => {
+
+export const AdsList = ({ ads, match, sortPrice, currentPageSale, itemsPerPage }) => {
 
   sortPrice === 'low-price' ? ads = ads.sort((prev, next) => prev.price - next.price) : ads = ads.sort((prev, next) => next.price - prev.price);
 
@@ -15,7 +16,6 @@ export const AdsList = ({ ads, match, sortPrice }) => {
           <HorizontalCard ad={ad} />
         </Link>
       ))}
-
     </div>
   );
 }
