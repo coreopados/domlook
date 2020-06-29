@@ -7,7 +7,7 @@ import { HorizontalCard } from "../../Cards/HorizontalCard/HorizontalCard";
 
 export const AdsList = ({ ads, match, sortPrice, currentPageSale, itemsPerPage }) => {
 
-  sortPrice === 'low-price' ? ads = ads.sort((prev, next) => prev.price - next.price) : ads = ads.sort((prev, next) => next.price - prev.price);
+  // sortPrice === 'low-price' ? ads = ads.sort((prev, next) => prev.price - next.price) : ads = ads.sort((prev, next) => next.price - prev.price);
 
   return (
     <div className="rows-list">
@@ -19,7 +19,6 @@ export const AdsList = ({ ads, match, sortPrice, currentPageSale, itemsPerPage }
     </div>
   );
 }
-
 
 AdsList.propTypes = {
   ads: PropTypes.arrayOf(

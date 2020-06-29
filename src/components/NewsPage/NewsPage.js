@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -16,31 +16,34 @@ const NewsPage = ({
   itemsPerPage,
   // currentPageNews,
   currentPageNews,
-  filterCategoryNews, state
+  filterCategoryNews,
+  // state,
 }) => {
   useEffect(() => {
     loadData();
-    window.scrollTo(0, 0);
-
   }, []);
 
 
-
-  if (filterCategoryNews === 'Новости рынка') {
-    news = news = news.filter((newPost) => newPost.category === "Новости рынка")
-  } else if (filterCategoryNews === 'Аналитика') {
-    news = news = news.filter((newPost) => newPost.category === "Аналитика")
-  } else if (filterCategoryNews === 'Новости') {
-    news = news = news.filter((newPost) => newPost.category === "Новости")
-  } else if (filterCategoryNews === 'Новости и советы ЖКХ') {
-    news = news = news.filter((newPost) => newPost.category === "Новости и советы ЖКХ")
-  } else if (filterCategoryNews === 'Новости новостроек') {
-    news = news = news.filter((newPost) => newPost.category === "Новости новостроек")
-  } else if (filterCategoryNews === 'Советы по обустройству') {
-    news = news = news.filter((newPost) => newPost.category === "Советы по обустройству")
-  } else if (filterCategoryNews === 'Финансы') {
-    news = news = news.filter((newPost) => newPost.category === "Финансы")
-  }
+  news = (() => {
+    switch (filterCategoryNews) {
+      case 'Новости рынка':
+        return news.filter(post => post.category === 'Новости рынка');
+      case 'Аналитика':
+        return news.filter(post => post.category === 'Аналитика');
+      case 'Новости':
+        return news.filter(post => post.category === 'Новости');
+      case 'Новости и советы ЖКХ':
+        return news.filter(post => post.category === 'Новости и советы ЖКХ');
+      case 'Новости новостроек':
+        return news.filter(post => post.category === 'Новости новостроек');
+      case 'Советы по обустройству':
+        return news.filter(post => post.category === 'Советы по обустройству');
+      case 'Финансы':
+        return news.filter(post => post.category === 'Финансы');
+      default:
+        return news;
+    }
+  })();
 
 
   const indexOfLastAd = currentPageNews * itemsPerPage;
@@ -56,7 +59,7 @@ const NewsPage = ({
           <div className="common-section__wrapper">
             <NewsFiltersForm />
             <div className="common-section__block">
-              <NewsAdsList filterCategoryNews={filterCategoryNews} news={currentNewsPosts} match={match} />
+              <NewsAdsList filterCategoryNews={news} news={currentNewsPosts} match={match} />
               {(news.length > 9) && <PaginationNews currentPageNews={currentPageNews} totalItems={news.length} />}
               <About title="Новости рынка недвижимости">
                 <p className="about__text">
@@ -111,8 +114,8 @@ const mapStateToProps = (state) => ({
   isLoaded: state.mainReducer.isLoaded,
   isLoading: state.mainReducer.isLoading,
   itemsPerPage: state.paginationReducer.itemsPerPage,
-  // currentPageNews: state.paginationReducer.currentPageNews,
   currentPageNews: state.paginationReducer.currentPageNews,
+  // currentPageNews: state.filterCategoryReducer.currentPageNews,
   filterCategoryNews: state.filterCategoryReducer.filterCategoryNews,
   state: state.filterCategoryReducer,
 });

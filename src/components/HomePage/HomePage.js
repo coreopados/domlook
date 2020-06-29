@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import "./HomePage.scss";
 import Loader from "react-loader-spinner";
-import HomeFiltersForm from "../ReduxForms/HomeFiltersForm/HomeFiltersForm";
+import { HomeFiltersForm } from "../ReduxForms/HomeFiltersForm/HomeFiltersForm";
 import SecondaryInfo from "./SecondaryInfo/SecondaryInfo";
 import { HomeNews } from "./HomeNews/HomeNews";
 import About from "../CommonParts/About/About";
@@ -16,7 +16,7 @@ import { handleLoadNewsAds } from "../../redux/actionCreators";
 import { filterTypeRentCreator, filterTypeSellCreator, filterStatusApartmentCreator, filterStatusHouseCreator } from "../../redux/actionFilterCreators";
 
 
-const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatusApartment, filterStatusHouse }) => {
+const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatusApartment, filterStatusHouse, statusFilter }) => {
   useEffect(() => {
     loadData();
   }, []);
@@ -38,7 +38,7 @@ const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatu
 
   return (
     <main>
-      <HomeFiltersForm adsLength={adsLength} />
+      <HomeFiltersForm adsLength={adsLength} statusFilter={statusFilter} />
       <HomePageCities />
       {isLoading && (
         <div className="loader-wrapper">

@@ -12,14 +12,32 @@ const PaginationNews = ({ totalItems, itemsPerPage, paginateNews, currentPageNew
     pageNumbers.push(i);
   }
 
+  // console.log(currentPageNews)
+
   return (
 
     <div className="common-pagination">
       <div className="common-pagination__wrapper">
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateNews(currentPageNews - 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageNews === 1 && "common-pagination__button--hidden"
+          )}
+        >
+          ‹
+        </button>
         {pageNumbers.map((number) => (
           <button
             key={number}
-            onClick={() => paginateNews(number)}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              paginateNews(number);
+            }}
             type="button"
             className={clsx(
               "common-pagination__button",
@@ -29,6 +47,19 @@ const PaginationNews = ({ totalItems, itemsPerPage, paginateNews, currentPageNew
             {number}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateNews(currentPageNews + 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageNews === Math.ceil(totalItems / itemsPerPage) && "common-pagination__button--hidden"
+          )}
+        >
+          ›
+        </button>
       </div>
     </div>
   );
@@ -39,8 +70,9 @@ const PaginationNews = ({ totalItems, itemsPerPage, paginateNews, currentPageNew
 const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   // totalItemsCount: state.mainReducer.totalItemsCount,
-  // currentPageNews: state.paginationReducer.currentPageNews,
   currentPageNews: state.paginationReducer.currentPageNews,
+  // currentPageNews: state.filterCategoryReducer.currentPageNews,
+  // state: state.filterCategoryReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({

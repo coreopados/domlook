@@ -8,6 +8,16 @@ import {
     SORT_LOCATION_DNEPR,
     SORT_LOCATION_LVOV,
     SORT_LOCATION_ODESSA,
+
+    FILTER_STATUS_RENT,
+    FILTER_STATUS_SALE,
+    FILTER_STATUS_DAILYRENT,
+
+    FILTER_TYPE_HOUSE,
+    FILTER_TYPE_APPARTMENT,
+    FILTER_TYPE_COMMERCE,
+
+
     RESET_FILTERS
 } from './constants';
 
@@ -34,7 +44,7 @@ export const filterReducer = (state = initialState, action) => {
                 locationFilter: ''
             };
 
-        //сортировка по квартира \ дом
+        //сортировка по квартира\дом
         case SORT_STATUS_HOUSE:
             return {
                 ...state,
@@ -87,6 +97,41 @@ export const filterReducer = (state = initialState, action) => {
                 statusFilter: "",
                 typeFilter: "",
             };
+
+        case FILTER_STATUS_RENT:
+            return {
+                ...state,
+                typeFilter: 'rent'
+            };
+        case FILTER_STATUS_SALE:
+            return {
+                ...state,
+                typeFilter: 'sale'
+            };
+        case FILTER_STATUS_DAILYRENT:
+            return {
+                ...state,
+                typeFilter: 'dailyRent'
+            };
+
+
+        case FILTER_TYPE_HOUSE:
+            return {
+                ...state,
+                statusFilter: 'house'
+            };
+        case FILTER_TYPE_APPARTMENT:
+            return {
+                ...state,
+                statusFilter: 'apartment'
+            };
+        case FILTER_TYPE_COMMERCE:
+            return {
+                ...state,
+                statusFilter: 'commerce'
+            };
+
+
         case RESET_FILTERS:
             return {
                 ...state,

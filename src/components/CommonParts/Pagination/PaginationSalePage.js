@@ -12,15 +12,30 @@ const PaginationSale = ({ totalItems, itemsPerPage, paginateSale, currentPageSal
     pageNumbers.push(i);
   }
 
-
   return (
 
     <div className="common-pagination">
       <div className="common-pagination__wrapper">
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateSale(currentPageSale - 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageSale === 1 && "common-pagination__button--hidden"
+          )}
+        >
+          ‹
+        </button>
         {pageNumbers.map((number) => (
           <button
             key={number}
-            onClick={() => paginateSale(number)}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              paginateSale(number);
+            }}
             type="button"
             className={clsx(
               "common-pagination__button",
@@ -30,21 +45,32 @@ const PaginationSale = ({ totalItems, itemsPerPage, paginateSale, currentPageSal
             {number}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateSale(currentPageSale + 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageSale === Math.ceil(totalItems / itemsPerPage) && "common-pagination__button--hidden"
+          )}
+        >
+          ›
+        </button>
       </div>
     </div>
   );
-
-
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   // totalItemsCount: state.mainReducer.totalItemsCount,
   currentPageSale: state.paginationReducer.currentPageSale,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  paginateSale: (number) => dispatch(paginateSaleCreator(number)),
+const mapDispatchToProps = dispatch => ({
+  paginateSale: number => dispatch(paginateSaleCreator(number)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(PaginationSale);

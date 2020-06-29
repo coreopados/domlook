@@ -21,30 +21,30 @@
       padding: 8px 0 8px 14px;
       position: relative;
       border-bottom: 1px solid #ccc;
-      a{
+      button {
         color: #75797A;
         font-size: 13px;
         line-height: 20px;
-        transition:0.2s;
+        transition: 0.2s;
       }
-      a:hover{
-        transition:0.2s;
+      button:hover {
+        transition: 0.2s;
         color: rgb(37, 103, 153);
       }
-      a.active{
+      button.active {
         color: rgb(37, 103, 153);
-        font-weight:500;
+        font-weight: 500;
       }
     }
-    li:after{
+    li:after {
       content: '';
       position: absolute;
       left: 0;
       top: 50%;
       transform: translateY(-50%);
       display: inline-block;
-      width: 0px;
-      height: 0px;
+      width: 0;
+      height: 0;
       border: 3px solid transparent;
       border-left: 4px solid green;
     }

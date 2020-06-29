@@ -7,6 +7,7 @@ import {
 
 import './App.scss';
 
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import { Header } from './components/Header/Header';
 import { HomePage } from './components/HomePage/HomePage';
 import { SalePage } from './components/SalePage/SalePage';
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <React.Fragment>
+      <ScrollToTop />
       <Header />
 
       <Switch>

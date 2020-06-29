@@ -7,5 +7,5 @@ import { filterByDateReducer } from './filterByDateReducer';
 import { filterReducer } from './filterReducer';
 
 export const rootReducer = combineReducers({
-  mainReducer, paginationReducer, filterCategoryReducer, filterByPriceReducer, filterByDateReducer, filterReducer
+  mainReducer, paginationReducer, filterCategoryReducer, filterByPriceReducer, filterByDateReducer, filterReducer,
 });

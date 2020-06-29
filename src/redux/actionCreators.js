@@ -17,7 +17,7 @@ import {
   PAGINATE_DAILYRENT,
   PAGINATE_NEWS,
 
-  CURRENT_CATEGORY_NEWS,
+  // CURRENT_CATEGORY_NEWS,
 
   SORT_LOW_PRICE,
   SORT_HIGHT_PRICE,
@@ -109,13 +109,6 @@ export const activeTopFilterPriceCreator = () => ({
 export const activeTopFilterDateCreator = () => ({
   type: ACTIVE_TOP_FILTER_DATE,
 })
-
-
-// длинна найденных обьявлений
-// export const findedAdsLength = () => ({
-//   type: FINDED_ADS_LENGTH,
-// })
-
 
 
 

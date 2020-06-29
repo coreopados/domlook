@@ -1,33 +1,13 @@
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import './NewsAdsList.scss';
 import { NewsAdsCard } from './NewsAdsCard/NewsAdsCard';
 
 export const NewsAdsList = ({
-  filterCategoryNews,
+
   news,
   match,
 }) => {
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
-  // if (filterCategoryNews === 'Новости рынка') {
-  //   news = news.filter((newPost) => newPost.category === "Новости рынка")
-  // } else if (filterCategoryNews === 'Аналитика') {
-  //   news = news.filter((newPost) => newPost.category === "Аналитика")
-  // } else if (filterCategoryNews === 'Новости') {
-  //   news = news.filter((newPost) => newPost.category === "Новости")
-  // } else if (filterCategoryNews === 'Новости и советы ЖКХ') {
-  //   news = news.filter((newPost) => newPost.category === "Новости и советы ЖКХ")
-  // } else if (filterCategoryNews === 'Новости новостроек') {
-  //   news = news.filter((newPost) => newPost.category === "Новости новостроек")
-  // } else if (filterCategoryNews === 'Советы по обустройству') {
-  //   news = news.filter((newPost) => newPost.category === "Советы по обустройству")
-  // } else if (filterCategoryNews === 'Финансы') {
-  //   news = news.filter((newPost) => newPost.category === "Финансы")
-  // }
-
-
 
   return (
     <div className="news-ads-list">

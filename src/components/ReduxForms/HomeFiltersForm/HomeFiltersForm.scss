@@ -1,8 +1,9 @@
 @import "../../../styles/fonts";
-
+@import "../../../styles/utils";
 .home-filters {
   width: 100%;
   margin-top: 50px;
+
   &__title {
     margin-bottom: 50px;
     color: #fff;
@@ -18,4 +19,114 @@
   padding: 30px;
   background: #fff;
   border-radius: 10px;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap:0px 2%;
+  .block{
+    display: flex;
+    a{
+      width:100%;
+      margin-bottom: 20px;
+      margin-top: auto;
+    }
+    label{
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      width: 100%;
+      select{
+        box-shadow: inset 0 0 4px 0 #dedede;
+        -webkit-appearance: none;
+        border: 0;
+        margin-top: 5px;
+        outline:none;
+        padding-right: 30px;
+        padding-left: 6px;
+        border: 1px solid #c9e8fb;
+        height: 41px;
+        border-radius: 5px;
+        background: url('/domlook/img/home-page/bo_pole.png') no-repeat;
+        background-size: cover;
+        background-position-y: -2px;
+        background-position-x: 0px;
+        box-shadow: 0;
+        font-size: 14px;
+        color: #414141;
+        font-weight: 300;
+        font-family: 'Roboto';
+
+      }
+      .wrap-price{
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        input{
+          max-width: 110px;
+          height: 39px;
+          margin-top: 5px;
+          border: 1px solid #c9e8fb;
+          font-size: 14px;
+          box-shadow: inset 0 0 4px 0 #dedede;
+          outline:none;
+          padding-left: 10px;
+          border-radius:5px;
+          background: #e0f2fd;
+          font-family: Roboto, Helvetica, Arial, sans-serif;
+          color: #394041;
+          font-size: 14px;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+          -webkit-appearance:none;
+        }
+        input:nth-of-type(2){
+          max-width: 130px;
+          width: 100%;
+          margin-left: 10px;
+          
+        }
+
+        select{
+          position: absolute;
+          right: 0;
+          top: 0;
+          max-width: 38px;
+          width: 100%;
+          height: 39px;
+          padding: 0;
+          border: 0;
+          text-align-last:center;
+          // box-shadow: none!important;
+          // option{
+          //   text-align: center;
+          // }
+          background: #E0F2FD;
+        }
+      }
+ 
+    }
+  }
+  button,
+  input[type="submit"]{
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: block;
+    border-radius: 5px;
+    background-position: center;
+    margin: auto 0;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    background: url('/domlook/img/home-page/poisk.png') no-repeat;
+    background-size: cover;
+    transition: 0.3s;
+  }
+  input[type="submit"]:hover{
+    opacity:0.7;
+    transition: 0.3s;
+  }
 }

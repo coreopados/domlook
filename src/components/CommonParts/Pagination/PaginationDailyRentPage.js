@@ -11,16 +11,33 @@ const PaginationDailyRent = ({ totalItems, itemsPerPage, paginateDailyRent, curr
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i += 1) {
     pageNumbers.push(i);
   }
-  console.log(totalItems, itemsPerPage, paginateDailyRent, currentPageDailyRent)
+
+  // console.log(totalItems, itemsPerPage, paginateDailyRent, currentPageDailyRent)
 
   return (
 
     <div className="common-pagination">
       <div className="common-pagination__wrapper">
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateDailyRent(currentPageDailyRent - 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageDailyRent === 1 && "common-pagination__button--hidden"
+          )}
+        >
+          ‹
+        </button>
         {pageNumbers.map((number) => (
           <button
             key={number}
-            onClick={() => paginateDailyRent(number)}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              paginateDailyRent(number);
+            }}
             type="button"
             className={clsx(
               "common-pagination__button",
@@ -30,6 +47,19 @@ const PaginationDailyRent = ({ totalItems, itemsPerPage, paginateDailyRent, curr
             {number}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateDailyRent(currentPageDailyRent + 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageDailyRent === Math.ceil(totalItems / itemsPerPage) && "common-pagination__button--hidden"
+          )}
+        >
+          ›
+        </button>
       </div>
     </div>
   );

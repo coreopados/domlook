@@ -54,11 +54,15 @@ const RentPage = ({
     rentAds = rentAds.filter((ad) => ad.location.match('Львов'))
   }
 
+  sort_price === 'low-price' ? rentAds = rentAds.sort((prev, next) => prev.price - next.price) : rentAds = rentAds.sort((prev, next) => next.price - prev.price);
+
   const indexOfLastAd = currentPageRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = rentAds.slice(indexOfFirstAd, indexOfLastAd);
 
-
+  console.log(typeFilter,
+    statusFilter,
+    locationFilter)
 
   return (
     <main className="common-main">

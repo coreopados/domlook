@@ -21,19 +21,36 @@ const DailyRentPage = ({
   match,
   itemsPerPage,
   currentPageDailyRent,
-  sort_price
+  sort_price,
+  statusFilter
 }) => {
   useEffect(() => {
     loadData();
   }, []);
 
-  const dailyRentAds = useMemo(() =>
+  let dailyRentAds = useMemo(() =>
     ads.filter((ad) => ad.prop_status === "rent")
   );
   const List = orientation === "vertical" ? AdsGrid : AdsList;
+
+  if (statusFilter === 'apartment') {
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_type === "apartment")
+  } else if (statusFilter === 'house') {
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_type === "house")
+  }
+
+
+
+  sort_price === 'low-price' ? dailyRentAds = dailyRentAds.sort((prev, next) => prev.price - next.price) : dailyRentAds = dailyRentAds.sort((prev, next) => next.price - prev.price);
+
+
+
   const indexOfLastAd = currentPageDailyRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = dailyRentAds.slice(indexOfFirstAd, indexOfLastAd);
+
+
+
 
   return (
     <main className="common-main">
@@ -130,6 +147,7 @@ const mapStateToProps = (state) => ({
   sort_by_date: state.filterByDateReducer.sort_by_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageDailyRent: state.paginationReducer.currentPageDailyRent,
+  statusFilter: state.filterReducer.statusFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

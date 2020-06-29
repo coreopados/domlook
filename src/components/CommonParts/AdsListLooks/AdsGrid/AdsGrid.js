@@ -6,7 +6,7 @@ import { VerticalCard } from '../../Cards/VerticalCard/VerticalCard';
 
 export const AdsGrid = ({ ads, match, sortPrice }) => {
 
-  sortPrice === 'low-price' ? ads = ads.sort((prev, next) => prev.price - next.price) : ads = ads.sort((prev, next) => next.price - prev.price);
+  // sortPrice === 'low-price' ? ads = ads.sort((prev, next) => prev.price - next.price) : ads = ads.sort((prev, next) => next.price - prev.price);
 
   return (
     <div className="ads-grid">

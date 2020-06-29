@@ -1,7 +1,7 @@
 @import "../../../styles/utils";
 
 .common-pagination {
-  margin: 0px 0 20px;
+  margin: 0 0 20px;
   @include flex-style(flex, row, center, center);
   &__wrapper {
     @include flex-style(flex, row, center, center);
@@ -15,6 +15,9 @@
     text-align: center;
     &--active {
       background: $pagination-active-color-blue;
+    }
+    &--hidden {
+      display: none;
     }
   }
   &__button:not(:last-child) {

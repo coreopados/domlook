@@ -26,7 +26,7 @@ const SalePage = ({
   active_top_filter,
 
   statusFilter,
-  locationFilter
+  locationFilter, typeFilter
 }) => {
   useEffect(() => {
     loadData();
@@ -36,11 +36,12 @@ const SalePage = ({
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"));
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-
   if (statusFilter === 'apartment') {
     saleAds = saleAds.filter((ad) => ad.prop_type === "apartment")
   } else if (statusFilter === 'house') {
     saleAds = saleAds.filter((ad) => ad.prop_type === "house")
+  } else if (statusFilter === 'commerce') {
+    saleAds = saleAds.filter((ad) => ad.prop_type === "commerce")
   }
 
 
@@ -56,15 +57,16 @@ const SalePage = ({
     saleAds = saleAds.filter((ad) => ad.location.trim().match('Львов '))
   }
 
-
-
-  console.log(locationFilter)
+  sort_price === 'low-price' ? saleAds = saleAds.sort((prev, next) => prev.price - next.price) : saleAds = saleAds.sort((prev, next) => next.price - prev.price);
 
 
   const indexOfLastAd = currentPageSale * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
+  console.log(typeFilter,
+    statusFilter,
+    locationFilter)
 
   return (
     <main className="common-main">
@@ -156,7 +158,6 @@ const mapStateToProps = (state) => ({
   orientation: state.mainReducer.orientation,
   sort_price: state.filterByPriceReducer.sort_price,
   sort_by_date: state.filterByDateReducer.sort_by_date,
-  active_top_filter: state.mainReducer.active_top_filter,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageSale: state.paginationReducer.currentPageSale,
 

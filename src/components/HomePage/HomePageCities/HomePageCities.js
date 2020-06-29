@@ -10,7 +10,7 @@ import {
   filterLocationKievCreator,
   filterLocationKharkovCreator,
   filterLocationDneprCreator,
-  filterLocationOdessaCreator
+  filterLocationOdessaCreator,
 } from "../../../redux/actionFilterCreators.js";
 
 const HomePageCities = ({ filterLocationLvov,
@@ -18,115 +18,174 @@ const HomePageCities = ({ filterLocationLvov,
   filterLocationKharkov,
   filterLocationDnepr,
   filterLocationOdessa }) => (
-    <div className="homepage-cities">
-      <div className="container">
-        <div className="homepage-cities__wrapper">
-          <h3 className="homepage-cities__title">
-            Топ объявлений по городам
+  <div className="homepage-cities">
+    <div className="container">
+      <div className="homepage-cities__wrapper">
+        <h3 className="homepage-cities__title">
+          Топ объявлений по городам
         </h3>
-          <div className="homepage-cities__block">
-            <article className="cities-card">
-              <div className="cities-card__icon-wrapper">
-                <img
-                  src="/domlook/img/home-page/building-icon-1.png"
-                  alt="здание"
-                  className="cities-card__icon"
-                />
-              </div>
-              <h5 className="cities-card__title">Киев</h5>
-              <div className="cities-card__link-wrapper">
-                <button onClick={filterLocationKiev} className="cities-card__link">
-                  <NavLink to="/rent" >Аренда</NavLink >
-                </button>
-                <button onClick={filterLocationKiev} className="cities-card__link">
-                  <NavLink to="/sale" >Продажа</NavLink >
-                </button>
-              </div>
-            </article>
-            <article className="cities-card">
-              <div className="cities-card__icon-wrapper">
-                <img
-                  src="/domlook/img/home-page/building-icon-2.png"
-                  alt="здание"
-                  className="cities-card__icon"
-                />
-              </div>
-              <h5 className="cities-card__title">Днепр</h5>
-              <div className="cities-card__link-wrapper">
-                <button onClick={filterLocationDnepr} className="cities-card__link">
-                  <NavLink to="/rent" >Аренда</NavLink >
-                </button>
-                <button onClick={filterLocationDnepr} className="cities-card__link">
-                  <NavLink to="/sale" >Продажа</NavLink >
-                </button>
-              </div>
-            </article>
-            <article className="cities-card">
-              <div className="cities-card__icon-wrapper">
-                <img
-                  src="/domlook/img/home-page/building-icon-3.png"
-                  alt="здание"
-                  className="cities-card__icon"
-                />
-              </div>
-              <h5 className="cities-card__title">Харьков</h5>
-              <div className="cities-card__link-wrapper">
-                <button onClick={filterLocationKharkov} className="cities-card__link">
-                  <NavLink to="/rent" >Аренда</NavLink >
-                </button>
-                <button onClick={filterLocationKharkov} className="cities-card__link">
-                  <NavLink to="/sale" >Продажа</NavLink >
-                </button>
-              </div>
-            </article>
-            <article className="cities-card">
-              <div className="cities-card__icon-wrapper">
-                <img
-                  src="/domlook/img/home-page/building-icon-4.png"
-                  alt="здание"
-                  className="cities-card__icon"
-                />
-              </div>
-              <h5 className="cities-card__title">Одесса</h5>
-              <div className="cities-card__link-wrapper">
-                <button onClick={filterLocationOdessa} className="cities-card__link">
-                  <NavLink to="/rent" >Аренда</NavLink >
-                </button>
-                <button onClick={filterLocationOdessa} className="cities-card__link">
-                  <NavLink to="/sale" >Продажа</NavLink >
-                </button>
-              </div>
-            </article>
-            <article className="cities-card">
-              <div className="cities-card__icon-wrapper">
-                <img
-                  src="/domlook/img/home-page/building-icon-5.png"
-                  alt="здание"
-                  className="cities-card__icon"
-                />
-              </div>
-              <h5 className="cities-card__title">Львов</h5>
-              <div className="cities-card__link-wrapper">
-                <button onClick={filterLocationLvov} className="cities-card__link">
-                  <NavLink to="/rent" >Аренда</NavLink >
-                </button>
-                <button onClick={filterLocationLvov} className="cities-card__link">
-                  <NavLink to="/sale" >Продажа</NavLink >
-                </button>
-              </div>
-            </article>
-          </div>
+        <div className="homepage-cities__block">
+          <article className="cities-card">
+            <div className="cities-card__icon-wrapper">
+              <img
+                src="/domlook/img/home-page/building-icon-1.png"
+                alt="здание"
+                className="cities-card__icon"
+              />
+            </div>
+            <h5 className="cities-card__title">Киев</h5>
+            <div className="cities-card__link-wrapper">
+              <button
+                type="button"
+                onClick={filterLocationKiev} 
+                className="cities-card__link"
+              >
+                <NavLink to="/rent">
+                  Аренда
+                </NavLink>
+              </button>
+              <button
+                type="button"
+                onClick={filterLocationKiev} 
+                className="cities-card__link"
+              >
+                <NavLink to="/sale">
+                  Продажа
+                </NavLink>
+              </button>
+            </div>
+          </article>
+          <article className="cities-card">
+            <div className="cities-card__icon-wrapper">
+              <img
+                src="/domlook/img/home-page/building-icon-2.png"
+                alt="здание"
+                className="cities-card__icon"
+              />
+            </div>
+            <h5 className="cities-card__title">Днепр</h5>
+            <div className="cities-card__link-wrapper">
+              <button
+                type="button"
+                onClick={filterLocationDnepr}
+                className="cities-card__link"
+              >
+                <NavLink to="/rent">
+                  Аренда
+                </NavLink>
+              </button>
+              <button
+                type="button"
+                onClick={filterLocationDnepr} 
+                className="cities-card__link"
+              >
+                <NavLink to="/sale">
+                  Продажа
+                </NavLink>
+              </button>
+            </div>
+          </article>
+          <article className="cities-card">
+            <div className="cities-card__icon-wrapper">
+              <img
+                src="/domlook/img/home-page/building-icon-3.png"
+                alt="здание"
+                className="cities-card__icon"
+              />
+            </div>
+            <h5 className="cities-card__title">Харьков</h5>
+            <div className="cities-card__link-wrapper">
+              <button
+                type="button"
+                onClick={filterLocationKharkov} 
+                className="cities-card__link"
+              >
+                <NavLink to="/rent">
+                  Аренда
+                </NavLink>
+              </button>
+              <button
+                type="button"
+                onClick={filterLocationKharkov}
+                className="cities-card__link"
+              >
+                <NavLink to="/sale">
+                  Продажа
+                </NavLink>
+              </button>
+            </div>
+          </article>
+          <article className="cities-card">
+            <div className="cities-card__icon-wrapper">
+              <img
+                src="/domlook/img/home-page/building-icon-4.png"
+                alt="здание"
+                className="cities-card__icon"
+              />
+            </div>
+            <h5 className="cities-card__title">Одесса</h5>
+            <div className="cities-card__link-wrapper">
+              <button
+                type="button"
+                onClick={filterLocationOdessa}
+                className="cities-card__link"
+              >
+                <NavLink to="/rent">
+                  Аренда
+                </NavLink>
+              </button>
+              <button
+                type="button"
+                onClick={filterLocationOdessa} 
+                className="cities-card__link"
+              >
+                <NavLink to="/sale">
+                  Продажа
+                </NavLink>
+              </button>
+            </div>
+          </article>
+          <article className="cities-card">
+            <div className="cities-card__icon-wrapper">
+              <img
+                src="/domlook/img/home-page/building-icon-5.png"
+                alt="здание"
+                className="cities-card__icon"
+              />
+            </div>
+            <h5 className="cities-card__title">Львов</h5>
+            <div className="cities-card__link-wrapper">
+              <button
+                type="button"
+                onClick={filterLocationLvov} 
+                className="cities-card__link"
+              >
+                <NavLink to="/rent">
+                  Аренда
+                </NavLink>
+              </button>
+              <button
+                type="button"
+                onClick={filterLocationLvov}
+                className="cities-card__link"
+              >
+                <NavLink to="/sale">
+                  Продажа
+                </NavLink>
+              </button>
+            </div>
+          </article>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   locationFilter: state.filterReducer.locationFilter
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   filterLocationLvov: () => dispatch(filterLocationLvovCreator()),
   filterLocationKiev: () => dispatch(filterLocationKievCreator()),
   filterLocationKharkov: () => dispatch(filterLocationKharkovCreator()),

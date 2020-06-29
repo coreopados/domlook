@@ -7,9 +7,7 @@ import './TopFilters.scss';
 import {
   handleLoadAds,
   setVerticalOrientationCreator,
-  setHorizontalOrientationCreator,
-  activeTopFilterDateCreator,
-  activeTopFilterPriceCreator,
+  setHorizontalOrientationCreator
 } from '../../../redux/actionCreators';
 import { DropdownPriceSort } from "./Dropdown/DropdownPrice";
 import { DropdownDateSort } from "./Dropdown/DropdownDate";
@@ -22,7 +20,7 @@ const TopFilters = ({
   loadData,
   ads,
   match,
-  active_top_filter,
+
   totalAdsSale,
   totalAdsRent,
   totalAdsDailyRent,
@@ -38,19 +36,16 @@ const TopFilters = ({
     if (match.path === '/sale') {
       pageTitle = "Продажа";
       return (
-        //   saleAds.length
         totalAdsSale
       )
     } else if (match.path === '/rent') {
       pageTitle = "Аренда";
       return (
-        //   rentAds.length
         totalAdsRent
       )
     } else if (match.path === '/dailyRent') {
       pageTitle = "Посуточно";
       return (
-        //   dailyrentAds.length
         totalAdsDailyRent
       )
     }
@@ -91,13 +86,13 @@ const TopFilters = ({
         <div className="common-top-filters__sort">Сортировка
 
         <div className="select-wrap">
-            <DropdownPriceSort activeFilter={active_top_filter} />
+            <DropdownPriceSort />
           </div>
         </div>
 
         <div className="common-top-filters__post-date">Период подачи
         <div className="select-wrap">
-            <DropdownDateSort activeFilter={active_top_filter} />
+            <DropdownDateSort />
           </div>
         </div>
       </div>
@@ -106,17 +101,12 @@ const TopFilters = ({
 }
 const mapStateToProps = state => ({
   orientation: state.mainReducer.orientation,
-  // sort_price: state.filterByPriceReducer.sort_price,
-  ads: state.mainReducer.ads,
-  active_top_filter: state.mainReducer.active_top_filter,
-
+  ads: state.mainReducer.ads
 });
 
 const mapDispatchToProps = dispatch => ({
   setHorizontalOrientation: () => dispatch(setHorizontalOrientationCreator()),
   setVerticalOrientation: () => dispatch(setVerticalOrientationCreator()),
-  activeTopFilterDate: () => dispatch(activeTopFilterDateCreator()),
-  activeTopFilterPrice: () => dispatch(activeTopFilterPriceCreator()),
   loadData: () => dispatch(handleLoadAds()),
 });
 
@@ -131,8 +121,6 @@ TopFilters.propTypes = {
   setVerticalOrientation: PropTypes.func.isRequired,
   setHorizontalOrientation: PropTypes.func.isRequired,
   orientation: PropTypes.string.isRequired,
-
-
   ads: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -150,7 +138,6 @@ TopFilters.propTypes = {
       rooms: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  // quantyAds: PropTypes.number.isRequired,
   loadData: PropTypes.func.isRequired,
 
 };

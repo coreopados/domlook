@@ -16,10 +16,26 @@ const PaginationRent = ({ totalItems, itemsPerPage, paginateSale, currentPageRen
 
     <div className="common-pagination">
       <div className="common-pagination__wrapper">
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateSale(currentPageRent - 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageRent === 1 && "common-pagination__button--hidden"
+          )}
+        >
+          ‹
+        </button>
         {pageNumbers.map((number) => (
           <button
             key={number}
-            onClick={() => paginateSale(number)}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              paginateSale(number);
+            }}
             type="button"
             className={clsx(
               "common-pagination__button",
@@ -29,6 +45,19 @@ const PaginationRent = ({ totalItems, itemsPerPage, paginateSale, currentPageRen
             {number}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            paginateSale(currentPageRent + 1);
+          }}
+          className={clsx(
+            "common-pagination__button",
+            currentPageRent === Math.ceil(totalItems / itemsPerPage) && "common-pagination__button--hidden"
+          )}
+        >
+          ›
+        </button>
       </div>
     </div>
   );

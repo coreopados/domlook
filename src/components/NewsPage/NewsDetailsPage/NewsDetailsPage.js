@@ -26,8 +26,6 @@ const NewsDetailsPage = ({
     if (newsItem === null || newsItem === undefined) {
       loadData();
     }
-
-    window.scrollTo(0, 0);
   }, []);
 
   if (id && id <= news.length) {

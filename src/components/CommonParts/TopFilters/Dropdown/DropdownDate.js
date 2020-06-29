@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { connect } from 'react-redux';
 import {
     sortByTodayCreator,
@@ -14,19 +14,18 @@ const DropdownDateSort = ({
     sortByMounth,
     activeTopFilterDate,
 }) => {
-    const price_options = [{ id: 1, value: 0, label: 'за сегодня' }, { id: 2, value: 7, label: 'за неделю' }, { id: 3, value: 30, label: 'за месяц' }];
+    const price_options = [
+        { id: 1, value: 0, label: 'за сегодня' },
+        { id: 2, value: 7, label: 'за неделю' },
+        { id: 3, value: 30, label: 'за месяц' }];
     const [selectedOption, setSelectedOption] = useState(price_options[0].value);
 
     if (selectedOption === 'byToday') {
         sortByToday();
-
     } else if (selectedOption === 'byWeek') {
         sortByWeek();
-
-
     } else if (selectedOption === 'byMounth') {
         sortByMounth();
-
     }
 
 
@@ -43,7 +42,7 @@ const DropdownDateSort = ({
 
 const mapStateToProps = state => ({
     selectedOption: state.filterByDateReducer.selectedOption,
-    active_top_filter: state.mainReducer.active_top_filter,
+    // active_top_filter: state.mainReducer.active_top_filter,
 })
 
 const mapDispatchToProps = dispatch => ({

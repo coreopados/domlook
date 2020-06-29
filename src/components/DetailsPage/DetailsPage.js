@@ -13,8 +13,6 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
     if (ad === null || ad === undefined) {
       loadData();
     }
-
-    window.scrollTo(0, 0);
   }, []);
 
   const calcPerSquareMeter = useCallback(() => {
