@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Loader from 'react-loader-spinner';
 import {
   FiltersForm,
 } from '../ReduxForms/FiltersForm/FiltersForm';
@@ -9,16 +8,23 @@ import {
   Navigation,
 } from '../CommonParts/Navigation/Navigation';
 import { AdsGridFavourite } from '../CommonParts/AdsListLooks/AdsGrid/AdsGridFavourite';
+import { setFavouritesCreator } from '../../redux/actionCreators';
 
 
 const Favourites = ({
   favourites,
-  isLoaded,
-  isLoading,
   match,
+  setFavourites,
 }) => {
 
-  // const adsFavourites = localStorage.getItem([favourites]);
+
+  useEffect(() => {
+    const cachedFavourites = localStorage.getItem('favourites');
+
+    if (cachedFavourites) {
+      setFavourites(JSON.parse(cachedFavourites));
+    }
+  }, []);
 
   return (
     <main className="common-main">
@@ -28,20 +34,7 @@ const Favourites = ({
           <div className="common-section__wrapper">
             <FiltersForm />
             <div className="common-section__block">
-              {isLoading
-                && (
-                  <div className="loader-wrapper">
-                    <Loader
-                      type="Puff"
-                      color="#313237"
-                      height={80}
-                      width={80}
-                    />
-                  </div>
-                )}
-              {(isLoaded) && (
-                <AdsGridFavourite adsFavourites={favourites} match={match} />
-              )}
+              <AdsGridFavourite adsFavourites={favourites} match={match} />
             </div>
           </div>
         </div>
@@ -52,17 +45,17 @@ const Favourites = ({
 
 const mapStateToProps = state => ({
   favourites: state.mainReducer.favourites,
-  isLoaded: state.mainReducer.isLoaded,
-  isLoading: state.mainReducer.isLoading,
 });
 
-const Enhanced = connect(mapStateToProps)(Favourites);
+const mapDispatchToProps = (dispatch) => ({
+  setFavourites: ads => dispatch(setFavouritesCreator(ads)),
+});
+
+const Enhanced = connect(mapStateToProps, mapDispatchToProps)(Favourites);
 
 export { Enhanced as Favourites };
 
 Favourites.propTypes = {
   adsFavourites: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isLoaded: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
   match: PropTypes.shape().isRequired,
 };

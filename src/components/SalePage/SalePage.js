@@ -23,123 +23,174 @@ const SalePage = ({
   itemsPerPage,
   sort_price,
   sort_by_date,
-  active_top_filter,
 
+  // typeFilter,
+  totalAreaFilter,
   statusFilter,
-  locationFilter, typeFilter
+  cityFilter,
+  floorFilter,
+  roomsFilter,
+  propWallsFilter,
+  propOfferFilter,
+  propHeatingFilter,
+  propBuildingFilter,
+  propCeilingHeightFilter,
+  propRegionFilter,
+  propCityFilter
 }) => {
   useEffect(() => {
     loadData();
-
   }, []);
 
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"));
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-  if (statusFilter === 'apartment') {
-    saleAds = saleAds.filter((ad) => ad.prop_type === "apartment")
-  } else if (statusFilter === 'house') {
-    saleAds = saleAds.filter((ad) => ad.prop_type === "house")
-  } else if (statusFilter === 'commerce') {
-    saleAds = saleAds.filter((ad) => ad.prop_type === "commerce")
+
+  //по типу
+  if (statusFilter) {
+    saleAds = saleAds.filter((ad) => ad.prop_type === statusFilter)
   }
 
+  // по городу
+  if (cityFilter === "Kiev") {
+    saleAds = saleAds.filter((ad) => ad.prop_city === 'Киев')
+  } else if (cityFilter === "Kharkov") {
+    saleAds = saleAds.filter((ad) => ad.prop_city === 'Харьков')
+  } else if (cityFilter === "Odessa") {
+    saleAds = saleAds.filter((ad) => ad.prop_city === 'Одесса')
+  } else if (cityFilter === "Dnepr") {
+    saleAds = saleAds.filter((ad) => ad.prop_city === 'Днепр')
+  } else if (cityFilter === "Lvov") {
+    saleAds = saleAds.filter((ad) => ad.prop_city === 'Львов')
+  }
 
-  if (locationFilter === "Kiev") {
-    saleAds = saleAds.filter((ad) => ad.location.trim().match('Киев '))
-  } else if (locationFilter === "Kharkov") {
-    saleAds = saleAds.filter((ad) => ad.location.trim().match('Харьков '))
-  } else if (locationFilter === "Odessa") {
-    saleAds = saleAds.filter((ad) => ad.location.trim().match('Одесса '))
-  } else if (locationFilter === "Dnepr") {
-    saleAds = saleAds.filter((ad) => ad.location.trim().match('Днепр '))
-  } else if (locationFilter === "Lvov") {
-    saleAds = saleAds.filter((ad) => ad.location.trim().match('Львов '))
+  //по площади
+  if (totalAreaFilter !== "") {
+    saleAds = saleAds.filter((ad) => Math.floor(ad.total_area) > Math.floor(totalAreaFilter))
+  }
+
+  //по этажу
+  if (floorFilter !== "") {
+    saleAds = saleAds.filter((ad) => Math.floor(ad.floor) < Math.floor(floorFilter))
+  }
+
+  //по количеству комнат
+  if (roomsFilter !== "") {
+    saleAds = saleAds.filter((ad) => ad.rooms === roomsFilter)
+  }
+
+  //по типу стен
+  if (propWallsFilter !== '') {
+    saleAds = saleAds.filter((ad) => ad.prop_walls === propWallsFilter)
+  }
+
+  //по типу предложения
+  if (propOfferFilter !== '') {
+    saleAds = saleAds.filter((ad) => ad.prop_offer === propOfferFilter)
+  }
+
+  //по типу отопления
+  if (propHeatingFilter !== '') {
+    saleAds = saleAds.filter((ad) => ad.prop_heating === propHeatingFilter)
+  }
+
+  //по типу здания
+  if (propBuildingFilter !== "") {
+    saleAds = saleAds.filter((ad) => ad.prop_building === propBuildingFilter)
+  }
+
+  //по высоте потолков
+  if (propCeilingHeightFilter !== "") {
+    saleAds = saleAds.filter((ad) => Math.floor(ad.ceiling_height) <= Math.floor(propCeilingHeightFilter))
+  }
+
+  //по области
+  if (propRegionFilter) {
+    saleAds = saleAds.filter((ad) => ad.prop_region === propRegionFilter)
+  }
+  //по городу
+  if (propCityFilter) {
+    saleAds = saleAds.filter((ad) => ad.prop_city === propCityFilter)
   }
 
   sort_price === 'low-price' ? saleAds = saleAds.sort((prev, next) => prev.price - next.price) : saleAds = saleAds.sort((prev, next) => next.price - prev.price);
+
 
 
   const indexOfLastAd = currentPageSale * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  console.log(typeFilter,
-    statusFilter,
-    locationFilter)
+
 
   return (
-    <main className="common-main">
+    <main className="common-main" >
       <Navigation pageName="Продажа" />
-      <section className="common-section">
-        <div className="container">
-          <div className="common-section__wrapper">
+      <section className="common-section" >
+        <div className="container" >
+          <div className="common-section__wrapper" >
             <FiltersForm />
-            <div className="common-section__block">
-              <TopFilters match={match} totalAdsSale={saleAds.length} />
-              {isLoading && (
-                <div className="loader-wrapper">
-                  <Loader type="Puff" color="#313237" height={80} width={80} />
-                </div>
-              )}
-              {isLoaded && <List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />}
-              {/* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
-
-              {(saleAds.length > 9) && <PaginationSale totalItems={saleAds.length} />}
-              <About title="Продажа жилья в Украине">
-                <p className="about__text">
+            <div className="common-section__block" >
+              {isLoading && (<div className="loader-wrapper" >
+                <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
+              }
+              {isLoaded && < TopFilters match={match} totalAdsSale={saleAds.length} />}
+              {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />}
+              { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
+              {(saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} />}
+              < About title="Продажа жилья в Украине" >
+                <p className="about__text" >
                   Покупка или продажа всех видов недвижимости произойдет
                   максимально быстро, если вы воспользуетесь базой объявлений,
-                  размещенных на сайте DomLook.com. Здесь представлен широкий
+                  размещенных на сайте DomLook.com.Здесь представлен широкий
                   выбор объявлений о продаже и покупке домов, квартир, гаражей,
-                  дач, офисов и магазинов.
-                </p>
-                <p className="about__text">
-                  Вся информация очень удобно структурирована. Поэтому, в
+                  дач, офисов и магазинов. </p>
+                <p className="about__text" >
+                  Вся информация очень удобно структурирована.Поэтому, в
                   зависимости от предпочтений, вы можете разместить предложение,
                   либо же осуществить поиск недвижимости на первичном или
-                  вторичном рынке; в центре города или на окраине; купить
+                  вторичном рынке;
+                  в центре города или на окраине;
+                  купить
                   скромную квартиру без посредников, или продать элитный дом
-                  через агентство.
-                </p>
-                <p className="about__text">
+                  через агентство. </p>
+                < p className="about__text" >
                   Для того, чтобы зря не терять время на просмотр тех вариантов,
                   которые вам не подходят, заранее определитесь с районом, типом
                   дома, высотой потолков, этажом, количеством комнат и их
-                  площадью. Чем более точную информацию о покупке или продаже
+                  площадью.Чем более точную информацию о покупке или продаже
                   недвижимости вы введете в поисковую систему сайта DomLook, тем
                   в большей степени полученные варианты будут соответствовать
-                  вашим ожиданиям. Кроме того, самостоятельный поиск и покупка
+                  вашим ожиданиям.Кроме того, самостоятельный поиск и покупка
                   недвижимости, без услуг посредников, позволит вам сэкономить
-                  немалую сумму денег. Если же вы располагаете достаточными
+                  немалую сумму денег.Если же вы располагаете достаточными
                   денежными средствами, а времени у вас, наоборот, мало, то
                   стоит поручить все хлопоты по продаже или покупке недвижимости
                   опытному риелтору, который самостоятельно проанализирует
                   рынок, выберет подходящие варианты, предварительно встретится
                   с хозяевами, проверит документы и договорится о встречи в
-                  удобное для вас время. Естественно, за такую услугу следует
+                  удобное для вас время.Естественно, за такую услугу следует
                   заплатить, однако она значительно облегчает реализацию
-                  поставленных задач.
-                </p>
-                <p className="about__text">
+                  поставленных задач. </p>
+                < p className="about__text" >
                   Если при покупке недвижимости вам сложно сориентироваться и
                   понять, где конкретно находится выставленная на продажу
                   квартира или дом, то следует воспользоваться поиском
-                  недвижимости на карте. Тогда вы сразу увидите, где находится
+                  недвижимости на карте.Тогда вы сразу увидите, где находится
                   метро, магазины, рынки и какова общая транспортная и
                   социальная инфраструктура района.
                 </p>
-                <p className="about__text">
+                < p className="about__text" >
                   Рассматривая те или иные варианты, не забывайте анализировать
                   и просчитывать все возможные плюсы и минусы приобретаемого
-                  жилья. Посмотрите, в каком оно состоянии, требуется ли
-                  проведение ремонта или даже перепланировки. Взвесьте свои силы
+                  жилья.Посмотрите, в каком оно состоянии, требуется ли
+                  проведение ремонта или даже перепланировки.Взвесьте свои силы
                   и финансовые возможности.
                 </p>
-                <p className="about__text">
+                <p className="about__text" >
                   В случае необходимости продажи любого типа недвижимости, мы
-                  также к вашим услугам. Вам потребуется только поместить
-                  объявление о продаже в каталоге сайта DomLook.com. и ждать
+                  также к вашим услугам.Вам потребуется только поместить
+                  объявление о продаже в каталоге сайта DomLook.com.и ждать
                   звонки потенциальных покупателей.
                 </p>
               </About>
@@ -161,10 +212,19 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageSale: state.paginationReducer.currentPageSale,
 
-  typeFilter: state.filterReducer.typeFilter,
+  // typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
-  locationFilter: state.filterReducer.locationFilter,
-  findedAdsLength: state.filterReducer.findedAdsLength,
+  cityFilter: state.filterReducer.cityFilter,
+  totalAreaFilter: state.filterReducer.totalAreaFilter,
+  floorFilter: state.filterReducer.floorFilter,
+  roomsFilter: state.filterReducer.roomsFilter,
+  propWallsFilter: state.filterReducer.propWallsFilter,
+  propOfferFilter: state.filterReducer.propOfferFilter,
+  propHeatingFilter: state.filterReducer.propHeatingFilter,
+  propBuildingFilter: state.filterReducer.propBuildingFilter,
+  propCeilingHeightFilter: state.filterReducer.propCeilingHeightFilter,
+  propRegionFilter: state.filterReducer.propRegionFilter,
+  propCityFilter: state.filterReducer.propCityFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -184,7 +244,7 @@ SalePage.propTypes = {
       price: PropTypes.string.isRequired,
       imgUrl: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
+      prop_city: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       total_area: PropTypes.string.isRequired,
       living_space: PropTypes.string.isRequired,
@@ -201,5 +261,11 @@ SalePage.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   currentPageSale: PropTypes.number.isRequired,
   statusFilter: PropTypes.string.isRequired,
-  locationFilter: PropTypes.string.isRequired,
+  cityFilter: PropTypes.string.isRequired,
+  totalAreaFilter: PropTypes.string.isRequired,
+  propWallsFilter: PropTypes.string.isRequired,
+  propOfferFilter: PropTypes.string.isRequired,
+  propHeatingFilter: PropTypes.string.isRequired,
+  propBuildingFilter: PropTypes.string.isRequired,
+  propCeilingHeightFilter: PropTypes.string.isRequired,
 };

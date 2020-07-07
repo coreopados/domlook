@@ -3,11 +3,11 @@ import {
     SORT_TYPE_SELL,
     SORT_STATUS_HOUSE,
     SORT_STATUS_APARTMENT,
-    SORT_LOCATION_KIEV,
-    SORT_LOCATION_KHARKOV,
-    SORT_LOCATION_DNEPR,
-    SORT_LOCATION_LVOV,
-    SORT_LOCATION_ODESSA,
+    SORT_CITY_KIEV,
+    SORT_CITY_KHARKOV,
+    SORT_CITY_DNEPR,
+    SORT_CITY_LVOV,
+    SORT_CITY_ODESSA,
 
     FILTER_STATUS_RENT,
     FILTER_STATUS_SALE,
@@ -17,6 +17,19 @@ import {
     FILTER_TYPE_APPARTMENT,
     FILTER_TYPE_COMMERCE,
 
+    FILTER_TOTAL_AREA,
+    FILTER_FLOOR,
+    FILTER_ROOM,
+    FILTER_PROP_WALLS,
+    FILTER_HEATING,
+    FILTER_CEILING_HEIGHT,
+    FILTER_BUILDING,
+    FILTER_OFFER,
+    FILTER_REGION,
+    FILTER_CITY,
+    FILTER_DISTRICT,
+    FILTER_PRICE_FROM,
+    FILTER_PRICE_TO,
 
     RESET_FILTERS
 } from './constants';
@@ -24,7 +37,20 @@ import {
 const initialState = {
     typeFilter: '',
     statusFilter: '',
-    locationFilter: ''
+    cityFilter: '',
+    totalAreaFilter: '',
+    floorFilter: '',
+    roomsFilter: '',
+    propWallsFilter: '',
+    propHeatingFilter: '',
+    propCeilingHeightFilter: '',
+    propBuildingFilter: '',
+    propOfferFilter: '',
+    priceFromFilter: '',
+    priceToFilter: '',
+    propRegionFilter: '',
+    propCityFilter: '',
+    propDistrictFilter: '',
 }
 export const filterReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -34,14 +60,14 @@ export const filterReducer = (state = initialState, action) => {
                 ...state,
                 typeFilter: "rent",
                 statusFilter: '',
-                locationFilter: ''
+                cityFilter: ''
             };
         case SORT_TYPE_SELL:
             return {
                 ...state,
                 typeFilter: "sell",
                 statusFilter: '',
-                locationFilter: ''
+                cityFilter: ''
             };
 
         //сортировка по квартира\дом
@@ -50,50 +76,50 @@ export const filterReducer = (state = initialState, action) => {
                 ...state,
                 statusFilter: "house",
                 typeFilter: "",
-                locationFilter: ''
+                cityFilter: ''
             };
         case SORT_STATUS_APARTMENT:
             return {
                 ...state,
                 statusFilter: "apartment",
                 typeFilter: "",
-                locationFilter: ''
+                cityFilter: ''
             };
 
 
         //сортировка по городам
-        case SORT_LOCATION_KIEV:
+        case SORT_CITY_KIEV:
             return {
                 ...state,
-                locationFilter: "Kiev",
+                cityFilter: "Kiev",
                 statusFilter: "",
                 typeFilter: "",
             };
-        case SORT_LOCATION_KHARKOV:
+        case SORT_CITY_KHARKOV:
             return {
                 ...state,
-                locationFilter: "Kharkov",
+                cityFilter: "Kharkov",
                 statusFilter: "",
                 typeFilter: "",
             };
-        case SORT_LOCATION_DNEPR:
+        case SORT_CITY_DNEPR:
             return {
                 ...state,
-                locationFilter: "Dnepr",
+                cityFilter: "Dnepr",
                 statusFilter: "",
                 typeFilter: "",
             };
-        case SORT_LOCATION_LVOV:
+        case SORT_CITY_LVOV:
             return {
                 ...state,
-                locationFilter: "Lvov",
+                cityFilter: "Lvov",
                 statusFilter: "",
                 typeFilter: "",
             };
-        case SORT_LOCATION_ODESSA:
+        case SORT_CITY_ODESSA:
             return {
                 ...state,
-                locationFilter: "Odessa",
+                cityFilter: "Odessa",
                 statusFilter: "",
                 typeFilter: "",
             };
@@ -131,13 +157,93 @@ export const filterReducer = (state = initialState, action) => {
                 statusFilter: 'commerce'
             };
 
+        case FILTER_TOTAL_AREA:
+            return {
+                ...state,
+                totalAreaFilter: action.payload
+            };
+        case FILTER_FLOOR:
+            return {
+                ...state,
+                floorFilter: action.payload
+            };
+        case FILTER_ROOM:
+            return {
+                ...state,
+                roomsFilter: action.payload
+            };
+        case FILTER_PROP_WALLS:
+            return {
+                ...state,
+                propWallsFilter: action.payload
+            };
+        case FILTER_HEATING:
+            return {
+                ...state,
+                propHeatingFilter: action.payload
+            };
+        case FILTER_CEILING_HEIGHT:
+            return {
+                ...state,
+                propCeilingHeightFilter: action.payload
+            };
+        case FILTER_BUILDING:
+            return {
+                ...state,
+                propBuildingFilter: action.payload
+            };
+        case FILTER_OFFER:
+            return {
+                ...state,
+                propOfferFilter: action.payload
+            };
+        case FILTER_REGION:
+            return {
+                ...state,
+                propRegionFilter: action.payload
+            };
+        case FILTER_CITY:
+            return {
+                ...state,
+                propCityFilter: action.payload
+            };
+        case FILTER_DISTRICT:
+            return {
+                ...state,
+                propDistrictFilter: action.payload
+            };
+        case FILTER_PRICE_FROM:
+            return {
+                ...state,
+                priceFromFilter: action.payload
+            };
+        case FILTER_PRICE_TO:
+            return {
+                ...state,
+                priceToFilter: action.payload
+            };
+
+
 
         case RESET_FILTERS:
             return {
                 ...state,
                 typeFilter: '',
                 statusFilter: '',
-                locationFilter: '',
+                cityFilter: '',
+                totalArea: '',
+                floorFilter: '',
+                roomsFilter: '',
+                propWallsFilter: '',
+                propHeatingFilter: '',
+                propCeilingHeightFilter: '',
+                propBuildingFilter: '',
+                propOfferFilter: '',
+                priceFromFilter: '',
+                priceToFilter: '',
+                propRegionFilter: '',
+                propCityFilter: '',
+                propDistrictFilter: '',
             };
 
 

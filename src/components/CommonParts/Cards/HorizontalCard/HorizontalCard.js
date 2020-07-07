@@ -8,8 +8,10 @@ const HorizontalCard = ({ ad, addFavourites, favourites }) => {
 
 
   useEffect(() => {
-    localStorage.setItem(favourites, JSON.stringify(favourites))
-  }, [favourites])
+    if (favourites && favourites.length !== 0) {
+      localStorage.setItem('favourites', JSON.stringify(favourites));
+    }
+  }, [favourites]);
 
   const handleAddFavourites = (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ const HorizontalCard = ({ ad, addFavourites, favourites }) => {
       <div className="horizontal-card__block">
         <div className="horizontal-card__inner">
           <h5 className="horizontal-card__title">{ad.title}</h5>
-          <p className="horizontal-card__location">{ad.location}</p>
+          <p className="horizontal-card__location">{ad.address}</p>
           <div className="horizontal-card__middle-part">
             <p className="horizontal-card__description">
               {ad.description.slice(0, 140)}
@@ -83,7 +85,7 @@ HorizontalCard.propTypes = {
     price: PropTypes.string.isRequired,
     imgUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     total_area: PropTypes.string.isRequired,
     living_space: PropTypes.string.isRequired,

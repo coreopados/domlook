@@ -38,7 +38,7 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
                 <aside className="details-full-info">
                   <div className="details-full-info__block">
                     <h4 className="details-full-info__title">{ad.title}</h4>
-                    <p className="details-full-info__location">{ad.location}</p>
+                    <p className="details-full-info__location">{ad.address}</p>
                   </div>
                   <div className="details-full-info__block">
                     <div className="details-full-info__price-wrapper">
@@ -111,7 +111,7 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
                           Опубликовано:
                         </p>
                         <p className="details-full-info__secondary-info-item">
-                          29.05.2020
+                          {ad.post_date}
                         </p>
                       </div>
                       <div className="details-full-info__secondary-info-box">
@@ -119,7 +119,7 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
                           ID:
                         </p>
                         <p className="details-full-info__secondary-info-item">
-                          41876
+                          {ad.id}
                         </p>
                       </div>
                     </div>
@@ -175,10 +175,10 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
                             {ad.floor}
                           </p>
                           <p className="details-general-info__spec-value">
-                            от посредника
+                            {ad.prop_offer}
                           </p>
                           <p className="details-general-info__spec-value">
-                            кирпич
+                            {ad.prop_walls}
                           </p>
                         </div>
                       </div>
@@ -288,7 +288,7 @@ DetailsPage.defaultProps = {
     price: PropTypes.string,
     imgUrl: PropTypes.string,
     title: PropTypes.string,
-    location: PropTypes.string,
+    address: PropTypes.string,
     description: PropTypes.string,
     total_area: PropTypes.string,
     living_space: PropTypes.string,
@@ -306,7 +306,7 @@ DetailsPage.propTypes = {
     price: PropTypes.string,
     imgUrl: PropTypes.string,
     title: PropTypes.string,
-    location: PropTypes.string,
+    address: PropTypes.string,
     description: PropTypes.string,
     total_area: PropTypes.string,
     living_space: PropTypes.string,
@@ -321,7 +321,7 @@ DetailsPage.propTypes = {
       price: PropTypes.string.isRequired,
       imgUrl: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       total_area: PropTypes.string.isRequired,
       living_space: PropTypes.string.isRequired,

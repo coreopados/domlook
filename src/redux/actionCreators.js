@@ -6,22 +6,17 @@ import {
   SET_HORIZONTAL_ORIENTATION,
   ADD_FAVOURITE,
   REMOVE_FAVOURITE,
+  SET_FAVOURITES,
   SET_ABOUT_TEXT,
   SET_NEWS,
 
-  // FINDED_ADS_LENGTH,
-
-  // PAGINATE,
   PAGINATE_SALE,
   PAGINATE_RENT,
   PAGINATE_DAILYRENT,
   PAGINATE_NEWS,
 
-  // CURRENT_CATEGORY_NEWS,
-
   SORT_LOW_PRICE,
   SORT_HIGHT_PRICE,
-  // SET_SELECTED_PRICE,
 
   SORT_BY_TODAY,
   SORT_BY_WEEK,
@@ -154,6 +149,11 @@ export const addFavouriteCreator = ad => ({
 export const removeFavouriteCreator = ad => ({
   type: REMOVE_FAVOURITE,
   payload: ad,
+});
+
+export const setFavouritesCreator = ads => ({
+  type: SET_FAVOURITES,
+  payload: ads,
 });
 
 

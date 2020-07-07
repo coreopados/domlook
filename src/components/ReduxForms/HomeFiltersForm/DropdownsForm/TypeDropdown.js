@@ -11,7 +11,6 @@ const TypeDropdown = ({
     typeRent,
     typeSale,
     typeDailyRent
-
 }) => {
 
     const type_options = [

@@ -29,7 +29,7 @@ AdsList.propTypes = {
       price: PropTypes.string.isRequired,
       imgUrl: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
+      prop_city: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       total_area: PropTypes.string.isRequired,
       living_space: PropTypes.string.isRequired,

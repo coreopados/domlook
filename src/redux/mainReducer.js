@@ -6,6 +6,7 @@ import {
   SET_VERTICAL_ORIENTATION,
   ADD_FAVOURITE,
   REMOVE_FAVOURITE,
+  SET_FAVOURITES,
   SET_ABOUT_TEXT,
   SET_NEWS,
 
@@ -67,6 +68,11 @@ export const mainReducer = (state = initialState, action) => {
         ...state,
         favourites: action.payload,
       };
+    case SET_FAVOURITES:
+    return {
+      ...state,
+      favourites: action.payload,
+    }
     case SET_ABOUT_TEXT:
       return {
         ...state,

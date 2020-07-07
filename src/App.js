@@ -1,10 +1,10 @@
-import React from 'react';
+import { React, useEffect, useMemo } from 'react';
 import {
   Route,
   Switch,
   Redirect,
 } from 'react-router-dom';
-
+import { connect } from "react-redux";
 import './App.scss';
 
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
@@ -21,9 +21,12 @@ import { Favourites } from './components/Favourites/Favourites';
 import {
   NewsDetailsPage,
 } from './components/NewsPage/NewsDetailsPage/NewsDetailsPage';
+import { handleLoadAds } from "./redux/actionCreators";
 
-function App() {
-
+function App({ loadData }) {
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <React.Fragment>
       <ScrollToTop />
@@ -50,5 +53,11 @@ function App() {
     </React.Fragment>
   );
 }
+const mapDispatchToProps = (dispatch) => ({
+  loadData: () => dispatch(handleLoadAds()),
+});
 
-export default App;
+const Enhanced = connect(null, mapDispatchToProps)(App);
+
+export { Enhanced as App };
+// export default App;

@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import './Navigation.scss';
 
-export const Navigation = ({ pageName }) => (
+export const Navigation = ({ pageName, resetFilters }) => (
   <div className="common-nav">
     <div className="container">
       <div className="common-nav__wrapper">

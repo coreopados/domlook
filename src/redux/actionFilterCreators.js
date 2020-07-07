@@ -3,11 +3,11 @@ import {
   SORT_TYPE_SELL,
   SORT_STATUS_HOUSE,
   SORT_STATUS_APARTMENT,
-  SORT_LOCATION_KIEV,
-  SORT_LOCATION_KHARKOV,
-  SORT_LOCATION_DNEPR,
-  SORT_LOCATION_LVOV,
-  SORT_LOCATION_ODESSA,
+  SORT_CITY_KIEV,
+  SORT_CITY_KHARKOV,
+  SORT_CITY_DNEPR,
+  SORT_CITY_LVOV,
+  SORT_CITY_ODESSA,
   RESET_FILTERS
 } from './constants';
 
@@ -30,24 +30,24 @@ export const filterStatusHouseCreator = () => ({
 });
 
 //покзать объявление "киев"
-export const filterLocationKievCreator = () => ({
-  type: SORT_LOCATION_KIEV,
+export const filterCityKievCreator = () => ({
+  type: SORT_CITY_KIEV,
 });
 //покзать объявление "харьков"
-export const filterLocationKharkovCreator = () => ({
-  type: SORT_LOCATION_KHARKOV,
+export const filterCityKharkovCreator = () => ({
+  type: SORT_CITY_KHARKOV,
 });
 //покзать объявление "днепр"
-export const filterLocationDneprCreator = () => ({
-  type: SORT_LOCATION_DNEPR,
+export const filterCityDneprCreator = () => ({
+  type: SORT_CITY_DNEPR,
 });
 //покзать объявление "львов"
-export const filterLocationLvovCreator = () => ({
-  type: SORT_LOCATION_LVOV,
+export const filterCityLvovCreator = () => ({
+  type: SORT_CITY_LVOV,
 });
 //покзать объявление "одесса"
-export const filterLocationOdessaCreator = () => ({
-  type: SORT_LOCATION_ODESSA,
+export const filterCityOdessaCreator = () => ({
+  type: SORT_CITY_ODESSA,
 });
 
 

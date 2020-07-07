@@ -10,6 +10,7 @@ import {
 const DropdownPriceSort = ({
     sortLowPrice,
     sortHightPrice,
+
 }) => {
     const price_options = [
         { id: 1, value: 'low-price', label: 'от дешевых к дорогим' },
@@ -24,6 +25,7 @@ const DropdownPriceSort = ({
     }
 
     return (
+
         <select name="top-filter-price" id="top-filter-price"
             value={selectedOption}
             onChange={e => setSelectedOption(e.target.value)}>
@@ -31,6 +33,7 @@ const DropdownPriceSort = ({
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}
         </select>
+
     );
 };
 

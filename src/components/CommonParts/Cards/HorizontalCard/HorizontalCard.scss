@@ -66,6 +66,11 @@
   }
   &__specification {
     @include flex-style(flex, row, space-between);
+
+  }
+  &__specification+p{
+    font-size: 13px;
+    font-weight: bold;
   }
   &__area,
   &__floor,

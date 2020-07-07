@@ -4,17 +4,17 @@ import { Provider } from 'react-redux';
 
 import {
   Route,
-  // BrowserRouter,
-  HashRouter,
+  BrowserRouter,
+  // HashRouter,
 } from 'react-router-dom';
-import App from './App';
+import { App } from './App';
 import { store } from './redux/store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter basename="/domlook">
+    <BrowserRouter basename="/domlook">
       <Route component={App} />
-    </HashRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );

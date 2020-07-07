@@ -1,3 +1,4 @@
+
 import React, { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -23,46 +24,110 @@ const RentPage = ({
   currentPageRent,
   sort_price,
 
-  typeFilter,
+  // typeFilter,
   statusFilter,
-  locationFilter
+  cityFilter,
+  totalAreaFilter,
+  floorFilter,
+  roomsFilter,
+  propWallsFilter,
+  propOfferFilter,
+  propHeatingFilter,
+  propBuildingFilter,
+  propCeilingHeightFilter,
+  propRegionFilter,
+  propCityFilter
 }) => {
   useEffect(() => {
     loadData();
-
   }, []);
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"));
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-  if (statusFilter === 'apartment') {
-    rentAds = rentAds.filter((ad) => ad.prop_type === "apartment")
-  } else if (statusFilter === 'house') {
-    rentAds = rentAds.filter((ad) => ad.prop_type === "house")
+
+  //по типу
+  if (statusFilter) {
+    rentAds = rentAds.filter((ad) => ad.prop_type === statusFilter)
   }
 
 
-  if (locationFilter === "Kiev") {
-    rentAds = rentAds.filter((ad) => ad.location.match('Киев'))
-  } else if (locationFilter === "Kharkov") {
-    rentAds = rentAds.filter((ad) => ad.location.match('Харьков'))
-  } else if (locationFilter === "Odessa") {
-    rentAds = rentAds.filter((ad) => ad.location.match('Одесса'))
-  } else if (locationFilter === "Dnepr") {
-    rentAds = rentAds.filter((ad) => ad.location.match('Днепр'))
-  } else if (locationFilter === "Lvov") {
-    rentAds = rentAds.filter((ad) => ad.location.match('Львов'))
+  //по городу
+  if (cityFilter === "Kiev") {
+    rentAds = rentAds.filter((ad) => ad.prop_city === 'Киев')
+  } else if (cityFilter === "Kharkov") {
+    rentAds = rentAds.filter((ad) => ad.prop_city === 'Харьков')
+  } else if (cityFilter === "Odessa") {
+    rentAds = rentAds.filter((ad) => ad.prop_city === 'Одесса')
+  } else if (cityFilter === "Dnepr") {
+    rentAds = rentAds.filter((ad) => ad.prop_city === 'Днепр')
+  } else if (cityFilter === "Lvov") {
+    rentAds = rentAds.filter((ad) => ad.prop_city === 'Львов')
   }
+
+  //по площади
+  if (totalAreaFilter !== "") {
+    rentAds = rentAds.filter((ad) => Math.floor(ad.total_area) > Math.floor(totalAreaFilter))
+  }
+
+  //по этажу
+  if (floorFilter !== "") {
+    rentAds = rentAds.filter((ad) => Math.floor(ad.floor) < Math.floor(floorFilter))
+  }
+
+  //по количеству комнат
+  if (roomsFilter !== "") {
+    rentAds = rentAds.filter((ad) => ad.rooms === roomsFilter)
+  }
+
+  //по типу стен
+  if (propWallsFilter !== '') {
+    rentAds = rentAds.filter((ad) => ad.prop_walls === propWallsFilter)
+  }
+
+  //по типу предложения
+  if (propOfferFilter !== '') {
+    rentAds = rentAds.filter((ad) => ad.prop_offer === propOfferFilter)
+  }
+
+  //по типу отопления
+  if (propHeatingFilter !== '') {
+    rentAds = rentAds.filter((ad) => ad.prop_heating === propHeatingFilter)
+  }
+
+
+  //по типу здания
+  if (propBuildingFilter !== "") {
+    rentAds = rentAds.filter((ad) => ad.prop_building === propBuildingFilter)
+  }
+
+
+
+  //по высоте потолков
+  if (propCeilingHeightFilter !== "") {
+    rentAds = rentAds.filter((ad) => Math.floor(ad.ceiling_height) <= Math.floor(propCeilingHeightFilter))
+  }
+
+
+  //по области
+  if (propRegionFilter) {
+    rentAds = rentAds.filter((ad) => ad.prop_region === propRegionFilter)
+  }
+  //по городу
+  if (propCityFilter) {
+    rentAds = rentAds.filter((ad) => ad.prop_city === propCityFilter)
+  }
+
 
   sort_price === 'low-price' ? rentAds = rentAds.sort((prev, next) => prev.price - next.price) : rentAds = rentAds.sort((prev, next) => next.price - prev.price);
+
+
 
   const indexOfLastAd = currentPageRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = rentAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  console.log(typeFilter,
-    statusFilter,
-    locationFilter)
+
 
   return (
     <main className="common-main">
@@ -154,9 +219,19 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageRent: state.paginationReducer.currentPageRent,
 
-  typeFilter: state.filterReducer.typeFilter,
+  // typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
-  locationFilter: state.filterReducer.locationFilter,
+  cityFilter: state.filterReducer.cityFilter,
+  totalAreaFilter: state.filterReducer.totalAreaFilter,
+  floorFilter: state.filterReducer.floorFilter,
+  roomsFilter: state.filterReducer.roomsFilter,
+  propWallsFilter: state.filterReducer.propWallsFilter,
+  propOfferFilter: state.filterReducer.propOfferFilter,
+  propHeatingFilter: state.filterReducer.propHeatingFilter,
+  propBuildingFilter: state.filterReducer.propBuildingFilter,
+  propCeilingHeightFilter: state.filterReducer.propCeilingHeightFilter,
+  propRegionFilter: state.filterReducer.propRegionFilter,
+  propCityFilter: state.filterReducer.propCityFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -176,7 +251,7 @@ RentPage.propTypes = {
       price: PropTypes.string.isRequired,
       imgUrl: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
+      prop_city: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       total_area: PropTypes.string.isRequired,
       living_space: PropTypes.string.isRequired,
@@ -192,4 +267,11 @@ RentPage.propTypes = {
   match: PropTypes.shape().isRequired,
   itemsPerPage: PropTypes.number.isRequired,
   currentPageRent: PropTypes.number.isRequired,
+  statusFilter: PropTypes.string.isRequired,
+  cityFilter: PropTypes.string.isRequired,
+  totalAreaFilter: PropTypes.string.isRequired,
+  propWallsFilter: PropTypes.string.isRequired,
+  propHeatingFilter: PropTypes.string.isRequired,
+  propBuildingFilter: PropTypes.string.isRequired,
+  propCeilingHeightFilter: PropTypes.string.isRequired,
 };

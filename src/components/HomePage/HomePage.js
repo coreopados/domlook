@@ -12,13 +12,22 @@ import { HomeNews } from "./HomeNews/HomeNews";
 import About from "../CommonParts/About/About";
 import { HomePageCities } from "./HomePageCities/HomePageCities";
 import { HomeAdsList } from "./HomeAdsList/HomeAdsList";
-import { handleLoadNewsAds } from "../../redux/actionCreators";
+import { handleLoadNewsAds,
+  setFavouritesCreator } from "../../redux/actionCreators";
 import { filterTypeRentCreator, filterTypeSellCreator, filterStatusApartmentCreator, filterStatusHouseCreator } from "../../redux/actionFilterCreators";
 
 
-const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatusApartment, filterStatusHouse, statusFilter }) => {
+const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatusApartment, filterStatusHouse, statusFilter, setFavourites }) => {
   useEffect(() => {
     loadData();
+  }, []);
+
+  useEffect(() => {
+    const cachedFavourites = localStorage.getItem('favourites');
+
+    if (cachedFavourites) {
+      setFavourites(JSON.parse(cachedFavourites));
+    }
   }, []);
   const aptsAds = useMemo(
     () =>
@@ -171,7 +180,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.mainReducer.isLoading,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
-  locationFilter: state.filterReducer.locationFilter
+  cityFilter: state.filterReducer.cityFilter
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -180,7 +189,7 @@ const mapDispatchToProps = (dispatch) => ({
   filterTypeSell: () => dispatch(filterTypeSellCreator()),
   filterStatusApartment: () => dispatch(filterStatusApartmentCreator()),
   filterStatusHouse: () => dispatch(filterStatusHouseCreator()),
-
+  setFavourites: (ads) => dispatch(setFavouritesCreator(ads)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(HomePage);
@@ -196,7 +205,7 @@ HomePage.propTypes = {
       price: PropTypes.string.isRequired,
       imgUrl: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
+      prop_city: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       total_area: PropTypes.string.isRequired,
       living_space: PropTypes.string.isRequired,

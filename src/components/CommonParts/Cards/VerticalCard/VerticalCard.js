@@ -12,6 +12,10 @@ const VerticalCard = ({ ad, match, favourites, removeFavourites }) => {
     if (hasFavourites >= 0) {
       removeFavourites([...favourites.filter((item) => item.id !== ad.id)]);
     }
+
+    const favArray = JSON.parse(localStorage.getItem('favourites'));
+    favArray.splice(favArray.indexOf(ad.id, 1));
+    localStorage.setItem('favourites', JSON.stringify(favArray));
   };
 
 
@@ -81,7 +85,7 @@ VerticalCard.propTypes = {
     price: PropTypes.string.isRequired,
     imgUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
+    prop_city: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     total_area: PropTypes.string.isRequired,
     living_space: PropTypes.string.isRequired,
