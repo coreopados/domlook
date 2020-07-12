@@ -1,28 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import {
-    sortLowPriceCreator,
-    sortHightPriceCreator,
+    sortPriceCreator,
 
 } from '../../../../redux/actionCreators';
 
 
 const DropdownPriceSort = ({
-    sortLowPrice,
-    sortHightPrice,
-
+    sortPrice,
+    sortPriceFunc
 }) => {
+
+
+
     const price_options = [
         { id: 1, value: 'low-price', label: 'от дешевых к дорогим' },
         { id: 2, value: 'hight-price', label: 'от дорогих к дешевым' }
     ];
-    const [selectedOption, setSelectedOption] = useState(price_options[0].value);
 
-    if (selectedOption === 'low-price') {
-        sortLowPrice();
-    } else if (selectedOption === 'hight-price') {
-        sortHightPrice();
-    }
+    const [selectedOption, setSelectedOption] = useState(sortPrice);
+
+    sortPriceFunc(selectedOption)
+
 
     return (
 
@@ -40,10 +39,7 @@ const DropdownPriceSort = ({
 
 
 const mapDispatchToProps = dispatch => ({
-    sortHightPrice: () => dispatch(sortHightPriceCreator()),
-    sortLowPrice: () => dispatch(sortLowPriceCreator()),
-
-    // setSelectedOption: () => dispatch(setSelectedOptionCreator()),
+    sortPriceFunc: selectedOption => dispatch(sortPriceCreator(selectedOption)),
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(DropdownPriceSort);

@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import {
   NavLink,
 } from 'react-router-dom';
-import { filterCategoryNews } from "../../redux/actionCreators";
+import { filterCategoryNewsCreator } from "../../redux/actionCreators";
 import { resetFilters } from "../../redux/actionFilterCreators";
 import './Header.scss';
 
-const Header = ({ filterCategoryNews, resetFilters }) => (
+const Header = ({ resetFilters }) => (
   <header className="header">
     <div className="header__background-wrapper">
       <img
@@ -48,17 +48,18 @@ const Header = ({ filterCategoryNews, resetFilters }) => (
             to="/"
             // to={`${process.env.PUBLIC_URL}/`}
             className="header-nav__logo-wrapper"
-          >
-            <img
-              src="/domlook/img/header/logo-header-1.png"
-              alt="логотип"
-              className="header-nav__logo-1"
-            />
-            <img
-              src="/domlook/img/header/logo-header-2.png"
-              alt="логотип"
-              className="header-nav__logo-2"
-            />
+          ><div onClick={resetFilters}>
+              <img
+                src="/domlook/img/header/logo-header-1.png"
+                alt="логотип"
+                className="header-nav__logo-1"
+              />
+              <img
+                src="/domlook/img/header/logo-header-2.png"
+                alt="логотип"
+                className="header-nav__logo-2"
+              />
+            </div>
           </NavLink>
           <nav className="navigation">
             <ul className="navigation__list">
@@ -97,7 +98,7 @@ const Header = ({ filterCategoryNews, resetFilters }) => (
                   // to={`${process.env.PUBLIC_URL}/news`}
                   className="navigation__link"
                   activeClassName="navigation__link--active"
-                  onClick={filterCategoryNews}
+                  onClick={resetFilters}
                 >
                   Новости рынка
                 </NavLink>
@@ -117,15 +118,15 @@ const Header = ({ filterCategoryNews, resetFilters }) => (
 );
 
 
-const mapStateToProps = (state) => ({
-  filterCategoryNews: state.mainReducer.filterCategoryNews,
-});
+// const mapStateToProps = (state) => ({
+//   filterCategoryNews: state.mainReducer.filterCategoryNews,
+// });
 
 const mapDispatchToProps = (dispatch) => ({
-  filterCategoryNews: (number) => dispatch(filterCategoryNews()),
+  filterCategoryNews: (number) => dispatch(filterCategoryNewsCreator()),
   resetFilters: () => dispatch(resetFilters()),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(Header);
+const Enhanced = connect(null, mapDispatchToProps)(Header);
 
 export { Enhanced as Header };

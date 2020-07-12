@@ -161,7 +161,9 @@
       input{
         display: none;
       }
-      label{
+      span,label{
+      // label{
+        display: inline-block;
         padding-left: 30px;
         position: relative;
         font-size: 14px;
@@ -169,6 +171,9 @@
         height: 20px;
         line-height: 24px;
         cursor:pointer;
+      }
+      span{
+        padding-left: 0;
       }
       label:before{
         content:'';

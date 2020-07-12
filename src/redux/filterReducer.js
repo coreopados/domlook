@@ -31,6 +31,10 @@ import {
     FILTER_PRICE_FROM,
     FILTER_PRICE_TO,
 
+    FILTER_CATEGORY_NEWS,
+    ACTIVE_CATEGORY_NEWS,
+
+
     RESET_FILTERS
 } from './constants';
 
@@ -51,6 +55,8 @@ const initialState = {
     propRegionFilter: '',
     propCityFilter: '',
     propDistrictFilter: '',
+    activeCategoryNews: '',
+    filterCategoryNews: ''
 }
 export const filterReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -223,6 +229,17 @@ export const filterReducer = (state = initialState, action) => {
                 priceToFilter: action.payload
             };
 
+        //новости
+        case FILTER_CATEGORY_NEWS:
+            return {
+                ...state,
+                filterCategoryNews: action.payload,
+            };
+        case ACTIVE_CATEGORY_NEWS:
+            return {
+                ...state,
+                activeCategoryNews: action.payload,
+            };
 
 
         case RESET_FILTERS:
@@ -244,6 +261,8 @@ export const filterReducer = (state = initialState, action) => {
                 propRegionFilter: '',
                 propCityFilter: '',
                 propDistrictFilter: '',
+                filterCategoryNews: '',
+                activeCategoryNews: ''
             };
 
 

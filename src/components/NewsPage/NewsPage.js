@@ -6,49 +6,31 @@ import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { NewsFiltersForm } from "../ReduxForms/NewsFiltersForm/NewsFiltersForm";
 import { NewsAdsList } from "./NewsAdsList/NewsAdsList";
 import { PaginationNews } from "../CommonParts/Pagination/PaginationNewsPage";
+import { handleLoadNewsAds } from "../../redux/actionCreators";
 import About from "../CommonParts/About/About";
-import { handleLoadNews } from "../../redux/actionCreators";
+
 
 const NewsPage = ({
   news,
-  loadData,
   match,
   itemsPerPage,
-  // currentPageNews,
   currentPageNews,
   filterCategoryNews,
-  // state,
+  activeCategoryNews,
+  loadData,
 }) => {
-  useEffect(() => {
-    loadData();
-  }, []);
+
+  useEffect(() => { loadData() }, [])
 
 
-  news = (() => {
-    switch (filterCategoryNews) {
-      case 'Новости рынка':
-        return news.filter(post => post.category === 'Новости рынка');
-      case 'Аналитика':
-        return news.filter(post => post.category === 'Аналитика');
-      case 'Новости':
-        return news.filter(post => post.category === 'Новости');
-      case 'Новости и советы ЖКХ':
-        return news.filter(post => post.category === 'Новости и советы ЖКХ');
-      case 'Новости новостроек':
-        return news.filter(post => post.category === 'Новости новостроек');
-      case 'Советы по обустройству':
-        return news.filter(post => post.category === 'Советы по обустройству');
-      case 'Финансы':
-        return news.filter(post => post.category === 'Финансы');
-      default:
-        return news;
-    }
-  })();
-
+  if (filterCategoryNews !== '') {
+    news = news.filter((post) => post.category === filterCategoryNews)
+  }
 
   const indexOfLastAd = currentPageNews * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentNewsPosts = news.slice(indexOfFirstAd, indexOfLastAd);
+
 
 
   return (
@@ -57,7 +39,7 @@ const NewsPage = ({
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
-            <NewsFiltersForm />
+            <NewsFiltersForm activeCategory={activeCategoryNews} />
             <div className="common-section__block">
               <NewsAdsList filterCategoryNews={news} news={currentNewsPosts} match={match} />
               {(news.length > 9) && <PaginationNews currentPageNews={currentPageNews} totalItems={news.length} />}
@@ -111,17 +93,17 @@ const NewsPage = ({
 
 const mapStateToProps = (state) => ({
   news: state.mainReducer.news,
+  activeCategoryNews: state.filterReducer.activeCategoryNews,
   isLoaded: state.mainReducer.isLoaded,
   isLoading: state.mainReducer.isLoading,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageNews: state.paginationReducer.currentPageNews,
-  // currentPageNews: state.filterCategoryReducer.currentPageNews,
-  filterCategoryNews: state.filterCategoryReducer.filterCategoryNews,
+  filterCategoryNews: state.filterReducer.filterCategoryNews,
   state: state.filterCategoryReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadData: () => dispatch(handleLoadNews()),
+  loadData: () => dispatch(handleLoadNewsAds()),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(NewsPage);
@@ -141,7 +123,7 @@ NewsPage.propTypes = {
       message2: PropTypes.string.isRequired,
     })
   ).isRequired,
-  loadData: PropTypes.func.isRequired,
+  // loadData: PropTypes.func.isRequired,
   match: PropTypes.shape().isRequired,
   itemsPerPage: PropTypes.number.isRequired,
   currentPageNews: PropTypes.number.isRequired,

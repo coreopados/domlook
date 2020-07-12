@@ -16,6 +16,9 @@ import { BuildingDropdown } from './DropdownsForm/BuildingDropdown';
 import { CeilingHeightDropdown } from './DropdownsForm/CeilingHeightDropdown';
 import { SelectRegionDropdown } from './DropdownsForm/SelectRegionDropdown';
 import { SelectCityDropdown } from './DropdownsForm/SelectCityDropdown';
+import { SelectDistrictDropdown } from './DropdownsForm/SelectDistrictDropdown';
+import { PriceFromTo } from './DropdownsForm/PriceFromTo';
+import { Facilities } from './Facilities/Facilities';
 
 const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
 
@@ -64,11 +67,9 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
 
             {/* фильтр по району */}
             <div className="block">
-              <label htmlFor="district-filter">
+              <label htmlFor="select-city-filter">
                 Район
-              <select name="" id="district-filter">
-                  <option value="">Не выбрано</option>
-                </select>
+         <SelectDistrictDropdown />
               </label>
             </div>
 
@@ -140,16 +141,7 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
             <div className="block">
               <label htmlFor="">
                 Цена
-              <div className="wrap-price">
-                  <input type="number" placeholder="От" />
-                  <input type="number" placeholder="До" />
-                  <select name="" id="">
-                    <option value="hrn">грн.</option>
-                    <option value="dollar">$</option>
-                    <option value="euro">€</option>
-                  </select>
-                </div>
-
+                <PriceFromTo />
               </label>
             </div>
 
@@ -169,107 +161,7 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
             <button onClick={() => setStatusAddInfo(!count)}><i className={count ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o'}></i>Дополнительные параметры</button>
 
             <div className={clsx('additional-block', (count === true) && 'active')}>
-              <div className="parametrs">
-                <p>Удобства:</p>
-                <div className="facilities">
-                  <input type="checkbox" id="wifi-check" />
-                  <label htmlFor="wifi-check">
-                    Wi-Fi
-              </label>
-
-                  <input type="checkbox" id="bath-check" />
-                  <label htmlFor="bath-check">
-                    Баня
-              </label>
-
-                  <input type="checkbox" id="pool-check" />
-                  <label htmlFor="pool-check">
-                    Бассейн
-              </label>
-
-                  <input type="checkbox" id="boiler-check" />
-                  <label htmlFor="boiler-check">
-                    Бойлер
-              </label>
-
-                  <input type="checkbox" id="gas-plate-check" />
-                  <label htmlFor="gas-plate-check">
-                    Газовая плита
-              </label>
-
-                  <input type="checkbox" id="garage-check" />
-                  <label htmlFor="garage-check">
-                    Гараж
-              </label>
-
-                  <input type="checkbox" id="jakoozee-check" />
-                  <label htmlFor="jakoozee-check">
-                    Джакузи
-              </label>
-
-                  <input type="checkbox" id="shower-stall-check" />
-                  <label htmlFor="shower-stall-check">
-                    Душевая кабинка
-              </label>
-
-                  <input type="checkbox" id="internet-check" />
-                  <label htmlFor="internet-check">
-                    Интернет
-              </label>
-
-                  <input type="checkbox" id="cable-tv-check" />
-                  <label htmlFor="cable-tv-check">
-                    Кабельное ТВ
-              </label>
-
-                  <input type="checkbox" id="fireplace-check" />
-                  <label htmlFor="fireplace-check">
-                    Камин
-              </label>
-
-                  <input type="checkbox" id="conditioner-check" />
-                  <label htmlFor="conditioner-check">
-                    Кондиционер
-              </label>
-
-                  <input type="checkbox" id="kitchen-check" />
-                  <label htmlFor="kitchen-check">
-                    Кухня
-              </label>
-
-                  <input type="checkbox" id="elevator-check" />
-                  <label htmlFor="elevator-check">
-                    Лифт
-              </label>
-
-                  <input type="checkbox" id="furniture-check" />
-                  <label htmlFor="furniture-check">
-                    Мебель
-              </label>
-
-                  <input type="checkbox" id="microwave-check" />
-                  <label htmlFor="microwave-check">
-                    Микроволновая печь
-              </label>
-
-                  <input type="checkbox" id="sauna-check" />
-                  <label htmlFor="sauna-check">
-                    Сауна
-              </label>
-
-                  <input type="checkbox" id="wash-check" />
-                  <label htmlFor="wash-check">
-                    Стиральная машина
-              </label>
-
-                  <input type="checkbox" id="tv-check" />
-                  <label htmlFor="tv-check">
-                    Телевизор
-              </label>
-
-
-                </div>
-              </div>
+              <Facilities />
 
               <div className="terms">
                 <p>Тип сделки:</p>

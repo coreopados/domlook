@@ -4,7 +4,6 @@ import {
     rentTypeCreator,
     saleTypeCreator,
     dailyRentTypeCreator,
-
 } from '../../../../redux/actionHomeFilterCreators';
 
 const TypeDropdown = ({

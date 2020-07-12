@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -8,140 +8,44 @@ import { FiltersForm } from "../ReduxForms/FiltersForm/FiltersForm";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
-import { PaginationSale } from "../CommonParts/Pagination/PaginationSalePage";
-import { handleLoadAds } from "../../redux/actionCreators";
+import { PaginationCommon } from "../CommonParts/Pagination/PaginationCommonPage";
 import About from "../CommonParts/About/About";
 
-const SalePage = ({
+const CommonAds = ({
   ads,
   isLoaded,
   isLoading,
   orientation,
   match,
-  currentPageSale,
+  currentPageCommon,
   itemsPerPage,
   sort_price,
   sort_by_date,
-
-  loadData,
-  // typeFilter,
-  totalAreaFilter,
-  statusFilter,
-  cityFilter,
-  floorFilter,
-  roomsFilter,
-  propWallsFilter,
-  propOfferFilter,
-  propHeatingFilter,
-  propBuildingFilter,
-  propCeilingHeightFilter,
   propRegionFilter,
-  propCityFilter,
-  propDistrictFilter,
-  priceFromFilter,
-  priceToFilter,
-
 }) => {
 
-  let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"), [ads]);
+  let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
-
-
-  //по типу
-  if (statusFilter) {
-    saleAds = saleAds.filter((ad) => ad.prop_type === statusFilter)
-  }
-
-  // по городу
-  if (cityFilter === "Kiev") {
-    saleAds = saleAds.filter((ad) => ad.prop_city === 'Киев')
-  } else if (cityFilter === "Kharkov") {
-    saleAds = saleAds.filter((ad) => ad.prop_city === 'Харьков')
-  } else if (cityFilter === "Odessa") {
-    saleAds = saleAds.filter((ad) => ad.prop_city === 'Одесса')
-  } else if (cityFilter === "Dnepr") {
-    saleAds = saleAds.filter((ad) => ad.prop_city === 'Днепр')
-  } else if (cityFilter === "Lvov") {
-    saleAds = saleAds.filter((ad) => ad.prop_city === 'Львов')
-  }
-
-  //по площади
-  if (totalAreaFilter !== "") {
-    saleAds = saleAds.filter((ad) => Math.floor(ad.total_area) >= Math.floor(totalAreaFilter))
-  }
-
-  //по этажу
-  if (floorFilter !== "") {
-    saleAds = saleAds.filter((ad) => Math.floor(ad.floor) <= Math.floor(floorFilter))
-  }
-
-  //по количеству комнат
-  if (roomsFilter !== "") {
-    saleAds = saleAds.filter((ad) => ad.rooms === roomsFilter)
-  }
-
-  //по типу стен
-  if (propWallsFilter !== '') {
-    saleAds = saleAds.filter((ad) => ad.prop_walls === propWallsFilter)
-  }
-
-  //по типу предложения
-  if (propOfferFilter !== '') {
-    saleAds = saleAds.filter((ad) => ad.prop_offer === propOfferFilter)
-  }
-
-  //по типу отопления
-  if (propHeatingFilter !== '') {
-    saleAds = saleAds.filter((ad) => ad.prop_heating === propHeatingFilter)
-  }
-
-  //по типу здания
-  if (propBuildingFilter !== "") {
-    saleAds = saleAds.filter((ad) => ad.prop_building === propBuildingFilter)
-  }
-
-  //по высоте потолков
-  if (propCeilingHeightFilter !== "") {
-    saleAds = saleAds.filter((ad) => Math.floor(ad.ceiling_height) <= Math.floor(propCeilingHeightFilter))
-  }
 
   //по области
   if (propRegionFilter) {
-    saleAds = saleAds.filter((ad) => ad.prop_region === propRegionFilter)
-  }
-  //по городу
-  if (propCityFilter) {
-    saleAds = saleAds.filter((ad) => ad.prop_city === propCityFilter)
-  }
-  //по району
-  if (propDistrictFilter) {
-    saleAds = saleAds.filter((ad) => ad.prop_district === propDistrictFilter)
-  }
-  //по цене от
-  if (priceFromFilter !== "") {
-    saleAds = saleAds.filter((ad) => Math.floor(ad.price) >= Math.floor(priceFromFilter))
-  }
-  //по цене до
-  if (priceToFilter !== "") {
-    saleAds = saleAds.filter((ad) => Math.floor(ad.price) <= Math.floor(priceToFilter))
+    commonAds = commonAds.filter((ad) => ad.prop_region === propRegionFilter)
   }
 
 
-
-  //фильтр цен по низкой/по высокой
-  sort_price === 'low-price' ? saleAds = saleAds.sort((prev, next) => prev.price - next.price) : saleAds = saleAds.sort((prev, next) => next.price - prev.price);
+  sort_price === 'low-price' ? commonAds = commonAds.sort((prev, next) => prev.price - next.price) : commonAds = commonAds.sort((prev, next) => next.price - prev.price);
 
 
-
-  const indexOfLastAd = currentPageSale * itemsPerPage;
+  const indexOfLastAd = currentPageCommon * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
-  const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
+  const currentAds = commonAds.slice(indexOfFirstAd, indexOfLastAd);
+
 
 
 
   return (
     <main className="common-main" >
-      <Navigation pageName="Продажа" />
+      <Navigation pageName="Объявления" />
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >
@@ -151,10 +55,10 @@ const SalePage = ({
               {isLoading && (<div className="loader-wrapper" >
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
-              < TopFilters match={match} totalAdsSale={saleAds.length} />
+              {isLoaded && < TopFilters match={match} totalAdsCommon={commonAds.length} />}
               {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />}
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
-              {(saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} />}
+              {(commonAds.length > 9) && < PaginationCommon totalItems={commonAds.length} />}
               < About title="Продажа жилья в Украине" >
                 <p className="about__text" >
                   Покупка или продажа всех видов недвижимости произойдет
@@ -227,9 +131,8 @@ const mapStateToProps = (state) => ({
   sort_price: state.filterByPriceReducer.sort_price,
   sort_by_date: state.filterByDateReducer.sort_by_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
-  currentPageSale: state.paginationReducer.currentPageSale,
+  currentPageCommon: state.paginationReducer.currentPageCommon,
 
-  // typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
   totalAreaFilter: state.filterReducer.totalAreaFilter,
@@ -247,15 +150,12 @@ const mapStateToProps = (state) => ({
   priceToFilter: state.filterReducer.priceToFilter,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   loadData: () => dispatch(handleLoadAds())
-// })
 
-const Enhanced = connect(mapStateToProps, null)(SalePage);
+const Enhanced = connect(mapStateToProps, null)(CommonAds);
 
-export { Enhanced as SalePage };
+export { Enhanced as CommonAds };
 
-SalePage.propTypes = {
+CommonAds.propTypes = {
   ads: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -275,11 +175,10 @@ SalePage.propTypes = {
   ).isRequired,
   isLoaded: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  // loadData: PropTypes.func.isRequired,
   orientation: PropTypes.string.isRequired,
   match: PropTypes.shape().isRequired,
   itemsPerPage: PropTypes.number.isRequired,
-  currentPageSale: PropTypes.number.isRequired,
+  currentPageCommon: PropTypes.number.isRequired,
   statusFilter: PropTypes.string.isRequired,
   cityFilter: PropTypes.string.isRequired,
   totalAreaFilter: PropTypes.string.isRequired,

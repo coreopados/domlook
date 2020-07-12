@@ -20,6 +20,10 @@ import {
   FILTER_DISTRICT,
   FILTER_PRICE_FROM,
   FILTER_PRICE_TO,
+
+  ADD_FEATURES,
+  REMOVE_FEATURES,
+  SET_FEATURES,
 } from './constants';
 
 
@@ -101,6 +105,28 @@ export const priceToFilterCreator = selectedOption => ({
   payload: selectedOption
 })
 
+
+// export const featuresArrCreator = selectedOption => ({
+//   type: FEATURES,
+//   payload: selectedOption
+// })
+
+//добавление в избранное
+export const addFeaturesCreator = ad => ({
+  type: ADD_FEATURES,
+  payload: ad,
+});
+
+//удаление из избранного
+export const removeFeaturesCreator = ad => ({
+  type: REMOVE_FEATURES,
+  payload: ad,
+});
+
+export const setFeaturesCreator = ads => ({
+  type: SET_FEATURES,
+  payload: ads,
+});
 
 
 

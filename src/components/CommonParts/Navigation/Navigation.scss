@@ -4,6 +4,13 @@
   margin-bottom: 15px;
   &__link {
     color: $news-card-color-black;
+    margin-right: 20px;
+position: relative;
+  }
+  &__link:not(:last-of-type):after{
+    content:url("/domlook/img/header/str_pag.png");
+    position: relative;
+    left: 10px;
   }
   &__wrapper {
     @include flex-style(flex, row, flex-start, center);

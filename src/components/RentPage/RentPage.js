@@ -1,5 +1,5 @@
 
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -11,18 +11,17 @@ import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationRent } from "../CommonParts/Pagination/PaginationRentPage";
 import About from "../CommonParts/About/About";
-import { handleLoadAds } from "../../redux/actionCreators";
 
 const RentPage = ({
   ads,
   isLoaded,
   isLoading,
-  loadData,
   orientation,
   match,
   itemsPerPage,
   currentPageRent,
   sort_price,
+
 
   // typeFilter,
   statusFilter,
@@ -36,13 +35,13 @@ const RentPage = ({
   propBuildingFilter,
   propCeilingHeightFilter,
   propRegionFilter,
-  propCityFilter
+  propCityFilter,
+  propDistrictFilter,
+  priceFromFilter,
+  priceToFilter,
 }) => {
-  useEffect(() => {
-    loadData();
-  }, []);
 
-  let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"));
+  let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
 
@@ -101,13 +100,10 @@ const RentPage = ({
     rentAds = rentAds.filter((ad) => ad.prop_building === propBuildingFilter)
   }
 
-
-
   //по высоте потолков
   if (propCeilingHeightFilter !== "") {
     rentAds = rentAds.filter((ad) => Math.floor(ad.ceiling_height) <= Math.floor(propCeilingHeightFilter))
   }
-
 
   //по области
   if (propRegionFilter) {
@@ -117,8 +113,22 @@ const RentPage = ({
   if (propCityFilter) {
     rentAds = rentAds.filter((ad) => ad.prop_city === propCityFilter)
   }
+  //по району
+  if (propDistrictFilter) {
+    rentAds = rentAds.filter((ad) => ad.prop_district === propDistrictFilter)
+  }
+
+  //по цене от
+  if (priceFromFilter !== "") {
+    rentAds = rentAds.filter((ad) => Math.floor(ad.price) >= Math.floor(priceFromFilter))
+  }
+  //по цене до
+  if (priceToFilter !== "") {
+    rentAds = rentAds.filter((ad) => Math.floor(ad.price) <= Math.floor(priceToFilter))
+  }
 
 
+  //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? rentAds = rentAds.sort((prev, next) => prev.price - next.price) : rentAds = rentAds.sort((prev, next) => next.price - prev.price);
 
 
@@ -232,13 +242,14 @@ const mapStateToProps = (state) => ({
   propCeilingHeightFilter: state.filterReducer.propCeilingHeightFilter,
   propRegionFilter: state.filterReducer.propRegionFilter,
   propCityFilter: state.filterReducer.propCityFilter,
+  propDistrictFilter: state.filterReducer.propDistrictFilter,
+  priceFromFilter: state.filterReducer.priceFromFilter,
+  priceToFilter: state.filterReducer.priceToFilter,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadData: () => dispatch(handleLoadAds()),
-});
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(RentPage);
+
+const Enhanced = connect(mapStateToProps, null)(RentPage);
 
 export { Enhanced as RentPage };
 
@@ -262,7 +273,7 @@ RentPage.propTypes = {
   ).isRequired,
   isLoaded: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  loadData: PropTypes.func.isRequired,
+  // loadData: PropTypes.func.isRequired,
   orientation: PropTypes.string.isRequired,
   match: PropTypes.shape().isRequired,
   itemsPerPage: PropTypes.number.isRequired,

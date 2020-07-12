@@ -26,6 +26,15 @@
 
 .footer-cities {
   @include flex-style(flex);
+  .footer-list{
+    display:grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(5, 1fr);
+    li{
+      margin-bottom: 0;
+    }
+    // a{font-size: 13px;}
+  }
 }
 
 .footer-list {

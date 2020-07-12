@@ -17,24 +17,37 @@
   ul{
     li{
       
-      
       padding: 8px 0 8px 14px;
       position: relative;
       border-bottom: 1px solid #ccc;
-      button {
-        color: #75797A;
-        font-size: 13px;
-        line-height: 20px;
-        transition: 0.2s;
-      }
-      button:hover {
-        transition: 0.2s;
-        color: rgb(37, 103, 153);
-      }
-      button.active {
-        color: rgb(37, 103, 153);
-        font-weight: 500;
-      }
+      cursor:pointer;
+      color: #75797A;
+      font-size: 13px;
+      line-height: 20px;
+      transition: 0.2s;
+      // a {
+      //   color: #75797A;
+      //   font-size: 13px;
+      //   line-height: 20px;
+      //   transition: 0.2s;
+      // }
+      // a:hover {
+      //   transition: 0.2s;
+      //   color: rgb(37, 103, 153);
+      // }
+      // a.active {
+      //   color: rgb(37, 103, 153);
+      //   font-weight: 500;
+      // }
+    }
+    li:hover {
+      transition: 0.2s;
+      color: rgb(37, 103, 153);
+    }
+
+    li.active {
+      color: rgb(37, 103, 153);
+      font-weight: 500;
     }
     li:after {
       content: '';

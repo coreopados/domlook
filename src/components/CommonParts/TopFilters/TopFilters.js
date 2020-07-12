@@ -1,11 +1,10 @@
 // import React from 'react';
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import './TopFilters.scss';
 import {
-  handleLoadAds,
   setVerticalOrientationCreator,
   setHorizontalOrientationCreator
 } from '../../../redux/actionCreators';
@@ -17,37 +16,43 @@ const TopFilters = ({
   setVerticalOrientation,
   setHorizontalOrientation,
   orientation,
-  loadData,
-  ads,
   match,
   totalAdsSale,
   totalAdsRent,
   totalAdsDailyRent,
-}) => {
-  useEffect(() => {
-    loadData();
-  }, [])
+  totalAdsCommon,
 
-  let pageTitle = ""
+  sortPrice
+}) => {
+
+  // let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"), [ads]);
+
+  const pageTitle = useRef(null);
 
   //количество рбьявлений в зависимости от страницы
   const quantityAds = useMemo(() => {
     if (match.path === '/sale') {
-      pageTitle = "Продажа";
+      pageTitle.current = "Продажа";
       return (
         totalAdsSale
       )
     } else if (match.path === '/rent') {
-      pageTitle = "Аренда";
+      pageTitle.current = "Аренда";
       return (
         totalAdsRent
       )
     } else if (match.path === '/dailyRent') {
-      pageTitle = "Посуточно";
+      pageTitle.current = "Посуточно";
       return (
         totalAdsDailyRent
       )
+    } else if (match.path === '/advertisement') {
+      pageTitle.current = "Объявления";
+      return (
+        totalAdsCommon
+      )
     }
+
   })
 
 
@@ -55,7 +60,7 @@ const TopFilters = ({
 
     <div className="common-top-filters">
       <div className="common-top-filters__block">
-        <h3 className="common-top-filters__title">{pageTitle}</h3>
+        <h3 className="common-top-filters__title">{pageTitle.current}</h3>
         <div className="common-top-filters__buttons-wrapper">
           <button
             onClick={setHorizontalOrientation}
@@ -85,7 +90,7 @@ const TopFilters = ({
         <div className="common-top-filters__sort">Сортировка
 
         <div className="select-wrap">
-            <DropdownPriceSort />
+            <DropdownPriceSort sortPrice={sortPrice} />
           </div>
         </div>
 
@@ -106,7 +111,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setHorizontalOrientation: () => dispatch(setHorizontalOrientationCreator()),
   setVerticalOrientation: () => dispatch(setVerticalOrientationCreator()),
-  loadData: () => dispatch(handleLoadAds()),
 });
 
 
@@ -137,6 +141,6 @@ TopFilters.propTypes = {
       rooms: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  loadData: PropTypes.func.isRequired,
+
 
 };

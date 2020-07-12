@@ -29,6 +29,7 @@ const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatu
       setFavourites(JSON.parse(cachedFavourites));
     }
   }, []);
+  
   const aptsAds = useMemo(
     () =>
       ads.filter(

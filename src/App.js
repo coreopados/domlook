@@ -1,4 +1,4 @@
-import { React, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import {
   Route,
   Switch,
@@ -14,19 +14,19 @@ import { SalePage } from './components/SalePage/SalePage';
 import { RentPage } from './components/RentPage/RentPage';
 import { DailyRentPage } from './components/DailyRentPage/DailyRentPage';
 import { NewsPage } from './components/NewsPage/NewsPage';
+import { CommonAds } from './components/CommonAds/CommonAds';
 import { ErrorPage } from './components/ErrorPage/ErrorPage';
-import { Footer } from './components/Footer/Footer';
+import Footer from './components/Footer/Footer';
 import { DetailsPage } from './components/DetailsPage/DetailsPage';
 import { Favourites } from './components/Favourites/Favourites';
-import {
-  NewsDetailsPage,
-} from './components/NewsPage/NewsDetailsPage/NewsDetailsPage';
+import { NewsDetailsPage } from './components/NewsPage/NewsDetailsPage/NewsDetailsPage';
 import { handleLoadAds } from "./redux/actionCreators";
 
-function App({ loadData }) {
+function App({ loadData, activeCategoryNews }) {
   useEffect(() => {
     loadData();
   }, []);
+
   return (
     <React.Fragment>
       <ScrollToTop />
@@ -39,6 +39,8 @@ function App({ loadData }) {
         <Route path="/dailyRent" exact component={DailyRentPage} />
         <Route path="/news" exact component={NewsPage} />
         <Route path="/favourites" exact component={Favourites} />
+        <Route path="/advertisement" exact component={CommonAds} />
+        <Route path="/advertisement/:id" exact component={DetailsPage} />
         <Route path="/news/:id" exact component={NewsDetailsPage} />
         <Route path="/sale/:id" component={DetailsPage} />
         <Route path="/rent/:id" component={DetailsPage} />
@@ -48,16 +50,20 @@ function App({ loadData }) {
         <Route path="/404" component={ErrorPage} />
         <Redirect from="*" to="/404" />
       </Switch>
-
+      {/* activeCategory={activeCategoryNews} */}
       <Footer />
     </React.Fragment>
   );
 }
+const mapStateToProps = state => ({
+  activeCategoryNews: state.filterReducer.activeCategoryNews,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   loadData: () => dispatch(handleLoadAds()),
 });
 
-const Enhanced = connect(null, mapDispatchToProps)(App);
+const Enhanced = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export { Enhanced as App };
 // export default App;

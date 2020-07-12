@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from 'react-redux';
 import {
     propCityFilterCreator
@@ -10,8 +10,9 @@ const SelectCityDropdown = ({
     propRegionFilter,
 }) => {
 
+    const [selectedOption, setSelectedOption] = useState('');
     const region = regions.region.filter((reg) => reg.name === propRegionFilter)
-    const cities = region.map((city) => city.city)
+    const cities = region.map((city) => city.cities)
 
     let obj = [];
 
@@ -19,7 +20,7 @@ const SelectCityDropdown = ({
         obj = cities[i];
     }
 
-    const [selectedOption, setSelectedOption] = useState('');
+
 
     propCityFilterFilterFunc(selectedOption)
 
@@ -37,8 +38,8 @@ const SelectCityDropdown = ({
                 value={selectedOption}
                 onChange={e => setSelectedOption(e.target.value)}>
                 <option value="Выберите город">Выберите город</option>
-                {obj.map((o, index) => (
-                    <option value={o.name} key={index}>{o.name}</option>
+                {obj.map((o) => (
+                    <option value={o.name} key={o.id}>{o.name}</option>
                 ))}
             </select>
         );

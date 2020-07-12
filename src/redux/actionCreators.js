@@ -14,9 +14,11 @@ import {
   PAGINATE_RENT,
   PAGINATE_DAILYRENT,
   PAGINATE_NEWS,
+  PAGINATE_COMMON,
 
   SORT_LOW_PRICE,
   SORT_HIGHT_PRICE,
+  SORT_PRICE,
 
   SORT_BY_TODAY,
   SORT_BY_WEEK,
@@ -24,14 +26,7 @@ import {
   ACTIVE_TOP_FILTER_PRICE,
   ACTIVE_TOP_FILTER_DATE,
   FILTER_CATEGORY_NEWS,
-  FILTER_CATEGORY_NEWS_BY_NEWS,
-  FILTER_CATEGORY_NEWS_BY_TIPSGKH,
-  FILTER_CATEGORY_NEWS_BY_NEWBUILD,
-  FILTER_CATEGORY_NEWS_BY_MARKET,
-  FILTER_CATEGORY_NEWS_BY_ANLITIC,
-  FILTER_CATEGORY_NEWS_BY_TIPS_ARRANGEMENT,
-  FILTER_CATEGORY_NEWS_BY_FINANCE,
-
+  ACTIVE_CATEGORY_NEWS
 } from './constants';
 // import { loadAds } from '../api/loadAds';
 import adsData from '../api/testData.json';
@@ -66,15 +61,22 @@ export const setHorizontalOrientationCreator = () => ({
   type: SET_HORIZONTAL_ORIENTATION,
 });
 
-//сортировка по низкой цене
-export const sortLowPriceCreator = () => ({
-  type: SORT_LOW_PRICE,
+// //сортировка по низкой цене
+// export const sortLowPriceCreator = () => ({
+//   type: SORT_LOW_PRICE,
+// });
+
+// //сортировка по высокой цене
+// export const sortHightPriceCreator = () => ({
+//   type: SORT_HIGHT_PRICE,
+// });
+
+
+export const sortPriceCreator = selectedOption => ({
+  type: SORT_PRICE,
+  payload: selectedOption
 });
 
-//сортировка по высокой цене
-export const sortHightPriceCreator = () => ({
-  type: SORT_HIGHT_PRICE,
-});
 
 //сортировка за сегодня 
 export const sortByTodayCreator = () => ({
@@ -91,10 +93,7 @@ export const sortByMounthCreator = () => ({
   type: SORT_BY_MOUNTH,
 })
 
-// export const setSelectedOptionCreator = option => ({
-//   type: SET_SELECTED_PRICE,
-//   payload: option,
-// })
+
 
 //активный фильтр "по цене"
 export const activeTopFilterPriceCreator = () => ({
@@ -110,33 +109,14 @@ export const activeTopFilterDateCreator = () => ({
 ////новости
 
 //фильтры по категориям
-export const filterCategoryNews = () => ({
+export const filterCategoryNewsCreator = selectedOption => ({
   type: FILTER_CATEGORY_NEWS,
+  payload: selectedOption
 })
-export const filterCategoryByNews = () => ({
-  type: FILTER_CATEGORY_NEWS_BY_NEWS,
+export const activeCategoryNewsCreator = selectedOption => ({
+  type: ACTIVE_CATEGORY_NEWS,
+  payload: selectedOption
 })
-export const filterCategoryByTips = () => ({
-  type: FILTER_CATEGORY_NEWS_BY_TIPSGKH,
-})
-export const filterCategoryByNewBuild = () => ({
-  type: FILTER_CATEGORY_NEWS_BY_NEWBUILD,
-})
-export const filterCategoryByMarket = () => ({
-  type: FILTER_CATEGORY_NEWS_BY_MARKET,
-})
-export const filterCategoryByAnalitic = () => ({
-  type: FILTER_CATEGORY_NEWS_BY_ANLITIC,
-})
-export const filterCategoryByTipsArrangement = () => ({
-  type: FILTER_CATEGORY_NEWS_BY_TIPS_ARRANGEMENT,
-})
-export const filterCategoryByFinance = () => ({
-  type: FILTER_CATEGORY_NEWS_BY_FINANCE,
-})
-
-
-
 
 
 //добавление в избранное
@@ -183,7 +163,10 @@ export const paginateNewsCreator = number => ({
   type: PAGINATE_NEWS,
   payload: number,
 });
-
+export const paginateCommonCreator = number => ({
+  type: PAGINATE_COMMON,
+  payload: number,
+});
 // export const handleLoad = () => {
 //   return (dispatch) => {
 //     dispatch(startLoadingCreator());

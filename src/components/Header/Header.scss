@@ -99,6 +99,7 @@
   }
   &__logo-1 {
     height: 53px;
+    margin-right: 10px;
   }
   &__logo-2 {
     height: 34px;
@@ -108,6 +109,10 @@
     width: 210px;
     background: linear-gradient(0deg, rgba(239,99,1,1) 0%, rgba(255,197,41,1) 100%);
     border-radius: 5px;
+  }
+  >div{
+    display: flex;
+    align-items: center;
   }
 }
 

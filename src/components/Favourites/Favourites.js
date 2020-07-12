@@ -56,6 +56,6 @@ const Enhanced = connect(mapStateToProps, mapDispatchToProps)(Favourites);
 export { Enhanced as Favourites };
 
 Favourites.propTypes = {
-  adsFavourites: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // adsFavourites: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.shape().isRequired,
 };

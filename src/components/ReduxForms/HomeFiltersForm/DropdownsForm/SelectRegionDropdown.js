@@ -7,11 +7,11 @@ import { regions } from '../../../../api/testCities.json'
 
 const SelectRegionDropdown = ({
     propRegionFilterFilterFunc,
-
-
 }) => {
 
     const [selectedOption, setSelectedOption] = useState('');
+
+
 
     propRegionFilterFilterFunc(selectedOption)
 

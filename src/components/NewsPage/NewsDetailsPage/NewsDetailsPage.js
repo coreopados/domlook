@@ -1,32 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './NewsDetailsPage.scss';
 import Loader from 'react-loader-spinner';
-import {
-  handleLoadNews,
-} from '../../../redux/actionCreators';
 import { ErrorPage } from '../../ErrorPage/ErrorPage';
-import {
-  Navigation,
-} from '../../CommonParts/Navigation/Navigation';
-import {
-  NewsHeadingsFilters,
-} from '../../ReduxForms/NewsFiltersForm/NewsHeadingsFilters/NewsHeadingsFilters';
+import { Navigation } from '../../CommonParts/Navigation/Navigation';
+import { NewsHeadingsFilters } from '../../ReduxForms/NewsFiltersForm/NewsHeadingsFilters/NewsHeadingsFilters';
 
 const NewsDetailsPage = ({
   news,
   newsItem,
   isLoading,
   isLoaded,
-  loadData,
   id,
 }) => {
-  useEffect(() => {
-    if (newsItem === null || newsItem === undefined) {
-      loadData();
-    }
-  }, []);
+
 
   if (id && id <= news.length) {
     return (
@@ -108,14 +96,10 @@ const NewsDetailsPage = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const id = ownProps.match.params.id
-    ? Number(ownProps.match.params.id)
-    : null;
+  const id = ownProps.match.params.id ? Number(ownProps.match.params.id) : null;
 
   return {
-    id: ownProps.match.params.id
-      ? Number(ownProps.match.params.id)
-      : null,
+    id: ownProps.match.params.id ? Number(ownProps.match.params.id) : null,
     isLoaded: state.mainReducer.isLoaded,
     isLoading: state.mainReducer.isLoading,
     news: state.mainReducer.news,
@@ -125,11 +109,8 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  loadData: () => dispatch(handleLoadNews()),
-});
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(NewsDetailsPage);
+const Enhanced = connect(mapStateToProps, null)(NewsDetailsPage);
 
 export { Enhanced as NewsDetailsPage };
 
@@ -177,6 +158,6 @@ NewsDetailsPage.propTypes = {
   }),
   isLoaded: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  loadData: PropTypes.func.isRequired,
+  // loadData: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
 };

@@ -1,4 +1,4 @@
-import { React, useMemo } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -10,13 +10,12 @@ import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationDailyRent } from "../CommonParts/Pagination/PaginationDailyRentPage";
-import { handleLoadAds } from "../../redux/actionCreators";
+
 
 const DailyRentPage = ({
   ads,
   isLoaded,
   isLoading,
-  loadData,
   orientation,
   match,
   currentPageDailyRent,
@@ -24,7 +23,6 @@ const DailyRentPage = ({
   sort_price,
   sort_by_date,
 
-  // typeFilter,
   totalAreaFilter,
   statusFilter,
   cityFilter,
@@ -36,15 +34,13 @@ const DailyRentPage = ({
   propBuildingFilter,
   propCeilingHeightFilter,
   propRegionFilter,
-  propCityFilter
+  propCityFilter,
+  propDistrictFilter,
+  priceFromFilter,
+  priceToFilter,
 }) => {
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
 
-  let dailyRentAds = useMemo(() =>
-    ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]
-  );
+  let dailyRentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
 
@@ -87,8 +83,8 @@ const DailyRentPage = ({
   }
 
   //по типу предложения
-  if (propHeatingFilter !== '') {
-    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_heating === propHeatingFilter)
+  if (propOfferFilter !== '') {
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_offer === propOfferFilter)
   }
 
   //по типу отопления
@@ -110,14 +106,29 @@ const DailyRentPage = ({
   if (propRegionFilter) {
     dailyRentAds = dailyRentAds.filter((ad) => ad.prop_region === propRegionFilter)
   }
+
   //по городу
   if (propCityFilter) {
     dailyRentAds = dailyRentAds.filter((ad) => ad.prop_city === propCityFilter)
   }
 
+  //по району
+  if (propDistrictFilter) {
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_district === propDistrictFilter)
+  }
+
+  //по цене от
+  if (priceFromFilter !== "") {
+    dailyRentAds = dailyRentAds.filter((ad) => Math.floor(ad.price) >= Math.floor(priceFromFilter))
+  }
+
+  //по цене до
+  if (priceToFilter !== "") {
+    dailyRentAds = dailyRentAds.filter((ad) => Math.floor(ad.price) <= Math.floor(priceToFilter))
+  }
+
+  //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? dailyRentAds = dailyRentAds.sort((prev, next) => prev.price - next.price) : dailyRentAds = dailyRentAds.sort((prev, next) => next.price - prev.price);
-
-
 
   const indexOfLastAd = currentPageDailyRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
@@ -235,13 +246,13 @@ const mapStateToProps = (state) => ({
   propCeilingHeightFilter: state.filterReducer.propCeilingHeightFilter,
   propRegionFilter: state.filterReducer.propRegionFilter,
   propCityFilter: state.filterReducer.propCityFilter,
+  propDistrictFilter: state.filterReducer.propDistrictFilter,
+  priceFromFilter: state.filterReducer.priceFromFilter,
+  priceToFilter: state.filterReducer.priceToFilter,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadData: () => dispatch(handleLoadAds()),
-});
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(DailyRentPage);
+const Enhanced = connect(mapStateToProps, null)(DailyRentPage);
 
 export { Enhanced as DailyRentPage };
 
@@ -265,7 +276,7 @@ DailyRentPage.propTypes = {
   ).isRequired,
   isLoaded: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  loadData: PropTypes.func.isRequired,
+  // loadData: PropTypes.func.isRequired,
   orientation: PropTypes.string.isRequired,
   match: PropTypes.shape().isRequired,
   itemsPerPage: PropTypes.number.isRequired,
