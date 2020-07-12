@@ -40,11 +40,12 @@ const SalePage = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
-
+  features
 }) => {
 
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
+
 
 
   //по типу
@@ -127,6 +128,22 @@ const SalePage = ({
   }
 
 
+
+
+
+  var keys = [];
+  for (var key in features) {
+    keys.push(key)
+
+  }
+
+  // saleAds = saleAds.filter(i =>
+  //   i.features.some(k =>
+  //     keys.includes(k)
+  //   )
+  // )
+
+  console.log(saleAds)
 
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? saleAds = saleAds.sort((prev, next) => prev.price - next.price) : saleAds = saleAds.sort((prev, next) => next.price - prev.price);
@@ -245,6 +262,7 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
+  features: state.mainReducer.features,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

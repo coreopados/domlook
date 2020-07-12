@@ -10,56 +10,35 @@ import {
 
 const Facilities = ({
     setFeaturesFunc,
-    addFeaturesFunc,
-    removeFeaturesFunc
+    // addFeaturesFunc,
+    // removeFeaturesFunc
 }) => {
 
+    const [x, setForm] = useState(false);
 
-    const [selectedOption, setSelectedOption] = useState([]);
+    const handler = (e) => {
+        const { target } = e;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const { id } = target;
 
+        setForm(f => ({ ...f, [id]: value }));
 
-    let check = false
-    // const addToArr = (event) => {
-    //     check = !check
-    //     if (check === true) {
-    //         setSelectedOption([...selectedOption, {
-    //             id: selectedOption.length,
-    //             value: ''
-    //         }])
-    //     }
-    // }
-    console.log(selectedOption)
-
-    setFeaturesFunc(selectedOption)
+    };
+    setFeaturesFunc(x)
+    console.log(x)
 
     return (
         <div className="parametrs">
             <p>Удобства:</p>
             <div className="facilities">
-                {features.map((fac) => {
-                    return <span>
-                        {/* <input type="checkbox" id={"" + fac.name + ""} chacked={check} value={"" + fac.name + ""} onChange={addToArr} /> */}
+                {features.map((fac, index) => {
+                    return <span    >
                         <input
+                            key={index}
                             type="checkbox"
                             id={"" + fac.name + ""}
-                            chacked={check}
                             value={"" + fac.name + ""}
-                            onChange={(e => {
-                                if (check === false) {
-
-                                    setSelectedOption([...selectedOption, {
-                                        id: selectedOption.length,
-                                        value: e.target.value
-                                    }])
-                                    check = !check;
-                                } else {
-
-                                    setSelectedOption([...selectedOption.filter((item) => item.id !== selectedOption.id)])
-                                    check = !check;
-                                }
-                                console.log(check)
-                            }
-                            )}
+                            onChange={handler}
                         />
                         <label for={"" + fac.name + ""}>{fac.name}</label>
                     </span>
@@ -71,8 +50,8 @@ const Facilities = ({
 
 const mapDispatchToProps = (dispatch) => ({
     setFeaturesFunc: (ads) => dispatch(setFeaturesCreator(ads)),
-    addFeaturesFunc: (ads) => dispatch(addFeaturesCreator(ads)),
-    removeFeaturesFunc: (ads) => dispatch(removeFeaturesCreator(ads)),
+    // addFeaturesFunc: (ads) => dispatch(addFeaturesCreator(ads)),
+    // removeFeaturesFunc: (ads) => dispatch(removeFeaturesCreator(ads)),
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(Facilities);

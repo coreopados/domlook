@@ -39,10 +39,12 @@ const RentPage = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
+  features
 }) => {
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
+
 
 
   //по типу
@@ -128,8 +130,32 @@ const RentPage = ({
   }
 
 
+
+  var keys = [];
+  for (var key in features) {
+    keys.push(key)
+
+  }
+
+  // rentAds = rentAds.prop_features.filter(inArray(keys))
+  rentAds = rentAds.filter((ad) => ad.prop_features)
+  console.log(rentAds)
+  function inArray(rentAds) {
+    return function (x) {
+      return rentAds.includes(x);
+    };
+  }
+  rentAds = rentAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
+  console.log(rentAds)
+
+
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? rentAds = rentAds.sort((prev, next) => prev.price - next.price) : rentAds = rentAds.sort((prev, next) => next.price - prev.price);
+
+
+
+
+
 
 
 
@@ -245,6 +271,7 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
+  features: state.mainReducer.features,
 });
 
 

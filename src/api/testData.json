@@ -400,9 +400,9 @@
     "prop_building": "",
     "prop_heating": "автономное",
     "prop_features": [
-      "wi-fi",
-      "tv",
-      "conditioner"
+      "Wi-FI",
+      "Баня",
+      "Бассейн"
     ],
     "map": {
       "latitude": "49.2188261",
@@ -433,6 +433,11 @@
     "prop_walls": "силикатный кирпич",
     "prop_building": "",
     "prop_heating": "автономное",
+    "prop_features": [
+      "Wi-FI",
+      "Джакузи",
+      "Сауна"
+    ],
     "map": {
       "latitude": "49.2188261",
       "longitude": "28.444967099999985",
