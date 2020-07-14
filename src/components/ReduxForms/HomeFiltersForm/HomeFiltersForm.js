@@ -19,8 +19,16 @@ import { SelectCityDropdown } from './DropdownsForm/SelectCityDropdown';
 import { SelectDistrictDropdown } from './DropdownsForm/SelectDistrictDropdown';
 import { PriceFromTo } from './DropdownsForm/PriceFromTo';
 import { Facilities } from './Facilities/Facilities';
+import { TypeTransaction } from './TypeTransaction/TypeTransaction';
 
-const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
+const HomeFiltersForm = ({
+  priceFrom,
+  priceTo,
+  adsLength,
+  typeFilter,
+  statusFilter,
+  isLoaded,
+  match }) => {
 
   const [count, setStatusAddInfo] = useState(false)
 
@@ -33,19 +41,21 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
         <div className="wrap-main-filter">
           <form className="home-filters-form">
 
-            {/* фильтр по статусу */}
-            <div className="block">
-              <label htmlFor="status-filter">
-                Раздел
-              {isLoaded && <StatusDropdown typeFilter={typeFilter} />}
-              </label>
-            </div>
+
 
             {/* фильтр по типу */}
             <div className="block">
               <label htmlFor="type-filter">
                 Тип недвижимости
-              {isLoaded && <TypeDropdown />}
+              {isLoaded && <TypeDropdown match={match} typeFilter={typeFilter} />}
+              </label>
+            </div>
+
+            {/* фильтр по статусу */}
+            <div className="block">
+              <label htmlFor="status-filter">
+                Раздел
+              {isLoaded && <StatusDropdown match={match} statusFilter={statusFilter} />}
               </label>
             </div>
 
@@ -69,7 +79,7 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
             <div className="block">
               <label htmlFor="select-city-filter">
                 Район
-         <SelectDistrictDropdown />
+              <SelectDistrictDropdown />
               </label>
             </div>
 
@@ -125,7 +135,7 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
             <div className="block">
               <label htmlFor="ceiling-height-filter">
                 Высота потолков
-            {isLoaded && <CeilingHeightDropdown />}
+              {isLoaded && <CeilingHeightDropdown />}
               </label>
             </div>
 
@@ -141,13 +151,13 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
             <div className="block">
               <label htmlFor="">
                 Цена
-                <PriceFromTo />
+                <PriceFromTo priceFrom={priceFrom} priceTo={priceTo} />
               </label>
             </div>
 
             <div className="block">
               <NavLink
-                to={`/${typeFilter}`}
+                to={`/${statusFilter}`}
                 replace
                 exact
               >
@@ -163,24 +173,7 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
             <div className={clsx('additional-block', (count === true) && 'active')}>
               <Facilities />
 
-              <div className="terms">
-                <p>Тип сделки:</p>
-
-                <input type="checkbox" id="credit-check" />
-                <label htmlFor="credit-check">
-                  Возможна рассрочка/кредит
-              </label>
-
-                <input type="checkbox" id="torg-check" />
-                <label htmlFor="torg-check">
-                  Возможен торг
-              </label>
-
-                <input type="checkbox" id="replace-check" />
-                <label htmlFor="replace-check">
-                  Возможен обмен
-              </label>
-              </div>
+              <TypeTransaction />
             </div>
           </div>
         </div >
@@ -190,15 +183,9 @@ const HomeFiltersForm = ({ adsLength, typeFilter, isLoaded }) => {
 };
 
 const mapStateToProps = state => ({
-  typeFilter: state.filterReducer.typeFilter,
   isLoaded: state.mainReducer.isLoaded,
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   typeHouse: () => dispatch(houseTypeCreator()),
-//   typeAppartment: () => dispatch(appartmentTypeCreator()),
-//   typeCommerce: () => dispatch(commerceTypeCreator())
-// });
 
 const Enhanced = connect(mapStateToProps, null)(HomeFiltersForm);
 

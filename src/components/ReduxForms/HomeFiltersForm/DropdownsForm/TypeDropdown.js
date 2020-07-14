@@ -1,55 +1,47 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import {
-    rentTypeCreator,
-    saleTypeCreator,
-    dailyRentTypeCreator,
+    typeFilterCreator
 } from '../../../../redux/actionHomeFilterCreators';
 
 const TypeDropdown = ({
-    typeRent,
-    typeSale,
-    typeDailyRent
+    typeFilter,
+    typeFilterFunc,
+
 }) => {
 
+    const [selectedOption, setSelectedOption] = useState(typeFilter);
+
     const type_options = [
-        { id: 1, value: 'rent', label: 'Аренда' },
-        { id: 2, value: 'sell', label: 'Продажа' },
-        { id: 3, value: 'dailyRent', label: 'Посуточно' }
+        { id: 0, value: '', label: 'Не выбрано' },
+        { id: 1, value: 'house', label: 'Дома' },
+        { id: 2, value: 'apartment', label: 'Квартиры' },
+        { id: 3, value: 'commerce', label: 'Коммерческая недвижимость' }
     ];
-    const [selectedOption, setSelectedOption] = useState(type_options[0].value);
 
 
-    if (selectedOption === 'rent') {
-        typeRent();
-    } else if (selectedOption === 'sell') {
-        typeSale();
-    } else if (selectedOption === 'dailyRent') {
-        typeDailyRent();
-    }
-
+    typeFilterFunc(selectedOption)
 
     return (
         <select name="type-filter" id="type-filter"
             value={selectedOption}
             onChange={e => setSelectedOption(e.target.value)}>
-            {type_options.map(o => (
-                <option value={o.value} key={o.id}>{o.label}</option>
+            {type_options.map((o, index) => (
+                <option value={o.value} key={index}>{o.label}</option>
             ))}
         </select>
     );
 }
 
-const mapStateToProps = state => ({
-    statusFilter: state.filterReducer.statusFilter,
-})
-
 const mapDispatchToProps = dispatch => ({
-    typeRent: () => dispatch(rentTypeCreator()),
-    typeSale: () => dispatch(saleTypeCreator()),
-    typeDailyRent: () => dispatch(dailyRentTypeCreator())
+    typeFilterFunc: selectedOption => dispatch(typeFilterCreator(selectedOption))
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(TypeDropdown);
+const Enhanced = connect(null, mapDispatchToProps)(TypeDropdown);
 
 export { Enhanced as TypeDropdown };
+
+
+
+
+

@@ -16,8 +16,8 @@ import {
   PAGINATE_NEWS,
   PAGINATE_COMMON,
 
-  SORT_LOW_PRICE,
-  SORT_HIGHT_PRICE,
+  // SORT_LOW_PRICE,
+  // SORT_HIGHT_PRICE,
   SORT_PRICE,
 
   SORT_BY_TODAY,
@@ -61,15 +61,6 @@ export const setHorizontalOrientationCreator = () => ({
   type: SET_HORIZONTAL_ORIENTATION,
 });
 
-// //сортировка по низкой цене
-// export const sortLowPriceCreator = () => ({
-//   type: SORT_LOW_PRICE,
-// });
-
-// //сортировка по высокой цене
-// export const sortHightPriceCreator = () => ({
-//   type: SORT_HIGHT_PRICE,
-// });
 
 
 export const sortPriceCreator = selectedOption => ({

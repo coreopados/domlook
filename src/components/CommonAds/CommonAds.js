@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
-import { FiltersForm } from "../ReduxForms/FiltersForm/FiltersForm";
+import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
@@ -49,7 +49,7 @@ const CommonAds = ({
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >
-            <FiltersForm />
+            <AsideFilters />
             <div className="common-section__block" >
 
               {isLoading && (<div className="loader-wrapper" >

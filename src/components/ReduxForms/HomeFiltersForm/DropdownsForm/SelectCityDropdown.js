@@ -6,7 +6,7 @@ import {
 import { regions } from '../../../../api/testCities.json'
 
 const SelectCityDropdown = ({
-    propCityFilterFilterFunc,
+    propCityFilterFunc,
     propRegionFilter,
 }) => {
 
@@ -20,15 +20,15 @@ const SelectCityDropdown = ({
         obj = cities[i];
     }
 
-
-
-    propCityFilterFilterFunc(selectedOption)
+    propCityFilterFunc(selectedOption)
 
     if (propRegionFilter === "Не выбрано" || !propRegionFilter) {
+
         return (
             <select name="select-city-filter" id="select-city-filter"
                 value={"Выберите город"}
-                onChange={e => setSelectedOption(e.target.value)}>
+                onChange={e => setSelectedOption('')}>
+                {/* onChange={e => setSelectedOption(e.target.value)}> */}
                 <option value='Выберите город' >Выберите город</option>
             </select>
         );
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    propCityFilterFilterFunc: (selectedOption) => dispatch(propCityFilterCreator(selectedOption)),
+    propCityFilterFunc: (selectedOption) => dispatch(propCityFilterCreator(selectedOption)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(SelectCityDropdown);

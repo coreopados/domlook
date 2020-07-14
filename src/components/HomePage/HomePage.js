@@ -12,12 +12,28 @@ import { HomeNews } from "./HomeNews/HomeNews";
 import About from "../CommonParts/About/About";
 import { HomePageCities } from "./HomePageCities/HomePageCities";
 import { HomeAdsList } from "./HomeAdsList/HomeAdsList";
-import { handleLoadNewsAds,
-  setFavouritesCreator } from "../../redux/actionCreators";
+import {
+  handleLoadNewsAds,
+  setFavouritesCreator
+} from "../../redux/actionCreators";
 import { filterTypeRentCreator, filterTypeSellCreator, filterStatusApartmentCreator, filterStatusHouseCreator } from "../../redux/actionFilterCreators";
 
 
-const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatusApartment, filterStatusHouse, statusFilter, setFavourites }) => {
+const HomePage = ({
+  priceFromFilter,
+  priceToFilter,
+  ads,
+  news,
+  isLoaded,
+  isLoading,
+  loadData,
+  match,
+  filterStatusApartment,
+  filterStatusHouse,
+  statusFilter,
+  typeFilter,
+  setFavourites
+}) => {
   useEffect(() => {
     loadData();
   }, []);
@@ -29,26 +45,32 @@ const HomePage = ({ ads, news, isLoaded, isLoading, loadData, match, filterStatu
       setFavourites(JSON.parse(cachedFavourites));
     }
   }, []);
-  
+
   const aptsAds = useMemo(
     () =>
       ads.filter(
-        (ad) => ad.prop_type === "apartment" && ad.prop_status === "sell"
+        (ad) => ad.prop_type === "apartment" && ad.prop_status === "sale"
       ),
     [ads]
   );
   const housesAds = useMemo(
     () =>
-      ads.filter((ad) => ad.prop_type === "house" && ad.prop_status === "sell"),
+      ads.filter((ad) => ad.prop_type === "house" && ad.prop_status === "sale"),
     [ads]
   );
   const homeNews = useMemo(() => news.filter((item) => item.id <= 3));
   const adsLength = ads.length
 
-
   return (
     <main>
-      <HomeFiltersForm adsLength={adsLength} statusFilter={statusFilter} />
+      <HomeFiltersForm
+        priceFrom={priceFromFilter}
+        priceTo={priceToFilter}
+        match={match}
+        adsLength={adsLength}
+        statusFilter={statusFilter}
+        typeFilter={typeFilter}
+      />
       <HomePageCities />
       {isLoading && (
         <div className="loader-wrapper">
@@ -181,7 +203,9 @@ const mapStateToProps = (state) => ({
   isLoading: state.mainReducer.isLoading,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
-  cityFilter: state.filterReducer.cityFilter
+  cityFilter: state.filterReducer.cityFilter,
+  priceFromFilter: state.filterReducer.priceFromFilter,
+  priceToFilter: state.filterReducer.priceToFilter
 });
 
 const mapDispatchToProps = (dispatch) => ({

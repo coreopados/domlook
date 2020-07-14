@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "./DetailsPage.scss";
@@ -7,20 +7,64 @@ import { handleLoadAds } from "../../redux/actionCreators";
 import { ErrorPage } from "../ErrorPage/ErrorPage";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { DetailsMap } from "../CommonParts/DetailsMap/DetailsMap";
+import DetailsFeatures from "./DetailsFeatures/DetailsFeatures.js";
+import { users } from "../../api/testUsers.json";
+import { addFavouriteCreator } from "../../redux/actionCreators";
 
-const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
+import ReactFancyBox from 'react-fancybox';
+import 'react-fancybox/lib/fancybox.css';
+import ImageGallery from 'react-image-gallery';
+
+
+const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, addFavourites }) => {
   useEffect(() => {
     if (ad === null || ad === undefined) {
       loadData();
     }
   }, []);
 
+  useEffect(() => {
+    if (favourites && favourites.length !== 0) {
+      localStorage.setItem('favourites', JSON.stringify(favourites));
+    }
+  }, [favourites]);
+
+  const handleAddFavourites = (e) => {
+    e.preventDefault();
+    const hasFavourites = favourites.findIndex((item) => item.id === ad.id);
+
+    if (hasFavourites === -1) {
+      addFavourites([...favourites, ad]);
+    }
+  };
+
+
+
   const calcPerSquareMeter = useCallback(() => {
     const total_area = Number(ad.total_area);
     const price = Number(ad.price);
-
     return Math.round(price / total_area);
   });
+
+  const userName = useCallback(() => {
+    const userId = ad.id_author
+    const user = users.filter((elem) => elem.id === userId)
+    const name = user.map((elem) => elem.name)
+    const surname = user.map((elem) => elem.surname)
+    return (name + " " + surname)
+  })
+
+  const userPhone = useCallback(() => {
+    const userId = ad.id_author
+    const user = users.filter((elem) => elem.id === userId)
+    const phone = user.map((elem) => elem.phone)
+    return phone
+  })
+
+
+
+
+  const [showTel, setShowTel] = useState(false)
 
   if (id && id <= ads.length) {
     return (
@@ -71,34 +115,43 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
                   </div>
                   <div className="details-full-info__block">
                     <h5 className="details-full-info__person-name">
-                      Ольга Ткаченко
+                      {`${userName()}`}
                     </h5>
                     <p className="details-full-info__person-title">Риэлтор</p>
                     <span className="details-full-info__phone-number">
-                      +380XX-XXX-XX-XX
+
+                      {showTel === false ? "+ 380XX-XXX-XX-XX" : <a href={'tel:' + `${userPhone()}`}>{`${userPhone()}`}</a>}
+
                     </span>
                     <div className="details-full-info__actions-wrapper">
                       <button
                         type="button"
-                        className="details-full-info__action"
+                        className="details-full-info__action tel-button"
+                        onClick={e => setShowTel(!showTel)}
                       >
-                        Показать телефон
+                        {showTel === false ? "Показать телефон" : "Скрыть телефон"}
+                      </button>
+
+                      <button
+                        type="button"
+                        className="details-full-info__action fav-button"
+                        onClick={(e) => handleAddFavourites(e)}
+                      >
+                        {!favourites.includes(ad) ? "Добавить в избранное" : "Добавлено"}
+                        {/* {favourites.filter((elem) => elem.id === Number(`${adId()}`)) ? "Добавлено" : "Добавить в избранное"} */}
+
+
                       </button>
                       <button
                         type="button"
-                        className="details-full-info__action"
-                      >
-                        Добавить в избранное
-                      </button>
-                      <button
-                        type="button"
-                        className="details-full-info__action"
+                        className="details-full-info__action print-button"
+                        onClick={() => { javascript: window.print() }}
                       >
                         Распечатать
                       </button>
                       <button
                         type="button"
-                        className="details-full-info__action"
+                        className="details-full-info__action report-button"
                       >
                         Пожаловаться
                       </button>
@@ -134,11 +187,17 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
                 <div className="details-main-content">
                   <div className="details-slider">
                     <div className="details-slider__photo-wrapper">
-                      <img
+                      {/* <img
                         src={ad.imgUrl}
                         alt="фото"
                         className="details-slider__photo"
-                      />
+                      /> */}
+
+
+                      <ReactFancyBox
+                        thumbnail={ad.imgUrl}
+                        image={ad.imgUrl} />
+
                     </div>
                   </div>
                   <div className="details-infoblock">
@@ -196,6 +255,11 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id }) => {
                       {ad.description}
                     </p>
                   </div>
+                  {ad.prop_features &&
+
+
+                    <DetailsFeatures ad={ad} />
+                  }
                   <div className="details-location">
                     <h3 className="details-location__title">Местоположение</h3>
                     <div className="details-location__map">
@@ -265,6 +329,7 @@ const mapStateToProps = (state, ownProps) => {
     isLoaded: state.mainReducer.isLoaded,
     isLoading: state.mainReducer.isLoading,
     ads: state.mainReducer.ads,
+    favourites: state.mainReducer.favourites,
     ad:
       state.mainReducer.ads && state.mainReducer.ads.length > 0
         ? state.mainReducer.ads.find((ad) => ad.id === id)
@@ -274,6 +339,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   loadData: () => dispatch(handleLoadAds()),
+  addFavourites: (ad) => dispatch(addFavouriteCreator(ad)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

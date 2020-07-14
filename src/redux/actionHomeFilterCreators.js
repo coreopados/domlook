@@ -1,11 +1,6 @@
 import {
-  FILTER_TYPE_HOUSE,
-  FILTER_TYPE_APPARTMENT,
-  FILTER_TYPE_COMMERCE,
-
-  FILTER_STATUS_RENT,
-  FILTER_STATUS_SALE,
-  FILTER_STATUS_DAILYRENT,
+  FILTER_STATUS,
+  FILTER_TYPE,
 
   FILTER_TOTAL_AREA,
   FILTER_FLOOR,
@@ -21,32 +16,22 @@ import {
   FILTER_PRICE_FROM,
   FILTER_PRICE_TO,
 
-  ADD_FEATURES,
-  REMOVE_FEATURES,
+
   SET_FEATURES,
+  SET_TYPETRANSACTION,
 } from './constants';
 
 
-
-export const houseStatusCreator = () => ({
-  type: FILTER_TYPE_HOUSE,
-});
-export const appartmentStatusCreator = () => ({
-  type: FILTER_TYPE_APPARTMENT,
-});
-export const commerceStatusCreator = () => ({
-  type: FILTER_TYPE_COMMERCE,
+export const propStatusFilterCreator = selectedOption => ({
+  type: FILTER_STATUS,
+  payload: selectedOption
 });
 
-export const rentTypeCreator = () => ({
-  type: FILTER_STATUS_RENT,
+export const typeFilterCreator = selectedOption => ({
+  type: FILTER_TYPE,
+  payload: selectedOption
 })
-export const saleTypeCreator = () => ({
-  type: FILTER_STATUS_SALE,
-})
-export const dailyRentTypeCreator = () => ({
-  type: FILTER_STATUS_DAILYRENT,
-})
+
 
 export const totalAreaCreator = selectedOption => ({
   type: FILTER_TOTAL_AREA,
@@ -105,26 +90,15 @@ export const priceToFilterCreator = selectedOption => ({
   payload: selectedOption
 })
 
-
-// export const featuresArrCreator = selectedOption => ({
-//   type: FEATURES,
-//   payload: selectedOption
-// })
-
-//добавление в избранное
-export const addFeaturesCreator = ad => ({
-  type: ADD_FEATURES,
-  payload: ad,
-});
-
-//удаление из избранного
-export const removeFeaturesCreator = ad => ({
-  type: REMOVE_FEATURES,
-  payload: ad,
-});
-
+//добавление удобств
 export const setFeaturesCreator = ads => ({
   type: SET_FEATURES,
+  payload: ads,
+});
+
+//добавление типа сделки
+export const setTypeTransactionCreator = ads => ({
+  type: SET_TYPETRANSACTION,
   payload: ads,
 });
 

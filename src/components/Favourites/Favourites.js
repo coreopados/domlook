@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  FiltersForm,
-} from '../ReduxForms/FiltersForm/FiltersForm';
+import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 import {
   Navigation,
 } from '../CommonParts/Navigation/Navigation';
@@ -32,7 +30,7 @@ const Favourites = ({
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
-            <FiltersForm />
+            <AsideFilters />
             <div className="common-section__block">
               <AdsGridFavourite adsFavourites={favourites} match={match} />
             </div>

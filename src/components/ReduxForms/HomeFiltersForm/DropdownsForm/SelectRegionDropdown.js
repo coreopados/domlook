@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import {
     propRegionFilterCreator
@@ -6,21 +6,20 @@ import {
 import { regions } from '../../../../api/testCities.json'
 
 const SelectRegionDropdown = ({
-    propRegionFilterFilterFunc,
+    propRegionFilterFunc,
+
 }) => {
 
     const [selectedOption, setSelectedOption] = useState('');
 
-
-
-    propRegionFilterFilterFunc(selectedOption)
+    propRegionFilterFunc(selectedOption)
 
 
     return (
         <select name="select-region-filter" id="select-region-filter"
             value={selectedOption}
             onChange={e => setSelectedOption(e.target.value)}>
-            <option value="Выберите область" >Выберите область</option>
+            <option value="" >Выберите область</option>
             {regions.region.map((o, index) => (
                 <option value={o.name} key={index}>{o.name}</option>
             ))}
@@ -33,7 +32,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    propRegionFilterFilterFunc: (selectedOption) => dispatch(propRegionFilterCreator(selectedOption)),
+    propRegionFilterFunc: (selectedOption) => dispatch(propRegionFilterCreator(selectedOption)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(SelectRegionDropdown);

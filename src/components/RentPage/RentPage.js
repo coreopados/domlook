@@ -1,15 +1,15 @@
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
-import { FiltersForm } from "../ReduxForms/FiltersForm/FiltersForm";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationRent } from "../CommonParts/Pagination/PaginationRentPage";
+import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 import About from "../CommonParts/About/About";
 
 const RentPage = ({
@@ -23,7 +23,7 @@ const RentPage = ({
   sort_price,
 
 
-  // typeFilter,
+  typeFilter,
   statusFilter,
   cityFilter,
   totalAreaFilter,
@@ -39,17 +39,21 @@ const RentPage = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
-  features
+  features,
+  typeTransaction
 }) => {
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
 
-
   //по типу
+  if (typeFilter) {
+    rentAds = rentAds.filter((ad) => ad.prop_type === typeFilter)
+  }
+  //по статусу
   if (statusFilter) {
-    rentAds = rentAds.filter((ad) => ad.prop_type === statusFilter)
+    rentAds = rentAds.filter((ad) => ad.prop_status === statusFilter)
   }
 
 
@@ -129,41 +133,36 @@ const RentPage = ({
     rentAds = rentAds.filter((ad) => Math.floor(ad.price) <= Math.floor(priceToFilter))
   }
 
+  //по удобствам
+  if (features !== false) {
+    var keys = [];
+    for (var key in features) {
+      keys.push(key)
 
-
-  var keys = [];
-  for (var key in features) {
-    keys.push(key)
-
+    }
+    rentAds = rentAds.filter((ad) => ad.prop_features)
+    rentAds = rentAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
   }
 
-  // rentAds = rentAds.prop_features.filter(inArray(keys))
-  rentAds = rentAds.filter((ad) => ad.prop_features)
-  console.log(rentAds)
-  function inArray(rentAds) {
-    return function (x) {
-      return rentAds.includes(x);
-    };
+  //по типу сделки
+  if (typeTransaction !== false) {
+    var keys = [];
+    for (var key in typeTransaction) {
+      keys.push(key)
+    }
+    rentAds = rentAds.filter((ad) => ad.prop_features_add)
+    rentAds = rentAds.filter(item => item.prop_features_add.some(i => (keys).includes(i)))
   }
-  rentAds = rentAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
-  console.log(rentAds)
-
 
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? rentAds = rentAds.sort((prev, next) => prev.price - next.price) : rentAds = rentAds.sort((prev, next) => next.price - prev.price);
-
-
-
-
-
-
 
 
   const indexOfLastAd = currentPageRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = rentAds.slice(indexOfFirstAd, indexOfLastAd);
 
-
+  console.log(statusFilter, typeFilter)
 
   return (
     <main className="common-main">
@@ -171,7 +170,13 @@ const RentPage = ({
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
-            <FiltersForm />
+            <AsideFilters
+              typeFilter={typeFilter}
+              priceFrom={priceFromFilter}
+              priceTo={priceToFilter}
+              match={match}
+              statusFilter={statusFilter}
+            />
             <div className="common-section__block">
               <TopFilters match={match} totalAdsRent={rentAds.length} />
               {isLoading && (
@@ -251,11 +256,11 @@ const mapStateToProps = (state) => ({
   isLoading: state.mainReducer.isLoading,
   orientation: state.mainReducer.orientation,
   sort_price: state.filterByPriceReducer.sort_price,
-  sort_by_date: state.filterByDateReducer.sort_by_date,
+  // sort_by_date: state.filterByDateReducer.sort_by_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageRent: state.paginationReducer.currentPageRent,
 
-  // typeFilter: state.filterReducer.typeFilter,
+  typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
   totalAreaFilter: state.filterReducer.totalAreaFilter,
@@ -271,7 +276,8 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
-  features: state.mainReducer.features,
+  features: state.filterReducer.features,
+  typeTransaction: state.filterReducer.typeTransaction,
 });
 
 

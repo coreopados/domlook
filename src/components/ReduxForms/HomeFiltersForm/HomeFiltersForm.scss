@@ -211,8 +211,11 @@
 
       .terms{
         width: 240px;
-        display: flex;
-        flex-direction: column;
+    
+        .type_transaction{
+          display: flex;
+          flex-direction: column;
+        }
       }
     }
     .additional-block.active{

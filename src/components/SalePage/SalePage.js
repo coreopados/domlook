@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
-import { FiltersForm } from "../ReduxForms/FiltersForm/FiltersForm";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationSale } from "../CommonParts/Pagination/PaginationSalePage";
-import { handleLoadAds } from "../../redux/actionCreators";
+import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
+// import { handleLoadAds } from "../../redux/actionCreators";
 import About from "../CommonParts/About/About";
 
 const SalePage = ({
@@ -21,10 +21,10 @@ const SalePage = ({
   currentPageSale,
   itemsPerPage,
   sort_price,
-  sort_by_date,
+  // sort_by_date,
 
-  loadData,
-  // typeFilter,
+  // loadData,
+  typeFilter,
   totalAreaFilter,
   statusFilter,
   cityFilter,
@@ -40,17 +40,22 @@ const SalePage = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
-  features
+  features,
+  typeTransaction
 }) => {
 
-  let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"), [ads]);
+  let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
 
-
   //по типу
+  if (typeFilter) {
+    saleAds = saleAds.filter((ad) => ad.prop_type === typeFilter)
+  }
+
+  //по статусу
   if (statusFilter) {
-    saleAds = saleAds.filter((ad) => ad.prop_type === statusFilter)
+    saleAds = saleAds.filter((ad) => ad.prop_status === statusFilter)
   }
 
   // по городу
@@ -129,32 +134,35 @@ const SalePage = ({
 
 
 
-
-
-  var keys = [];
-  for (var key in features) {
-    keys.push(key)
-
+  //по удобствам
+  if (features !== false) {
+    var keys = [];
+    for (var key in features) {
+      keys.push(key)
+    }
+    saleAds = saleAds.filter((ad) => ad.prop_features)
+    saleAds = saleAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
   }
 
-  // saleAds = saleAds.filter(i =>
-  //   i.features.some(k =>
-  //     keys.includes(k)
-  //   )
-  // )
-
-  console.log(saleAds)
+  //по типу сделки
+  if (typeTransaction !== false) {
+    var keys = [];
+    for (var key in typeTransaction) {
+      keys.push(key)
+    }
+    saleAds = saleAds.filter((ad) => ad.prop_features_add)
+    saleAds = saleAds.filter(item => item.prop_features_add.some(i => (keys).includes(i)))
+  }
 
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? saleAds = saleAds.sort((prev, next) => prev.price - next.price) : saleAds = saleAds.sort((prev, next) => next.price - prev.price);
-
 
 
   const indexOfLastAd = currentPageSale * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
-
+  console.log(statusFilter, typeFilter)
 
   return (
     <main className="common-main" >
@@ -162,14 +170,20 @@ const SalePage = ({
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >
-            <FiltersForm />
+            <AsideFilters
+              typeFilter={typeFilter}
+              priceFrom={priceFromFilter}
+              priceTo={priceToFilter}
+              match={match}
+              statusFilter={statusFilter}
+            />
             <div className="common-section__block" >
 
               {isLoading && (<div className="loader-wrapper" >
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
-              < TopFilters match={match} totalAdsSale={saleAds.length} />
-              {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />}
+              {isLoaded && < TopFilters match={match} totalAdsSale={saleAds.length} />}
+              {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} />}
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {(saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} />}
               < About title="Продажа жилья в Украине" >
@@ -242,11 +256,11 @@ const mapStateToProps = (state) => ({
   isLoading: state.mainReducer.isLoading,
   orientation: state.mainReducer.orientation,
   sort_price: state.filterByPriceReducer.sort_price,
-  sort_by_date: state.filterByDateReducer.sort_by_date,
+  // sort_by_date: state.filterByDateReducer.sort_by_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageSale: state.paginationReducer.currentPageSale,
 
-  // typeFilter: state.filterReducer.typeFilter,
+  typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
   totalAreaFilter: state.filterReducer.totalAreaFilter,
@@ -262,7 +276,8 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
-  features: state.mainReducer.features,
+  features: state.filterReducer.features,
+  typeTransaction: state.filterReducer.typeTransaction,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

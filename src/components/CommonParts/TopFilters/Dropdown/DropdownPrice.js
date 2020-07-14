@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import {
     sortPriceCreator,
-
 } from '../../../../redux/actionCreators';
 
 
@@ -11,14 +10,12 @@ const DropdownPriceSort = ({
     sortPriceFunc
 }) => {
 
-
-
     const price_options = [
         { id: 1, value: 'low-price', label: 'от дешевых к дорогим' },
         { id: 2, value: 'hight-price', label: 'от дорогих к дешевым' }
     ];
 
-    const [selectedOption, setSelectedOption] = useState(sortPrice);
+    const [selectedOption, setSelectedOption] = useState(price_options[0].value);
 
     sortPriceFunc(selectedOption)
 

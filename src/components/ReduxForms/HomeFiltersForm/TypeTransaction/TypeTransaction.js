@@ -1,36 +1,32 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { features } from '../../../../api/testFeatures'
+import { features_add } from '../../../../api/testFeatures'
 import {
-    setFeaturesCreator
+    setTypeTransactionCreator
 } from '../../../../redux/actionHomeFilterCreators';
 
 
-const Facilities = ({
-    setFeaturesFunc
+const TypeTransaction = ({
+    setTypeTransactionFunc
 }) => {
 
     const [x, setForm] = useState(false);
 
-
     const handler = (e) => {
         const { target } = e;
-        const { id } = target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        if (value === true) {
+        const { id } = target;
 
-        } else {
-            console.log(target.id)
-        }
+        setForm(f => ({ ...f, [id]: value }));
 
     };
-    setFeaturesFunc(x)
+    setTypeTransactionFunc(x)
 
     return (
-        <div className="parametrs">
-            <p className="label-filter">Удобства:</p>
-            <div className="facilities">
-                {features.map((fac, index) => {
+        <div className="terms">
+            <p className="label-filter">Тип сделки:</p>
+            <div className="type_transaction">
+                {features_add.map((fac, index) => {
                     return <span key={index} >
                         <input
                             type="checkbox"
@@ -47,9 +43,9 @@ const Facilities = ({
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setFeaturesFunc: (ads) => dispatch(setFeaturesCreator(ads)),
+    setTypeTransactionFunc: (ads) => dispatch(setTypeTransactionCreator(ads)),
 });
 
-const Enhanced = connect(null, mapDispatchToProps)(Facilities);
+const Enhanced = connect(null, mapDispatchToProps)(TypeTransaction);
 
-export { Enhanced as Facilities };
+export { Enhanced as TypeTransaction };

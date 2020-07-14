@@ -9,13 +9,8 @@ import {
     SORT_CITY_LVOV,
     SORT_CITY_ODESSA,
 
-    FILTER_STATUS_RENT,
-    FILTER_STATUS_SALE,
-    FILTER_STATUS_DAILYRENT,
-
-    FILTER_TYPE_HOUSE,
-    FILTER_TYPE_APPARTMENT,
-    FILTER_TYPE_COMMERCE,
+    FILTER_TYPE,
+    FILTER_STATUS,
 
     FILTER_TOTAL_AREA,
     FILTER_FLOOR,
@@ -33,12 +28,15 @@ import {
 
     FILTER_CATEGORY_NEWS,
     ACTIVE_CATEGORY_NEWS,
-
+    SET_FEATURES,
+    SET_TYPETRANSACTION,
 
     RESET_FILTERS
 } from './constants';
 
+
 const initialState = {
+
     typeFilter: '',
     statusFilter: '',
     cityFilter: '',
@@ -56,9 +54,12 @@ const initialState = {
     propCityFilter: '',
     propDistrictFilter: '',
     activeCategoryNews: '',
-    filterCategoryNews: ''
+    filterCategoryNews: '',
+    features: [],
+    typeTransaction: [],
 }
 export const filterReducer = (state = initialState, action) => {
+    // console.log(state)
     switch (action.type) {
         //сортировка по цене
         case SORT_TYPE_RENT:
@@ -71,7 +72,7 @@ export const filterReducer = (state = initialState, action) => {
         case SORT_TYPE_SELL:
             return {
                 ...state,
-                typeFilter: "sell",
+                typeFilter: "sale",
                 statusFilter: '',
                 cityFilter: ''
             };
@@ -130,37 +131,16 @@ export const filterReducer = (state = initialState, action) => {
                 typeFilter: "",
             };
 
-        case FILTER_STATUS_RENT:
+        case FILTER_TYPE:
             return {
                 ...state,
-                typeFilter: 'rent'
-            };
-        case FILTER_STATUS_SALE:
-            return {
-                ...state,
-                typeFilter: 'sale'
-            };
-        case FILTER_STATUS_DAILYRENT:
-            return {
-                ...state,
-                typeFilter: 'dailyRent'
+                typeFilter: action.payload
             };
 
-
-        case FILTER_TYPE_HOUSE:
+        case FILTER_STATUS:
             return {
                 ...state,
-                statusFilter: 'house'
-            };
-        case FILTER_TYPE_APPARTMENT:
-            return {
-                ...state,
-                statusFilter: 'apartment'
-            };
-        case FILTER_TYPE_COMMERCE:
-            return {
-                ...state,
-                statusFilter: 'commerce'
+                statusFilter: action.payload
             };
 
         case FILTER_TOTAL_AREA:
@@ -206,7 +186,7 @@ export const filterReducer = (state = initialState, action) => {
         case FILTER_REGION:
             return {
                 ...state,
-                propRegionFilter: action.payload
+                propRegionFilter: action.payload,
             };
         case FILTER_CITY:
             return {
@@ -229,6 +209,19 @@ export const filterReducer = (state = initialState, action) => {
                 priceToFilter: action.payload
             };
 
+        case SET_FEATURES:
+            return {
+                ...state,
+                features: action.payload,
+            };
+        case SET_TYPETRANSACTION:
+            return {
+                ...state,
+                typeTransaction: action.payload,
+            };
+
+
+
         //новости
         case FILTER_CATEGORY_NEWS:
             return {
@@ -240,6 +233,8 @@ export const filterReducer = (state = initialState, action) => {
                 ...state,
                 activeCategoryNews: action.payload,
             };
+
+
 
 
         case RESET_FILTERS:
@@ -262,7 +257,9 @@ export const filterReducer = (state = initialState, action) => {
                 propCityFilter: '',
                 propDistrictFilter: '',
                 filterCategoryNews: '',
-                activeCategoryNews: ''
+                activeCategoryNews: '',
+                features: false,
+                typeTransaction: false
             };
 
 

@@ -9,9 +9,6 @@ import {
   SET_FAVOURITES,
   SET_ABOUT_TEXT,
   SET_NEWS,
-  SET_FEATURES,
-  ADD_FEATURES,
-  REMOVE_FEATURES,
 
 } from './constants';
 
@@ -21,12 +18,11 @@ const initialState = {
   ads: [],
   orientation: 'horizontal',
   favourites: [],
-  features: [],
   showAllAbout: false,
   news: [],
-
-  // price_options =[{ id: 1, value: 'low-price', label: 'от дешевых к дорогим' }, { id: 2, value: 'hight-price', label: 'от дорогих к дешевым' }];
 };
+
+
 
 export const mainReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -80,22 +76,7 @@ export const mainReducer = (state = initialState, action) => {
         ...state,
         news: action.payload,
       };
-    case SET_FEATURES:
-      return {
-        ...state,
-        features: action.payload,
-      };
-    case ADD_FEATURES:
-      return {
-        ...state,
-        features: action.payload,
-      };
 
-    case REMOVE_FEATURES:
-      return {
-        ...state,
-        features: action.payload,
-      };
 
     default:
       return state;

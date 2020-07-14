@@ -1,5 +1,5 @@
 @import "../../styles/utils";
-
+@import "~react-image-gallery/styles/css/image-gallery.css";
 .details-main {
   background: #fff;
 }
@@ -93,6 +93,20 @@
     color: $orange-color;
     font-size: 14px;
     font-weight: 700;
+    background-repeat: no-repeat;
+  }
+
+  &__action.tel-button{
+    background-image:url(../../img/detailPage/tel1.png) ;
+  }
+  &__action.fav-button{
+    background-image:url(../../img/detailPage/zv1.png) ;
+  }
+  &__action.print-button{
+    background-image:url(../../img/detailPage/print1.png) ;
+  }
+  &__action.report-button{
+    background-image:url(../../img/detailPage/report1.png) ;
   }
   &__secondary-info-wrapper {
     padding-bottom: 20px;
@@ -130,6 +144,10 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+  .react-fancybox .thumbnail img{
+    max-width: 100%;
+    cursor:pointer
   }
 }
 
@@ -184,6 +202,95 @@
     color: $news-card-color-black;
   }
 }
+.details-features{
+  margin-bottom: 50px;
+
+  .details-features-wrap{
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+    span{
+      font-size: 14px;
+      font-weight: 300;
+      font-style: normal;
+      font-family: 'Roboto';
+      color: #8B9293;
+      padding-left: 30px;
+      background-repeat: no-repeat;
+      background-position-y: center;
+      background-position-x: left ;
+      background-size: contain;
+      display: flex;
+      align-items: center;
+      height: 25px;
+    }
+    .details-description__text__wifi{
+      background-image: url(../../img/features/wi-fi.png);
+    }
+    .details-description__text__wathhouse{
+      background-image: url(../../img/features/ban.png);
+    }
+    .details-description__text__pool{
+      background-image: url(../../img/features/bas.png);
+    }
+    .details-description__text__boiler{
+      background-image: url(../../img/features/boy.png);
+    }
+    .details-description__text__doors{
+      background-image: url(../../img/features/door.png);
+    }
+    .details-description__text__gas_stove{
+      background-image: url(../../img/features/pl.png);
+    }
+    .details-description__text__garage{
+      background-image: url(../../img/features/gar.png);
+    }
+    .details-description__text__jaquzee{
+      // background-image: url(../../img/features/ban.png);
+    }
+    .details-description__text__bath_cab{
+      background-image: url(../../img/features/dk.png);
+    }
+    .details-description__text__inet{
+      background-image: url(../../img/features/inet.png);
+    }
+    .details-description__text__cable_tv{
+      background-image: url(../../img/features/TV.png);
+    }
+    .details-description__text__kamin{
+      background-image: url(../../img/features/kam.png);
+    }
+    .details-description__text__conditioner{
+      background-image: url(../../img/features/kon.png);
+    }
+    .details-description__text__kitchen{
+      background-image: url(../../img/features/kitchen.png);
+    }
+    .details-description__text__elevator{
+      background-image: url(../../img/features/l.png);
+    }
+    .details-description__text__furniture{
+      background-image: url(../../img/features/m.png);
+    }
+    .details-description__text__microwave{
+      background-image: url(../../img/features/mp.png);
+    }
+    .details-description__text__sauna{
+      // background-image: url(../../img/features/inet.png);
+    }
+    .details-description__text__washer{
+      background-image: url(../../img/features/st.png);
+    }
+    .details-description__text__tv{
+      background-image: url(../../img/features/kam.png);
+    }
+    .details-description__text__phone{
+      background-image: url(../../img/features/telev.png);
+    }
+    .details-description__text__refrigerator{
+      // background-image: url(../../img/features/hol.png);
+    }
+  }
+} 
 
 .details-location {
   margin-bottom: 15px;

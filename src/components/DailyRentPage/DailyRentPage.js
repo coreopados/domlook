@@ -4,13 +4,12 @@ import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
-import { FiltersForm } from "../ReduxForms/FiltersForm/FiltersForm";
 import About from "../CommonParts/About/About";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationDailyRent } from "../CommonParts/Pagination/PaginationDailyRentPage";
-
+import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 
 const DailyRentPage = ({
   ads,
@@ -24,6 +23,7 @@ const DailyRentPage = ({
   sort_by_date,
 
   totalAreaFilter,
+  typeFilter,
   statusFilter,
   cityFilter,
   floorFilter,
@@ -43,10 +43,14 @@ const DailyRentPage = ({
   let dailyRentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
+  //по статусу
+  if (typeFilter) {
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_type === typeFilter)
+  }
 
   //по типу
   if (statusFilter) {
-    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_type === statusFilter)
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_status === statusFilter)
   }
 
   //по городу
@@ -143,7 +147,13 @@ const DailyRentPage = ({
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
-            <FiltersForm />
+          <AsideFilters
+              typeFilter={typeFilter}
+              priceFrom={priceFromFilter}
+              priceTo={priceToFilter}
+              match={match}
+              statusFilter={statusFilter}
+            />
             <div className="common-section__block">
               <TopFilters match={match} totalAdsDailyRent={dailyRentAds.length} />
               {isLoading && (
@@ -233,7 +243,7 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageDailyRent: state.paginationReducer.currentPageDailyRent,
 
-  // typeFilter: state.filterReducer.typeFilter,
+  typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
   totalAreaFilter: state.filterReducer.totalAreaFilter,

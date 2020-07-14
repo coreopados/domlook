@@ -1,8 +1,9 @@
 [
   {
     "id": 1,
+    "id_author": 3,
     "post_date": "2017-08-07",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "36900",
     "imgUrl": "/domlook/img/ads-images/1.jpg",
@@ -30,8 +31,9 @@
   },
   {
     "id": 2,
+    "id_author": 1,
     "post_date": "2017-08-08",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "35900",
     "imgUrl": "/domlook/img/ads-images/2.jpg",
@@ -59,8 +61,9 @@
   },
   {
     "id": 3,
+    "id_author": 4,
     "post_date": "2017-08-09",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "20900",
     "imgUrl": "/domlook/img/ads-images/3.jpg",
@@ -88,8 +91,9 @@
   },
   {
     "id": 4,
+    "id_author": 2,
     "post_date": "2017-08-10",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "87000",
     "imgUrl": "/domlook/img/ads-images/4.jpg",
@@ -117,8 +121,9 @@
   },
   {
     "id": 5,
+    "id_author": 6,
     "post_date": "2017-08-11",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "117000",
     "imgUrl": "/domlook/img/ads-images/5.jpg",
@@ -146,8 +151,9 @@
   },
   {
     "id": 6,
+    "id_author": 5,
     "post_date": "2017-08-12",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "29000",
     "imgUrl": "/domlook/img/ads-images/6.jpg",
@@ -175,8 +181,9 @@
   },
   {
     "id": 7,
+    "id_author": 5,
     "post_date": "2017-08-13",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "220000",
     "imgUrl": "/domlook/img/ads-images/7.jpg",
@@ -204,8 +211,9 @@
   },
   {
     "id": 8,
+    "id_author": 3,
     "post_date": "2017-08-14",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "36990",
     "imgUrl": "/domlook/img/ads-images/8.jpg",
@@ -233,6 +241,7 @@
   },
   {
     "id": 9,
+    "id_author": 2,
     "post_date": "2017-08-15",
     "prop_status": "dailyrent",
     "prop_type": "apartment",
@@ -262,6 +271,7 @@
   },
   {
     "id": 10,
+    "id_author": 1,
     "post_date": "2017-08-16",
     "prop_status": "rent",
     "prop_type": "apartment",
@@ -291,6 +301,7 @@
   },
   {
     "id": 11,
+    "id_author": 6,
     "post_date": "2017-08-17",
     "prop_status": "dailyrent",
     "prop_type": "house",
@@ -320,6 +331,7 @@
   },
   {
     "id": 12,
+    "id_author": 6,
     "post_date": "2017-08-18",
     "prop_status": "dailyrent",
     "prop_type": "apartment",
@@ -349,6 +361,7 @@
   },
   {
     "id": 13,
+    "id_author": 2,
     "post_date": "2017-08-19",
     "prop_status": "rent",
     "prop_type": "house",
@@ -378,6 +391,7 @@
   },
   {
     "id": 14,
+    "id_author": 1,
     "post_date": "2017-08-20",
     "prop_status": "rent",
     "prop_type": "house",
@@ -400,9 +414,12 @@
     "prop_building": "",
     "prop_heating": "автономное",
     "prop_features": [
-      "Wi-FI",
+      "Wi-Fi",
       "Баня",
       "Бассейн"
+    ],
+    "prop_features_add": [
+      "Рассрочка"
     ],
     "map": {
       "latitude": "49.2188261",
@@ -412,6 +429,7 @@
   },
   {
     "id": 15,
+    "id_author": 3,
     "post_date": "2017-08-21",
     "prop_status": "rent",
     "prop_type": "house",
@@ -434,7 +452,7 @@
     "prop_building": "",
     "prop_heating": "автономное",
     "prop_features": [
-      "Wi-FI",
+      "Wi-Fi",
       "Джакузи",
       "Сауна"
     ],
@@ -446,6 +464,7 @@
   },
   {
     "id": 16,
+    "id_author": 4,
     "post_date": "2017-08-22",
     "prop_status": "rent",
     "prop_type": "house",
@@ -475,8 +494,9 @@
   },
   {
     "id": 17,
+    "id_author": 5,
     "post_date": "2017-08-07",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "36901",
     "imgUrl": "/domlook/img/ads-images/1.jpg",
@@ -504,8 +524,9 @@
   },
   {
     "id": 18,
+    "id_author": 6,
     "post_date": "2017-08-08",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "35901",
     "imgUrl": "/domlook/img/ads-images/2.jpg",
@@ -533,8 +554,9 @@
   },
   {
     "id": 19,
+    "id_author": 1,
     "post_date": "2017-08-09",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "120900",
     "imgUrl": "/domlook/img/ads-images/3.jpg",
@@ -562,8 +584,9 @@
   },
   {
     "id": 20,
+    "id_author": 3,
     "post_date": "2017-08-10",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "apartment",
     "price": "37000",
     "imgUrl": "/domlook/img/ads-images/4.jpg",
@@ -591,8 +614,9 @@
   },
   {
     "id": 21,
+    "id_author": 2,
     "post_date": "2017-08-11",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "37000",
     "imgUrl": "/domlook/img/ads-images/5.jpg",
@@ -612,6 +636,11 @@
     "prop_walls": "силикатный кирпич",
     "prop_building": "",
     "prop_heating": "автономное",
+    "prop_features": [
+      "Бронедвери",
+      "Стиральная машина",
+      "Интернет"
+    ],
     "map": {
       "latitude": "49.2188261",
       "longitude": "28.444967099999985",
@@ -620,8 +649,9 @@
   },
   {
     "id": 22,
+    "id_author": 3,
     "post_date": "2017-08-12",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "22000",
     "imgUrl": "/domlook/img/ads-images/6.jpg",
@@ -649,8 +679,9 @@
   },
   {
     "id": 23,
+    "id_author": 4,
     "post_date": "2017-08-13",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "520000",
     "imgUrl": "/domlook/img/ads-images/7.jpg",
@@ -678,8 +709,9 @@
   },
   {
     "id": 24,
+    "id_author": 2,
     "post_date": "2017-08-14",
-    "prop_status": "sell",
+    "prop_status": "sale",
     "prop_type": "house",
     "price": "76990",
     "imgUrl": "/domlook/img/ads-images/8.jpg",

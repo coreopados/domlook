@@ -7,6 +7,7 @@
 .common-section {
   &__wrapper {
     @include flex-style(flex);
+    margin-bottom: 50px;
   }
   &__block {
     width: 100%;

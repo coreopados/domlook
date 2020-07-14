@@ -7,12 +7,14 @@ import {
 
 const PriceFromTo = ({
     PriceFromFunc,
-    PriceToFunc
+    PriceToFunc,
+    priceFrom,
+    priceTo
 }) => {
 
 
-    const [selectedOptionFrom, setSelectedOptionFrom] = useState('');
-    const [selectedOptionTo, setSelectedOptionTo] = useState('');
+    const [selectedOptionFrom, setSelectedOptionFrom] = useState(priceFrom);
+    const [selectedOptionTo, setSelectedOptionTo] = useState(priceTo);
 
     PriceFromFunc(selectedOptionFrom);
     PriceToFunc(selectedOptionTo);
@@ -30,16 +32,16 @@ const PriceFromTo = ({
     );
 }
 
-const mapStateToProps = (state) => ({
-    priceFromFilter: state.filterReducer.priceFromFilter,
-    priceToFilter: state.filterReducer.priceToFilter,
-})
+// const mapStateToProps = (state) => ({
+// priceFromFilter: state.filterReducer.priceFromFilter,
+// priceToFilter: state.filterReducer.priceToFilter,
+// })
 
 const mapDispatchToProps = (dispatch) => ({
     PriceFromFunc: (selectedOption) => dispatch(priceFromFilterCreator(selectedOption)),
     PriceToFunc: (selectedOption) => dispatch(priceToFilterCreator(selectedOption)),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(PriceFromTo);
+const Enhanced = connect(null, mapDispatchToProps)(PriceFromTo);
 
 export { Enhanced as PriceFromTo };

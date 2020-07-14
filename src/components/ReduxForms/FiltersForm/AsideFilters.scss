@@ -1,0 +1,337 @@
+@import "../../../styles/utils";
+
+.common-filters {
+  min-width: 270px;
+  // height: 1000px;
+  height: 100%;
+  margin-right: 25px;
+  padding: 20px 15px;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid $form-border-color-lightblue;
+
+  .topFilter{
+    position: relative;
+   padding-top: 0!important;
+    .searchById{
+      display: none;
+      position: absolute;
+      right: 0;
+      top: -21px;
+      transform: translateX(calc(100% + 15px));
+      overflow: hidden;
+      // border: 1px solid #ccc;
+      border: 1px solid #c9e8fb;
+      background: #fff;
+      padding: 5px 15px 15px;
+      height: 100px;
+      .idField{
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+        input[type="number"]{
+          padding: 10px 10px 10px 28px;
+          background: url('/domlook/img/filter/lupa.svg') no-repeat left 5px center;
+          border: 2px solid #d5d5d5;
+          color: #262626;
+          font-weight: 400;
+          height: 46px;
+          font-size: .86667em;
+          -webkit-appearance: none;
+          width: 160px;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        .searchButton{
+          display: inline-block;
+          height: 46px;
+          line-height: 46px;
+          width: 70px;
+          border-radius: 0;
+          margin-left: 0;
+          margin-bottom: 10px;
+          background: #fe7002 !important;
+          text-align: center;
+          color:#fff;
+          margin-bottom: 0;
+          margin-left: 3px;
+          cursor:pointer;
+        }
+     
+      }
+      .cancelSearchById{
+        text-align: center;
+        margin-top: 10px;
+        font-size: 15px;
+        color: #414141;
+        text-decoration: underline;
+        cursor:pointer;
+      }
+    }
+   .searchById.show{
+      display: block;
+    }
+    label[for='status-filter']{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 0;
+    }
+
+    #status-filter{
+      border: 0;
+      -webkit-appearance: none;
+      outline: none;
+      font-size: 16px;
+      padding: 4px 25px 4px 6px;
+      margin-top: 0;
+      background: none;
+      border:0;
+      box-shadow: none;
+      font-size: 14px;
+      height: unset;
+  
+    }
+    .status-filter-select{
+      position: relative;
+    }
+    .status-filter-select:before {
+      content: '';
+      position: absolute;
+      width: 85%;
+      bottom: 0px;
+      border-bottom: 1px dotted #4dc7ec;
+      left: 7px;
+    }
+
+    .status-filter-select:after {
+      content: "▼";
+      font-size: 12px;
+      position: absolute;
+      right: 8px;
+      top: 6px;
+      z-index: 1;
+      color: #4dc7ec;
+      text-align: center;
+      width: 10%;
+      height: 100%;
+      pointer-events: none;
+      box-sizing: border-box;
+      padding: 0px 8px;
+    }
+
+    .search-by-Id-button{
+      background: none;
+      color: #fe7002;
+      font-size: 13px;
+      cursor:pointer;
+      white-space:nowrap;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .filter-section{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;    
+  }
+  .byRegion + .filter-section{
+    margin-bottom: 25px;
+  }
+  .filter-section:after{
+    content:'';
+    width: calc(100% + 30px);
+    left: -15px;
+    height: 1px;
+    background: #c9e8fb;
+    position: absolute;
+    bottom: -5px;
+  }
+  p.addition-param-button{
+    margin-top: 25px;
+    margin-bottom: 20px;
+    background: none;
+    color: #43b7e8;
+    font-size: 14px;
+    position: relative;
+    padding-left: 20px;
+    transition: 0.2s;
+    cursor:pointer;
+    i{
+      position: absolute;
+      left: 0;
+    }
+  }
+  p.addition-param-button:hover{
+    color: #007ba9;
+    transition: 0.2s;
+  }
+
+  .additional-param{
+    display: none;
+
+    input{
+      display: none;
+    }
+    span,label{
+    // label{
+      display: inline-block;
+      padding-left: 30px;
+      position: relative;
+      font-size: 14px;
+      margin-bottom: 10px;
+      height: 20px;
+      line-height: 24px;
+      cursor:pointer;
+    }
+    span{
+      padding-left: 0;
+    }
+    label:before{
+      content:'';
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      border: 1px solid #ccc;
+    }
+    input:checked+label:after{
+      content:url('/domlook/img/home-page/checked.png');
+      position: absolute;
+      left: 4px;
+      top: 2px;
+    }
+    .terms,
+    .parametrs{
+      .label-filter{
+        margin: 10px 0;
+      }
+      .facilities,
+      .type_transaction{
+        display: flex;
+        flex-direction: column;
+      }
+
+    }
+  }
+
+  .additional-param.show{
+    display: block;
+  }
+  .block{
+    display: flex;
+    a{
+      width:100%;
+      // margin-bottom: 20px;
+      margin-top: auto;
+    }
+    label{
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      font-weight: bold;
+      font-family: 'Roboto';
+      color: #414141;
+      margin-top: 5px;
+      width: 100%;
+      select{
+        box-shadow: inset 0 0 4px 0 #dedede;
+        -webkit-appearance: none;
+        border: 0;
+        margin-top: 5px;
+        outline:none;
+        padding-right: 30px;
+        padding-left: 6px;
+        border: 1px solid #c9e8fb;
+        height: 41px;
+        border-radius: 5px;
+        background: url('/domlook/img/home-page/bo_pole.png') no-repeat;
+        background-size: cover;
+        background-position-y: -2px;
+        background-position-x: 0px;
+        box-shadow: 0;
+        font-size: 14px;
+        color: #414141;
+        font-weight: 300;
+        font-family: 'Roboto';
+
+      }
+      .wrap-price{
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        input{
+          max-width: 110px;
+          height: 41px;
+          margin-top: 5px;
+          border: 1px solid #c9e8fb;
+          font-size: 14px;
+          box-shadow: inset 0 0 4px 0 #dedede;
+          outline:none;
+          padding-left: 10px;
+          border-radius:5px;
+          background: #e0f2fd;
+          font-family: Roboto, Helvetica, Arial, sans-serif;
+          color: #394041;
+          font-size: 14px;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+          -webkit-appearance:none;
+        }
+        input:nth-of-type(2){
+          max-width: 130px;
+          width: 100%;
+          margin-left: 10px;
+          
+        }
+
+        select{
+          position: absolute;
+          right: 0;
+          top: 0;
+          max-width: 38px;
+          width: 100%;
+          height: 41px;
+          padding: 0;
+          border: 0;
+          text-align-last:center;
+          // box-shadow: none!important;
+          // option{
+          //   text-align: center;
+          // }
+          background: #E0F2FD;
+        }
+      }
+ 
+    }
+  }
+  button,
+  input[type="submit"]{
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: block;
+    border-radius: 5px;
+    background-position: center;
+    margin: auto 0;
+    height: 41px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    background: url('/domlook/img/home-page/poisk.png') no-repeat;
+    background-size: cover;
+    transition: 0.3s;
+  }
+  button:hover,
+  input[type="submit"]:hover{
+    opacity:0.8;
+    transition: 0.3s;
+  }
+}

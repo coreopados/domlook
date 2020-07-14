@@ -1,0 +1,58 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Ольга",
+            "surname": "Ткаченко",
+            "avatar": "",
+            "city": "",
+            "phone": "+ 380993332215",
+            "email": ""
+        },
+        {
+            "id": 2,
+            "name": "Кирилл",
+            "surname": "",
+            "avatar": "",
+            "city": "",
+            "phone": "+ 380993332215",
+            "email": ""
+        },
+        {
+            "id": 3,
+            "name": "Саша",
+            "surname": "",
+            "avatar": "",
+            "city": "",
+            "phone": "+ 380993332215",
+            "email": ""
+        },
+        {
+            "id": 4,
+            "name": "Богдан",
+            "surname": "",
+            "avatar": "",
+            "city": "",
+            "phone": "+ 380993332215",
+            "email": ""
+        },
+        {
+            "id": 5,
+            "name": "Олег",
+            "surname": "",
+            "avatar": "",
+            "city": "",
+            "phone": "+ 380993332215",
+            "email": ""
+        },
+        {
+            "id": 6,
+            "name": "Владимир",
+            "surname": "",
+            "avatar": "",
+            "city": "",
+            "phone": "+ 380993332215",
+            "email": ""
+        }
+    ]
+}
