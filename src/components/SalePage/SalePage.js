@@ -40,14 +40,14 @@ const SalePage = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
-  features,
+  featuresArr,
   typeTransaction
 }) => {
 
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-
+  console.log(featuresArr)
   //по типу
   if (typeFilter) {
     saleAds = saleAds.filter((ad) => ad.prop_type === typeFilter)
@@ -135,9 +135,9 @@ const SalePage = ({
 
 
   //по удобствам
-  if (features !== false) {
+  if (featuresArr !== false) {
     var keys = [];
-    for (var key in features) {
+    for (var key in featuresArr) {
       keys.push(key)
     }
     saleAds = saleAds.filter((ad) => ad.prop_features)
@@ -164,9 +164,10 @@ const SalePage = ({
 
 
 
+
   return (
     <main className="common-main" >
-      <Navigation pageName="Продажа" typeFilter={typeFilter} />
+      <Navigation pageName="Продажа" />
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >
@@ -176,6 +177,9 @@ const SalePage = ({
               priceTo={priceToFilter}
               match={match}
               statusFilter={statusFilter}
+              regionFilter={propRegionFilter}
+              features={featuresArr}
+              transaction={typeTransaction}
             />
             <div className="common-section__block" >
 
@@ -276,7 +280,7 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
-  features: state.filterReducer.features,
+  featuresArr: state.filterReducer.featuresArr,
   typeTransaction: state.filterReducer.typeTransaction,
 });
 

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./DetailsPage.scss";
 import Loader from "react-loader-spinner";
 import { handleLoadAds } from "../../redux/actionCreators";
-import { ErrorPage } from "../ErrorPage/ErrorPage";
+// import { ErrorPage } from "../ErrorPage/ErrorPage";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { DetailsMap } from "../CommonParts/DetailsMap/DetailsMap";
 import DetailsFeatures from "./DetailsFeatures/DetailsFeatures.js";
@@ -328,6 +328,7 @@ const mapStateToProps = (state, ownProps) => {
     id: ownProps.match.params.id ? Number(ownProps.match.params.id) : null,
     isLoaded: state.mainReducer.isLoaded,
     isLoading: state.mainReducer.isLoading,
+    typeFilter: state.mainReducer.typeFilter,
     ads: state.mainReducer.ads,
     favourites: state.mainReducer.favourites,
     ad:

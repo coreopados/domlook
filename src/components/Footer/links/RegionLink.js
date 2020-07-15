@@ -6,7 +6,7 @@ import { propRegionFilterCreator } from '../../../redux/actionHomeFilterCreators
 import { regions } from '../../../api/testCities.json'
 
 
-const RegionLink = ({ propRegionFilterFunc }) => {
+const RegionLink = ({ propRegionFilterFunc, propRegionFilter }) => {
 
     const [selectedOption, setselectedOption] = useState('')
 
@@ -28,7 +28,6 @@ const RegionLink = ({ propRegionFilterFunc }) => {
             })}
         </ul>)
 }
-
 
 const mapDispatchToProps = (dispatch) => ({
     propRegionFilterFunc: (selectedOption) => dispatch(propRegionFilterCreator(selectedOption)),

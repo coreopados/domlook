@@ -5,7 +5,7 @@ import {
 import './Navigation.scss';
 
 export const Navigation = ({ pageName, typeFilter, resetFilters }) => {
-  console.log(typeFilter)
+  // console.log(typeFilter)
   return (
 
     <div className="common-nav">

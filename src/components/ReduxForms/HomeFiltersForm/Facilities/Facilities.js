@@ -7,10 +7,11 @@ import {
 
 
 const Facilities = ({
-    setFeaturesFunc
+    setFeaturesFunc,
+    Features
 }) => {
 
-    const [x, setForm] = useState(false);
+    const [x, setForm] = useState(Features);
 
 
     const handler = (e) => {
@@ -18,7 +19,7 @@ const Facilities = ({
         const { id } = target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         if (value === true) {
-
+            setForm(f => ({ ...f, [id]: value }));
         } else {
             console.log(target.id)
         }

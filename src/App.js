@@ -51,7 +51,7 @@ function App({ loadData, activeCategoryNews }) {
         <Redirect from="*" to="/404" />
       </Switch>
       {/* activeCategory={activeCategoryNews} */}
-      <Footer />
+      {/* <Footer /> */}
     </React.Fragment>
   );
 }

@@ -39,7 +39,7 @@ const RentPage = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
-  features,
+  featuresArr,
   typeTransaction
 }) => {
 
@@ -134,9 +134,9 @@ const RentPage = ({
   }
 
   //по удобствам
-  if (features !== false) {
+  if (featuresArr !== false) {
     var keys = [];
-    for (var key in features) {
+    for (var key in featuresArr) {
       keys.push(key)
 
     }
@@ -162,7 +162,6 @@ const RentPage = ({
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = rentAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  console.log(statusFilter, typeFilter)
 
   return (
     <main className="common-main">
@@ -176,6 +175,9 @@ const RentPage = ({
               priceTo={priceToFilter}
               match={match}
               statusFilter={statusFilter}
+              regionFilter={propRegionFilter}
+              features={featuresArr}
+              transaction={typeTransaction}
             />
             <div className="common-section__block">
               <TopFilters match={match} totalAdsRent={rentAds.length} />
@@ -276,7 +278,7 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
-  features: state.filterReducer.features,
+  featuresArr: state.filterReducer.featuresArr,
   typeTransaction: state.filterReducer.typeTransaction,
 });
 

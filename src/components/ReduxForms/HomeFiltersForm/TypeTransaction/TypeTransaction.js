@@ -7,10 +7,11 @@ import {
 
 
 const TypeTransaction = ({
-    setTypeTransactionFunc
+    setTypeTransactionFunc,
+    transaction
 }) => {
 
-    const [x, setForm] = useState(false);
+    const [x, setForm] = useState(transaction);
 
     const handler = (e) => {
         const { target } = e;

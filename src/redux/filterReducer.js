@@ -55,7 +55,7 @@ const initialState = {
     propDistrictFilter: '',
     activeCategoryNews: '',
     filterCategoryNews: '',
-    features: [],
+    featuresArr: [],
     typeTransaction: [],
 }
 export const filterReducer = (state = initialState, action) => {
@@ -212,7 +212,7 @@ export const filterReducer = (state = initialState, action) => {
         case SET_FEATURES:
             return {
                 ...state,
-                features: action.payload,
+                featuresArr: action.payload,
             };
         case SET_TYPETRANSACTION:
             return {

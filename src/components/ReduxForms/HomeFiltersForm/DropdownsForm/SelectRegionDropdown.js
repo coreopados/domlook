@@ -7,10 +7,10 @@ import { regions } from '../../../../api/testCities.json'
 
 const SelectRegionDropdown = ({
     propRegionFilterFunc,
-
+    regionFilter
 }) => {
 
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption] = useState(regionFilter);
 
     propRegionFilterFunc(selectedOption)
 
@@ -27,14 +27,14 @@ const SelectRegionDropdown = ({
     );
 }
 
-const mapStateToProps = (state) => ({
-    propRegionFilter: state.filterReducer.propRegionFilter,
-})
+// const mapStateToProps = (state) => ({
+//     propRegionFilter: state.filterReducer.propRegionFilter,
+// })
 
 const mapDispatchToProps = (dispatch) => ({
     propRegionFilterFunc: (selectedOption) => dispatch(propRegionFilterCreator(selectedOption)),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(SelectRegionDropdown);
+const Enhanced = connect(null, mapDispatchToProps)(SelectRegionDropdown);
 
 export { Enhanced as SelectRegionDropdown };
