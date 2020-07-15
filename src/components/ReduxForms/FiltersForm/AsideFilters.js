@@ -188,8 +188,8 @@ const AsideFilters = ({
 
         <p className="addition-param-button" onClick={() => setStatusAddInfo(!addInfo)}><i className={addInfo ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o'}></i>Дополнительные параметры</p>
         <div className={addInfo === false ? "additional-param" : "additional-param show"}>
-          {/* <div className="block"><TypeTransaction transaction={transaction} /></div> */}
-          {/* <div className="block"><Facilities Features={features} /></div> */}
+          <div className="block"><TypeTransaction transaction={transaction} /></div>
+          <div className="block"><Facilities Features={features} /></div>
         </div>
 
         <div className="block">

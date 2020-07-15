@@ -176,8 +176,8 @@ const RentPage = ({
               match={match}
               statusFilter={statusFilter}
               regionFilter={propRegionFilter}
-            // features={featuresArr}
-            // transaction={typeTransaction}
+            features={featuresArr}
+            transaction={typeTransaction}
             />
             <div className="common-section__block">
               <TopFilters match={match} totalAdsRent={rentAds.length} />

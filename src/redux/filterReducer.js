@@ -55,8 +55,8 @@ const initialState = {
     propDistrictFilter: '',
     activeCategoryNews: '',
     filterCategoryNews: '',
-    featuresArr: [],
-    typeTransaction: [],
+    featuresArr: false,
+    typeTransaction: false,
 }
 export const filterReducer = (state = initialState, action) => {
     console.log(state)
