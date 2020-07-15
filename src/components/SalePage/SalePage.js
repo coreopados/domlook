@@ -162,11 +162,11 @@ const SalePage = ({
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  console.log(statusFilter, typeFilter)
+
 
   return (
     <main className="common-main" >
-      <Navigation pageName="Продажа" />
+      <Navigation pageName="Продажа" typeFilter={typeFilter} />
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >

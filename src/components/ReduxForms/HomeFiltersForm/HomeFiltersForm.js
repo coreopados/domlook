@@ -28,7 +28,8 @@ const HomeFiltersForm = ({
   typeFilter,
   statusFilter,
   isLoaded,
-  match }) => {
+  match
+}) => {
 
   const [count, setStatusAddInfo] = useState(false)
 

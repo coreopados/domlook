@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { connect } from 'react-redux';
 import {
     typeFilterCreator
@@ -18,7 +18,6 @@ const TypeDropdown = ({
         { id: 2, value: 'apartment', label: 'Квартиры' },
         { id: 3, value: 'commerce', label: 'Коммерческая недвижимость' }
     ];
-
 
     typeFilterFunc(selectedOption)
 

@@ -21,7 +21,25 @@ const CommonAds = ({
   itemsPerPage,
   sort_price,
   sort_by_date,
+
+  typeFilter,
+  totalAreaFilter,
+  statusFilter,
+  cityFilter,
+  floorFilter,
+  roomsFilter,
+  propWallsFilter,
+  propOfferFilter,
+  propHeatingFilter,
+  propBuildingFilter,
+  propCeilingHeightFilter,
   propRegionFilter,
+  propCityFilter,
+  propDistrictFilter,
+  priceFromFilter,
+  priceToFilter,
+  features,
+  typeTransaction
 }) => {
 
   let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);
@@ -49,7 +67,13 @@ const CommonAds = ({
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >
-            <AsideFilters />
+            <AsideFilters
+              typeFilter={typeFilter}
+              priceFrom={priceFromFilter}
+              priceTo={priceToFilter}
+              match={match}
+              statusFilter={statusFilter}
+            />
             <div className="common-section__block" >
 
               {isLoading && (<div className="loader-wrapper" >
@@ -148,6 +172,8 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
+  features: state.filterReducer.features,
+  typeTransaction: state.filterReducer.typeTransaction,
 });
 
 

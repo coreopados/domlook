@@ -13,10 +13,10 @@ import { addFavouriteCreator } from "../../redux/actionCreators";
 
 import ReactFancyBox from 'react-fancybox';
 import 'react-fancybox/lib/fancybox.css';
-import ImageGallery from 'react-image-gallery';
 
 
-const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, addFavourites }) => {
+
+const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, addFavourites, typeFilter }) => {
   useEffect(() => {
     if (ad === null || ad === undefined) {
       loadData();
@@ -61,264 +61,264 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
     return phone
   })
 
-
-
-
   const [showTel, setShowTel] = useState(false)
 
-  if (id && id <= ads.length) {
-    return (
-      <main className="details-main">
-        <Navigation />
-        {isLoading && (
-          <div className="loader-wrapper">
-            <Loader type="Puff" color="#313237" height={80} width={80} />
-          </div>
-        )}
-        {isLoaded && (
-          <section className="details-page">
-            <div className="container">
-              <div className="details-page__wrapper">
-                <aside className="details-full-info">
-                  <div className="details-full-info__block">
-                    <h4 className="details-full-info__title">{ad.title}</h4>
-                    <p className="details-full-info__location">{ad.address}</p>
-                  </div>
-                  <div className="details-full-info__block">
-                    <div className="details-full-info__price-wrapper">
-                      <div className="details-full-info__select-wrapper">
-                        <span className="details-full-info__price-word">
-                          Стоимость в
+  // if (id && id <= ads.length) {
+  return (
+    <main className="details-main">
+      <Navigation typeFilter={typeFilter} />
+      {isLoading && (
+        <div className="loader-wrapper">
+          <Loader type="Puff" color="#313237" height={80} width={80} />
+        </div>
+      )}
+      {isLoaded && (
+        <section className="details-page">
+          <div className="container">
+            <div className="details-page__wrapper">
+              <aside className="details-full-info">
+                <div className="details-full-info__block">
+                  <h4 className="details-full-info__title">{ad.title}</h4>
+                  <p className="details-full-info__location">{ad.address}</p>
+                </div>
+                <div className="details-full-info__block">
+                  <div className="details-full-info__price-wrapper">
+                    <div className="details-full-info__select-wrapper">
+                      <span className="details-full-info__price-word">
+                        Стоимость в
                         </span>
-                      </div>
-                      <span className="details-full-info__price">{`$ ${ad.price}`}</span>
-                      <span className="details-full-info__square-meter">{`$ ${calcPerSquareMeter()} за кв. м.`}</span>
                     </div>
+                    <span className="details-full-info__price">{`$ ${ad.price}`}</span>
+                    <span className="details-full-info__square-meter">{`$ ${calcPerSquareMeter()} за кв. м.`}</span>
                   </div>
-                  <div className="details-full-info__block">
-                    <div className="details-full-info__specs-box">
-                      <span className="details-full-info__word">Комнат: </span>
-                      <span className="details-full-info__value">
-                        {ad.rooms}
-                      </span>
-                    </div>
-                    <div className="details-full-info__specs-box">
-                      <span className="details-full-info__word">Этаж: </span>
-                      <span className="details-full-info__value">
-                        {ad.floor}
-                      </span>
-                    </div>
-                    <div className="details-full-info__specs-box">
-                      <span className="details-full-info__word">Площадь: </span>
-                      <span className="details-full-info__value">{`${ad.living_space} м²`}</span>
-                    </div>
-                  </div>
-                  <div className="details-full-info__block">
-                    <h5 className="details-full-info__person-name">
-                      {`${userName()}`}
-                    </h5>
-                    <p className="details-full-info__person-title">Риэлтор</p>
-                    <span className="details-full-info__phone-number">
-
-                      {showTel === false ? "+ 380XX-XXX-XX-XX" : <a href={'tel:' + `${userPhone()}`}>{`${userPhone()}`}</a>}
-
+                </div>
+                <div className="details-full-info__block">
+                  <div className="details-full-info__specs-box">
+                    <span className="details-full-info__word">Комнат: </span>
+                    <span className="details-full-info__value">
+                      {ad.rooms}
                     </span>
-                    <div className="details-full-info__actions-wrapper">
-                      <button
-                        type="button"
-                        className="details-full-info__action tel-button"
-                        onClick={e => setShowTel(!showTel)}
-                      >
-                        {showTel === false ? "Показать телефон" : "Скрыть телефон"}
-                      </button>
+                  </div>
+                  <div className="details-full-info__specs-box">
+                    <span className="details-full-info__word">Этаж: </span>
+                    <span className="details-full-info__value">
+                      {ad.floor}
+                    </span>
+                  </div>
+                  <div className="details-full-info__specs-box">
+                    <span className="details-full-info__word">Площадь: </span>
+                    <span className="details-full-info__value">{`${ad.living_space} м²`}</span>
+                  </div>
+                </div>
+                <div className="details-full-info__block">
+                  <h5 className="details-full-info__person-name">
+                    {`${userName()}`}
+                  </h5>
+                  <p className="details-full-info__person-title">Риэлтор</p>
+                  <span className="details-full-info__phone-number">
 
-                      <button
-                        type="button"
-                        className="details-full-info__action fav-button"
-                        onClick={(e) => handleAddFavourites(e)}
-                      >
-                        {!favourites.includes(ad) ? "Добавить в избранное" : "Добавлено"}
-                        {/* {favourites.filter((elem) => elem.id === Number(`${adId()}`)) ? "Добавлено" : "Добавить в избранное"} */}
+                    {showTel === false ? "+ 380XX-XXX-XX-XX" : <a href={'tel:' + `${userPhone()}`}>{`${userPhone()}`}</a>}
+
+                  </span>
+                  <div className="details-full-info__actions-wrapper">
+                    <button
+                      type="button"
+                      className="details-full-info__action tel-button"
+                      onClick={e => setShowTel(!showTel)}
+                    >
+                      {showTel === false ? "Показать телефон" : "Скрыть телефон"}
+                    </button>
+
+                    <button
+                      type="button"
+                      className="details-full-info__action fav-button"
+                      onClick={(e) => handleAddFavourites(e)}
+                    >
+                      {!favourites.includes(ad) ? "Добавить в избранное" : "Добавлено"}
+                      {/* {favourites.filter((elem) => elem.id === Number(`${adId()}`)) ? "Добавлено" : "Добавить в избранное"} */}
 
 
+                    </button>
+                    <button
+                      type="button"
+                      className="details-full-info__action print-button"
+                      onClick={() => { javascript: window.print() }}
+                    >
+                      Распечатать
                       </button>
-                      <button
-                        type="button"
-                        className="details-full-info__action print-button"
-                        onClick={() => { javascript: window.print() }}
-                      >
-                        Распечатать
+                    <button
+                      type="button"
+                      className="details-full-info__action report-button"
+                    >
+                      Пожаловаться
                       </button>
-                      <button
-                        type="button"
-                        className="details-full-info__action report-button"
-                      >
-                        Пожаловаться
-                      </button>
+                  </div>
+                </div>
+                <div className="details-full-info__block">
+                  <div className="details-full-info__secondary-info-wrapper">
+                    <div className="details-full-info__secondary-info-box">
+                      <p className="details-full-info__secondary-info-item">
+                        Опубликовано:
+                        </p>
+                      <p className="details-full-info__secondary-info-item">
+                        {ad.post_date}
+                      </p>
+                    </div>
+                    <div className="details-full-info__secondary-info-box">
+                      <p className="details-full-info__secondary-info-item">
+                        ID:
+                        </p>
+                      <p className="details-full-info__secondary-info-item">
+                        {ad.id}
+                      </p>
                     </div>
                   </div>
-                  <div className="details-full-info__block">
-                    <div className="details-full-info__secondary-info-wrapper">
-                      <div className="details-full-info__secondary-info-box">
-                        <p className="details-full-info__secondary-info-item">
-                          Опубликовано:
-                        </p>
-                        <p className="details-full-info__secondary-info-item">
-                          {ad.post_date}
-                        </p>
-                      </div>
-                      <div className="details-full-info__secondary-info-box">
-                        <p className="details-full-info__secondary-info-item">
-                          ID:
-                        </p>
-                        <p className="details-full-info__secondary-info-item">
-                          {ad.id}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="details-full-info__block">
-                    <h5 className="details-full-info__similar-ads-title">
-                      Похожие предложения
+                </div>
+                <div className="details-full-info__block">
+                  <h5 className="details-full-info__similar-ads-title">
+                    Похожие предложения
                     </h5>
-                    <div className="details-full-info__similar-ads"></div>
-                  </div>
-                </aside>
-                <div className="details-main-content">
-                  <div className="details-slider">
-                    <div className="details-slider__photo-wrapper">
-                      {/* <img
+                  <div className="details-full-info__similar-ads"></div>
+                </div>
+              </aside>
+              <div className="details-main-content">
+                <div className="details-slider">
+                  <div className="details-slider__photo-wrapper">
+                    {/* <img
                         src={ad.imgUrl}
                         alt="фото"
                         className="details-slider__photo"
                       /> */}
 
 
-                      <ReactFancyBox
-                        thumbnail={ad.imgUrl}
-                        image={ad.imgUrl} />
+                    <ReactFancyBox
+                      thumbnail={ad.imgUrl}
+                      image={ad.imgUrl} />
 
-                    </div>
                   </div>
-                  <div className="details-infoblock">
-                    <div className="details-infoblock__general">
-                      <h3 className="details-infoblock__title">Информация</h3>
-                      <div className="details-general-info">
-                        <div className="details-general-info__box">
-                          <p className="details-general-info__spec-name">
-                            Общая площадь:
+                </div>
+                <div className="details-infoblock">
+                  <div className="details-infoblock__general">
+                    <h3 className="details-infoblock__title">Информация</h3>
+                    <div className="details-general-info">
+                      <div className="details-general-info__box">
+                        <p className="details-general-info__spec-name">
+                          Общая площадь:
                           </p>
-                          <p className="details-general-info__spec-name">
-                            Жилая площадь:
+                        <p className="details-general-info__spec-name">
+                          Жилая площадь:
                           </p>
-                          <p className="details-general-info__spec-name">
-                            Площадь кухни:
+                        <p className="details-general-info__spec-name">
+                          Площадь кухни:
                           </p>
-                          <p className="details-general-info__spec-name">
-                            Этаж/Этажность:
+                        <p className="details-general-info__spec-name">
+                          Этаж/Этажность:
                           </p>
-                          <p className="details-general-info__spec-name">
-                            Тип предложения:
+                        <p className="details-general-info__spec-name">
+                          Тип предложения:
                           </p>
-                          <p className="details-general-info__spec-name">
-                            Тип стен:
+                        <p className="details-general-info__spec-name">
+                          Тип стен:
                           </p>
-                        </div>
-                        <div className="details-general-info__box">
-                          <p className="details-general-info__spec-value">{`${ad.total_area}м²`}</p>
-                          <p className="details-general-info__spec-value">{`${ad.living_space}м²`}</p>
-                          <p className="details-general-info__spec-value">
-                            20м²
+                      </div>
+                      <div className="details-general-info__box">
+                        <p className="details-general-info__spec-value">{`${ad.total_area}м²`}</p>
+                        <p className="details-general-info__spec-value">{`${ad.living_space}м²`}</p>
+                        <p className="details-general-info__spec-value">
+                          20м²
                           </p>
-                          <p className="details-general-info__spec-value">
-                            {ad.floor}
-                          </p>
-                          <p className="details-general-info__spec-value">
-                            {ad.prop_offer}
-                          </p>
-                          <p className="details-general-info__spec-value">
-                            {ad.prop_walls}
-                          </p>
-                        </div>
+                        <p className="details-general-info__spec-value">
+                          {ad.floor}
+                        </p>
+                        <p className="details-general-info__spec-value">
+                          {ad.prop_offer}
+                        </p>
+                        <p className="details-general-info__spec-value">
+                          {ad.prop_walls}
+                        </p>
                       </div>
                     </div>
-                    <div className="details-infoblock__additional">
-                      <h3 className="details-infoblock__title">
-                        Дополнительная информация
+                  </div>
+                  <div className="details-infoblock__additional">
+                    <h3 className="details-infoblock__title">
+                      Дополнительная информация
                       </h3>
-                      <div className="details-additional-info"></div>
-                    </div>
+                    <div className="details-additional-info"></div>
                   </div>
-                  <div className="details-description">
-                    <h3 className="details-description__title">Описание</h3>
-                    <p className="details-description__text">
-                      {ad.description}
-                    </p>
-                  </div>
-                  {ad.prop_features &&
+                </div>
+                <div className="details-description">
+                  <h3 className="details-description__title">Описание</h3>
+                  <p className="details-description__text">
+                    {ad.description}
+                  </p>
+                </div>
+                {ad.prop_features &&
 
 
-                    <DetailsFeatures ad={ad} />
-                  }
-                  <div className="details-location">
-                    <h3 className="details-location__title">Местоположение</h3>
-                    <div className="details-location__map">
-                      <DetailsMap
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                        loadingElement={<div style={{ height: "100%" }} />}
-                        containerElement={<div style={{ height: "100%" }} />}
-                        mapElement={<div style={{ height: "100%" }} />}
-                        coordinates={ad.map}
-                      />
-                    </div>
+                  <DetailsFeatures ad={ad} />
+                }
+                <div className="details-location">
+                  <h3 className="details-location__title">Местоположение</h3>
+                  <div className="details-location__map">
+                    <DetailsMap
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                      loadingElement={<div style={{ height: "100%" }} />}
+                      containerElement={<div style={{ height: "100%" }} />}
+                      mapElement={<div style={{ height: "100%" }} />}
+                      coordinates={ad.map}
+                    />
                   </div>
-                  <div className="details-socials">
-                    <span className="details-socials__share">Поделиться</span>
-                    <ul className="details-socials__list">
-                      <li className="details-socials__list-item">
-                        <a
-                          href="https://www.facebook.com"
-                          className="details-socials__list-link"
-                        >
-                          <i className="fa fa-facebook fa-lg" />
-                        </a>
-                      </li>
-                      <li className="details-socials__list-item">
-                        <a
-                          href="https://www.vk.com"
-                          className="details-socials__list-link"
-                        >
-                          <i className="fa fa-vk fa-lg" />
-                        </a>
-                      </li>
-                      <li className="details-socials__list-item">
-                        <a
-                          href="https://www.twitter.com"
-                          className="details-socials__list-link"
-                        >
-                          <i className="fa fa-twitter fa-lg" />
-                        </a>
-                      </li>
-                      <li className="details-socials__list-item">
-                        <a
-                          href="https://www.google.com"
-                          className="details-socials__list-link"
-                        >
-                          <i className="fa fa-google-plus fa-lg" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                </div>
+                <div className="details-socials">
+                  <span className="details-socials__share">Поделиться</span>
+                  <ul className="details-socials__list">
+                    <li className="details-socials__list-item">
+                      <a
+                        href="https://www.facebook.com"
+                        className="details-socials__list-link"
+                      >
+                        <i className="fa fa-facebook fa-lg" />
+                      </a>
+                    </li>
+                    <li className="details-socials__list-item">
+                      <a
+                        href="https://www.vk.com"
+                        className="details-socials__list-link"
+                      >
+                        <i className="fa fa-vk fa-lg" />
+                      </a>
+                    </li>
+                    <li className="details-socials__list-item">
+                      <a
+                        href="https://www.twitter.com"
+                        className="details-socials__list-link"
+                      >
+                        <i className="fa fa-twitter fa-lg" />
+                      </a>
+                    </li>
+                    <li className="details-socials__list-item">
+                      <a
+                        href="https://www.google.com"
+                        className="details-socials__list-link"
+                      >
+                        <i className="fa fa-google-plus fa-lg" />
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </section>
-        )}
-      </main>
-    );
-  }
+          </div>
+        </section>
+      )}
+    </main>
+  );
+  // }
+  //  else {
+  //   return <ErrorPage />;
+  // }
 
-  return <ErrorPage />;
+
 };
 
 const mapStateToProps = (state, ownProps) => {

@@ -1,8 +1,8 @@
 import {
-    SORT_TYPE_RENT,
-    SORT_TYPE_SELL,
-    SORT_STATUS_HOUSE,
-    SORT_STATUS_APARTMENT,
+    SORT_TYPE_HOUSE,
+    SORT_TYPE_APARTMENT,
+    SORT_STATUS_RENT,
+    SORT_STATUS_SALE,
     SORT_CITY_KIEV,
     SORT_CITY_KHARKOV,
     SORT_CITY_DNEPR,
@@ -62,33 +62,33 @@ export const filterReducer = (state = initialState, action) => {
     // console.log(state)
     switch (action.type) {
         //сортировка по цене
-        case SORT_TYPE_RENT:
+        case SORT_TYPE_HOUSE:
             return {
                 ...state,
-                typeFilter: "rent",
+                typeFilter: "house",
                 statusFilter: '',
                 cityFilter: ''
             };
-        case SORT_TYPE_SELL:
+        case SORT_TYPE_APARTMENT:
             return {
                 ...state,
-                typeFilter: "sale",
+                typeFilter: "apartment",
                 statusFilter: '',
                 cityFilter: ''
             };
 
         //сортировка по квартира\дом
-        case SORT_STATUS_HOUSE:
+        case SORT_STATUS_RENT:
             return {
                 ...state,
-                statusFilter: "house",
+                statusFilter: "rent",
                 typeFilter: "",
                 cityFilter: ''
             };
-        case SORT_STATUS_APARTMENT:
+        case SORT_STATUS_SALE:
             return {
                 ...state,
-                statusFilter: "apartment",
+                statusFilter: "sale",
                 typeFilter: "",
                 cityFilter: ''
             };

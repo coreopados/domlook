@@ -6,7 +6,7 @@ const DetailsFeatures = ({ ad }) => {
             <h3 className="details-description__title">Удобства</h3>
             <div className="details-features-wrap">
 
-                {ad.prop_features.map((elem) => {
+                {ad.prop_features.map((elem, index) => {
 
                     let clasName = ''
                     switch (elem) {
@@ -82,7 +82,7 @@ const DetailsFeatures = ({ ad }) => {
                             clasName = ""
                     }
 
-                    return <span className={"details-description__text__" + clasName} >
+                    return <span key={index} className={"details-description__text__" + clasName} >
                         {elem}
                     </span>
                 })}
