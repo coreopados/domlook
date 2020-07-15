@@ -47,7 +47,7 @@ const SalePage = ({
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-  console.log(featuresArr)
+  console.log(typeFilter, statusFilter)
   //по типу
   if (typeFilter) {
     saleAds = saleAds.filter((ad) => ad.prop_type === typeFilter)
@@ -178,8 +178,8 @@ const SalePage = ({
               match={match}
               statusFilter={statusFilter}
               regionFilter={propRegionFilter}
-              features={featuresArr}
-              transaction={typeTransaction}
+            // features={featuresArr}
+            // transaction={typeTransaction}
             />
             <div className="common-section__block" >
 

@@ -38,7 +38,7 @@ const CommonAds = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
-  features,
+  featuresArr,
   typeTransaction
 }) => {
 
@@ -172,7 +172,7 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
-  features: state.filterReducer.features,
+  featuresArr: state.filterReducer.featuresArr,
   typeTransaction: state.filterReducer.typeTransaction,
 });
 

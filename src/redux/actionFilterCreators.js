@@ -13,19 +13,19 @@ import {
 
 
 //покзать объявление "аренды"
-export const filterTypeRentCreator = () => ({
+export const filterStatusRentCreator = () => ({
   type: SORT_STATUS_RENT,
 });
 //покзать объявление "продажи"
-export const filterTypeSellCreator = () => ({
+export const filterStatusSellCreator = () => ({
   type: SORT_STATUS_SALE,
 });
 //покзать объявление "квартиры"
-export const filterStatusApartmentCreator = () => ({
+export const filterTypeApartmentCreator = () => ({
   type: SORT_TYPE_APARTMENT,
 });
 //покзать объявление "дома"
-export const filterStatusHouseCreator = () => ({
+export const filterTypeHouseCreator = () => ({
   type: SORT_TYPE_HOUSE,
 });
 

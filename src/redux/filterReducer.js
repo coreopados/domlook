@@ -59,7 +59,7 @@ const initialState = {
     typeTransaction: [],
 }
 export const filterReducer = (state = initialState, action) => {
-    // console.log(state)
+    console.log(state)
     switch (action.type) {
         //сортировка по цене
         case SORT_TYPE_HOUSE:
@@ -258,7 +258,7 @@ export const filterReducer = (state = initialState, action) => {
                 propDistrictFilter: '',
                 filterCategoryNews: '',
                 activeCategoryNews: '',
-                features: false,
+                featuresArr: false,
                 typeTransaction: false
             };
 

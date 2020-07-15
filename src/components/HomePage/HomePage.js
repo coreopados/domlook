@@ -16,7 +16,7 @@ import {
   handleLoadNewsAds,
   setFavouritesCreator
 } from "../../redux/actionCreators";
-import { filterTypeRentCreator, filterTypeSellCreator, filterStatusApartmentCreator, filterStatusHouseCreator } from "../../redux/actionFilterCreators";
+import { filterStatusRentCreator, filterStatusSellCreator, filterTypeApartmentCreator, filterTypeHouseCreator } from "../../redux/actionFilterCreators";
 
 
 const HomePage = ({
@@ -28,10 +28,11 @@ const HomePage = ({
   isLoading,
   loadData,
   match,
-  filterStatusApartment,
-  filterStatusHouse,
+  filterTypeApartment,
+  filterTypeHouse,
   statusFilter,
   typeFilter,
+  // featuresArr,
   setFavourites
 }) => {
   useEffect(() => {
@@ -83,7 +84,7 @@ const HomePage = ({
           <HomeAdsList ads={aptsAds} match={match}>
             <h2 className="home-ads-list__title">
               Последние объявления &nbsp;
-              <button onClick={filterStatusApartment} >
+              <button onClick={filterTypeApartment} >
                 <NavLink
                   to="/sale"
                   // to={`${process.env.PUBLIC_URL}/sale`}
@@ -94,7 +95,7 @@ const HomePage = ({
               </button>
                 &nbsp;
                 и&nbsp;
-              <button onClick={filterStatusApartment}>
+              <button onClick={filterTypeApartment}>
                 <NavLink
                   to="/rent"
                   // to={`${process.env.PUBLIC_URL}/sale`}
@@ -108,7 +109,7 @@ const HomePage = ({
           <HomeAdsList ads={housesAds} match={match}>
             <h2 className="home-ads-list__title">
               Последние объявления &nbsp;
-              <button onClick={filterStatusHouse}>
+              <button onClick={filterTypeHouse}>
                 <NavLink
                   to="/sale"
                   // to={`${process.env.PUBLIC_URL}/sale`}
@@ -119,7 +120,7 @@ const HomePage = ({
               </button>
                  &nbsp;
                 и&nbsp;
-                <button onClick={filterStatusHouse}>
+                <button onClick={filterTypeHouse}>
                 <NavLink
                   to="/rent"
                   // to={`${process.env.PUBLIC_URL}/sale`}
@@ -210,10 +211,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadData: () => dispatch(handleLoadNewsAds()),
-  filterTypeRent: () => dispatch(filterTypeRentCreator()),
-  filterTypeSell: () => dispatch(filterTypeSellCreator()),
-  filterStatusApartment: () => dispatch(filterStatusApartmentCreator()),
-  filterStatusHouse: () => dispatch(filterStatusHouseCreator()),
+  filterStatusRent: () => dispatch(filterStatusRentCreator()),
+  filterStatusSell: () => dispatch(filterStatusSellCreator()),
+  filterTypeApartment: () => dispatch(filterTypeApartmentCreator()),
+  filterTypeHouse: () => dispatch(filterTypeHouseCreator()),
   setFavourites: (ads) => dispatch(setFavouritesCreator(ads)),
 });
 
