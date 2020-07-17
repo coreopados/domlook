@@ -114,6 +114,20 @@ const Header = ({ resetFilters }) => (
         </div>
       </div>
     </div>
+
+
+    <div className="layerForm">
+      <div className="wrapForm">
+        <div className="top-form">
+          <button>Логин</button>
+          <button>Регистрация</button>
+        </div>
+        <form id="loginForm">
+          <input type="text" />
+          <input type="submit" value="Восстановить" />
+        </form>
+      </div>
+    </div>
   </header>
 );
 
