@@ -62,6 +62,7 @@ const HomePage = ({
   const homeNews = useMemo(() => news.filter((item) => item.id <= 3));
   const adsLength = ads.length
 
+
   return (
     <main>
       <HomeFiltersForm
@@ -206,7 +207,8 @@ const mapStateToProps = (state) => ({
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
-  priceToFilter: state.filterReducer.priceToFilter
+  priceToFilter: state.filterReducer.priceToFilter,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

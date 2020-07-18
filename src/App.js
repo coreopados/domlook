@@ -22,7 +22,7 @@ import { Favourites } from './components/Favourites/Favourites';
 import { NewsDetailsPage } from './components/NewsPage/NewsDetailsPage/NewsDetailsPage';
 import { handleLoadAds } from "./redux/actionCreators";
 
-function App({ loadData, activeCategoryNews }) {
+function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm }) {
   useEffect(() => {
     loadData();
   }, []);
@@ -30,7 +30,7 @@ function App({ loadData, activeCategoryNews }) {
   return (
     <React.Fragment>
       <ScrollToTop />
-      <Header />
+      <Header mainform={activeMainForm} regform={activeRegForm} />
 
       <Switch>
         <Route path="/" exact component={HomePage} />
@@ -57,6 +57,8 @@ function App({ loadData, activeCategoryNews }) {
 }
 const mapStateToProps = state => ({
   activeCategoryNews: state.filterReducer.activeCategoryNews,
+  activeMainForm: state.filterReducer.activeMainForm,
+  activeRegForm: state.filterReducer.activeRegForm,
 });
 
 const mapDispatchToProps = (dispatch) => ({

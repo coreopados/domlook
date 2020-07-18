@@ -16,6 +16,9 @@ import {
   PAGINATE_NEWS,
   PAGINATE_COMMON,
 
+  ACTIVE_MAIN_FORM,
+  ACTIVE_REG_FORM,
+
   // SORT_LOW_PRICE,
   // SORT_HIGHT_PRICE,
   SORT_PRICE,
@@ -82,6 +85,15 @@ export const sortByWeekCreator = () => ({
 //сортировка за месяц
 export const sortByMounthCreator = () => ({
   type: SORT_BY_MOUNTH,
+})
+
+export const activeMainFormCreator = active => ({
+  type: ACTIVE_MAIN_FORM,
+  payload: active
+})
+export const activeRegFormCreator = activeReg => ({
+  type: ACTIVE_REG_FORM,
+  payload: activeReg
 })
 
 

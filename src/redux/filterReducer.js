@@ -30,6 +30,8 @@ import {
     ACTIVE_CATEGORY_NEWS,
     SET_FEATURES,
     SET_TYPETRANSACTION,
+    ACTIVE_MAIN_FORM,
+    ACTIVE_REG_FORM,
 
     RESET_FILTERS
 } from './constants';
@@ -57,10 +59,24 @@ const initialState = {
     filterCategoryNews: '',
     featuresArr: false,
     typeTransaction: false,
+    activeMainForm: 'loginForm',
+    activeRegForm: 'privateReg'
 }
 export const filterReducer = (state = initialState, action) => {
-    console.log(state)
+    // console.log(state)
     switch (action.type) {
+        //active main form
+        case ACTIVE_MAIN_FORM:
+            return {
+                ...state,
+                activeMainForm: action.payload,
+            };
+        case ACTIVE_REG_FORM:
+            return {
+                ...state,
+                activeRegForm: action.payload,
+            };
+
         //сортировка по цене
         case SORT_TYPE_HOUSE:
             return {
