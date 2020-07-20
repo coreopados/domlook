@@ -1,3 +1,4 @@
+
 import {
     SORT_TYPE_HOUSE,
     SORT_TYPE_APARTMENT,
@@ -63,7 +64,11 @@ const initialState = {
     activeRegForm: 'privateReg'
 }
 export const filterReducer = (state = initialState, action) => {
+
     // console.log(state)
+
+
+
     switch (action.type) {
         //active main form
         case ACTIVE_MAIN_FORM:
