@@ -178,8 +178,8 @@ const SalePage = ({
               match={match}
               statusFilter={statusFilter}
               regionFilter={propRegionFilter}
-            // features={featuresArr}
-            // transaction={typeTransaction}
+              features={featuresArr}
+              transaction={typeTransaction}
             />
             <div className="common-section__block" >
 

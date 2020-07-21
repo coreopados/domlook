@@ -34,8 +34,11 @@ import {
     ACTIVE_MAIN_FORM,
     ACTIVE_REG_FORM,
 
+    IS_LOGGED,
+
     RESET_FILTERS
 } from './constants';
+
 
 
 const initialState = {
@@ -61,7 +64,10 @@ const initialState = {
     featuresArr: false,
     typeTransaction: false,
     activeMainForm: 'loginForm',
-    activeRegForm: 'privateReg'
+    activeRegForm: 'privateReg',
+
+    isLogged: false
+
 }
 export const filterReducer = (state = initialState, action) => {
 
@@ -70,6 +76,15 @@ export const filterReducer = (state = initialState, action) => {
 
 
     switch (action.type) {
+
+        // is showing Login
+        case IS_LOGGED:
+            return {
+                ...state,
+                isLogged: action.payload,
+            };
+
+
         //active main form
         case ACTIVE_MAIN_FORM:
             return {

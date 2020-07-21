@@ -78,5 +78,7 @@ export const SET_TYPETRANSACTION = "SET_TYPETRANSACTION";
 export const ACTIVE_MAIN_FORM = "ACTIVE_MAIN_FORM";
 export const ACTIVE_REG_FORM = "ACTIVE_MAIN_FORM";
 
+export const IS_LOGGED = "IS_LOGGED";
+
 
 

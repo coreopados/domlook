@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from "react-redux";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -6,82 +6,32 @@ import {
   NavLink,
 } from 'react-router-dom';
 
-import InputField from './Form/InputField'
 import { filterCategoryNewsCreator, activeMainFormCreator, activeRegFormCreator, handleLoadNewsAds, } from "../../redux/actionCreators";
 import { resetFilters } from "../../redux/actionFilterCreators";
 import './Header.scss';
 import { propStatusFilterCreator } from '../../redux/actionHomeFilterCreators';
+import { LoginForm } from './Form/LoginForm'
+import RegFormPrivate from './Form/RegFormPrivate'
+import RegFormRielter from './Form/RegFormRielter'
+import RepairForm from './Form/RepairForm'
 
-const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform, regform, isLoaded, loadData, }) => {
+
+
+const Header = ({ resetFilters, isLogged, activeMainFormFunc, activeRegFormFunc, mainform, regform, isLoaded, loadData, }) => {
   useEffect(() => {
     loadData();
   }, []);
 
-  const inputRefs = React.useRef([
-    React.createRef(), React.createRef(),
-  ]);
 
-  const inputRefs2 = React.useRef([
-    React.createRef(), React.createRef(),
-  ]);
-  const inputRefs3 = React.useRef([
-    React.createRef(), React.createRef(),
-    React.createRef(), React.createRef(),
-    React.createRef(), React.createRef(),
-  ]);
-  const inputRefs4 = React.useRef([
-    React.createRef()
-  ]);
 
   const [activeLink, setActiveLink] = useState(mainform)
   const [activeReg, setActiveReg] = useState(regform)
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [isLogged, setIsLogged] = useState(false)
+  const [isLoggedd, setIsLoggedd] = useState(isLogged)
 
-  const [data, setData] = useState({})
-
-
-  const handleChange = (name, value) => {
-    setData(prev => ({ ...prev, [value]: name }))
-  }
-
+  console.log(isOpenModal)
   activeMainFormFunc(activeLink);
   activeRegFormFunc(activeReg);
-
-
-  const submitForm = (e) => {
-    e.preventDefault()
-    let isValid = true;
-
-    let Refs = '';
-    if (e.target.id === 'loginForm') {
-      Refs = inputRefs
-    } else if (e.target.id === 'registrationForm_1') {
-      Refs = inputRefs2
-    } else if (e.target.id === 'registrationForm_2') {
-      Refs = inputRefs3
-    } else if (e.target.id === 'repairForm') {
-      Refs = inputRefs4
-    }
-
-    for (let i = 0; i < Refs.current.length; i++) {
-
-      const valid = Refs.current[i].current.validate();
-
-      if (!valid) {
-        isValid = false;
-        // break;
-      }
-
-      if (!isValid) {
-        return
-      }
-
-    }
-
-    setIsLogged(true)
-    setIsOpenModal(false);
-  }
 
 
   return (
@@ -95,10 +45,11 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
         <div className="header__overlay-1" />
         <div className="header__overlay-2" />
       </div>
+
       <div className="container">
         <div className="header__wrapper">
 
-          {isLogged === false &&
+          {isLoggedd === false &&
             <div className="header-top-section">
               <div className="header-top-section__wrapper">
                 <NavLink
@@ -125,7 +76,7 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
             </div>
           }
 
-          {isLogged === true &&
+          {isLoggedd === true &&
             <div className="header-top-section">
               <div className="header-top-section__wrapper-logged">
                 {/* <NavLink
@@ -149,8 +100,8 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
                   {/* <i class="fa fa-plus-circle"></i> */}
                   Список частников
                   </button>
-                {/* </NavLink>
-                <NavLink> */}
+                {/* </NavLink>*/}
+                {/* <NavLink to="/"> */}
                 <button
 
                   type="button"
@@ -159,8 +110,8 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
                   {/* <i class="fa fa-plus-circle"></i> */}
                   Добавить объявление
                   </button>
-                {/* </NavLink>
-                <NavLink> */}
+                {/* </NavLink> */}
+                {/* <NavLink> */}
                 <button
 
                   type="button"
@@ -169,18 +120,18 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
                   {/* <i class="fa fa-th-list"></i> */}
                   Мои объекты
                   </button>
-                {/* </NavLink>
-                <NavLink> */}
-                <button
+                {/* </NavLink>*/}
+                <NavLink to="/favourites">
+                  <button
 
-                  type="button"
-                  className="header-top-section__button header-top-section__button--favourites"
-                >
-                  {/* <i class="fa fa-plus-circle"></i> */}
+                    type="button"
+                    className="header-top-section__button header-top-section__button--favourites"
+                  >
+                    {/* <i class="fa fa-plus-circle"></i> */}
                   Избранное
                   </button>
-                {/* </NavLink>
-                <NavLink> */}
+                </NavLink>
+                {/* <NavLink> */}
                 <button
 
                   type="button"
@@ -191,11 +142,11 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
                   </button>
                 {/* </NavLink> */}
                 <button
-                  onClick={e => setIsLogged(false)}
+                  onClick={e => setIsLoggedd(false)}
                   type="button"
                   className="header-top-section__button header-top-section__button--exit"
                 >
-                  <i class="fa fa-sign-out"></i>
+                  <i className="fa fa-sign-out"></i>
                   Выйти
                   </button>
               </div>
@@ -276,106 +227,36 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
         </div>
       </div>
 
-
-      <div className={isOpenModal ? "layerForm" : "layerForm hidden"} onClick={e => setIsOpenModal(false)}>
-      </div>
-
-      <div className={isOpenModal ? "hidden-wrap" : "hidden-wrap hidden"}>
-        <div className="wrapForm" >
-          <div className="top-form">
-            <label onClick={e => { setActiveLink("loginForm") }} htmlFor="loginFormButton" className={activeLink === "loginForm" ? "active-link" : ""}>
-              Логин
-            </label>
-            <label onClick={e => { setActiveLink("regForm") }} htmlFor="regFormButton" className={activeLink === "regForm" ? "active-link" : ""}>
-              Регистрация
-            </label>
+      {isLoggedd === false &&
+        <div>
+          <div className={isOpenModal ? "layerForm" : "layerForm hidden"} onClick={e => setIsOpenModal(false)}>
           </div>
-          <div className="body-form">
 
-            {/* форма входа */}
-
-            {(activeLink === "loginForm") && (isLoaded) &&
-              <div className="wrap-login wrapper-form">
-                <form onSubmit={submitForm} id="loginForm">
-
-                  <InputField
-                    ref={inputRefs.current[0]}
-                    type="text"
-                    placeholder="Имя пользователя"
-                    name="name"
-                    onChange={handleChange}
-                    // clear={clear}
-                    validation={"required"}
-                  />
-                  <InputField
-                    ref={inputRefs.current[1]}
-                    type="email"
-                    placeholder="E-mail"
-                    name="email"
-                    onChange={handleChange}
-                    // clear={clear}
-                    validation={"required"}
-                  />
-
-                  <input type="submit" value="Войти" />
-                </form>
-
-                <label htmlFor="repairFormButton" onClick={e => { setActiveLink("repairForm") }}>
-                  Забыли пароль?
-                </label>
-
-                <div className="soc-block">
-                  <p>Нажимая на кнопку «Регистрация»,<br />
-                        я соглашаюсь с <a href="#">правилами сервиса</a></p>
-                  <p><span>или войдите через: </span></p>
-
-                  <div className="soc-icons">
-                    <a href="facebook.com"><i className="fab fa-facebook-f"></i></a>
-                    <a href="google.com"><i className="fab fa-google-plus-g"></i></a>
-                    <a href="twitter.com"><i className="fab fa-twitter"></i></a>
-                    <a href="vk.com"><i className="fab fa-vk"></i></a>
-
-                  </div>
-                </div>
+          <div className={isOpenModal ? "hidden-wrap" : "hidden-wrap hidden"}>
+            <div className="wrapForm" >
+              <div className="top-form">
+                <label onClick={e => { setActiveLink("loginForm") }} htmlFor="loginFormButton" className={activeLink === "loginForm" ? "active-link" : ""}>
+                  Логин
+            </label>
+                <label onClick={e => { setActiveLink("regForm") }} htmlFor="regFormButton" className={activeLink === "regForm" ? "active-link" : ""}>
+                  Регистрация
+            </label>
               </div>
-            }
+              <div className="body-form">
 
+                {/* форма входа */}
 
-            {/* форма регистрации */}
-            {
-              (activeLink === "regForm") && (isLoaded) &&
-              <div id="registrationForm" className="wrapper-form">
-                <div className="top-form reg">
-                  <label onClick={e => { setActiveReg("privateReg") }} className={activeReg === "privateReg" ? "private-link active-link" : ""} htmlFor="privateRegForm">Я частник</label>
-                  <label onClick={e => { setActiveReg("rieltorReg") }} className={activeReg === "rieltorReg" ? "rieltor-link active-link" : ""} htmlFor="rielterRegForm">Я риэлтор</label>
-                </div>
+                {(activeLink === "loginForm") && (isLoaded) &&
+                  <div>
+                    <LoginForm isopen={e => setIsOpenModal(false)} isLogged={e => setIsLoggedd(true)} />
 
-                {
-                  (activeReg === "privateReg") && (isLoaded) &&
-                  <div className="wrapper-form">
+                    <label htmlFor="repairFormButton" onClick={e => { setActiveLink("repairForm") }}>
+                      Забыли пароль?
+               </label>
 
-                    <form onSubmit={submitForm} id="registrationForm_1">
-                      <InputField
-                        ref={inputRefs2.current[0]}
-                        type="text"
-                        placeholder="Имя пользователя"
-                        name="name"
-                        onChange={handleChange}
-                        validation={"required|"}
-                      />
-                      <InputField
-                        ref={inputRefs2.current[1]}
-                        type="email"
-                        placeholder="E-mail"
-                        name="email"
-                        onChange={handleChange}
-                        validation={"required|"}
-                      />
-                      <input type="submit" value="Регистрация" />
-                    </form>
                     <div className="soc-block">
                       <p>Нажимая на кнопку «Регистрация»,<br />
-                        я соглашаюсь с <a href="#">правилами сервиса</a></p>
+      я соглашаюсь с <a href="#">правилами сервиса</a></p>
                       <p><span>или войдите через: </span></p>
 
                       <div className="soc-icons">
@@ -389,137 +270,39 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
                   </div>
                 }
 
-                {/* регистрация риелтор */}
+                {/* форма регистрации */}
                 {
-                  (activeReg === "rieltorReg") && (isLoaded) &&
-                  <div className="wrapper-form">
-
-                    <form onSubmit={submitForm} id="registrationForm_2">
-                      <InputField
-                        ref={inputRefs3.current[0]}
-                        type="email"
-                        placeholder="E-mail"
-                        name="email"
-                        onChange={handleChange}
-                        validation={"required"}
-                      />
-
-                      <div className="field-wrap">
-                        <InputField
-                          ref={inputRefs3.current[1]}
-                          type="password"
-                          placeholder="Пароль"
-                          name="password"
-                          onChange={handleChange}
-                          validation={"required"}
-                        />
-                        <InputField
-                          ref={inputRefs3.current[2]}
-                          type="password"
-                          placeholder="Повторите пароль"
-                          name="password"
-                          onChange={handleChange}
-                          validation={"required"}
-                        />
-
-                      </div>
-                      <div className="field-wrap">
-                        <InputField
-                          ref={inputRefs3.current[3]}
-                          type="text"
-                          placeholder="Название агенства"
-                          name="agenstvo"
-                          onChange={handleChange}
-                          validation={"required"}
-                        />
-                        <InputField
-                          ref={inputRefs3.current[4]}
-                          type="number"
-                          placeholder="№ свидетельства АСНУ"
-                          name="number_certificate"
-                          onChange={handleChange}
-                          validation={"required"}
-                        />
-
-                      </div>
-                      <div className="field-wrap">
-                        <InputField
-                          ref={inputRefs3.current[5]}
-                          type="text"
-                          placeholder="Город"
-                          name="сшен"
-                          onChange={handleChange}
-                          validation={"required"}
-                        />
-                        <InputField
-                          ref={inputRefs3.current[6]}
-                          type="text"
-                          placeholder="Адрес"
-                          name="adress"
-                          onChange={handleChange}
-                          validation={"required"}
-                        />
-
-
-                      </div>
-
-                      <PhoneInput
-                        inputProps={{
-                          name: 'phone',
-                          required: true,
-                          autoFocus: true,
-                        }}
-                        countryCodeEditable={false}
-                        country='ua'
-                        regions={'europe'}
-
-                        onChange={handleChange}
-
-                      />
-
-                      <input type="submit" value="Регистрация" />
-                    </form>
-                    <div className="soc-block">
-                      <p>Нажимая на кнопку «Регистрация»,<br />
-                        я соглашаюсь с <a href="#">правилами сервиса</a></p>
-                      <p><span>или войдите через: </span></p>
-
-                      <div className="soc-icons">
-                        <a href="facebook.com"><i className="fab fa-facebook-f"></i></a>
-                        <a href="google.com"><i className="fab fa-google-plus-g"></i></a>
-                        <a href="twitter.com"><i className="fab fa-twitter"></i></a>
-                        <a href="vk.com"><i className="fab fa-vk"></i></a>
-                      </div>
+                  (activeLink === "regForm") && (isLoaded) &&
+                  <div id="registrationForm" className="wrapper-form">
+                    <div className="top-form reg">
+                      <label onClick={e => { setActiveReg("privateReg") }} className={activeReg === "privateReg" ? "private-link active-link" : ""} htmlFor="privateRegForm">Я частник</label>
+                      <label onClick={e => { setActiveReg("rieltorReg") }} className={activeReg === "rieltorReg" ? "rieltor-link active-link" : ""} htmlFor="rielterRegForm">Я риэлтор</label>
                     </div>
-                  </div>
 
+                    {
+                      (activeReg === "privateReg") && (isLoaded) &&
+                      <RegFormPrivate isopen={e => setIsOpenModal(false)} defaultactiveLink={e => setActiveLink('loginForm')} />
+                    }
+
+                    {/* регистрация риелтор */}
+                    {
+                      (activeReg === "rieltorReg") && (isLoaded) &&
+                      <RegFormRielter isopen={e => setIsOpenModal(false)} defaultactiveLink={e => setActiveLink('loginForm')} />
+                    }
+                  </div>
+                }
+
+
+                {/* форма восстановления */}
+                {(activeLink === "repairForm") && (isLoaded) &&
+                  <RepairForm isopen={e => setIsOpenModal(false)} defaultactiveLink={e => setActiveLink('loginForm')} />
                 }
               </div>
-            }
 
-
-            {/* форма восстановления */}
-            {(activeLink === "repairForm") && (isLoaded) &&
-              <div className="wrap-repair wrapper-form">
-                <form onSubmit={submitForm} id="repairForm">
-                  <InputField
-                    ref={inputRefs4.current[0]}
-                    type="text"
-                    placeholder="Имя пользователя или логин"
-                    name="name_login"
-                    onChange={handleChange}
-                    validation={"required"}
-                  />
-                  <input type="submit" value="Восстановить" />
-                </form>
-
-              </div>
-            }
+            </div>
           </div>
-
         </div>
-      </div>
-
+      }
     </header >
 
   )
@@ -531,6 +314,7 @@ const Header = ({ resetFilters, activeMainFormFunc, activeRegFormFunc, mainform,
 // });
 const mapStateToProps = (state) => ({
 
+  isLogged: state.filterReducer.isLogged,
   isLoaded: state.mainReducer.isLoaded,
 });
 

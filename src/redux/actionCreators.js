@@ -29,7 +29,9 @@ import {
   ACTIVE_TOP_FILTER_PRICE,
   ACTIVE_TOP_FILTER_DATE,
   FILTER_CATEGORY_NEWS,
-  ACTIVE_CATEGORY_NEWS
+  ACTIVE_CATEGORY_NEWS,
+  IS_LOGGED
+  
 } from './constants';
 // import { loadAds } from '../api/loadAds';
 import adsData from '../api/testData.json';
@@ -169,6 +171,11 @@ export const paginateNewsCreator = number => ({
 export const paginateCommonCreator = number => ({
   type: PAGINATE_COMMON,
   payload: number,
+});
+
+export const isShowLoginCreator = logged => ({
+  type: IS_LOGGED,
+  payload: logged,
 });
 // export const handleLoad = () => {
 //   return (dispatch) => {
