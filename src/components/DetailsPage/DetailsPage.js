@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import PropTypes, { array } from "prop-types";
 import "./DetailsPage.scss";
 import Loader from "react-loader-spinner";
 import { handleLoadAds } from "../../redux/actionCreators";
@@ -13,7 +13,7 @@ import { addFavouriteCreator } from "../../redux/actionCreators";
 
 import ReactFancyBox from 'react-fancybox';
 import 'react-fancybox/lib/fancybox.css';
-
+import ImageGallery from 'react-image-gallery';
 
 
 const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, addFavourites, typeFilter }) => {
@@ -55,11 +55,22 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
   })
 
   const userPhone = useCallback(() => {
+
     const userId = ad.id_author
     const user = users.filter((elem) => elem.id === userId)
     const phone = user.map((elem) => elem.phone)
     return phone
   })
+  const images = useCallback(() => {
+
+    const im = ad.images
+
+    const newArr = im.map((elem) => ({ original: elem, thumbnail: elem }))
+
+    return newArr
+  })
+
+
 
   const [showTel, setShowTel] = useState(false)
 
@@ -190,11 +201,14 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
                         className="details-slider__photo"
                       /> */}
 
-
-                    <ReactFancyBox
-                      thumbnail={ad.imgUrl}
-                      image={ad.imgUrl} />
-
+                    {images() !== 0 &&
+                      <ImageGallery items={images()} showPlayButton={false} />
+                    }
+                    {images() == 0 &&
+                      < ReactFancyBox
+                        thumbnail={ad.imgUrl}
+                        image={ad.imgUrl} />
+                    }
                   </div>
                 </div>
                 <div className="details-infoblock">

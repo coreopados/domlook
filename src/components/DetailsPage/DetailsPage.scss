@@ -347,3 +347,16 @@
 .details-slider .react-fancybox .thumbnail img{
   width:100%;
 }
+
+
+.image-gallery-content .image-gallery-slide .image-gallery-image{
+  max-height: 365px;
+  object-fit:cover;
+}
+
+.fullscreen.image-gallery-content .image-gallery-slide .image-gallery-image{
+  max-height: calc(100vh - 80px);
+}
+.image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg{
+  height: 50px;
+}
