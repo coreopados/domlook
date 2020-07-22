@@ -17,7 +17,7 @@ import RepairForm from './Form/RepairForm'
 
 
 
-const Header = ({ resetFilters, isLogged, activeMainFormFunc, activeRegFormFunc, mainform, regform, isLoaded, loadData, }) => {
+const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, activeRegFormFunc, mainform, regform, isLoaded, loadData, }) => {
   useEffect(() => {
     loadData();
   }, []);
@@ -176,13 +176,15 @@ const Header = ({ resetFilters, isLogged, activeMainFormFunc, activeRegFormFunc,
             <nav className="navigation">
               <ul className="navigation__list">
                 <li className="navigation__item">
+
                   <NavLink
                     to="/sale"
                     // to={`${process.env.PUBLIC_URL}/sale`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  ><button onClick={resetFilters}>Продажа</button>
+                  > <button onClick={resetFilters}>Продажа</button>
                   </NavLink>
+
                 </li>
                 <li className="navigation__item">
                   <NavLink
@@ -190,7 +192,7 @@ const Header = ({ resetFilters, isLogged, activeMainFormFunc, activeRegFormFunc,
                     // to={`${process.env.PUBLIC_URL}/rent`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  ><button onClick={resetFilters}> Аренда</button>
+                  ><button onClick={() => (resetFilters(), statusFilterFunc("rent"))}> Аренда</button>
 
                   </NavLink>
                 </li>
@@ -323,6 +325,8 @@ const mapDispatchToProps = (dispatch) => ({
   activeMainFormFunc: (active) => dispatch(activeMainFormCreator(active)),
   activeRegFormFunc: (activeReg) => dispatch(activeRegFormCreator(activeReg)),
   filterCategoryNews: (number) => dispatch(filterCategoryNewsCreator(number)),
+  statusFilterFunc: (number) => dispatch(propStatusFilterCreator(number)),
+
   resetFilters: () => dispatch(resetFilters()),
   loadData: () => dispatch(handleLoadNewsAds()),
 });

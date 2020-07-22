@@ -22,10 +22,11 @@ const DailyRentPage = ({
   sort_price,
   sort_by_date,
 
-  totalAreaFilter,
+  idFilter,
   typeFilter,
   statusFilter,
   cityFilter,
+  totalAreaFilter,
   floorFilter,
   roomsFilter,
   propWallsFilter,
@@ -43,12 +44,19 @@ const DailyRentPage = ({
   let dailyRentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-  //по статусу
+
+
+  //по id
+  if (idFilter) {
+    dailyRentAds = dailyRentAds.filter((ad) => ad.id === Number(idFilter))
+  }
+
+  //по типу
   if (typeFilter) {
     dailyRentAds = dailyRentAds.filter((ad) => ad.prop_type === typeFilter)
   }
 
-  //по типу
+  //по статусу
   if (statusFilter) {
     dailyRentAds = dailyRentAds.filter((ad) => ad.prop_status === statusFilter)
   }
@@ -243,6 +251,7 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageDailyRent: state.paginationReducer.currentPageDailyRent,
 
+  idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
@@ -259,6 +268,8 @@ const mapStateToProps = (state) => ({
   propDistrictFilter: state.filterReducer.propDistrictFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
+  featuresArr: state.filterReducer.featuresArr,
+  typeTransaction: state.filterReducer.typeTransaction,
 });
 
 

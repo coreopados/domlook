@@ -22,6 +22,7 @@ const CommonAds = ({
   sort_price,
   sort_by_date,
 
+  idFilter,
   typeFilter,
   totalAreaFilter,
   statusFilter,
@@ -45,10 +46,18 @@ const CommonAds = ({
   let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
+
+
+  //по id
+  if (idFilter) {
+    commonAds = commonAds.filter((ad) => ad.id === Number(idFilter))
+  }
+
   //по области
   if (propRegionFilter) {
     commonAds = commonAds.filter((ad) => ad.prop_region === propRegionFilter)
   }
+
 
 
   sort_price === 'low-price' ? commonAds = commonAds.sort((prev, next) => prev.price - next.price) : commonAds = commonAds.sort((prev, next) => next.price - prev.price);
@@ -157,6 +166,8 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageCommon: state.paginationReducer.currentPageCommon,
 
+
+  idFilter: state.filterReducer.idFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
   totalAreaFilter: state.filterReducer.totalAreaFilter,

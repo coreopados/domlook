@@ -24,6 +24,7 @@ const SalePage = ({
   // sort_by_date,
 
   // loadData,
+  idFilter,
   typeFilter,
   totalAreaFilter,
   statusFilter,
@@ -47,7 +48,12 @@ const SalePage = ({
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-  console.log(typeFilter, statusFilter)
+
+  //по id
+  if (idFilter) {
+    saleAds = saleAds.filter((ad) => ad.id === Number(idFilter))
+  }
+
   //по типу
   if (typeFilter) {
     saleAds = saleAds.filter((ad) => ad.prop_type === typeFilter)
@@ -264,6 +270,7 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageSale: state.paginationReducer.currentPageSale,
 
+  idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,

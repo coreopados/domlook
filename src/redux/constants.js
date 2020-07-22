@@ -17,6 +17,7 @@ export const PAGINATE_COMMON = 'PAGINATE_COMMON,';
 export const SORT_LOW_PRICE = 'SORT_LOW_PRICE';
 export const SORT_HIGHT_PRICE = 'SORT_HIGH_PRICE';
 export const SORT_PRICE = 'SORT_PRICE';
+export const FILTER_ID = 'FILTER_ID';
 
 // export const SET_SELECTED_PRICE = 'SET_SELECTED_PRICE';
 

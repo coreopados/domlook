@@ -26,6 +26,7 @@ import {
     FILTER_DISTRICT,
     FILTER_PRICE_FROM,
     FILTER_PRICE_TO,
+    FILTER_ID,
 
     FILTER_CATEGORY_NEWS,
     ACTIVE_CATEGORY_NEWS,
@@ -65,13 +66,13 @@ const initialState = {
     typeTransaction: false,
     activeMainForm: 'loginForm',
     activeRegForm: 'privateReg',
-
+    idFilter: '',
     isLogged: false
 
 }
 export const filterReducer = (state = initialState, action) => {
 
-    console.log(state)
+    // console.log(state)
 
 
 
@@ -82,6 +83,13 @@ export const filterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLogged: action.payload,
+            };
+
+        //filter id
+        case FILTER_ID:
+            return {
+                ...state,
+                idFilter: action.payload,
             };
 
 

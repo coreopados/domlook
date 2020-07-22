@@ -15,7 +15,7 @@ import {
   FILTER_DISTRICT,
   FILTER_PRICE_FROM,
   FILTER_PRICE_TO,
-
+  FILTER_ID,
 
   SET_FEATURES,
   SET_TYPETRANSACTION,
@@ -87,6 +87,10 @@ export const priceFromFilterCreator = selectedOption => ({
 })
 export const priceToFilterCreator = selectedOption => ({
   type: FILTER_PRICE_TO,
+  payload: selectedOption
+})
+export const IdFilterCreator = selectedOption => ({
+  type: FILTER_ID,
   payload: selectedOption
 })
 

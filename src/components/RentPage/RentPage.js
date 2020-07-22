@@ -1,5 +1,5 @@
 
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -22,7 +22,7 @@ const RentPage = ({
   currentPageRent,
   sort_price,
 
-
+  idFilter,
   typeFilter,
   statusFilter,
   cityFilter,
@@ -45,6 +45,13 @@ const RentPage = ({
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
+
+ 
+
+  //по id
+  if (idFilter) {
+    rentAds = rentAds.filter((ad) => ad.id === Number(idFilter))
+  }
 
 
   //по типу
@@ -165,20 +172,27 @@ const RentPage = ({
 
   return (
     <main className="common-main">
-      <Navigation pageName="Аренда" />
+      {/* {isLoaded && ( */}
+
+      <Navigation pageName="Аренда" statusFilter={statusFilter} typeFilter={typeFilter} regionFilter={propRegionFilter} cityFilter={propCityFilter} districtFilter={propDistrictFilter} />
+
+      {/* )} */}
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
-            <AsideFilters
-              typeFilter={typeFilter}
-              priceFrom={priceFromFilter}
-              priceTo={priceToFilter}
-              match={match}
-              statusFilter={statusFilter}
-              regionFilter={propRegionFilter}
-              features={featuresArr}
-              transaction={typeTransaction}
-            />
+            {isLoaded && (
+              <AsideFilters
+                typeFilter={typeFilter}
+                priceFrom={priceFromFilter}
+                priceTo={priceToFilter}
+                match={match}
+                statusFilter={statusFilter}
+                regionFilter={propRegionFilter}
+                features={featuresArr}
+                transaction={typeTransaction}
+              />
+            )}
+            {/* {console.log(statusFilter, typeFilter, propRegionFilter)} */}
             <div className="common-section__block">
               <TopFilters match={match} totalAdsRent={rentAds.length} />
               {isLoading && (
@@ -262,6 +276,7 @@ const mapStateToProps = (state) => ({
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageRent: state.paginationReducer.currentPageRent,
 
+  idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,

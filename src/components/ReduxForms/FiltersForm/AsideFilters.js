@@ -19,6 +19,7 @@ import { SelectDistrictDropdown } from '../HomeFiltersForm/DropdownsForm/SelectD
 import { PriceFromTo } from '../HomeFiltersForm/DropdownsForm/PriceFromTo';
 import { Facilities } from '../HomeFiltersForm/Facilities/Facilities';
 import { TypeTransaction } from '../HomeFiltersForm/TypeTransaction/TypeTransaction';
+import { FilterById } from '../HomeFiltersForm/DropdownsForm/FilterById';
 
 
 const AsideFilters = ({
@@ -59,10 +60,8 @@ const AsideFilters = ({
             <p className="search-by-Id-button" onClick={e => setFilterById(true)}>Поиск по ID</p>
 
             <div className={filterById === false ? "searchById" : "searchById show"}>
-              <div className="idField">
-                <input type='number' />
-                <p className="searchButton">Найти</p>
-              </div>
+
+              <FilterById cancel={e => setFilterById(false)} />
               <p className="cancelSearchById" onClick={e => setFilterById(false)}>Отмена</p>
             </div>
 
@@ -88,7 +87,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="region-filter">
               Область
-              <SelectRegionDropdown regionFilter={regionFilter} />
+              <SelectRegionDropdown />
             </label>
           </div>
 

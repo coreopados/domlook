@@ -14,7 +14,6 @@ const SelectRegionDropdown = ({
 
     propRegionFilterFunc(selectedOption)
 
-
     return (
         <select name="select-region-filter" id="select-region-filter"
             value={selectedOption}

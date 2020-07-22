@@ -18,24 +18,6 @@ const StatusDropdown = ({
         { id: 3, value: 'dailyRent', label: 'Посуточно' }
     ];
 
-    // let startopt = '';
-
-    // if (match.path === "/sale") {
-    //     startopt = type_options[0].value
-    // } else if (match.path === "/rent") {
-    //     startopt = type_options[0].value
-    // } else if (match.path === "/dailyRent") {
-    //     startopt = type_options[0].value
-    // } else if (match.path === "/commonAds") {
-    //     startopt = type_options[0].value
-    // } else if (match.path === "/") {
-    //     startopt = type_options[1].value
-    // }
-
-
-
-
-
     statusFilterFunc(selectedOption)
 
     return (
