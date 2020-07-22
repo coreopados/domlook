@@ -138,16 +138,16 @@ const DailyRentPage = ({
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = dailyRentAds.slice(indexOfFirstAd, indexOfLastAd);
 
-
+  console.log(propRegionFilter, typeFilter, statusFilter)
 
 
   return (
     <main className="common-main">
-      <Navigation pageName="Посуточно" />
+      <Navigation pageName="Посуточно" statusFilter={statusFilter} typeFilter={typeFilter} regionFilter={propRegionFilter} cityFilter={propCityFilter} districtFilter={propDistrictFilter} />
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
-          <AsideFilters
+            <AsideFilters
               typeFilter={typeFilter}
               priceFrom={priceFromFilter}
               priceTo={priceToFilter}

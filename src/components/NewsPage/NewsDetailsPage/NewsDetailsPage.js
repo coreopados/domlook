@@ -19,7 +19,7 @@ const NewsDetailsPage = ({
   if (id && id <= news.length) {
     return (
       <main className="news-details-main">
-        <Navigation />
+        <Navigation pageName="Новости" titleNew={newsItem.title} />
         {isLoading
           && (
             <div className="loader-wrapper">

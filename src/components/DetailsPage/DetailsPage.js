@@ -16,7 +16,7 @@ import 'react-fancybox/lib/fancybox.css';
 import ImageGallery from 'react-image-gallery';
 
 
-const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, addFavourites, typeFilter }) => {
+const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, addFavourites }) => {
   useEffect(() => {
     if (ad === null || ad === undefined) {
       loadData();
@@ -62,14 +62,10 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
     return phone
   })
   const images = useCallback(() => {
-
     const im = ad.images
-
     const newArr = im.map((elem) => ({ original: elem, thumbnail: elem }))
-
     return newArr
   })
-
 
 
   const [showTel, setShowTel] = useState(false)
@@ -77,8 +73,11 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
   // if (id && id <= ads.length) {
   return (
     <main className="details-main">
-      <Navigation typeFilter={typeFilter} />
+      {isLoaded && (
+        <Navigation statusFilter={ad.prop_status} typeFilter={ad.prop_type} regionFilter={ad.prop_region} cityFilter={ad.prop_city} districtFilter={ad.prop_district} />
+      )}
       {isLoading && (
+
         <div className="loader-wrapper">
           <Loader type="Puff" color="#313237" height={80} width={80} />
         </div>
@@ -343,6 +342,7 @@ const mapStateToProps = (state, ownProps) => {
     isLoaded: state.mainReducer.isLoaded,
     isLoading: state.mainReducer.isLoading,
     typeFilter: state.mainReducer.typeFilter,
+    statusFilter: state.mainReducer.statusFilter,
     ads: state.mainReducer.ads,
     favourites: state.mainReducer.favourites,
     ad:

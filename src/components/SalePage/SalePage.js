@@ -187,7 +187,7 @@ const SalePage = ({
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
               {isLoaded && < TopFilters match={match} totalAdsSale={saleAds.length} />}
-              {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} />}
+              {isLoaded && < List statusFilter={statusFilter} typeFilter={typeFilter} ads={currentAds} match={match} sortPrice={sort_price} />}
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {(saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} />}
               < About title="Продажа жилья в Украине" >

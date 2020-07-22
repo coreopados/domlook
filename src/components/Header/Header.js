@@ -159,7 +159,8 @@ const Header = ({ resetFilters, isLogged, activeMainFormFunc, activeRegFormFunc,
               to="/"
               // to={`${process.env.PUBLIC_URL}/`}
               className="header-nav__logo-wrapper"
-            ><div onClick={resetFilters}>
+            >
+              <div onClick={resetFilters}>
                 <img
                   src="/domlook/img/header/logo-header-1.png"
                   alt="логотип"

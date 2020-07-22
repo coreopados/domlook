@@ -71,7 +71,7 @@ const initialState = {
 }
 export const filterReducer = (state = initialState, action) => {
 
-    // console.log(state)
+    console.log(state)
 
 
 

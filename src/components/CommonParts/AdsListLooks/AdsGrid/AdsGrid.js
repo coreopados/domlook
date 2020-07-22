@@ -11,7 +11,7 @@ export const AdsGrid = ({ ads, match, sortPrice }) => {
   return (
     <div className="ads-grid">
       {ads.map(ad => (
-        <Link to={`${match.path}/${ad.id}`} key={ad.id}>
+        <Link to={`${match.path}/${ad.id}`} key={ad.id} >
           <VerticalCard ad={ad} match={match} />
         </Link>
       ))}

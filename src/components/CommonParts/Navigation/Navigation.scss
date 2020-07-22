@@ -5,9 +5,12 @@
   &__link {
     color: $news-card-color-black;
     margin-right: 20px;
-position: relative;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #363636;
   }
-  &__link:not(:last-of-type):after{
+  &__link:not(:last-child):after{
     content:url("/domlook/img/header/str_pag.png");
     position: relative;
     left: 10px;
