@@ -39,12 +39,14 @@ const DailyRentPage = ({
   propDistrictFilter,
   priceFromFilter,
   priceToFilter,
+  featuresArr,
+  typeTransaction
 }) => {
 
   let dailyRentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-
+  console.log(dailyRentAds)
 
   //по id
   if (idFilter) {
@@ -139,6 +141,27 @@ const DailyRentPage = ({
     dailyRentAds = dailyRentAds.filter((ad) => Math.floor(ad.price) <= Math.floor(priceToFilter))
   }
 
+  //по удобствам
+  if (featuresArr !== false) {
+    var keys = [];
+    for (var key in featuresArr) {
+      keys.push(key)
+    }
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_features)
+    dailyRentAds = dailyRentAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
+  }
+
+  //по типу сделки
+  if (typeTransaction !== false) {
+    var keys = [];
+    for (var key in typeTransaction) {
+      keys.push(key)
+    }
+    dailyRentAds = dailyRentAds.filter((ad) => ad.prop_features_add)
+    dailyRentAds = dailyRentAds.filter(item => item.prop_features_add.some(i => (keys).includes(i)))
+  }
+
+
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? dailyRentAds = dailyRentAds.sort((prev, next) => prev.price - next.price) : dailyRentAds = dailyRentAds.sort((prev, next) => next.price - prev.price);
 
@@ -175,14 +198,18 @@ const DailyRentPage = ({
               priceTo={priceToFilter}
               match={match}
               statusFilter={statusFilter}
+              regionFilter={propRegionFilter}
+              features={featuresArr}
+              transaction={typeTransaction}
             />
             <div className="common-section__block">
-              <TopFilters match={match} totalAdsDailyRent={dailyRentAds.length} />
+
               {isLoading && (
                 <div className="loader-wrapper">
                   <Loader type="Puff" color="#313237" height={80} width={80} />
                 </div>
               )}
+              {isLoaded && <TopFilters match={match} totalAdsDailyRent={dailyRentAds.length} />}
               {isLoaded && <List ads={currentAds} match={match} sortPrice={sort_price} />}
               {(dailyRentAds.length > 9) && <PaginationDailyRent totalItems={dailyRentAds.length} />}
 
@@ -263,7 +290,7 @@ const mapStateToProps = (state) => ({
   sort_price: state.filterReducer.sort_price,
   sort_date: state.filterReducer.sort_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
-  currentPageDailyRent: state.paginationReducer.currentPageDailyRent,
+  currentPageSale: state.paginationReducer.currentPageSale,
 
   idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,

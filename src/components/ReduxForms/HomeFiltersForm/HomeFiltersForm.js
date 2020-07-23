@@ -27,6 +27,9 @@ const HomeFiltersForm = ({
   adsLength,
   typeFilter,
   statusFilter,
+  regionFilter,
+  features,
+  typeTransaction,
   isLoaded,
   match
 }) => {
@@ -64,7 +67,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="region-filter">
                 Область
-              <SelectRegionDropdown />
+                {isLoaded && <SelectRegionDropdown regionFilter={regionFilter} />}
               </label>
             </div>
 
@@ -172,9 +175,9 @@ const HomeFiltersForm = ({
             <button onClick={() => setStatusAddInfo(!count)}><i className={count ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o'}></i>Дополнительные параметры</button>
 
             <div className={clsx('additional-block', (count === true) && 'active')}>
-              <Facilities />
+              <Facilities Features={features} />
 
-              <TypeTransaction />
+              <TypeTransaction typeTransaction={typeTransaction}/>
             </div>
           </div>
         </div >

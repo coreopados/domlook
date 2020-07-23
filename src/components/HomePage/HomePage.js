@@ -32,8 +32,10 @@ const HomePage = ({
   filterTypeHouse,
   statusFilter,
   typeFilter,
-  // featuresArr,
-  setFavourites
+  featuresArr,
+  propRegionFilter,
+  setFavourites,
+  typeTransaction
 }) => {
   useEffect(() => {
     loadData();
@@ -72,6 +74,9 @@ const HomePage = ({
         adsLength={adsLength}
         statusFilter={statusFilter}
         typeFilter={typeFilter}
+        regionFilter={propRegionFilter}
+        features={featuresArr}
+        typeTransaction={typeTransaction}
       />
       <HomePageCities />
       {isLoading && (
@@ -205,9 +210,12 @@ const mapStateToProps = (state) => ({
   isLoading: state.mainReducer.isLoading,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
+  propRegionFilter: state.filterReducer.propRegionFilter,
   cityFilter: state.filterReducer.cityFilter,
   priceFromFilter: state.filterReducer.priceFromFilter,
   priceToFilter: state.filterReducer.priceToFilter,
+  featuresArr: state.filterReducer.featuresArr,
+  typeTransaction: state.filterReducer.typeTransaction,
 
 });
 

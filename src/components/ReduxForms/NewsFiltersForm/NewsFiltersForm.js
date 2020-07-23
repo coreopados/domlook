@@ -3,9 +3,9 @@ import './NewsFiltersForm.scss';
 import { NewsHeadingsFilters } from './NewsHeadingsFilters/NewsHeadingsFilters';
 import { NewsArchivesFilters } from './NewsArchivesFilters/NewsArchivesFilters';
 
-export const NewsFiltersForm = ({ activeCategory }) => (
+export const NewsFiltersForm = ({ activeCategory, news }) => (
   <aside className="news-filters">
     <NewsHeadingsFilters activeCategory={activeCategory} />
-    <NewsArchivesFilters />
+    <NewsArchivesFilters news={news}/>
   </aside>
 );

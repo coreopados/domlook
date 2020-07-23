@@ -49,12 +49,6 @@ const SalePage = ({
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
 
-
-
-
-
-
-
   //по id
   if (idFilter) {
     saleAds = saleAds.filter((ad) => ad.id === Number(idFilter))

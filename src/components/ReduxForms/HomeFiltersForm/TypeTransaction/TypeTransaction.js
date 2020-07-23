@@ -8,10 +8,10 @@ import {
 
 const TypeTransaction = ({
     setTypeTransactionFunc,
-    transaction
+    typeTransaction
 }) => {
 
-    const [x, setForm] = useState(transaction);
+    const [x, setForm] = useState(typeTransaction);
 
     const handler = (e) => {
         const { target } = e;

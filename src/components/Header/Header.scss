@@ -177,6 +177,10 @@
     @include flex-style(flex, row, space-between, center);
     height: 53px;
     width: 184px;
+    >div{
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__logo-1 {

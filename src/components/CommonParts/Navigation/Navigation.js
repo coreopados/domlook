@@ -25,6 +25,7 @@ const Navigation = ({
 }) => {
 
   const [selectedOption, setActiveCategory] = useState(category)
+
   categoryFilterFunc(selectedOption)
 
   return (
@@ -35,16 +36,17 @@ const Navigation = ({
           <Link to="/" className="common-nav__link">Domlook</Link>
           {/* status */}
           {pageName === "Продажа" && !statusFilter && <Link to="/sale" className="common-nav__link">Продажа</Link>}
-          {pageName === "Объявления" && <Link Link to="/advertisement" className="common-nav__link">Объявления</Link>}
+          {pageName === "Объявления" && <Link to="/advertisement" className="common-nav__link">Объявления</Link>}
           {pageName === "Аренда" && !statusFilter && <Link to="/rent" className="common-nav__link">Аренда</Link>}
           {pageName === "Посуточно" && !statusFilter && <Link to="/dailyRent" className="common-nav__link">Посуточно</Link>}
+          {pageName === "Избранное" && <Link to="/favourites" className="common-nav__link">Избранное</Link>}
 
           {/* news */}
           {pageName === "Новости" &&
             <Link Link to="/news" className="common-nav__link">
               <button onClick={() => (resetFiltersFunc(), setActiveCategory())}>
                 Новости
-            </button>
+              </button>
             </Link>}
 
           {category &&
@@ -70,7 +72,7 @@ const Navigation = ({
                 Аренда
                   </button>
             </Link>}
-          {statusFilter === "dailyrent" &&
+          {statusFilter === "dailyRent" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
                 onClick={() => (statusFilterFunc(statusFilter), typeFilterFunc(''))}

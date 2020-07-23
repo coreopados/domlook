@@ -29,7 +29,7 @@ const SelectCityDropdown = ({
                 value={"Выберите город"}
                 onChange={e => setSelectedOption('')}>
                 {/* onChange={e => setSelectedOption(e.target.value)}> */}
-                <option value='Выберите город' >Выберите город</option>
+                <option value='' >Выберите город</option>
             </select>
         );
     } else {
@@ -37,7 +37,7 @@ const SelectCityDropdown = ({
             <select name="select-city-filter" id="select-city-filter"
                 value={selectedOption}
                 onChange={e => setSelectedOption(e.target.value)}>
-                <option value="Выберите город">Выберите город</option>
+                <option value="">Выберите город</option>
                 {obj.map((o) => (
                     <option value={o.name} key={o.id}>{o.name}</option>
                 ))}
