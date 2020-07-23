@@ -6,10 +6,11 @@ import {
 
 const FilterById = ({
     setFilterIdFunc,
-    cancel
+    cancel,
+    idFilter
 }) => {
 
-    const [idField, setIdField] = useState('');
+    const [idField, setIdField] = useState(idFilter);
 
     return (
         <div className="idField">

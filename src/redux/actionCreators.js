@@ -19,19 +19,15 @@ import {
   ACTIVE_MAIN_FORM,
   ACTIVE_REG_FORM,
 
-  // SORT_LOW_PRICE,
-  // SORT_HIGHT_PRICE,
   SORT_PRICE,
+  SORT_DATE,
 
-  SORT_BY_TODAY,
-  SORT_BY_WEEK,
-  SORT_BY_MOUNTH,
   ACTIVE_TOP_FILTER_PRICE,
   ACTIVE_TOP_FILTER_DATE,
   FILTER_CATEGORY_NEWS,
   ACTIVE_CATEGORY_NEWS,
   IS_LOGGED
-  
+
 } from './constants';
 // import { loadAds } from '../api/loadAds';
 import adsData from '../api/testData.json';
@@ -67,27 +63,18 @@ export const setHorizontalOrientationCreator = () => ({
 });
 
 
-
+// сортировка цены
 export const sortPriceCreator = selectedOption => ({
   type: SORT_PRICE,
   payload: selectedOption
 });
 
+// сортировка даты
+export const sortDateCreator = selectedOption => ({
+  type: SORT_DATE,
+  payload: selectedOption
+});
 
-//сортировка за сегодня 
-export const sortByTodayCreator = () => ({
-  type: SORT_BY_TODAY,
-})
-
-//сортировка за неделю
-export const sortByWeekCreator = () => ({
-  type: SORT_BY_WEEK,
-})
-
-//сортировка за месяц
-export const sortByMounthCreator = () => ({
-  type: SORT_BY_MOUNTH,
-})
 
 export const activeMainFormCreator = active => ({
   type: ACTIVE_MAIN_FORM,
@@ -173,6 +160,7 @@ export const paginateCommonCreator = number => ({
   payload: number,
 });
 
+// логин попап
 export const isShowLoginCreator = logged => ({
   type: IS_LOGGED,
   payload: logged,

@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import './NewsHeadingsFilters.scss';
 import clsx from 'clsx';
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 import { categories } from "../../../../api/testCategoriesNews.json"
 import {
   filterCategoryNewsCreator,
-  paginateNewsCreator
+  paginateNewsCreator,
+
 }
   from "../../../../redux/actionCreators";
 
@@ -15,7 +17,7 @@ const NewsHeadingsFilters = ({
   filterCategoryNewsFunc
 }) => {
 
-  const [selectedOption, setselectedOption] = useState('')
+  const [selectedOption, setselectedOption] = useState("")
 
   filterCategoryNewsFunc(selectedOption);
 
@@ -28,8 +30,8 @@ const NewsHeadingsFilters = ({
             key={index}
           >
             {item.name}
-
           </li>
+
         })}
       </ul>
     </div>
@@ -43,7 +45,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   filterCategoryNewsFunc: (selectedOption) => dispatch(filterCategoryNewsCreator(selectedOption)),
-  // activeCategoryFunc: (selectedOption) => dispatch(activeCategoryNewsCreator(selectedOption)),
   paginateNews: () => dispatch(paginateNewsCreator()),
 });
 

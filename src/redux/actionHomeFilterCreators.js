@@ -19,6 +19,7 @@ import {
 
   SET_FEATURES,
   SET_TYPETRANSACTION,
+  RESET_FILTERS
 } from './constants';
 
 
@@ -106,6 +107,11 @@ export const setTypeTransactionCreator = ads => ({
   payload: ads,
 });
 
+
+//сбросить фильтры
+export const resetFilters = () => ({
+  type: RESET_FILTERS,
+})
 
 
 

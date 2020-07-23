@@ -21,6 +21,7 @@ const RentPage = ({
   itemsPerPage,
   currentPageRent,
   sort_price,
+  sort_date,
 
   idFilter,
   typeFilter,
@@ -46,7 +47,7 @@ const RentPage = ({
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
- 
+
 
   //по id
   if (idFilter) {
@@ -164,6 +165,19 @@ const RentPage = ({
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? rentAds = rentAds.sort((prev, next) => prev.price - next.price) : rentAds = rentAds.sort((prev, next) => next.price - prev.price);
 
+  //фильтр по дате 0/7/30
+  const lastMonth = new Date().getTime() - 86400000 * 30;
+  const lastWeek = new Date().getTime() - 86400000 * 7;
+  const today = new Date().getTime() - 86400000;
+
+
+  if (Number(sort_date) === 31) {
+    rentAds = rentAds.filter((ad) => Date.parse(ad.post_date) >= lastMonth)
+  } else if (Number(sort_date) === 7) {
+    rentAds = rentAds.filter((ad) => Date.parse(ad.post_date) >= lastWeek)
+  } else if (Number(sort_date) === 0) {
+    rentAds = rentAds.filter((ad) => Date.parse(ad.post_date) >= today)
+  }
 
   const indexOfLastAd = currentPageRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
@@ -182,6 +196,7 @@ const RentPage = ({
           <div className="common-section__wrapper">
             {isLoaded && (
               <AsideFilters
+                idFilter={idFilter}
                 typeFilter={typeFilter}
                 priceFrom={priceFromFilter}
                 priceTo={priceToFilter}
@@ -271,7 +286,8 @@ const mapStateToProps = (state) => ({
   isLoaded: state.mainReducer.isLoaded,
   isLoading: state.mainReducer.isLoading,
   orientation: state.mainReducer.orientation,
-  sort_price: state.filterByPriceReducer.sort_price,
+  sort_price: state.filterReducer.sort_price,
+  sort_date: state.filterReducer.sort_date,
   // sort_by_date: state.filterByDateReducer.sort_by_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageRent: state.paginationReducer.currentPageRent,

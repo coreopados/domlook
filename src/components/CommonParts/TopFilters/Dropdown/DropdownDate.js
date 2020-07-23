@@ -1,57 +1,42 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import {
-    sortByTodayCreator,
-    sortByWeekCreator,
-    sortByMounthCreator,
-
+    sortDateCreator
 } from '../../../../redux/actionCreators';
 
 
 const DropdownDateSort = ({
-    sortByToday,
-    sortByWeek,
-    sortByMounth,
-    activeTopFilterDate,
+    sortDateFunc
 }) => {
-    const price_options = [
-        { id: 1, value: 0, label: 'за сегодня' },
+    const date_options = [
+        { id: 0, value: null, label: 'не выбран', disabled: true },
+        { id: 1, value: 31, label: 'за месяц' },
         { id: 2, value: 7, label: 'за неделю' },
-        { id: 3, value: 30, label: 'за месяц' }];
-    const [selectedOption, setSelectedOption] = useState(price_options[0].value);
+        { id: 3, value: 0, label: 'за сегодня' }
+    ];
 
-    if (selectedOption === 'byToday') {
-        sortByToday();
-    } else if (selectedOption === 'byWeek') {
-        sortByWeek();
-    } else if (selectedOption === 'byMounth') {
-        sortByMounth();
-    }
+    const [selectedOption, setSelectedOption] = useState(date_options[0]);
 
+
+    sortDateFunc(selectedOption)
 
     return (
-        <select name="top-filter-price" id="top-filter-price"
+        <select name="top-filter-date" id="top-filter-date"
             value={selectedOption}
             onChange={e => setSelectedOption(e.target.value)}>
-            {price_options.map(o => (
+            {date_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}
         </select>
     );
 };
 
-const mapStateToProps = state => ({
-    selectedOption: state.filterByDateReducer.selectedOption,
-    // active_top_filter: state.mainReducer.active_top_filter,
-})
+
 
 const mapDispatchToProps = dispatch => ({
-    sortByToday: () => dispatch(sortByTodayCreator()),
-    sortByWeek: () => dispatch(sortByWeekCreator()),
-    sortByMounth: () => dispatch(sortByMounthCreator()),
-
+    sortDateFunc: selectedOption => dispatch(sortDateCreator(selectedOption)),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(DropdownDateSort);
+const Enhanced = connect(null, mapDispatchToProps)(DropdownDateSort);
 
 export { Enhanced as DropdownDateSort };

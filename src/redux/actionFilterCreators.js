@@ -8,7 +8,7 @@ import {
   SORT_CITY_DNEPR,
   SORT_CITY_LVOV,
   SORT_CITY_ODESSA,
-  RESET_FILTERS
+
 } from './constants';
 
 
@@ -51,10 +51,7 @@ export const filterCityOdessaCreator = () => ({
 });
 
 
-//сбросить фильтры
-export const resetFilters = () => ({
-  type: RESET_FILTERS,
-})
+
 
 
 

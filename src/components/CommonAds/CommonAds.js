@@ -20,7 +20,7 @@ const CommonAds = ({
   currentPageCommon,
   itemsPerPage,
   sort_price,
-  sort_by_date,
+  sort_date,
 
   idFilter,
   typeFilter,
@@ -59,9 +59,22 @@ const CommonAds = ({
   }
 
 
-
+  // по цене
   sort_price === 'low-price' ? commonAds = commonAds.sort((prev, next) => prev.price - next.price) : commonAds = commonAds.sort((prev, next) => next.price - prev.price);
 
+  //фильтр по дате 0/7/30
+  const lastMonth = new Date().getTime() - 86400000 * 30;
+  const lastWeek = new Date().getTime() - 86400000 * 7;
+  const today = new Date().getTime() - 86400000;
+
+
+  if (Number(sort_date) === 31) {
+    commonAds = commonAds.filter((ad) => Date.parse(ad.post_date) >= lastMonth)
+  } else if (Number(sort_date) === 7) {
+    commonAds = commonAds.filter((ad) => Date.parse(ad.post_date) >= lastWeek)
+  } else if (Number(sort_date) === 0) {
+    commonAds = commonAds.filter((ad) => Date.parse(ad.post_date) >= today)
+  }
 
   const indexOfLastAd = currentPageCommon * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
@@ -89,7 +102,7 @@ const CommonAds = ({
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
               {isLoaded && < TopFilters match={match} totalAdsCommon={commonAds.length} />}
-              {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />}
+              {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_date} />}
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {(commonAds.length > 9) && < PaginationCommon totalItems={commonAds.length} />}
               < About title="Продажа жилья в Украине" >
@@ -161,8 +174,8 @@ const mapStateToProps = (state) => ({
   isLoaded: state.mainReducer.isLoaded,
   isLoading: state.mainReducer.isLoading,
   orientation: state.mainReducer.orientation,
-  sort_price: state.filterByPriceReducer.sort_price,
-  sort_by_date: state.filterByDateReducer.sort_by_date,
+  sort_price: state.filterReducer.sort_price,
+  sort_date: state.filterReducer.sort_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageCommon: state.paginationReducer.currentPageCommon,
 

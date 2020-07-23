@@ -16,12 +16,13 @@ const NewsPage = ({
   itemsPerPage,
   currentPageNews,
   filterCategoryNews,
-  activeCategoryNews,
   loadData,
 }) => {
 
   useEffect(() => { loadData() }, [])
 
+
+  console.log(filterCategoryNews)
 
   if (filterCategoryNews !== '') {
     news = news.filter((post) => post.category === filterCategoryNews)
@@ -35,13 +36,13 @@ const NewsPage = ({
 
   return (
     <main className="common-main">
-      <Navigation pageName="Новости" />
+      <Navigation pageName="Новости" category={filterCategoryNews} />
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
-            <NewsFiltersForm activeCategory={activeCategoryNews} />
+            <NewsFiltersForm activeCategory={filterCategoryNews} />
             <div className="common-section__block">
-              <NewsAdsList filterCategoryNews={news} news={currentNewsPosts} match={match} />
+              <NewsAdsList category={filterCategoryNews} filterCategoryNews={news} news={currentNewsPosts} match={match} />
               {(news.length > 9) && <PaginationNews currentPageNews={currentPageNews} totalItems={news.length} />}
               <About title="Новости рынка недвижимости">
                 <p className="about__text">
@@ -93,7 +94,6 @@ const NewsPage = ({
 
 const mapStateToProps = (state) => ({
   news: state.mainReducer.news,
-  activeCategoryNews: state.filterReducer.activeCategoryNews,
   isLoaded: state.mainReducer.isLoaded,
   isLoading: state.mainReducer.isLoading,
   itemsPerPage: state.paginationReducer.itemsPerPage,

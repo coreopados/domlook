@@ -22,7 +22,8 @@ const TopFilters = ({
   totalAdsDailyRent,
   totalAdsCommon,
 
-  sortPrice
+  sortPrice,
+  sortDate
 }) => {
 
   // let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"), [ads]);
@@ -96,7 +97,7 @@ const TopFilters = ({
 
         <div className="common-top-filters__post-date">Период подачи
         <div className="select-wrap">
-            <DropdownDateSort />
+            <DropdownDateSort sortDate={sortDate}/>
           </div>
         </div>
       </div>

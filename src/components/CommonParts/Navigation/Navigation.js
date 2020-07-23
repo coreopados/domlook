@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Link,
 } from 'react-router-dom';
 import './Navigation.scss';
-import { propStatusFilterCreator, typeFilterCreator, propRegionFilterCreator } from '../../../redux/actionHomeFilterCreators'
+import { propStatusFilterCreator, typeFilterCreator, propRegionFilterCreator, resetFilters } from '../../../redux/actionHomeFilterCreators';
+import { filterCategoryNewsCreator } from '../../../redux/actionCreators'
 
-const Navigation = ({ statusFilterFunc, regionFilterFunc, typeFilterFunc, pageName, titleNew, typeFilter, statusFilter, resetFilters, regionFilter, cityFilter, districtFilter }) => {
+const Navigation = ({
+  category,
+  categoryFilterFunc,
+  titleNew,
 
+  statusFilterFunc,
+  typeFilterFunc,
+  pageName,
+  typeFilter,
+  statusFilter,
+  resetFiltersFunc,
+  regionFilter,
+  regionFilterFunc,
+  cityFilter,
+  districtFilter
+}) => {
 
-  // console.log(regionFilter, typeFilter)
+  const [selectedOption, setActiveCategory] = useState(category)
+  categoryFilterFunc(selectedOption)
 
   return (
 
@@ -17,12 +33,29 @@ const Navigation = ({ statusFilterFunc, regionFilterFunc, typeFilterFunc, pageNa
       <div className="container">
         <div className="common-nav__wrapper">
           <Link to="/" className="common-nav__link">Domlook</Link>
+          {/* status */}
           {pageName === "Продажа" && !statusFilter && <Link to="/sale" className="common-nav__link">Продажа</Link>}
           {pageName === "Объявления" && <Link Link to="/advertisement" className="common-nav__link">Объявления</Link>}
           {pageName === "Аренда" && !statusFilter && <Link to="/rent" className="common-nav__link">Аренда</Link>}
           {pageName === "Посуточно" && !statusFilter && <Link to="/dailyRent" className="common-nav__link">Посуточно</Link>}
-          {pageName === "Новости" && <Link Link to="/news" className="common-nav__link">Новости</Link>}
-          {titleNew && <span className="common-nav__link">{titleNew}</span>}
+
+          {/* news */}
+          {pageName === "Новости" &&
+            <Link Link to="/news" className="common-nav__link">
+              <button onClick={() => (resetFiltersFunc(), setActiveCategory())}>
+                Новости
+            </button>
+            </Link>}
+
+          {category &&
+            <Link to="/news" className="common-nav__link">
+              <button onClick={() => (resetFiltersFunc(), setActiveCategory(selectedOption))}>
+                {category}
+              </button>
+            </Link>}
+          {category && titleNew && <span className="common-nav__link">{titleNew}</span>}
+
+
           {statusFilter === "sale" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
@@ -33,7 +66,7 @@ const Navigation = ({ statusFilterFunc, regionFilterFunc, typeFilterFunc, pageNa
           {statusFilter === "rent" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (statusFilterFunc(statusFilter), typeFilterFunc(''))}>
+                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(''))}>
                 Аренда
                   </button>
             </Link>}
@@ -91,7 +124,10 @@ const Navigation = ({ statusFilterFunc, regionFilterFunc, typeFilterFunc, pageNa
 const mapDispatchToProps = dispatch => ({
   typeFilterFunc: selectedOption => dispatch(typeFilterCreator(selectedOption)),
   statusFilterFunc: selectedOption => dispatch(propStatusFilterCreator(selectedOption)),
-  regionFilterFunc: selectedOption => dispatch(propRegionFilterCreator(selectedOption))
+  regionFilterFunc: selectedOption => dispatch(propRegionFilterCreator(selectedOption)),
+  categoryFilterFunc: selectedOption => dispatch(filterCategoryNewsCreator(selectedOption)),
+
+  resetFiltersFunc: selectedOption => dispatch(resetFilters(selectedOption))
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(Navigation);

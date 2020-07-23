@@ -10,6 +10,9 @@ import {
     SORT_CITY_LVOV,
     SORT_CITY_ODESSA,
 
+    SORT_PRICE,
+    SORT_DATE,
+
     FILTER_TYPE,
     FILTER_STATUS,
 
@@ -67,16 +70,29 @@ const initialState = {
     activeMainForm: 'loginForm',
     activeRegForm: 'privateReg',
     idFilter: '',
-    isLogged: false
-
+    isLogged: false,
+    sort_price: 'low-price',
+    sort_date: '',
 }
 export const filterReducer = (state = initialState, action) => {
 
     // console.log(state)
 
-
-
     switch (action.type) {
+
+        //сортировка по цене
+        case SORT_PRICE:
+            return {
+                ...state,
+                sort_price: action.payload
+            };
+
+        //сортировка по дате
+        case SORT_DATE:
+            return {
+                ...state,
+                sort_date: action.payload,
+            };
 
         // is showing Login
         case IS_LOGGED:
@@ -303,7 +319,8 @@ export const filterReducer = (state = initialState, action) => {
                 filterCategoryNews: '',
                 activeCategoryNews: '',
                 featuresArr: false,
-                typeTransaction: false
+                typeTransaction: false,
+                idFilter: '',
             };
 
 

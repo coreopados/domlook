@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { filterCategoryNewsCreator, activeMainFormCreator, activeRegFormCreator, handleLoadNewsAds, } from "../../redux/actionCreators";
-import { resetFilters } from "../../redux/actionFilterCreators";
+import { resetFilters } from "../../redux/actionHomeFilterCreators";
 import './Header.scss';
 import { propStatusFilterCreator } from '../../redux/actionHomeFilterCreators';
 import { LoginForm } from './Form/LoginForm'
@@ -192,7 +192,7 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                     // to={`${process.env.PUBLIC_URL}/rent`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  ><button onClick={() => (resetFilters(), statusFilterFunc("rent"))}> Аренда</button>
+                  ><button onClick={() => resetFilters()}> Аренда</button>
 
                   </NavLink>
                 </li>

@@ -4,15 +4,15 @@ import './NewsAdsList.scss';
 import { NewsAdsCard } from './NewsAdsCard/NewsAdsCard';
 
 export const NewsAdsList = ({
-
+  category,
   news,
   match,
-}) => {
 
+}) => {
   return (
     <div className="news-ads-list">
       {news.map(newsItem => (
-        <NewsAdsCard key={newsItem.id} newsItem={newsItem} match={match} />
+        <NewsAdsCard category={category} key={newsItem.id} newsItem={newsItem} match={match} />
       ))}
     </div>
   )

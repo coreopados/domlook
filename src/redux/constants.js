@@ -17,13 +17,12 @@ export const PAGINATE_COMMON = 'PAGINATE_COMMON,';
 export const SORT_LOW_PRICE = 'SORT_LOW_PRICE';
 export const SORT_HIGHT_PRICE = 'SORT_HIGH_PRICE';
 export const SORT_PRICE = 'SORT_PRICE';
+export const SORT_DATE = 'SORT_DATE';
 export const FILTER_ID = 'FILTER_ID';
 
 // export const SET_SELECTED_PRICE = 'SET_SELECTED_PRICE';
 
-export const SORT_BY_TODAY = "SORT_BY_TODAY";
-export const SORT_BY_WEEK = "SORT_BY_WEEK";
-export const SORT_BY_MOUNTH = "SORT_BY_MOUNTH";
+
 
 export const ACTIVE_TOP_FILTER_PRICE = "ACTIVE_TOP_FILTER_PRICE";
 export const ACTIVE_TOP_FILTER_DATE = "ACTIVE_TOP_FILTER_DATE";
@@ -67,10 +66,8 @@ export const FILTER_CITY = "FILTER_CITY";
 export const FILTER_DISTRICT = "FILTER_DISTRICT";
 
 
-
 export const FILTER_PRICE_FROM = "FILTER_PRICE_FROM";
 export const FILTER_PRICE_TO = "FILTER_PRICE_TO";
-
 
 
 export const SET_FEATURES = "SET_FEATURES";

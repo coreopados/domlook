@@ -31,7 +31,8 @@ const AsideFilters = ({
   priceTo,
   regionFilter,
   features,
-  transaction
+  transaction,
+  idFilter
 }) => {
 
   const [filterById, setFilterById] = useState(false)
@@ -61,7 +62,7 @@ const AsideFilters = ({
 
             <div className={filterById === false ? "searchById" : "searchById show"}>
 
-              <FilterById cancel={e => setFilterById(false)} />
+              <FilterById idFilter={idFilter} cancel={e => setFilterById(false)} />
               <p className="cancelSearchById" onClick={e => setFilterById(false)}>Отмена</p>
             </div>
 
@@ -87,7 +88,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="region-filter">
               Область
-              <SelectRegionDropdown />
+              <SelectRegionDropdown regionFilter={regionFilter} />
             </label>
           </div>
 

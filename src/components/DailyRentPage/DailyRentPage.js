@@ -20,7 +20,7 @@ const DailyRentPage = ({
   currentPageDailyRent,
   itemsPerPage,
   sort_price,
-  sort_by_date,
+  sort_date,
 
   idFilter,
   typeFilter,
@@ -142,11 +142,25 @@ const DailyRentPage = ({
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? dailyRentAds = dailyRentAds.sort((prev, next) => prev.price - next.price) : dailyRentAds = dailyRentAds.sort((prev, next) => next.price - prev.price);
 
+  //фильтр по дате 0/7/30
+  const lastMonth = new Date().getTime() - 86400000 * 30;
+  const lastWeek = new Date().getTime() - 86400000 * 7;
+  const today = new Date().getTime() - 86400000;
+
+
+  if (Number(sort_date) === 31) {
+    dailyRentAds = dailyRentAds.filter((ad) => Date.parse(ad.post_date) >= lastMonth)
+  } else if (Number(sort_date) === 7) {
+    dailyRentAds = dailyRentAds.filter((ad) => Date.parse(ad.post_date) >= lastWeek)
+  } else if (Number(sort_date) === 0) {
+    dailyRentAds = dailyRentAds.filter((ad) => Date.parse(ad.post_date) >= today)
+  }
+
   const indexOfLastAd = currentPageDailyRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = dailyRentAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  console.log(propRegionFilter, typeFilter, statusFilter)
+
 
 
   return (
@@ -246,8 +260,8 @@ const mapStateToProps = (state) => ({
   isLoaded: state.mainReducer.isLoaded,
   isLoading: state.mainReducer.isLoading,
   orientation: state.mainReducer.orientation,
-  sort_price: state.filterByPriceReducer.sort_price,
-  sort_by_date: state.filterByDateReducer.sort_by_date,
+  sort_price: state.filterReducer.sort_price,
+  sort_date: state.filterReducer.sort_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageDailyRent: state.paginationReducer.currentPageDailyRent,
 
