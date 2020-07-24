@@ -10,17 +10,31 @@ const TypeTransaction = ({
     setTypeTransactionFunc,
     typeTransaction
 }) => {
-
+    console.log(typeTransaction)
     const [x, setForm] = useState(typeTransaction);
 
     const handler = (e) => {
         const { target } = e;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+
         const { id } = target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
 
-        setForm(f => ({ ...f, [id]: value }));
-
+        if (value === true) {
+            setForm(f => ({ ...f, [id]: value }));
+        } else {
+            delete x[target.id]
+            const isEmpty = (x) => {
+                for (var key in x) {
+                    return false;
+                }
+                return true;
+            }
+            if (isEmpty(x)) {
+                setForm(false)
+            }
+        }
     };
+
     setTypeTransactionFunc(x)
 
     return (
@@ -31,11 +45,12 @@ const TypeTransaction = ({
                     return <span key={index} >
                         <input
                             type="checkbox"
-                            id={"" + fac.name + ""}
-                            value={"" + fac.name + ""}
+                            id={"" + fac.value + ""}
+                            value={"" + fac.value + ""}
                             onChange={handler}
+
                         />
-                        <label htmlFor={"" + fac.name + ""}>{fac.name}</label>
+                        <label htmlFor={"" + fac.value + ""}>{fac.name}</label>
                     </span>
                 })}
             </div>

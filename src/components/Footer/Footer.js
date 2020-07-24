@@ -7,7 +7,8 @@ import './Footer.scss';
 
 
 const Footer = ({
-  activeCategory
+  activeCategory,
+  propRegionFilter
 }) => {
 
   return (
@@ -64,7 +65,7 @@ const Footer = ({
               </ul>
             </div>
             <div className="footer-cities">
-              <RegionLink />
+              <RegionLink propRegionFilter={propRegionFilter} />
             </div>
             <div className="footer-usefull-links">
               < AdviceLink />

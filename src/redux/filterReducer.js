@@ -43,10 +43,10 @@ import {
     RESET_FILTERS
 } from './constants';
 
+import { initialState } from './paginationReducer'
 
-
-const initialState = {
-
+const initialState2 = {
+    ...initialState,
     typeFilter: '',
     statusFilter: '',
     cityFilter: '',
@@ -65,7 +65,8 @@ const initialState = {
     propDistrictFilter: '',
     activeCategoryNews: '',
     filterCategoryNews: '',
-    featuresArr: false,
+    // featuresArr: false,
+    featuresArr: {},
     typeTransaction: false,
     activeMainForm: 'loginForm',
     activeRegForm: 'privateReg',
@@ -74,7 +75,7 @@ const initialState = {
     sort_price: 'low-price',
     sort_date: '',
 }
-export const filterReducer = (state = initialState, action) => {
+export const filterReducer = (state = initialState2, action) => {
 
     console.log(state)
 

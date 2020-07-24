@@ -15,7 +15,7 @@ const RegionLink = ({ propRegionFilterFunc, propRegionFilter }) => {
     return (
         <ul className="footer-cities__list footer-list">
             {regions.region.map((item, index) => {
-                return <li className="footer-cities__list-item footer-list__item" onClick={e => { setselectedOption(item.name) }}
+                return <li className="footer-cities__list-item footer-list__item" onClick={() => { setselectedOption(item.name) }}
                     key={index}
                 >
                     <NavLink

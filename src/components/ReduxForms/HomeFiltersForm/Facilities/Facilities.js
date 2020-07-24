@@ -13,7 +13,6 @@ const Facilities = ({
 
     const [x, setForm] = useState(Features);
 
-
     const handler = (e) => {
         const { target } = e;
         const { id } = target;
@@ -21,10 +20,19 @@ const Facilities = ({
         if (value === true) {
             setForm(f => ({ ...f, [id]: value }));
         } else {
-            console.log(target.id)
+            delete x[target.id]
+            const isEmpty = (x) => {
+                for (var key in x) {
+                    return false;
+                }
+                return true;
+            }
+            if (isEmpty(x)) {
+                setForm(false)
+            }
         }
-
     };
+
     setFeaturesFunc(x)
 
     return (
@@ -38,6 +46,7 @@ const Facilities = ({
                             id={"" + fac.name + ""}
                             value={"" + fac.name + ""}
                             onChange={handler}
+                            checked={Features[fac.name]}
                         />
                         <label htmlFor={"" + fac.name + ""}>{fac.name}</label>
                     </span>

@@ -12,6 +12,7 @@ import { HomeNews } from "./HomeNews/HomeNews";
 import About from "../CommonParts/About/About";
 import { HomePageCities } from "./HomePageCities/HomePageCities";
 import { HomeAdsList } from "./HomeAdsList/HomeAdsList";
+import Footer from '../Footer/Footer';
 import {
   handleLoadNewsAds,
   setFavouritesCreator
@@ -222,6 +223,7 @@ const HomePage = ({
           </About>
         </React.Fragment>
       )}
+
     </main>
   );
 };

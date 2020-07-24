@@ -24,7 +24,7 @@ import { User } from './components/UserPage/User';
 import { NewsDetailsPage } from './components/NewsPage/NewsDetailsPage/NewsDetailsPage';
 import { handleLoadAds } from "./redux/actionCreators";
 
-function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm }) {
+function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm, propRegionFilter }) {
   useEffect(() => {
     loadData();
   }, []);
@@ -56,7 +56,8 @@ function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm }) {
         <Redirect from="*" to="/404" />
       </Switch>
       {/* activeCategory={activeCategoryNews} */}
-      {/* <Footer /> */}
+      {/* <Footer propRegionFilter={propRegionFilter} /> */}
+      <Footer />
     </React.Fragment>
   );
 }
@@ -64,6 +65,7 @@ const mapStateToProps = state => ({
   activeCategoryNews: state.filterReducer.activeCategoryNews,
   activeMainForm: state.filterReducer.activeMainForm,
   activeRegForm: state.filterReducer.activeRegForm,
+  // propRegionFilter: state.filterReducer.propRegionFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

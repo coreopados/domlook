@@ -141,6 +141,18 @@ const RentPage = ({
     rentAds = rentAds.filter((ad) => Math.floor(ad.price) <= Math.floor(priceToFilter))
   }
 
+
+  const isEmpty = (featuresArr) => {
+
+    for (let key in featuresArr) {
+      // если тело цикла начнет выполняться - значит в объекте есть свойства
+      return false;
+    }
+    return true;
+  }
+
+
+
   //по удобствам
   if (featuresArr !== false) {
     var keys = [];
@@ -152,6 +164,8 @@ const RentPage = ({
     rentAds = rentAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
   }
 
+
+  console.log(typeTransaction)
   //по типу сделки
   if (typeTransaction !== false) {
     var keys = [];

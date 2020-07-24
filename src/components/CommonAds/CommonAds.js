@@ -11,6 +11,7 @@ import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationCommon } from "../CommonParts/Pagination/PaginationCommonPage";
 import About from "../CommonParts/About/About";
 
+
 const CommonAds = ({
   ads,
   isLoaded,
@@ -42,7 +43,7 @@ const CommonAds = ({
   featuresArr,
   typeTransaction
 }) => {
-
+  console.log(propRegionFilter)
   let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
@@ -52,12 +53,90 @@ const CommonAds = ({
   if (idFilter) {
     commonAds = commonAds.filter((ad) => ad.id === Number(idFilter))
   }
+  //по id
+  if (idFilter) {
+    commonAds = commonAds.filter((ad) => ad.id === Number(idFilter))
+  }
 
+  //по статусу
+  if (statusFilter) {
+    commonAds = commonAds.filter((ad) => ad.prop_status === statusFilter)
+  }
+  //по площади
+  if (totalAreaFilter !== "") {
+    commonAds = commonAds.filter((ad) => Math.floor(ad.total_area) >= Math.floor(totalAreaFilter))
+  }
+  //по этажу
+  if (floorFilter !== "") {
+    commonAds = commonAds.filter((ad) => Math.floor(ad.floor) <= Math.floor(floorFilter))
+  }
+  //по количеству комнат
+  if (roomsFilter !== "") {
+    commonAds = commonAds.filter((ad) => ad.rooms === roomsFilter)
+  }
+  //по типу стен
+  if (propWallsFilter !== '') {
+    commonAds = commonAds.filter((ad) => ad.prop_walls === propWallsFilter)
+  }
+  //по типу предложения
+  if (propOfferFilter !== '') {
+    commonAds = commonAds.filter((ad) => ad.prop_offer === propOfferFilter)
+  }
+  //по типу отопления
+  if (propHeatingFilter !== '') {
+    commonAds = commonAds.filter((ad) => ad.prop_heating === propHeatingFilter)
+  }
+
+  //по типу здания
+  if (propBuildingFilter !== "") {
+    commonAds = commonAds.filter((ad) => ad.prop_building === propBuildingFilter)
+  }
+
+  //по высоте потолков
+  if (propCeilingHeightFilter !== "") {
+    commonAds = commonAds.filter((ad) => Math.floor(ad.ceiling_height) <= Math.floor(propCeilingHeightFilter))
+  }
   //по области
   if (propRegionFilter) {
     commonAds = commonAds.filter((ad) => ad.prop_region === propRegionFilter)
   }
 
+  //по городу
+  if (propCityFilter) {
+    commonAds = commonAds.filter((ad) => ad.prop_city === propCityFilter)
+  }
+  //по району
+  if (propDistrictFilter) {
+    commonAds = commonAds.filter((ad) => ad.prop_district === propDistrictFilter)
+  }
+  //по цене от
+  if (priceFromFilter !== "") {
+    commonAds = commonAds.filter((ad) => Math.floor(ad.price) >= Math.floor(priceFromFilter))
+  }
+  //по цене до
+  if (priceToFilter !== "") {
+    commonAds = commonAds.filter((ad) => Math.floor(ad.price) <= Math.floor(priceToFilter))
+  }
+
+  //по удобствам
+  if (featuresArr !== false) {
+    var keys = [];
+    for (var key in featuresArr) {
+      keys.push(key)
+    }
+    commonAds = commonAds.filter((ad) => ad.prop_features)
+    commonAds = commonAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
+  }
+
+  //по типу сделки
+  if (typeTransaction !== false) {
+    var keys = [];
+    for (var key in typeTransaction) {
+      keys.push(key)
+    }
+    commonAds = commonAds.filter((ad) => ad.prop_features_add)
+    commonAds = commonAds.filter(item => item.prop_features_add.some(i => (keys).includes(i)))
+  }
 
   // по цене
   sort_price === 'low-price' ? commonAds = commonAds.sort((prev, next) => prev.price - next.price) : commonAds = commonAds.sort((prev, next) => next.price - prev.price);
@@ -80,7 +159,7 @@ const CommonAds = ({
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = commonAds.slice(indexOfFirstAd, indexOfLastAd);
 
-
+  console.log(propRegionFilter)
 
 
   return (
@@ -90,12 +169,26 @@ const CommonAds = ({
         <div className="container" >
           <div className="common-section__wrapper" >
             <AsideFilters
+              idFilter={idFilter}
               typeFilter={typeFilter}
               priceFrom={priceFromFilter}
               priceTo={priceToFilter}
               match={match}
               statusFilter={statusFilter}
+              // regionFilter={propRegionFilter}
+              features={featuresArr}
+              transaction={typeTransaction}
+
+              wallsFilter={propWallsFilter}
+              heatingFilter={propHeatingFilter}
+              ceilingHeightFilter={propCeilingHeightFilter}
+              buildingFilter={propBuildingFilter}
+              offerFilter={propOfferFilter}
+              roomFilter={roomsFilter}
+              floorFilter={floorFilter}
+              totalAreaFilter={totalAreaFilter}
             />
+            {console.log(propRegionFilter)}
             <div className="common-section__block" >
 
               {isLoading && (<div className="loader-wrapper" >
@@ -103,7 +196,7 @@ const CommonAds = ({
               }
               {isLoaded && < TopFilters match={match} totalAdsCommon={commonAds.length} />}
               {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_date} />}
-              { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
+              { /* {isLoaded && <List ads={commonAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {(commonAds.length > 9) && < PaginationCommon totalItems={commonAds.length} />}
               < About title="Продажа жилья в Украине" >
                 <p className="about__text" >
@@ -181,6 +274,7 @@ const mapStateToProps = (state) => ({
 
 
   idFilter: state.filterReducer.idFilter,
+  typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
   cityFilter: state.filterReducer.cityFilter,
   totalAreaFilter: state.filterReducer.totalAreaFilter,

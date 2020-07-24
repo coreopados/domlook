@@ -184,9 +184,6 @@ const SalePage = ({
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  console.log(currentPageSale)
-
-
   return (
     <main className="common-main" >
       <Navigation pageName="Продажа" />

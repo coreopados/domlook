@@ -14,19 +14,21 @@ import {
 
 
 const NewsHeadingsFilters = ({
-  filterCategoryNewsFunc
+  filterCategoryNewsFunc,
+  paginateNews
 }) => {
 
   const [selectedOption, setselectedOption] = useState("")
 
   filterCategoryNewsFunc(selectedOption);
+  const number = 1
 
   return (
     <div className="heading-filters">
       <h3>Рубрики</h3>
       <ul >
         {categories.map((item, index) => {
-          return <li className={clsx((selectedOption === item.name) && 'active')} onClick={e => { setselectedOption(item.name) }}
+          return <li className={clsx((selectedOption === item.name) && 'active')} onClick={e => (setselectedOption(item.name), paginateNews(number))}
             key={index}
           >
             {item.name}
@@ -34,7 +36,7 @@ const NewsHeadingsFilters = ({
 
         })}
       </ul>
-    </div>
+    </div >
   );
 };
 
@@ -45,7 +47,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   filterCategoryNewsFunc: (selectedOption) => dispatch(filterCategoryNewsCreator(selectedOption)),
-  paginateNews: () => dispatch(paginateNewsCreator()),
+  paginateNews: (number) => dispatch(paginateNewsCreator(number)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(NewsHeadingsFilters);

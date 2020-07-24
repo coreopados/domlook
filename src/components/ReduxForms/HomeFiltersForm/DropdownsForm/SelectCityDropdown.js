@@ -45,8 +45,8 @@ const SelectCityDropdown = ({
                 value={selectedOption}
                 onChange={e => setSelectedOption(e.target.value)}>
                 <option value="">Выберите город</option>
-                {obj.map((o) => (
-                    <option value={o.name} key={o.id}>{o.name}</option>
+                {obj.map((o, index) => (
+                    <option value={o.name} key={index}>{o.name}</option>
                 ))}
             </select>
         );
