@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import './AdsGrid.scss';
 import { VerticalCard } from '../../Cards/VerticalCard/VerticalCard';
 
-export const AdsGrid = ({ ads, match, sortPrice }) => {
-
-  // sortPrice === 'low-price' ? ads = ads.sort((prev, next) => prev.price - next.price) : ads = ads.sort((prev, next) => next.price - prev.price);
+export const AdsGrid = ({ ads, match }) => {
 
   return (
     <div className="ads-grid">

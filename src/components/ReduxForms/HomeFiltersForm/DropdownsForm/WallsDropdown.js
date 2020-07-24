@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const WallsDropdown = ({
-    propWallsFilterFunc
+    propWallsFilterFunc,
+    wallsFilter
 }) => {
 
     const rooms_options = [
@@ -18,7 +19,7 @@ const WallsDropdown = ({
         { id: 7, value: 'кирпич', label: 'кирпич' },
         { id: 8, value: 'бутовый камень', label: 'бутовый камень' },
     ];
-    const [selectedOption, setSelectedOption] = useState(rooms_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(wallsFilter);
 
     propWallsFilterFunc(selectedOption)
     return (

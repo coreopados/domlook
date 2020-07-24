@@ -4,13 +4,12 @@ import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
-import About from "../CommonParts/About/About";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationDailyRent } from "../CommonParts/Pagination/PaginationDailyRentPage";
 import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
-
+import About from "../CommonParts/About/About";
 const DailyRentPage = ({
   ads,
   isLoaded,
@@ -165,6 +164,7 @@ const DailyRentPage = ({
   //фильтр цен по низкой/по высокой
   sort_price === 'low-price' ? dailyRentAds = dailyRentAds.sort((prev, next) => prev.price - next.price) : dailyRentAds = dailyRentAds.sort((prev, next) => next.price - prev.price);
 
+
   //фильтр по дате 0/7/30
   const lastMonth = new Date().getTime() - 86400000 * 30;
   const lastWeek = new Date().getTime() - 86400000 * 7;
@@ -179,9 +179,12 @@ const DailyRentPage = ({
     dailyRentAds = dailyRentAds.filter((ad) => Date.parse(ad.post_date) >= today)
   }
 
+
   const indexOfLastAd = currentPageDailyRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = dailyRentAds.slice(indexOfFirstAd, indexOfLastAd);
+
+  console.log(currentPageDailyRent)
 
 
 
@@ -201,6 +204,15 @@ const DailyRentPage = ({
               regionFilter={propRegionFilter}
               features={featuresArr}
               transaction={typeTransaction}
+
+              wallsFilter={propWallsFilter}
+              heatingFilter={propHeatingFilter}
+              ceilingHeightFilter={propCeilingHeightFilter}
+              buildingFilter={propBuildingFilter}
+              offerFilter={propOfferFilter}
+              roomFilter={roomsFilter}
+              floorFilter={floorFilter}
+              totalAreaFilter={totalAreaFilter}
             />
             <div className="common-section__block">
 
@@ -290,8 +302,7 @@ const mapStateToProps = (state) => ({
   sort_price: state.filterReducer.sort_price,
   sort_date: state.filterReducer.sort_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
-  currentPageSale: state.paginationReducer.currentPageSale,
-
+  currentPageDailyRent: state.paginationReducer.currentPageDailyRent,
   idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
@@ -312,7 +323,6 @@ const mapStateToProps = (state) => ({
   featuresArr: state.filterReducer.featuresArr,
   typeTransaction: state.filterReducer.typeTransaction,
 });
-
 
 const Enhanced = connect(mapStateToProps, null)(DailyRentPage);
 

@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -47,6 +47,7 @@ const SalePage = ({
 
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
+
 
 
   //по id
@@ -164,8 +165,6 @@ const SalePage = ({
   sort_price === 'low-price' ? saleAds = saleAds.sort((prev, next) => prev.price - next.price) : saleAds = saleAds.sort((prev, next) => next.price - prev.price);
 
 
-
-
   //фильтр по дате 0/7/30
   const lastMonth = new Date().getTime() - 86400000 * 30;
   const lastWeek = new Date().getTime() - 86400000 * 7;
@@ -180,11 +179,12 @@ const SalePage = ({
     saleAds = saleAds.filter((ad) => Date.parse(ad.post_date) >= today)
   }
 
+
   const indexOfLastAd = currentPageSale * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
-
+  console.log(currentPageSale)
 
 
   return (
@@ -200,16 +200,27 @@ const SalePage = ({
               match={match}
               statusFilter={statusFilter}
               regionFilter={propRegionFilter}
+              cityFilter={propCityFilter}
+              districtFilter={propDistrictFilter}
               features={featuresArr}
               transaction={typeTransaction}
+
+              wallsFilter={propWallsFilter}
+              heatingFilter={propHeatingFilter}
+              ceilingHeightFilter={propCeilingHeightFilter}
+              buildingFilter={propBuildingFilter}
+              offerFilter={propOfferFilter}
+              roomFilter={roomsFilter}
+              floorFilter={floorFilter}
+              totalAreaFilter={totalAreaFilter}
             />
             <div className="common-section__block" >
 
               {isLoading && (<div className="loader-wrapper" >
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
-              {isLoaded && < TopFilters match={match} totalAdsSale={saleAds.length} />}
-              {isLoaded && < List statusFilter={statusFilter} typeFilter={typeFilter} ads={currentAds} match={match} sortPrice={sort_price} />}
+              < TopFilters match={match} totalAdsSale={saleAds.length} />
+              < List ads={currentAds} match={match} />
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {(saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} />}
               < About title="Продажа жилья в Украине" >
@@ -283,10 +294,8 @@ const mapStateToProps = (state) => ({
   orientation: state.mainReducer.orientation,
   sort_price: state.filterReducer.sort_price,
   sort_date: state.filterReducer.sort_date,
-  // sort_by_date: state.filterByDateReducer.sort_by_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageSale: state.paginationReducer.currentPageSale,
-
   idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
@@ -306,6 +315,7 @@ const mapStateToProps = (state) => ({
   priceToFilter: state.filterReducer.priceToFilter,
   featuresArr: state.filterReducer.featuresArr,
   typeTransaction: state.filterReducer.typeTransaction,
+
 });
 
 // const mapDispatchToProps = (dispatch) => ({

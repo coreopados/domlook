@@ -9,7 +9,7 @@ import {
   SET_FAVOURITES,
   SET_ABOUT_TEXT,
   SET_NEWS,
-
+  USER_ID
 } from './constants';
 
 const initialState = {
@@ -20,12 +20,24 @@ const initialState = {
   favourites: [],
   showAllAbout: false,
   news: [],
+  userId: '',
 };
 
 
 
 export const mainReducer = (state = initialState, action) => {
+
+  // console.log(state)
+
   switch (action.type) {
+    // user id
+    case USER_ID:
+      return {
+        ...state,
+        userId: action.payload,
+      };
+
+
     case SET_ADS:
       return {
         ...state,

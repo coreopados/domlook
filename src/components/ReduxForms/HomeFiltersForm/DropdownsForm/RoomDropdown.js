@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const RoomDropdown = ({
-    roomFilterFunc
+    roomFilterFunc,
+    roomFilter
 }) => {
 
     const rooms_options = [
@@ -17,7 +18,7 @@ const RoomDropdown = ({
         { id: 6, value: '5', label: '5' },
         { id: 7, value: '6', label: '6' },
     ];
-    const [selectedOption, setSelectedOption] = useState(rooms_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(roomFilter);
 
     roomFilterFunc(selectedOption)
     return (

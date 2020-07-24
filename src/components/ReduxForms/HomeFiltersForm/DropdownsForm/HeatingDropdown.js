@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const HeatingDropdown = ({
-    heatingFilterFunc
+    heatingFilterFunc,
+    heatingFilter
 }) => {
 
     const heating_options = [
@@ -14,7 +15,7 @@ const HeatingDropdown = ({
         { id: 3, value: 'индивидуальное', label: 'индивидуальное' },
         { id: 4, value: 'автономное', label: 'автономное' },
     ];
-    const [selectedOption, setSelectedOption] = useState(heating_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(heatingFilter);
 
     heatingFilterFunc(selectedOption)
     return (

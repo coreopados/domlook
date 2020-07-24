@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const BuildingDropdown = ({
-    propBuildingFilterFunc
+    propBuildingFilterFunc,
+    buildingFilter
 }) => {
 
     const build_options = [
@@ -14,7 +15,7 @@ const BuildingDropdown = ({
         { id: 3, value: 'Хрущевка', label: 'Хрущевка' },
         { id: 4, value: 'Сталинка', label: 'Сталинка' },
     ];
-    const [selectedOption, setSelectedOption] = useState(build_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(buildingFilter);
 
     propBuildingFilterFunc(selectedOption)
 
@@ -29,14 +30,14 @@ const BuildingDropdown = ({
     );
 }
 
-const mapStateToProps = (state) => ({
-    buildingFilter: state.filterReducer.buildingFilter,
-})
+// const mapStateToProps = (state) => ({
+//     buildingFilter: state.filterReducer.buildingFilter,
+// })
 
 const mapDispatchToProps = (dispatch) => ({
     propBuildingFilterFunc: (selectedOption) => dispatch(propBuildingFilterCreator(selectedOption)),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(BuildingDropdown);
+const Enhanced = connect(null, mapDispatchToProps)(BuildingDropdown);
 
 export { Enhanced as BuildingDropdown };

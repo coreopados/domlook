@@ -19,6 +19,8 @@ import { ErrorPage } from './components/ErrorPage/ErrorPage';
 import Footer from './components/Footer/Footer';
 import { DetailsPage } from './components/DetailsPage/DetailsPage';
 import { Favourites } from './components/Favourites/Favourites';
+import { ListRielters } from './components/RieltersPage/ListRielters';
+import { User } from './components/UserPage/User';
 import { NewsDetailsPage } from './components/NewsPage/NewsDetailsPage/NewsDetailsPage';
 import { handleLoadAds } from "./redux/actionCreators";
 
@@ -39,6 +41,8 @@ function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm }) {
         <Route path="/dailyRent" exact component={DailyRentPage} />
         <Route path="/news" exact component={NewsPage} />
         <Route path="/favourites" exact component={Favourites} />
+        <Route path="/rielters" exact component={ListRielters} />
+        <Route path="/user/:id" exact component={User} />
         <Route path="/advertisement" exact component={CommonAds} />
         <Route path="/advertisement/:id" exact component={DetailsPage} />
         <Route path="/news/:id" exact component={NewsDetailsPage} />
@@ -47,6 +51,7 @@ function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm }) {
         <Route path="/dailyRent/:id" component={DetailsPage} />
         <Route path="/favourites/:id" component={DetailsPage} />
         <Route path="/:id" component={DetailsPage} />
+
         <Route path="/404" component={ErrorPage} />
         <Redirect from="*" to="/404" />
       </Switch>

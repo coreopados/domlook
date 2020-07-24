@@ -15,7 +15,7 @@ const StatusDropdown = ({
         { id: 0, value: '', label: 'Не выбрано' },
         { id: 1, value: 'rent', label: 'Аренда' },
         { id: 2, value: 'sale', label: 'Продажа' },
-        { id: 3, value: 'dailyRent', label: 'Посуточно' }
+        { id: 3, value: 'dailyrent', label: 'Посуточно' }
     ];
 
     statusFilterFunc(selectedOption)

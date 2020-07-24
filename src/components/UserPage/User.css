@@ -1,0 +1,29 @@
+.back-button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.back-button hr{
+
+    border:0;
+    height: 1px;
+    width: calc(100% - 70px);
+    background:#ccc;
+    margin: 0;
+}
+
+.table-user{
+    margin-left: 40px;
+    
+}
+
+.table-user h3{
+    font-size: 18px;
+    font-weight: 700;
+    color: #394041;
+    padding-top: 20px;
+}
+.table-user .table-row{
+    margin-bottom: 15px;
+}

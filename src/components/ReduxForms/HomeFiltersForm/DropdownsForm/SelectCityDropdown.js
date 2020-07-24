@@ -8,9 +8,10 @@ import { regions } from '../../../../api/testCities.json'
 const SelectCityDropdown = ({
     propCityFilterFunc,
     propRegionFilter,
+    cityFilter
 }) => {
 
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption] = useState(cityFilter);
     const region = regions.region.filter((reg) => reg.name === propRegionFilter)
     const cities = region.map((city) => city.cities)
 
@@ -20,9 +21,15 @@ const SelectCityDropdown = ({
         obj = cities[i];
     }
 
-    propCityFilterFunc(selectedOption)
+    if (propRegionFilter !== '') {
+        propCityFilterFunc(selectedOption)
+    } else {
+        propCityFilterFunc('')
+    }
 
-    if (propRegionFilter === "Не выбрано" || !propRegionFilter) {
+
+
+    if (propRegionFilter === "" || !propRegionFilter) {
 
         return (
             <select name="select-city-filter" id="select-city-filter"

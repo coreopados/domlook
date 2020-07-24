@@ -205,6 +205,15 @@ const RentPage = ({
                 regionFilter={propRegionFilter}
                 features={featuresArr}
                 transaction={typeTransaction}
+
+                wallsFilter={propWallsFilter}
+                heatingFilter={propHeatingFilter}
+                ceilingHeightFilter={propCeilingHeightFilter}
+                buildingFilter={propBuildingFilter}
+                offerFilter={propOfferFilter}
+                roomFilter={roomsFilter}
+                floorFilter={floorFilter}
+                totalAreaFilter={totalAreaFilter}
               />
             )}
             {/* {console.log(statusFilter, typeFilter, propRegionFilter)} */}

@@ -26,12 +26,19 @@ import {
   ACTIVE_TOP_FILTER_DATE,
   FILTER_CATEGORY_NEWS,
   ACTIVE_CATEGORY_NEWS,
-  IS_LOGGED
+  IS_LOGGED,
+  USER_ID
 
 } from './constants';
 // import { loadAds } from '../api/loadAds';
 import adsData from '../api/testData.json';
 import newsData from '../api/testNewsData.json';
+
+
+export const UserIdCreator = id => ({
+  type: USER_ID,
+  payload: id,
+});
 
 export const setAdsCreator = ads => ({
   type: SET_ADS,

@@ -35,7 +35,16 @@ const HomePage = ({
   featuresArr,
   propRegionFilter,
   setFavourites,
-  typeTransaction
+  typeTransaction,
+
+  totalAreaFilter,
+  propWallsFilter,
+  floorFilter,
+  roomsFilter,
+  propOfferFilter,
+  propHeatingFilter,
+  propBuildingFilter,
+  propCeilingHeightFilter
 }) => {
   useEffect(() => {
     loadData();
@@ -77,6 +86,15 @@ const HomePage = ({
         regionFilter={propRegionFilter}
         features={featuresArr}
         typeTransaction={typeTransaction}
+
+        wallsFilter={propWallsFilter}
+        floorFilter={floorFilter}
+        roomsFilter={roomsFilter}
+        offerFilter={propOfferFilter}
+        heatingFilter={propHeatingFilter}
+        buildingFilter={propBuildingFilter}
+        ceilingHeightFilter={propCeilingHeightFilter}
+        totalAreaFilter={totalAreaFilter}
       />
       <HomePageCities />
       {isLoading && (
@@ -217,6 +235,15 @@ const mapStateToProps = (state) => ({
   featuresArr: state.filterReducer.featuresArr,
   typeTransaction: state.filterReducer.typeTransaction,
 
+
+  totalAreaFilter: state.filterReducer.totalAreaFilter,
+  floorFilter: state.filterReducer.floorFilter,
+  roomsFilter: state.filterReducer.roomsFilter,
+  propWallsFilter: state.filterReducer.propWallsFilter,
+  propOfferFilter: state.filterReducer.propOfferFilter,
+  propHeatingFilter: state.filterReducer.propHeatingFilter,
+  propBuildingFilter: state.filterReducer.propBuildingFilter,
+  propCeilingHeightFilter: state.filterReducer.propCeilingHeightFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

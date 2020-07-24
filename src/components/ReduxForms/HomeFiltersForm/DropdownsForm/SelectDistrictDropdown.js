@@ -9,6 +9,7 @@ const SelectDistrictDropdown = ({
     propDistrictFilterFunc,
     propCityFilter,
     propRegionFilter,
+    districtFilter
 }) => {
 
     const region = regions.region.filter((reg) => reg.name === propRegionFilter)
@@ -27,16 +28,22 @@ const SelectDistrictDropdown = ({
         districts = chengeddistricts[j];
     }
 
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption] = useState(districtFilter);
 
-    propDistrictFilterFunc(selectedOption)
 
-    if (propCityFilter === "Не выбрано" || !propCityFilter) {
+    if (propRegionFilter !== '' && propCityFilter !== '') {
+        propDistrictFilterFunc(selectedOption)
+    } else {
+        propDistrictFilterFunc('')
+    }
+
+
+    if (propCityFilter === "" || !propCityFilter) {
         return (
             <select name="select-district-filter" id="select-district-filter"
-                value={"Выберите город"}
+                value={""}
                 onChange={e => setSelectedOption(e.target.value)}>
-                <option value='Выберите город' >Выберите район</option>
+                <option value='' >Выберите район</option>
             </select>
         );
     } else {
@@ -44,7 +51,7 @@ const SelectDistrictDropdown = ({
             <select name="select-district-filter" id="select-district-filter"
                 value={selectedOption}
                 onChange={e => setSelectedOption(e.target.value)}>
-                <option value="Выберите район">Выберите район</option>
+                <option value="">Выберите район</option>
                 {districts.map((o, index) => (
                     <option value={o.name} key={index}>{o.name}</option>
                 ))}

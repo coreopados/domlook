@@ -16,6 +16,9 @@ export const initialState = {
 };
 
 export const paginationReducer = (state = initialState, action) => {
+
+    // console.log(state)
+
     switch (action.type) {
         //пагинация
         case PAGINATE_SALE:

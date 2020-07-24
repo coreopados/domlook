@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const TotalAreaDropdown = ({
-    totalAreaFunc
+    totalAreaFunc,
+    totalAreaFilter
 }) => {
 
     const area_options = [
@@ -15,7 +16,7 @@ const TotalAreaDropdown = ({
         { id: 4, value: '65', label: 'от 65м' },
         { id: 5, value: '100', label: 'от 100м' },
     ];
-    const [selectedOption, setSelectedOption] = useState(area_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(totalAreaFilter);
 
     totalAreaFunc(selectedOption)
     return (

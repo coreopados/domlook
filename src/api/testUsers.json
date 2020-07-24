@@ -7,7 +7,9 @@
             "avatar": "",
             "city": "",
             "phone": "+ 380993332215",
-            "email": ""
+            "email": "test23946@bk.ru",
+            "messages": 0,
+            "date_reg": "2018-07-24"
         },
         {
             "id": 2,
@@ -16,7 +18,9 @@
             "avatar": "",
             "city": "",
             "phone": "+ 380993332215",
-            "email": ""
+            "email": "test23946@bk.ru",
+            "messages": 0,
+            "date_reg": "2018-07-24"
         },
         {
             "id": 3,
@@ -25,7 +29,9 @@
             "avatar": "",
             "city": "",
             "phone": "+ 380993332215",
-            "email": ""
+            "email": "test23946@bk.ru",
+            "messages": 0,
+            "date_reg": "2018-07-24"
         },
         {
             "id": 4,
@@ -34,7 +40,9 @@
             "avatar": "",
             "city": "",
             "phone": "+ 380993332215",
-            "email": ""
+            "email": "test23946@bk.ru",
+            "messages": 0,
+            "date_reg": "2018-07-24"
         },
         {
             "id": 5,
@@ -43,7 +51,9 @@
             "avatar": "",
             "city": "",
             "phone": "+ 380993332215",
-            "email": ""
+            "email": "test23946@bk.ru",
+            "messages": 0,
+            "date_reg": "2018-07-24"
         },
         {
             "id": 6,
@@ -52,7 +62,9 @@
             "avatar": "",
             "city": "",
             "phone": "+ 380993332215",
-            "email": ""
+            "email": "test23946@bk.ru",
+            "messages": 0,
+            "date_reg": "2018-07-24"
         }
     ]
 }

@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const CeilingHeightDropdown = ({
-    propCeilingHeightFilterFunc
+    propCeilingHeightFilterFunc,
+    ceilingHeightFilter
 }) => {
 
     const ceiling_height_options = [
@@ -16,7 +17,7 @@ const CeilingHeightDropdown = ({
         { id: 5, value: '3.2', label: 'до 3.2' },
         { id: 6, value: '3.4', label: 'до 3.4' },
     ];
-    const [selectedOption, setSelectedOption] = useState(ceiling_height_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(ceilingHeightFilter);
 
     propCeilingHeightFilterFunc(selectedOption)
 

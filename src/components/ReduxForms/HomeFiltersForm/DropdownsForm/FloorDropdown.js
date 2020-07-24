@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const FloorDropdown = ({
-    floorFilterFunc
+    floorFilterFunc,
+    floorFilter
 }) => {
 
     const floor_options = [
@@ -15,7 +16,7 @@ const FloorDropdown = ({
         { id: 4, value: '17', label: 'до 17 эт.' },
         { id: 5, value: '25', label: 'до 25 эт.' },
     ];
-    const [selectedOption, setSelectedOption] = useState(floor_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(floorFilter);
 
     floorFilterFunc(selectedOption)
     return (

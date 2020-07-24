@@ -5,7 +5,8 @@ import {
 } from '../../../../redux/actionHomeFilterCreators';
 
 const OfferDropdown = ({
-    propOfferFilterFunc
+    propOfferFilterFunc,
+    offerFilter
 }) => {
 
     const offer_options = [
@@ -16,7 +17,7 @@ const OfferDropdown = ({
         { id: 5, value: 'от посредника', label: 'от посредника' },
         { id: 6, value: 'от застройщика', label: 'от застройщика' },
     ];
-    const [selectedOption, setSelectedOption] = useState(offer_options[0].value);
+    const [selectedOption, setSelectedOption] = useState(offerFilter);
 
     propOfferFilterFunc(selectedOption)
     return (

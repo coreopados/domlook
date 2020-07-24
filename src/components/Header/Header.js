@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import {
-  NavLink,
+  NavLink
 } from 'react-router-dom';
 
 import { filterCategoryNewsCreator, activeMainFormCreator, activeRegFormCreator, handleLoadNewsAds, } from "../../redux/actionCreators";
@@ -79,19 +79,19 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
           {isLoggedd === true &&
             <div className="header-top-section">
               <div className="header-top-section__wrapper-logged">
-                {/* <NavLink
-                  to="/"
+                <NavLink
+                  to="/rielters"
                   className="header-top-section__link"
-                > */}
-                <button
-                  type="button"
-                  className="header-top-section__button header-top-section__button--spriel "
                 >
-                  {/* <i class="fa fa-user"></i> */}
+                  <button
+                    type="button"
+                    className="header-top-section__button header-top-section__button--spriel "
+                  >
+                    {/* <i class="fa fa-user"></i> */}
                   Список риелтеров
                   </button>
-                {/* </NavLink>
-                <NavLink> */}
+                </NavLink>
+                {/* <NavLink> */}
                 <button
 
                   type="button"
@@ -182,7 +182,7 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                     // to={`${process.env.PUBLIC_URL}/sale`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  > <button onClick={resetFilters}>Продажа</button>
+                  > <button onClick={() => resetFilters()}>Продажа</button>
                   </NavLink>
 
                 </li>
@@ -202,7 +202,7 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                     // to={`${process.env.PUBLIC_URL}/dailyRent`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  ><button onClick={resetFilters}> Посуточно</button>
+                  ><button onClick={() => resetFilters()}>Посуточно</button>
 
                   </NavLink>
                 </li>
@@ -212,7 +212,7 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                     // to={`${process.env.PUBLIC_URL}/news`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                    onClick={resetFilters}
+                    onClick={() => resetFilters()}
                   >
                     Новости рынка
                 </NavLink>

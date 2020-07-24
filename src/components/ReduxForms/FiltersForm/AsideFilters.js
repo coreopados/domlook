@@ -30,9 +30,20 @@ const AsideFilters = ({
   priceFrom,
   priceTo,
   regionFilter,
+  cityFilter,
+  districtFilter,
   features,
   transaction,
-  idFilter
+  idFilter,
+
+  wallsFilter,
+  heatingFilter,
+  ceilingHeightFilter,
+  buildingFilter,
+  offerFilter,
+  roomFilter,
+  floorFilter,
+  totalAreaFilter
 }) => {
 
   const [filterById, setFilterById] = useState(false)
@@ -51,6 +62,7 @@ const AsideFilters = ({
               <div className="status-filter-select">
 
                 <StatusDropdown
+                
                   match={match}
                   statusFilter={statusFilter}
                 />
@@ -96,7 +108,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="city-filter">
               Город
-              <SelectCityDropdown />
+              <SelectCityDropdown cityFilter={cityFilter} />
             </label>
           </div>
 
@@ -104,7 +116,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="select-city-filter">
               Район
-              <SelectDistrictDropdown />
+              <SelectDistrictDropdown districtFilter={districtFilter} />
             </label>
           </div>
         </div>
@@ -114,7 +126,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="wall-filter">
               Тип стен
-                {isLoaded && <WallsDropdown />}
+                {isLoaded && <WallsDropdown wallsFilter={wallsFilter}/>}
             </label>
           </div>
 
@@ -122,7 +134,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="offer-filter">
               Тип предложения
-              {isLoaded && <OfferDropdown />}
+              {isLoaded && <OfferDropdown offerFilter={offerFilter}/>}
             </label>
           </div>
 
@@ -130,7 +142,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="total-area-filter">
               Общая площадь
-              {isLoaded && <TotalAreaDropdown />}
+              {isLoaded && <TotalAreaDropdown totalAreaFilter={totalAreaFilter}/>}
             </label>
           </div>
 
@@ -138,7 +150,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="heating-filter">
               Тип отопления
-              {isLoaded && <HeatingDropdown />}
+              {isLoaded && <HeatingDropdown heatingFilter={heatingFilter}/>}
             </label>
           </div>
 
@@ -146,7 +158,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="">
               Этаж
-              {isLoaded && <FloorDropdown />}
+              {isLoaded && <FloorDropdown floorFilter={floorFilter}/>}
             </label>
           </div>
 
@@ -154,7 +166,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="building-filter">
               Тип здания
-            {isLoaded && <BuildingDropdown />}
+            {isLoaded && <BuildingDropdown buildingFilter={buildingFilter}/>}
             </label>
           </div>
 
@@ -162,7 +174,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="ceiling-height-filter">
               Высота потолков
-            {isLoaded && <CeilingHeightDropdown />}
+            {isLoaded && <CeilingHeightDropdown ceilingHeightFilter={ceilingHeightFilter}/>}
             </label>
           </div>
 
@@ -170,7 +182,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="rooms-filter">
               Комнат
-              <RoomDropdown />
+              <RoomDropdown roomFilter={roomFilter}/>
             </label>
           </div>
         </div>

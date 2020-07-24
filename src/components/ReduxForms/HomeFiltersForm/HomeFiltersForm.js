@@ -31,7 +31,15 @@ const HomeFiltersForm = ({
   features,
   typeTransaction,
   isLoaded,
-  match
+  match,
+  wallsFilter,
+  floorFilter,
+  roomsFilter,
+  offerFilter,
+  heatingFilter,
+  buildingFilter,
+  ceilingHeightFilter,
+  totalAreaFilter
 }) => {
 
   const [count, setStatusAddInfo] = useState(false)
@@ -91,7 +99,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="wall-filter">
                 Тип стен
-                {isLoaded && <WallsDropdown />}
+                {isLoaded && <WallsDropdown wallsFilter={wallsFilter} />}
               </label>
             </div>
 
@@ -99,7 +107,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="offer-filter">
                 Тип предложения
-              {isLoaded && <OfferDropdown />}
+              {isLoaded && <OfferDropdown offerFilter={offerFilter} />}
               </label>
             </div>
 
@@ -107,7 +115,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="total-area-filter">
                 Общая площадь
-              {isLoaded && <TotalAreaDropdown />}
+              {isLoaded && <TotalAreaDropdown totalAreaFilter={totalAreaFilter} />}
               </label>
             </div>
 
@@ -115,7 +123,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="heating-filter">
                 Тип отопления
-              {isLoaded && <HeatingDropdown />}
+              {isLoaded && <HeatingDropdown heatingFilter={heatingFilter} />}
               </label>
             </div>
 
@@ -123,7 +131,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="">
                 Этаж
-              {isLoaded && <FloorDropdown />}
+              {isLoaded && <FloorDropdown floorFilter={floorFilter} />}
               </label>
             </div>
 
@@ -131,7 +139,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="building-filter">
                 Тип здания
-            {isLoaded && <BuildingDropdown />}
+            {isLoaded && <BuildingDropdown buildingFilter={buildingFilter} />}
               </label>
             </div>
 
@@ -139,7 +147,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="ceiling-height-filter">
                 Высота потолков
-              {isLoaded && <CeilingHeightDropdown />}
+              {isLoaded && <CeilingHeightDropdown ceilingHeightFilter={ceilingHeightFilter} />}
               </label>
             </div>
 
@@ -147,7 +155,7 @@ const HomeFiltersForm = ({
             <div className="block">
               <label htmlFor="rooms-filter">
                 Комнат
-              <RoomDropdown />
+              <RoomDropdown roomFilter={roomsFilter} />
               </label>
             </div>
 
@@ -177,7 +185,7 @@ const HomeFiltersForm = ({
             <div className={clsx('additional-block', (count === true) && 'active')}>
               <Facilities Features={features} />
 
-              <TypeTransaction typeTransaction={typeTransaction}/>
+              <TypeTransaction typeTransaction={typeTransaction} />
             </div>
           </div>
         </div >
