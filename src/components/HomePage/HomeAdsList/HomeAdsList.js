@@ -4,20 +4,28 @@ import "./HomeAdsList.scss";
 import { Link } from "react-router-dom";
 import { VerticalCard } from "../../CommonParts/Cards/VerticalCard/VerticalCard";
 
-export const HomeAdsList = ({ ads, children, match }) => (
-  <div className="container">
-    <div className="home-ads-list">
-      {children}
-      <div className="home-ads-list__wrapper">
-        {ads.map((ad) => (
-          <Link to={`${match.path}${ad.id}`} key={ad.id}>
-            <VerticalCard key={ad.id} ad={ad} />
-          </Link>
-        ))}
+export const HomeAdsList = ({ ads, children, match, housesAdsSale, housesAdsRent, aptsAdsSale, aptsAdsRent }) => {
+
+
+  ads = ads.slice(-8)
+
+
+  return (
+    <div className="container">
+      <div className="home-ads-list">
+        {children}
+
+        <div className="home-ads-list__wrapper">
+          {ads.map((ad) => (
+            <Link to={`${match.path}${ad.id}`} key={ad.id}>
+              <VerticalCard key={ad.id} ad={ad} />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  )
+};
 
 HomeAdsList.propTypes = {
   ads: PropTypes.arrayOf(

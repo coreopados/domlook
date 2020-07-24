@@ -50,6 +50,8 @@ const HomePage = ({
     loadData();
   }, []);
 
+
+
   useEffect(() => {
     const cachedFavourites = localStorage.getItem('favourites');
 
@@ -61,15 +63,18 @@ const HomePage = ({
   const aptsAds = useMemo(
     () =>
       ads.filter(
-        (ad) => ad.prop_type === "apartment" && ad.prop_status === "sale"
+        (ad) => ad.prop_type === "apartment"
       ),
     [ads]
   );
+
+
   const housesAds = useMemo(
     () =>
-      ads.filter((ad) => ad.prop_type === "house" && ad.prop_status === "sale"),
+      ads.filter((ad) => ad.prop_type === "house"),
     [ads]
   );
+
   const homeNews = useMemo(() => news.filter((item) => item.id <= 3));
   const adsLength = ads.length
 
