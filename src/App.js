@@ -20,6 +20,7 @@ import Footer from './components/Footer/Footer';
 import { DetailsPage } from './components/DetailsPage/DetailsPage';
 import { Favourites } from './components/Favourites/Favourites';
 import { ListRielters } from './components/RieltersPage/ListRielters';
+import { ListPrivates } from './components/PrivatesPage/ListPrivates';
 import { User } from './components/UserPage/User';
 import { NewsDetailsPage } from './components/NewsPage/NewsDetailsPage/NewsDetailsPage';
 import { handleLoadAds } from "./redux/actionCreators";
@@ -42,6 +43,7 @@ function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm, prop
         <Route path="/news" exact component={NewsPage} />
         <Route path="/favourites" exact component={Favourites} />
         <Route path="/rielters" exact component={ListRielters} />
+        <Route path="/privates" exact component={ListPrivates} />
         <Route path="/user/:id" exact component={User} />
         <Route path="/advertisement" exact component={CommonAds} />
         <Route path="/advertisement/:id" exact component={DetailsPage} />

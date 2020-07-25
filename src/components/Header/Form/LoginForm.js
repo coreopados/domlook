@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import { useFormik } from 'formik';
 import { isShowLoginCreator } from '../../../redux/actionCreators'
@@ -7,7 +7,9 @@ import *as Yup from 'yup';
 
 const validationSchema = Yup.object({
     email: Yup.string().required('required'),
-    password: Yup.string().required('required')
+    password: Yup.string()
+        .required('required')
+        .min(6, 'min 6')
 })
 
 const LoginForm = ({ isopen, isLogged, setActive }) => {
@@ -51,7 +53,7 @@ const LoginForm = ({ isopen, isLogged, setActive }) => {
                         name="password"
                         placeholder="Пароль"
                     />
-                    {errors.password ? <p className="error-field">*Это поле обязательно</p> : null}
+                    {errors.password ? <p className="error-field">*введите пароль не менее 6 символов</p> : null}
                 </label>
                 <input type="submit" value="Войти" />
             </form>

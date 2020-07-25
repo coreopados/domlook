@@ -91,16 +91,20 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                   Список риелтеров
                   </button>
                 </NavLink>
-                {/* <NavLink> */}
-                <button
 
-                  type="button"
-                  className="header-top-section__button  header-top-section__button--s-ch"
+                <NavLink
+                  to="/privates"
+                  className="header-top-section__link"
                 >
-                  {/* <i class="fa fa-plus-circle"></i> */}
+                  <button
+                    type="button"
+                    className="header-top-section__button  header-top-section__button--s-ch"
+                  >
+                    {/* <i class="fa fa-plus-circle"></i> */}
                   Список частников
                   </button>
-                {/* </NavLink>*/}
+                </NavLink>
+
                 {/* <NavLink to="/"> */}
                 <button
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import './listRielters.css';
-import { usersRielters } from '../../api/testUsers.json'
+import '../RieltersPage/listRielters.css';
+import { usersPrivates } from '../../api/testUsers.json'
 import { UserIdCreator } from '../../redux/actionCreators'
 import { NavLink } from 'react-router-dom'
 
-const ListRielters = ({ setUserIdFunc }) => {
+const ListPrivates = ({ setUserIdFunc }) => {
 
     const [userId, setUserId] = useState('')
 
@@ -16,12 +16,12 @@ const ListRielters = ({ setUserIdFunc }) => {
         <main className="common-main">
             <div className="top-img-rielters">
                 <div className="container">
-                    <h1>Список Риэлторов</h1>
+                    <h1>Список частников</h1>
                 </div>
             </div>
 
             <div className="inner-container">
-                <h3>Список риэлторов</h3>
+                <h3>Список частников</h3>
 
                 <div className="table-rielters">
                     <div className="table-head">
@@ -60,7 +60,7 @@ const ListRielters = ({ setUserIdFunc }) => {
                     </div>
                     <div className="table-body">
 
-                        {usersRielters.map((elem) => {
+                        {usersPrivates.map((elem) => {
                             return <div className="table-body-row">
                                 <div className="col-wrap">
                                     <div className="table-body-col">
@@ -106,6 +106,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-const Enhanced = connect(null, mapDispatchToProps)(ListRielters);
+const Enhanced = connect(null, mapDispatchToProps)(ListPrivates);
 
-export { Enhanced as ListRielters };
+export { Enhanced as ListPrivates };
