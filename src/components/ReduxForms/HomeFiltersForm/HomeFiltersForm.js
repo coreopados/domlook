@@ -183,8 +183,10 @@ const HomeFiltersForm = ({
             <button onClick={() => setStatusAddInfo(!count)}><i className={count ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o'}></i>Дополнительные параметры</button>
 
             <div className={clsx('additional-block', (count === true) && 'active')}>
+              {/* фильтр удобства */}
               <Facilities Features={features} />
-
+              
+              {/* фильтр тип предложения */}
               <TypeTransaction typeTransaction={typeTransaction} />
             </div>
           </div>

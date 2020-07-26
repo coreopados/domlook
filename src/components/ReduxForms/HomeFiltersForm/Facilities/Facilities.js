@@ -46,7 +46,7 @@ const Facilities = ({
                             id={"" + fac.name + ""}
                             value={"" + fac.name + ""}
                             onChange={handler}
-                            checked={Features[fac.name]}
+                        // checked={Features[fac.name]}
                         />
                         <label htmlFor={"" + fac.name + ""}>{fac.name}</label>
                     </span>

@@ -27,6 +27,7 @@ import {
   FILTER_CATEGORY_NEWS,
   ACTIVE_CATEGORY_NEWS,
   IS_LOGGED,
+  IS_LOGGED_IN,
   USER_ID
 
 } from './constants';
@@ -172,6 +173,13 @@ export const isShowLoginCreator = logged => ({
   type: IS_LOGGED,
   payload: logged,
 });
+
+export const setLoginStatusCreator = status => ({
+  type: IS_LOGGED_IN,
+  payload: status,
+});
+
+
 // export const handleLoad = () => {
 //   return (dispatch) => {
 //     dispatch(startLoadingCreator());

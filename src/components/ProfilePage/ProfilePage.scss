@@ -1,0 +1,114 @@
+.profile-info .wrap-form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap:20px;
+    label{
+        display: flex;
+        flex-direction: column;
+        color: #394041;
+        font-size: 14px;
+        font-weight: 700;
+        input{
+            box-shadow: inset 0 0 2px #e9e9e9;
+            border: 1px solid #cdcdcd;
+            height: 24px;
+            color: #394041;
+            display: inline-block;
+            padding: 4px 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            height: 50px;
+            margin-top: 5px;
+        }
+        input[type='file']{
+            padding-top: 5px;
+        }
+        input[type='file']::-webkit-file-upload-button{
+            -webkit-appearance: none;
+            border: 0;
+            color:#fff;
+            background: none;
+
+        }
+        #remove-ava,
+        input[type='file']{
+            width: 130px;
+            display: inline-block;
+            height: 30px!important;
+            border: 0!important;
+            box-shadow:none!important;
+            cursor:pointer;
+            
+            font-weight: normal;
+        }
+        input[type='file']:focus{
+            outline:none
+        }
+    }
+
+    .avatar{
+        display: flex;margin-bottom: 20px;
+        label{
+            position: relative;
+        }
+        .img-wrap{
+            margin-right: 30px;
+            border: 4px solid #dedede;
+            img{
+                height: 100%;
+            }
+        }
+        p{
+            font-size: 12px;
+            margin-top: 20px;
+            max-width: 280px;
+            line-height: 1.5;
+        }
+    }
+    .right-part{
+        padding-top: 78px;
+    }
+    #remove-ava+i {
+        color:#fff;
+        position: absolute;
+        left: 105px;
+        top: 8px;
+    }
+    #remove-ava,
+    #add-ava{
+        background-color: #ec894d;
+        display: inline-block;
+        color:#fff;
+    }
+    #remove-ava:hover,
+    #add-ava:hover{
+        background-color: #e3712c;
+    }
+
+}   
+
+.submit-wrap{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    input[type="submit"]{
+        margin: 0 auto;
+        width: 92px;
+        background-color: #ec894d;
+        border: 0;
+        font-size: 13px;
+        height: 36px;
+        color:#fff;
+        border-radius:5px;
+        cursor:pointer;
+    }
+    p{
+        margin-top: 10px;
+        text-align: center;
+        display: none;
+    }
+    p.success{
+        display: block;
+    }
+}

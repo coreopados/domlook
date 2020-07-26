@@ -19,7 +19,7 @@ export const paginationReducer = (state = initialState, action) => {
 
 
 
-    console.log(state)
+    // console.log(state)
 
     switch (action.type) {
         //пагинация

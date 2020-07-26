@@ -39,6 +39,7 @@ import {
     ACTIVE_REG_FORM,
 
     IS_LOGGED,
+    IS_LOGGED_IN,
 
     RESET_FILTERS
 } from './constants';
@@ -72,12 +73,13 @@ const initialState2 = {
     activeRegForm: 'privateReg',
     idFilter: '',
     isLogged: false,
+    isLoggedStatus: false,
     sort_price: 'low-price',
     sort_date: '',
 }
 export const filterReducer = (state = initialState2, action) => {
 
-    console.log(state)
+
 
     switch (action.type) {
 
@@ -100,6 +102,12 @@ export const filterReducer = (state = initialState2, action) => {
             return {
                 ...state,
                 isLogged: action.payload,
+            };
+        // is Login in
+        case IS_LOGGED_IN:
+            return {
+                ...state,
+                isLoggedStatus: action.payload,
             };
 
         //filter id

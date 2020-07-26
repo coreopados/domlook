@@ -22,7 +22,7 @@ const SelectRegionDropdown = ({
         propCityFilterFunc('');
         propDistrictFilterFunc('');
     }
-    console.log(selectedOption)
+
     return (
         <select name="select-region-filter" id="select-region-filter"
             value={selectedOption}
@@ -40,6 +40,8 @@ const mapDispatchToProps = (dispatch) => ({
     propRegionFilterFunc: (selectedOption) => dispatch(propRegionFilterCreator(selectedOption)),
     propCityFilterFunc: () => dispatch(propCityFilterCreator()),
     propDistrictFilterFunc: () => dispatch(propDistrictFilterCreator()),
+
+
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(SelectRegionDropdown);

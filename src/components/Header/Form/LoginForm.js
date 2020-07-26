@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { useFormik } from 'formik';
-import { isShowLoginCreator } from '../../../redux/actionCreators'
+import { isShowLoginCreator, setLoginStatusCreator } from '../../../redux/actionCreators'
 import *as Yup from 'yup';
 
 const validationSchema = Yup.object({
@@ -12,7 +12,7 @@ const validationSchema = Yup.object({
         .min(6, 'min 6')
 })
 
-const LoginForm = ({ isopen, isLogged, setActive }) => {
+const LoginForm = ({ isopen, isLogged, setLoginStatus, setActive }) => {
 
 
     const { handleSubmit, handleChange, values, errors } = useFormik({
@@ -28,6 +28,8 @@ const LoginForm = ({ isopen, isLogged, setActive }) => {
             isopen()
             // записываем true в logged
             isLogged()
+            setLoginStatus(true)
+            localStorage.setItem('login', true);
         }
     });
 
@@ -66,6 +68,7 @@ const LoginForm = ({ isopen, isLogged, setActive }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     isOpenLoginForm: isOpen => dispatch(isShowLoginCreator(isOpen)),
+    setLoginStatus: (status) => dispatch(setLoginStatusCreator(status)),
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(LoginForm);

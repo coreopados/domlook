@@ -1,0 +1,281 @@
+#ad-info .wrap-form{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap:20px;
+    label{
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        width: 100%;
+        position: relative;
+        font-weight:bold;
+        >span{
+            position: absolute;
+            top: 22px;
+            right: 0px;
+            width: 40px;
+            height: 41px;
+            line-height: 40px;
+            text-align: center;
+            background: #e0f2fd;
+            border: 1px solid #c9e8fb;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: 'Roboto';
+            font-size: 14px;
+            font-weight: 300;
+            cursor: default;
+            z-index: 1;
+        }
+        select{
+          box-shadow: inset 0 0 4px 0 #dedede;
+          -webkit-appearance: none;
+          border: 0;
+          margin-top: 5px;
+          outline:none;
+          padding-right: 30px;
+          padding-left: 6px;
+          border: 1px solid #c9e8fb;
+          height: 41px;
+          border-radius: 5px;
+          background: url('/domlook/img/home-page/bo_pole.png') no-repeat;
+          background-size: cover;
+          background-position-y: -2px;
+          background-position-x: 0px;
+          box-shadow: 0;
+          font-size: 14px;
+          color: #414141;
+          font-weight: 300;
+          font-family: 'Roboto';
+        }
+     
+          input{
+            max-width: 100%;
+            height: 41px;
+            margin-top: 5px;
+            border: 1px solid #c9e8fb;
+            font-size: 14px;
+            box-shadow: inset 0 0 4px 0 #dedede;
+            outline:none;
+            padding-left: 10px;
+            border-radius:5px;
+            background: #e0f2fd;
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+            color: #394041;
+            font-size: 14px;
+          }
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button{
+            -webkit-appearance:none;
+          }
+          input:nth-of-type(2){
+            max-width: 130px;
+            width: 100%;
+            margin-left: 10px;
+            
+          }  
+    
+      }
+      .wrap-price{
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        input{
+          max-width: 110px;
+          height: 41px;
+          margin-top: 5px;
+          border: 1px solid #c9e8fb;
+          font-size: 14px;
+          box-shadow: inset 0 0 4px 0 #dedede;
+          outline:none;
+          padding-left: 10px;
+          border-radius:5px;
+          background: #e0f2fd;
+          font-family: Roboto, Helvetica, Arial, sans-serif;
+          color: #394041;
+          font-size: 14px;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+          -webkit-appearance:none;
+        }
+        input:nth-of-type(2){
+          max-width: 130px;
+          width: 100%;
+          margin-left: 10px;
+          
+        }
+
+        select{
+          position: absolute;
+          right: 0;
+          top: 0;
+          max-width: 38px;
+          width: 100%;
+          height: 41px;
+          padding: 0;
+          border: 0;
+          text-align-last:center;
+          background: #E0F2FD;
+        }
+      }
+
+     
+}
+
+.bottom-part-form{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    .description,
+    .street-address{
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap:20px;
+    }
+
+    .wrap-addintional-info{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap:20px;
+    }
+    .description{
+        margin-bottom: 40px;
+    }
+
+    .description>label{
+        margin-top: 32px;
+    }
+    .description textarea{
+        height: 350px;
+        width: 100%;
+        resize: none;
+        padding: 15px;
+        margin-top: 10px;
+    }
+    label{
+        font-size: 14px;
+        width: 100%;
+        position: relative;
+        font-weight: bold;
+        input{
+            height: 40px;
+            width: 100%;
+            box-shadow: inset 0 0 2px #e9e9e9;
+            border: 1px solid #cdcdcd;
+            margin-top: 10px;
+            padding:  0 10px;
+        }
+    }
+
+
+
+    .searchAdress{
+        background-color: #ec894d;
+        color:#fff;
+        height: 34px;
+        font-size: 13px;
+        width: 108px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .parametrs{
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        padding-top: 30px;
+        .facilities{
+          display: flex;
+          flex-direction: column;
+          height: 160px;
+          flex-wrap:wrap;  
+          padding-top: 20px;
+          input{
+            display: none;
+          }
+          span,label{
+          // label{
+            display: inline-block;
+            padding-left: 30px;
+            position: relative;
+            font-size: 14px;
+            margin-bottom: 10px;
+            height: 20px;
+            line-height: 24px;
+            cursor:pointer;
+            font-weight: normal;
+          }
+          span{
+            padding-left: 0;
+          }
+          label:before{
+            content:'';
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            border: 1px solid #ccc;
+          }
+          input:checked+label:after{
+            content:url('/domlook/img/home-page/checked.png');
+            position: absolute;
+            left: 4px;
+            top: 2px;
+          }
+        }
+      }
+}
+
+.drop-wrap{
+  >p{
+    font-size: 12px;
+  }
+  .dropzone{
+    height: 170px;
+    margin-bottom: 10px;
+    background-color: #efefef;
+    border: 3px dashed #dfdfdf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    p{
+      text-align: center;
+    }
+    .orangeButton{
+      width: 180px;
+      line-height: 34px;
+    }
+  }
+  .dropzone:focus{
+    outline:none
+  }
+  .descripton-drop{
+    font-size: 14px;
+    margin: 10px 0;
+  }
+}
+
+
+
+
+.orangeButton{
+  background-color: #ec894d;
+  color:#fff;
+  height: 34px;
+  font-size: 13px;
+  width: 108px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border: 0;
+  border-radius:5px;
+  cursor:pointer
+}
+
+.error-field{
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+}

@@ -10,29 +10,39 @@ import { filterCategoryNewsCreator, activeMainFormCreator, activeRegFormCreator,
 import { resetFilters } from "../../redux/actionHomeFilterCreators";
 import './Header.scss';
 import { propStatusFilterCreator } from '../../redux/actionHomeFilterCreators';
+import { setLoginStatusCreator } from '../../redux/actionCreators';
 import { LoginForm } from './Form/LoginForm'
 import RegFormPrivate from './Form/RegFormPrivate'
 import RegFormRielter from './Form/RegFormRielter'
 import RepairForm from './Form/RepairForm'
 
 
-
-const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, activeRegFormFunc, mainform, regform, isLoaded, loadData, }) => {
+// isLogged
+const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin, resetFilters, activeMainFormFunc, activeRegFormFunc, mainform, regform, isLoaded, loadData, }) => {
   useEffect(() => {
     loadData();
   }, []);
 
 
-
+  // let isLogged = false
   const [activeLink, setActiveLink] = useState(mainform)
   const [activeReg, setActiveReg] = useState(regform)
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [isLoggedd, setIsLoggedd] = useState(isLogged)
+  const [isLoggedd, setIsLoggedd] = useState(isLoggedStatus)
 
-  console.log(isOpenModal)
+  useEffect(() => {
+    const loginValue = localStorage.getItem('login');
+
+    if (loginValue === 'true') {
+      setIsLoggedd(true)
+    } else if (loginValue === 'false') {
+
+    }
+  }, [isLoggedd]);
+
   activeMainFormFunc(activeLink);
   activeRegFormFunc(activeReg);
-
+  setLoginStatus(isLoggedd)
 
   return (
     <header className="header">
@@ -105,26 +115,26 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                   </button>
                 </NavLink>
 
-                {/* <NavLink to="/"> */}
-                <button
+                <NavLink to="/addAd">
+                  <button
 
-                  type="button"
-                  className="header-top-section__button header-top-section__button--dob"
-                >
-                  {/* <i class="fa fa-plus-circle"></i> */}
+                    type="button"
+                    className="header-top-section__button header-top-section__button--dob"
+                  >
+                    {/* <i class="fa fa-plus-circle"></i> */}
                   Добавить объявление
                   </button>
-                {/* </NavLink> */}
-                {/* <NavLink> */}
-                <button
+                </NavLink>
+                <NavLink to="/objects">
+                  <button
 
-                  type="button"
-                  className="header-top-section__button header-top-section__button--mo"
-                >
-                  {/* <i class="fa fa-th-list"></i> */}
+                    type="button"
+                    className="header-top-section__button header-top-section__button--mo"
+                  >
+                    {/* <i class="fa fa-th-list"></i> */}
                   Мои объекты
                   </button>
-                {/* </NavLink>*/}
+                </NavLink>
                 <NavLink to="/favourites">
                   <button
 
@@ -135,24 +145,27 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                   Избранное
                   </button>
                 </NavLink>
-                {/* <NavLink> */}
-                <button
+                <NavLink to="/profile">
+                  <button
 
-                  type="button"
-                  className="header-top-section__button header-top-section__button--profile"
-                >
-                  {/* <i class="fa fa-plus-circle"></i> */}
+                    type="button"
+                    className="header-top-section__button header-top-section__button--profile"
+                  >
+                    {/* <i class="fa fa-plus-circle"></i> */}
                   Профиль
                   </button>
-                {/* </NavLink> */}
-                <button
-                  onClick={e => setIsLoggedd(false)}
-                  type="button"
-                  className="header-top-section__button header-top-section__button--exit"
-                >
-                  <i className="fa fa-sign-out"></i>
+                </NavLink>
+                <NavLink to="/">
+                  <button
+                    onClick={e => (setIsLoggedd(false), setIsOpenModal(false), localStorage.setItem('login', 'false'))}
+
+                    type="button"
+                    className="header-top-section__button header-top-section__button--exit"
+                  >
+                    <i className="fa fa-sign-out"></i>
                   Выйти
                   </button>
+                </NavLink>
               </div>
             </div>
           }
@@ -223,18 +236,36 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
                 </li>
               </ul>
             </nav>
-            <button
-              type="button"
-              className="header-nav__button"
-              onClick={e => { setIsOpenModal(true) }}
-            >
-              + Добавить объявление
-          </button>
+
+            {
+              isLoggedd === true &&
+              <NavLink to="/addAd">
+                <button
+                  type="button"
+                  className="header-nav__button"
+                  onClick={e => { setIsOpenModal(true) }}
+                >
+                  + Добавить объявление
+                </button>
+              </NavLink>
+            }
+            {
+              isLoggedd === false &&
+              <button
+                type="button"
+                className="header-nav__button"
+                onClick={e => { setIsOpenModal(true) }}
+              >
+                + Добавить объявление
+              </button>
+            }
+
           </div>
         </div>
-      </div>
+      </div >
 
-      {isLoggedd === false &&
+      {
+        isLoggedd === false &&
         <div>
           <div className={isOpenModal ? "layerForm" : "layerForm hidden"} onClick={e => setIsOpenModal(false)}>
           </div>
@@ -320,7 +351,7 @@ const Header = ({ statusFilterFunc, resetFilters, isLogged, activeMainFormFunc, 
 //   filterCategoryNews: state.mainReducer.filterCategoryNews,
 // });
 const mapStateToProps = (state) => ({
-
+  isLoggedStatus: state.filterReducer.isLoggedStatus,
   isLogged: state.filterReducer.isLogged,
   isLoaded: state.mainReducer.isLoaded,
 });
@@ -330,7 +361,7 @@ const mapDispatchToProps = (dispatch) => ({
   activeRegFormFunc: (activeReg) => dispatch(activeRegFormCreator(activeReg)),
   filterCategoryNews: (number) => dispatch(filterCategoryNewsCreator(number)),
   statusFilterFunc: (number) => dispatch(propStatusFilterCreator(number)),
-
+  setLoginStatus: (status) => dispatch(setLoginStatusCreator(status)),
   resetFilters: () => dispatch(resetFilters()),
   loadData: () => dispatch(handleLoadNewsAds()),
 });

@@ -9,7 +9,7 @@ const WallsDropdown = ({
     wallsFilter
 }) => {
 
-    const rooms_options = [
+    const walls_options = [
         { id: 1, value: '', label: 'Не выбрано' },
         { id: 2, value: 'силикатный кирпич', label: 'силикатный кирпич' },
         { id: 3, value: 'ракушечник', label: 'ракушечник' },
@@ -26,7 +26,7 @@ const WallsDropdown = ({
         <select name="wall-filter" id="wall-filter"
             value={selectedOption}
             onChange={e => setSelectedOption(e.target.value)}>
-            {rooms_options.map(o => (
+            {walls_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}
         </select>
