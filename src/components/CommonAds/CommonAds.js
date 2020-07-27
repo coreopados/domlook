@@ -120,22 +120,22 @@ const CommonAds = ({
 
   //по удобствам
   if (featuresArr !== false) {
-    var keys = [];
-    for (var key in featuresArr) {
-      keys.push(key)
+    var keys1 = [];
+    for (var key1 in featuresArr) {
+      keys1.push(key1)
     }
     commonAds = commonAds.filter((ad) => ad.prop_features)
-    commonAds = commonAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
+    commonAds = commonAds.filter(item => item.prop_features.some(i => (keys1).includes(i)))
   }
 
   //по типу сделки
   if (typeTransaction !== false) {
-    var keys = [];
-    for (var key in typeTransaction) {
-      keys.push(key)
+    var keys2 = [];
+    for (var key2 in typeTransaction) {
+      keys2.push(key2)
     }
     commonAds = commonAds.filter((ad) => ad.prop_features_add)
-    commonAds = commonAds.filter(item => item.prop_features_add.some(i => (keys).includes(i)))
+    commonAds = commonAds.filter(item => item.prop_features_add.some(i => (keys2).includes(i)))
   }
 
   // по цене

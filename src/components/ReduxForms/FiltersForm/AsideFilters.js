@@ -48,7 +48,7 @@ const AsideFilters = ({
 
   const [filterById, setFilterById] = useState(false)
   const [addInfo, setStatusAddInfo] = useState(false)
-  // console.log(features)
+  console.log(statusFilter)
   return (
     <aside className="common-filters">
       <form className="common-filters-form">
@@ -62,7 +62,7 @@ const AsideFilters = ({
               <div className="status-filter-select">
 
                 <StatusDropdown
-                
+
                   match={match}
                   statusFilter={statusFilter}
                 />
@@ -126,7 +126,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="wall-filter">
               Тип стен
-                {isLoaded && <WallsDropdown wallsFilter={wallsFilter}/>}
+                {isLoaded && <WallsDropdown wallsFilter={wallsFilter} />}
             </label>
           </div>
 
@@ -134,7 +134,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="offer-filter">
               Тип предложения
-              {isLoaded && <OfferDropdown offerFilter={offerFilter}/>}
+              {isLoaded && <OfferDropdown offerFilter={offerFilter} />}
             </label>
           </div>
 
@@ -142,7 +142,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="total-area-filter">
               Общая площадь
-              {isLoaded && <TotalAreaDropdown totalAreaFilter={totalAreaFilter}/>}
+              {isLoaded && <TotalAreaDropdown totalAreaFilter={totalAreaFilter} />}
             </label>
           </div>
 
@@ -150,7 +150,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="heating-filter">
               Тип отопления
-              {isLoaded && <HeatingDropdown heatingFilter={heatingFilter}/>}
+              {isLoaded && <HeatingDropdown heatingFilter={heatingFilter} />}
             </label>
           </div>
 
@@ -158,7 +158,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="">
               Этаж
-              {isLoaded && <FloorDropdown floorFilter={floorFilter}/>}
+              {isLoaded && <FloorDropdown floorFilter={floorFilter} />}
             </label>
           </div>
 
@@ -166,7 +166,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="building-filter">
               Тип здания
-            {isLoaded && <BuildingDropdown buildingFilter={buildingFilter}/>}
+            {isLoaded && <BuildingDropdown buildingFilter={buildingFilter} />}
             </label>
           </div>
 
@@ -174,7 +174,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="ceiling-height-filter">
               Высота потолков
-            {isLoaded && <CeilingHeightDropdown ceilingHeightFilter={ceilingHeightFilter}/>}
+            {isLoaded && <CeilingHeightDropdown ceilingHeightFilter={ceilingHeightFilter} />}
             </label>
           </div>
 
@@ -182,7 +182,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="rooms-filter">
               Комнат
-              <RoomDropdown roomFilter={roomFilter}/>
+              <RoomDropdown roomFilter={roomFilter} />
             </label>
           </div>
         </div>
@@ -206,7 +206,7 @@ const AsideFilters = ({
 
         <div className="block">
           <NavLink
-            to={`/${typeFilter}`}
+            to={`/${statusFilter}`}
             replace
             exact
           >

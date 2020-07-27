@@ -22,8 +22,6 @@ const NewsPage = ({
   useEffect(() => { loadData() }, [])
 
 
-  console.log(filterCategoryNews)
-
   if (filterCategoryNews !== '') {
     news = news.filter((post) => post.category === filterCategoryNews)
   }

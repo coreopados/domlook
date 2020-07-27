@@ -11,7 +11,6 @@ const Navigation = ({
   category,
   categoryFilterFunc,
   titleNew,
-
   statusFilterFunc,
   typeFilterFunc,
   pageName,
@@ -24,9 +23,6 @@ const Navigation = ({
   districtFilter
 }) => {
 
-  const [selectedOption, setActiveCategory] = useState(category)
-
-  categoryFilterFunc(selectedOption)
 
   return (
 
@@ -44,20 +40,22 @@ const Navigation = ({
           {/* news */}
           {pageName === "Новости" &&
             <Link Link to="/news" className="common-nav__link">
-              <button onClick={() => (resetFiltersFunc(), setActiveCategory())}>
+              <button onClick={() => (resetFiltersFunc(), categoryFilterFunc(''))}>
                 Новости
               </button>
             </Link>}
 
           {category &&
             <Link to="/news" className="common-nav__link">
-              <button onClick={() => (resetFiltersFunc(), setActiveCategory(selectedOption))}>
+              <button onClick={() => (resetFiltersFunc(), categoryFilterFunc(category))}>
                 {category}
               </button>
             </Link>}
+
           {category && titleNew && <span className="common-nav__link">{titleNew}</span>}
 
 
+          {/* sale */}
           {statusFilter === "sale" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
@@ -117,7 +115,6 @@ const Navigation = ({
           {districtFilter &&
             <span className="common-nav__link">{districtFilter}</span>}
 
-          {/* <span className="common-nav__page-name">{pageName}</span> */}
         </div >
       </div >
     </div >
@@ -129,7 +126,7 @@ const mapDispatchToProps = dispatch => ({
   regionFilterFunc: selectedOption => dispatch(propRegionFilterCreator(selectedOption)),
   categoryFilterFunc: selectedOption => dispatch(filterCategoryNewsCreator(selectedOption)),
 
-  resetFiltersFunc: selectedOption => dispatch(resetFilters(selectedOption))
+  resetFiltersFunc: () => dispatch(resetFilters())
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(Navigation);

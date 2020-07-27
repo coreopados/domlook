@@ -3,24 +3,21 @@ import { connect } from "react-redux";
 import './NewsHeadingsFilters.scss';
 import clsx from 'clsx';
 import PropTypes from "prop-types";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { categories } from "../../../../api/testCategoriesNews.json"
 import {
   filterCategoryNewsCreator,
   paginateNewsCreator,
-
 }
   from "../../../../redux/actionCreators";
 
 
 const NewsHeadingsFilters = ({
   filterCategoryNewsFunc,
-  paginateNews
+  paginateNews,
+  activeCategory
 }) => {
 
-  const [selectedOption, setselectedOption] = useState("")
-
-  filterCategoryNewsFunc(selectedOption);
   const number = 1
 
   return (
@@ -28,12 +25,14 @@ const NewsHeadingsFilters = ({
       <h3>Рубрики</h3>
       <ul >
         {categories.map((item, index) => {
-          return <li className={clsx((selectedOption === item.name) && 'active')} onClick={e => (setselectedOption(item.name), paginateNews(number))}
-            key={index}
-          >
-            {item.name}
-          </li>
-
+         
+          return <Link to="/news">
+            <li className={clsx((activeCategory === item.name) && 'active')} onClick={e => (filterCategoryNewsFunc(item.name), paginateNews(number))}
+              key={index}
+            >
+              {item.name}
+            </li>
+          </Link>
         })}
       </ul>
     </div >

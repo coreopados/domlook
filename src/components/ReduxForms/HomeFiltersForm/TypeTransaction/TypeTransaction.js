@@ -10,7 +10,7 @@ const TypeTransaction = ({
     setTypeTransactionFunc,
     typeTransaction
 }) => {
-    console.log(typeTransaction)
+    // console.log(typeTransaction)
     const [x, setForm] = useState(typeTransaction);
 
     const handler = (e) => {
