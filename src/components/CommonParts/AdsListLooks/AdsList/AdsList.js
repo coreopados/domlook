@@ -8,6 +8,7 @@ import { HorizontalCard } from "../../Cards/HorizontalCard/HorizontalCard";
 export const AdsList = ({ ads, match }) => {
 
   return (
+
     <div className="rows-list">
       {ads.map((ad) => (
         <Link to={`${match.path}/${ad.id}`} key={ad.id} >

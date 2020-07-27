@@ -11,7 +11,9 @@ const Facilities = ({
     Features
 }) => {
 
+  
     const [x, setForm] = useState(Features);
+
 
     const handler = (e) => {
         const { target } = e;

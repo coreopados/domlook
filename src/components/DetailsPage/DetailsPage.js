@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import "./DetailsPage.scss";
 import Loader from "react-loader-spinner";
 import { handleLoadAds } from "../../redux/actionCreators";
-// import { ErrorPage } from "../ErrorPage/ErrorPage";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { DetailsMap } from "../CommonParts/DetailsMap/DetailsMap";
 import DetailsFeatures from "./DetailsFeatures/DetailsFeatures.js";

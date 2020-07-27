@@ -1,5 +1,5 @@
 
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -43,6 +43,8 @@ const RentPage = ({
   featuresArr,
   typeTransaction
 }) => {
+
+
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
@@ -142,38 +144,38 @@ const RentPage = ({
   }
 
 
-  const isEmpty = (featuresArr) => {
+  // const isEmpty = (featuresArr) => {
 
-    for (let key in featuresArr) {
-      // если тело цикла начнет выполняться - значит в объекте есть свойства
-      return false;
-    }
-    return true;
-  }
+  //   for (let key in featuresArr) {
+  //     // если тело цикла начнет выполняться - значит в объекте есть свойства
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
 
 
   //по удобствам
   if (featuresArr !== false) {
-    var keys = [];
-    for (var key in featuresArr) {
-      keys.push(key)
-
+    var keys1 = [];
+    for (var key1 in featuresArr) {
+      keys1.push(key1)
     }
     rentAds = rentAds.filter((ad) => ad.prop_features)
-    rentAds = rentAds.filter(item => item.prop_features.some(i => (keys).includes(i)))
+    rentAds = rentAds.filter(item => item.prop_features.some(i => (keys1).includes(i)))
   }
 
+  // console.log(featuresArr)
+  // console.log(typeTransaction)
 
-  console.log(typeTransaction)
   //по типу сделки
   if (typeTransaction !== false) {
-    var keys = [];
-    for (var key in typeTransaction) {
-      keys.push(key)
+    var keys2 = [];
+    for (var key2 in typeTransaction) {
+      keys2.push(key2)
     }
     rentAds = rentAds.filter((ad) => ad.prop_features_add)
-    rentAds = rentAds.filter(item => item.prop_features_add.some(i => (keys).includes(i)))
+    rentAds = rentAds.filter(item => item.prop_features_add.some(i => (keys2).includes(i)))
   }
 
   //фильтр цен по низкой/по высокой
@@ -202,11 +204,7 @@ const RentPage = ({
 
   return (
     <main className="common-main">
-      {/* {isLoaded && ( */}
-
-      <Navigation pageName="Аренда" statusFilter={statusFilter} typeFilter={typeFilter} regionFilter={propRegionFilter} cityFilter={propCityFilter} districtFilter={propDistrictFilter} />
-
-      {/* )} */}
+      <Navigation pageName="Аренда" regionFilter={propRegionFilter} cityFilter={propCityFilter} districtFilter={propDistrictFilter} typeFilter={typeFilter} statusFilter={statusFilter} />
       <section className="common-section">
         <div className="container">
           <div className="common-section__wrapper">
@@ -232,7 +230,7 @@ const RentPage = ({
                 totalAreaFilter={totalAreaFilter}
               />
             )}
-            {/* {console.log(statusFilter, typeFilter, propRegionFilter)} */}
+
             <div className="common-section__block">
               <TopFilters match={match} totalAdsRent={rentAds.length} sortPrice={sort_price} sortDate={sort_date} />
               {isLoading && (

@@ -27,28 +27,41 @@ const Navigation = ({
   cityFilter,
   districtFilter
 }) => {
+  console.log(statusFilter, typeFilter)
 
-  console.log(regionFilter, cityFilter, districtFilter)
   return (
 
     <div className="common-nav">
       <div className="container">
         <div className="common-nav__wrapper">
-          <Link to="/" className="common-nav__link">Domlook</Link>
+          <Link to="/" className="common-nav__link">
+            <button onClick={() => (resetFiltersFunc())}>
+              Domlook
+            </button>
+          </Link>
           {/* status */}
           {pageName === "Продажа" && !statusFilter && <Link to="/sale" className="common-nav__link">Продажа</Link>}
-          {pageName === "Объявления" && !statusFilter && <Link to="/advertisement" className="common-nav__link">Объявления</Link>}
           {pageName === "Аренда" && !statusFilter && <Link to="/rent" className="common-nav__link">Аренда</Link>}
-          {pageName === "Посуточно" && !statusFilter && <Link to="/dailyRent" className="common-nav__link">Посуточно</Link>}
+          {pageName === "Посуточно" && !statusFilter && <Link to="/dailyrent" className="common-nav__link">Посуточно</Link>}
           {pageName === "Избранное" && <Link to="/favourites" className="common-nav__link">Избранное</Link>}
+
+
+          {pageName === "Объявления" && !statusFilter && regionFilter &&
+            <span className="common-nav__link">
+              {regionFilter}
+            </span>
+          }
 
           {/* news */}
           {pageName === "Новости" &&
             <Link Link to="/news" className="common-nav__link">
               <button onClick={() => (resetFiltersFunc(), categoryFilterFunc(''))}>
                 Новости
-              </button>
-            </Link>}
+            </button>
+            </Link>
+          }
+
+
 
           {category &&
             <Link to="/news" className="common-nav__link">
@@ -59,80 +72,92 @@ const Navigation = ({
 
           {category && titleNew && <span className="common-nav__link">{titleNew}</span>}
 
-
           {/* sale */}
-          {statusFilter === "sale" &&
+          {statusFilter === "sale" && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (statusFilterFunc(statusFilter), typeFilterFunc(''), regionFilterFunc(''))}>
+                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(''), regionFilterFunc(''))}>
                 Продажа
                   </button>
             </Link>}
 
+
           {/* rent */}
-          {statusFilter === "rent" &&
+          {statusFilter === "rent" && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), regionFilterFunc(''), typeFilterFunc(''))}>
+                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(''), regionFilterFunc(''))}>
                 Аренда
                   </button>
             </Link>}
-            
+
+
+
           {/* dailyrent */}
-          {statusFilter === "dailyRent" &&
+          {statusFilter === "dailyRent" && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (statusFilterFunc(statusFilter), typeFilterFunc(''), regionFilterFunc(''))}
+                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(''), regionFilterFunc(''))}
               >
                 Посуточно
                   </button>
             </Link>}
-          {typeFilter === "apartment" &&
+
+          {typeFilter === "apartment" && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (typeFilterFunc(typeFilter), regionFilterFunc(''), statusFilterFunc(statusFilter))}
+                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(typeFilter), regionFilterFunc(''))}
               >
                 Квартиры
                   </button>
             </Link>}
-          {typeFilter === "house" &&
+
+          {typeFilter === "house" && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (typeFilterFunc(typeFilter), regionFilterFunc(''), statusFilterFunc(statusFilter))}
+                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(typeFilter), regionFilterFunc(''))}
               >
                 Дома
                 </button>
             </Link>}
-          {typeFilter === "commerce" &&
+
+          {typeFilter === "commerce" && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (typeFilterFunc(typeFilter), regionFilterFunc(''), statusFilterFunc(statusFilter))}
+                onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(typeFilter), regionFilterFunc(''))}
               >
                 Коммерческая недвижимость
                   </button>
             </Link>}
-          {regionFilter &&
+
+          {regionFilter && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
-                onClick={() => (typeFilterFunc(typeFilter), statusFilterFunc(statusFilter), regionFilterFunc(regionFilter), cityFilterFunc(''), districtFilterFunc(''))}
+                onClick={() => (resetFiltersFunc(), typeFilterFunc(typeFilter), statusFilterFunc(statusFilter), regionFilterFunc(regionFilter), cityFilterFunc(''), districtFilterFunc(''))}
               >
                 {regionFilter}
               </button>
             </Link>}
-          {cityFilter &&
+
+          {cityFilter && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button className="common-nav__link" onClick={() => (typeFilterFunc(typeFilter), statusFilterFunc(statusFilter), regionFilterFunc(regionFilter), cityFilterFunc(cityFilter), districtFilterFunc(''))}>{cityFilter}</button>
             </Link>}
-          {districtFilter &&
+
+          {districtFilter && pageName !== "Объявления" &&
             // <span className="common-nav__link">{districtFilter}</span>
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button className="common-nav__link" onClick={() => (typeFilterFunc(typeFilter), statusFilterFunc(statusFilter), regionFilterFunc(regionFilter), cityFilterFunc(cityFilter), districtFilterFunc(districtFilter))}>{districtFilter}</button>
             </Link>}
+
+
+
         </div >
       </div >
     </div >
   )
 };
+
 const mapDispatchToProps = dispatch => ({
   typeFilterFunc: selectedOption => dispatch(typeFilterCreator(selectedOption)),
   statusFilterFunc: selectedOption => dispatch(propStatusFilterCreator(selectedOption)),

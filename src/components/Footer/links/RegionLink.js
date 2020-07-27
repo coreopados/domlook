@@ -2,11 +2,11 @@ import React from 'react';
 import '../Footer.scss';
 import { NavLink } from 'react-router-dom';
 import { connect } from "react-redux";
-import { propRegionFilterCreator } from '../../../redux/actionHomeFilterCreators';
+import { propRegionFilterCreator, resetFilters } from '../../../redux/actionHomeFilterCreators';
 import { regions } from '../../../api/testCities.json'
 
 
-const RegionLink = ({ propRegionFilterFunc, propRegionFilter }) => {
+const RegionLink = ({ propRegionFilterFunc, propRegionFilter, resetFiltersFunc }) => {
 
     // const [selectedOption, setselectedOption] = useState('')
 
@@ -15,7 +15,7 @@ const RegionLink = ({ propRegionFilterFunc, propRegionFilter }) => {
     return (
         <ul className="footer-cities__list footer-list">
             {regions.region.map((item, index) => {
-                return <li className="footer-cities__list-item footer-list__item" onClick={() => { propRegionFilterFunc(item.name) }}
+                return <li className="footer-cities__list-item footer-list__item" onClick={() => (resetFiltersFunc(), propRegionFilterFunc(item.name))}
                     key={index}
                 >
                     <NavLink
@@ -31,6 +31,7 @@ const RegionLink = ({ propRegionFilterFunc, propRegionFilter }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     propRegionFilterFunc: (selectedOption) => dispatch(propRegionFilterCreator(selectedOption)),
+    resetFiltersFunc: () => dispatch(resetFilters())
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(RegionLink);

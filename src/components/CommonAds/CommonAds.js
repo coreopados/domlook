@@ -43,7 +43,7 @@ const CommonAds = ({
   featuresArr,
   typeTransaction
 }) => {
-  console.log(propRegionFilter)
+  // console.log(typeFilter, statusFilter)
   let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
@@ -53,9 +53,10 @@ const CommonAds = ({
   if (idFilter) {
     commonAds = commonAds.filter((ad) => ad.id === Number(idFilter))
   }
-  //по id
-  if (idFilter) {
-    commonAds = commonAds.filter((ad) => ad.id === Number(idFilter))
+
+  //по статусу
+  if (typeFilter) {
+    commonAds = commonAds.filter((ad) => ad.prop_type === typeFilter)
   }
 
   //по статусу
@@ -159,7 +160,7 @@ const CommonAds = ({
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = commonAds.slice(indexOfFirstAd, indexOfLastAd);
 
- 
+
 
   return (
     <main className="common-main" >
@@ -187,7 +188,7 @@ const CommonAds = ({
               floorFilter={floorFilter}
               totalAreaFilter={totalAreaFilter}
             />
-            {console.log(propRegionFilter)}
+
             <div className="common-section__block" >
 
               {isLoading && (<div className="loader-wrapper" >

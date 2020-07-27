@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -25,6 +25,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
 
 
   // let isLogged = false
+
   const [activeLink, setActiveLink] = useState(mainform)
   const [activeReg, setActiveReg] = useState(regform)
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -177,7 +178,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
               // to={`${process.env.PUBLIC_URL}/`}
               className="header-nav__logo-wrapper"
             >
-              <div onClick={resetFilters}>
+              <div onClick={() => resetFilters()}>
                 <img
                   src="/domlook/img/header/logo-header-1.png"
                   alt="логотип"
@@ -199,7 +200,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
                     // to={`${process.env.PUBLIC_URL}/sale`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  > <button onClick={() => resetFilters()}>Продажа</button>
+                  > <button onClick={() => (resetFilters(), statusFilterFunc("sale"))}>Продажа</button>
                   </NavLink>
 
                 </li>
@@ -209,7 +210,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
                     // to={`${process.env.PUBLIC_URL}/rent`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  ><button onClick={() => resetFilters()}> Аренда</button>
+                  ><button onClick={() => (resetFilters(), statusFilterFunc("rent"))}> Аренда</button>
 
                   </NavLink>
                 </li>
@@ -219,7 +220,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
                     // to={`${process.env.PUBLIC_URL}/dailyRent`}
                     className="navigation__link"
                     activeClassName="navigation__link--active"
-                  ><button onClick={() => resetFilters()}>Посуточно</button>
+                  ><button onClick={() => (resetFilters(), statusFilterFunc("dailyrent"))}>Посуточно</button>
 
                   </NavLink>
                 </li>

@@ -45,12 +45,12 @@ const SalePage = ({
   typeTransaction
 }) => {
 
+
+
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-  console.log(propRegionFilter,
-    propCityFilter,
-    propDistrictFilter)
+
 
   //по id
   if (idFilter) {
@@ -322,6 +322,7 @@ const mapStateToProps = (state) => ({
 // const mapDispatchToProps = (dispatch) => ({
 //   loadData: () => dispatch(handleLoadAds())
 // })
+
 
 const Enhanced = connect(mapStateToProps, null)(SalePage);
 

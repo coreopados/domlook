@@ -78,7 +78,6 @@ const initialState = {
 }
 export const filterReducer = (state = initialState, action) => {
 
-    // console.log(initialState)
 
     switch (action.type) {
 
@@ -311,7 +310,7 @@ export const filterReducer = (state = initialState, action) => {
                 typeFilter: '',
                 statusFilter: '',
                 cityFilter: '',
-                totalArea: '',
+                totalAreaFilter: '',
                 floorFilter: '',
                 roomsFilter: '',
                 propWallsFilter: '',

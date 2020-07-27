@@ -26,13 +26,14 @@ const NewsHeadingsFilters = ({
       <ul >
         {categories.map((item, index) => {
 
-          return <Link to="/news">
-            <li className={clsx((activeCategory === item.name) && 'active')} onClick={e => (filterCategoryNewsFunc(item.name), paginateNews(number))}
-              key={index}
-            >
+          return <li className={clsx((activeCategory === item.name) && 'active')} onClick={e => (filterCategoryNewsFunc(item.name), paginateNews(number))}
+            key={index}
+          >
+            <Link to="/news">
               {item.name}
-            </li>
-          </Link>
+            </Link>
+          </li>
+
         })}
       </ul>
     </div >

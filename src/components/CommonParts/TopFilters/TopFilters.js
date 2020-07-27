@@ -25,7 +25,7 @@ const TopFilters = ({
   sortPrice,
   sortDate
 }) => {
-  console.log(sortPrice, sortDate)
+
 
 
   const pageTitle = useRef(null);

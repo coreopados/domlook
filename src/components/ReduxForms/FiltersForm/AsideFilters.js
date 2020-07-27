@@ -100,7 +100,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="region-filter">
               Область
-              <SelectRegionDropdown regionFilter={regionFilter} />
+              {isLoaded && <SelectRegionDropdown regionFilter={regionFilter} />}
             </label>
           </div>
 
@@ -108,7 +108,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="city-filter">
               Город
-              <SelectCityDropdown cityFilter={cityFilter} />
+              {isLoaded && <SelectCityDropdown cityFilter={cityFilter} />}
             </label>
           </div>
 
@@ -116,7 +116,7 @@ const AsideFilters = ({
           <div className="block">
             <label htmlFor="select-city-filter">
               Район
-              <SelectDistrictDropdown districtFilter={districtFilter} />
+              {isLoaded && <SelectDistrictDropdown districtFilter={districtFilter} />}
             </label>
           </div>
         </div>
