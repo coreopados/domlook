@@ -127,6 +127,12 @@
     color: $section-title-color-black;
     font-size: 21px;
   }
+
+
+  &__similar-ads{
+    max-width: 240px;
+    margin-bottom: 20px;
+  }
 }
 
 .details-main-content {

@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes, { array } from "prop-types";
+import { Link } from 'react-router-dom';
 import "./DetailsPage.scss";
 import Loader from "react-loader-spinner";
 import { handleLoadAds } from "../../redux/actionCreators";
@@ -184,11 +185,72 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
                     </div>
                   </div>
                 </div>
+
+                {/* Верстка */}
                 <div className="details-full-info__block">
+
                   <h5 className="details-full-info__similar-ads-title">
                     Похожие предложения
-                    </h5>
-                  <div className="details-full-info__similar-ads"></div>
+                  </h5>
+
+                  <div className="details-full-info__similar-ads">
+                    <Link to={'/' + id}>
+                      <article className="vertical-card">
+
+                        <span className="vertical-card__price">100</span>
+                        <div className="vertical-card__photo-wrapper">
+                          <img
+                            src={ad.imgUrl}
+                            alt="фото квартиры"
+                            className="vertical-card__photo"
+                          />
+                        </div>
+                        <div className="vertical-card__info-wrapper">
+                          <h5 className="vertical-card__title">{ad.title}</h5>
+                          <p className="vertical-card__description">
+                            {ad.description.slice(0, 80)}
+                          </p>
+                          <div className="vertical-card__specification">
+                            <span className="vertical-card__area">
+                              {ad.total_area}
+                            </span>
+                            <span className="vertical-card__floor">{ad.floor}</span>
+                            <span className="vertical-card__rooms">{ad.rooms}</span>
+                          </div>
+                        </div>
+                      </article>
+                    </Link>
+                  </div>
+
+                  <div className="details-full-info__similar-ads">
+                    <Link to={'/' + id}>
+                      <article className="vertical-card">
+
+                        <span className="vertical-card__price">100</span>
+                        <div className="vertical-card__photo-wrapper">
+                          <img
+                            src={ad.imgUrl}
+                            alt="фото квартиры"
+                            className="vertical-card__photo"
+                          />
+                        </div>
+                        <div className="vertical-card__info-wrapper">
+                          <h5 className="vertical-card__title">{ad.title}</h5>
+                          <p className="vertical-card__description">
+                            {ad.description.slice(0, 80)}
+                          </p>
+                          <div className="vertical-card__specification">
+                            <span className="vertical-card__area">
+                              {ad.total_area}
+                            </span>
+                            <span className="vertical-card__floor">{ad.floor}</span>
+                            <span className="vertical-card__rooms">{ad.rooms}</span>
+                          </div>
+                        </div>
+                      </article>
+                    </Link>
+                  </div>
+
                 </div>
               </aside>
               <div className="details-main-content">
@@ -323,8 +385,9 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
             </div>
           </div>
         </section>
-      )}
-    </main>
+      )
+      }
+    </main >
   );
   // }
   //  else {

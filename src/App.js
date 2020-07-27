@@ -37,7 +37,6 @@ function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm, prop
     <React.Fragment>
       <ScrollToTop />
       <Header mainform={activeMainForm} regform={activeRegForm} />
-
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/sale" exact component={SalePage} />
@@ -59,7 +58,6 @@ function App({ loadData, activeCategoryNews, activeMainForm, activeRegForm, prop
         <Route path="/dailyRent/:id" component={DetailsPage} />
         <Route path="/favourites/:id" component={DetailsPage} />
         <Route path="/:id" component={DetailsPage} />
-
         <Route path="/404" component={ErrorPage} />
         <Redirect from="*" to="/404" />
       </Switch>
