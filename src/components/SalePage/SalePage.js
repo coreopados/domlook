@@ -48,7 +48,9 @@ const SalePage = ({
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-
+  console.log(propRegionFilter,
+    propCityFilter,
+    propDistrictFilter)
 
   //по id
   if (idFilter) {
@@ -177,6 +179,8 @@ const SalePage = ({
     saleAds = saleAds.filter((ad) => Date.parse(ad.post_date) >= lastWeek)
   } else if (Number(sort_date) === 0) {
     saleAds = saleAds.filter((ad) => Date.parse(ad.post_date) >= today)
+  } else if (sort_date === 'false') {
+    saleAds = saleAds.filter((ad) => ad)
   }
 
 
@@ -186,7 +190,7 @@ const SalePage = ({
 
   return (
     <main className="common-main" >
-      <Navigation pageName="Продажа" />
+      <Navigation pageName="Продажа" regionFilter={propRegionFilter} cityFilter={propCityFilter} districtFilter={propDistrictFilter} typeFilter={typeFilter} statusFilter={statusFilter} />
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >
@@ -216,7 +220,7 @@ const SalePage = ({
               {isLoading && (<div className="loader-wrapper" >
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
-              < TopFilters match={match} totalAdsSale={saleAds.length} />
+              < TopFilters match={match} totalAdsSale={saleAds.length} sortPrice={sort_price} sortDate={sort_date} />
               < List ads={currentAds} match={match} />
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {(saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} />}

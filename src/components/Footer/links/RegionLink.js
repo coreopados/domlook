@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../Footer.scss';
 import { NavLink } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -8,14 +8,14 @@ import { regions } from '../../../api/testCities.json'
 
 const RegionLink = ({ propRegionFilterFunc, propRegionFilter }) => {
 
-    const [selectedOption, setselectedOption] = useState('')
+    // const [selectedOption, setselectedOption] = useState('')
 
-    propRegionFilterFunc(selectedOption);
+    // propRegionFilterFunc(selectedOption);
 
     return (
         <ul className="footer-cities__list footer-list">
             {regions.region.map((item, index) => {
-                return <li className="footer-cities__list-item footer-list__item" onClick={() => { setselectedOption(item.name) }}
+                return <li className="footer-cities__list-item footer-list__item" onClick={() => { propRegionFilterFunc(item.name) }}
                     key={index}
                 >
                     <NavLink

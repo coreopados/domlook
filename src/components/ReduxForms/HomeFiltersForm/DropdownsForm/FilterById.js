@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     IdFilterCreator
@@ -10,13 +10,16 @@ const FilterById = ({
     idFilter
 }) => {
 
-    const [idField, setIdField] = useState(idFilter);
+    // const [idField, setIdField] = useState(idFilter);
 
     return (
-        <div className="idField">
-            {/* <input type="number" onChange={e => setIdField(e.target.value)} value={idField} placeholder="введите ID" /> */}
-            <input type="number" onChange={e => (setFilterIdFunc(e.target.value), setIdField(e.target.value))} value={idField} placeholder="введите ID" />
-            <p className="searchButton" onClick={() => (setFilterIdFunc(idField), cancel())}>Найти</p>
+        <div>
+            <div className="idField">
+                {/* <input type="number" onChange={e => setIdField(e.target.value)} value={idField} placeholder="введите ID" /> */}
+                <input type="number" onChange={e => setFilterIdFunc(e.target.value)} value={idFilter} placeholder="введите ID" />
+                <p className="searchButton" onClick={e => cancel()}>Найти</p>
+            </div>
+            <p className="cancelSearchById" onClick={e => (setFilterIdFunc(''), cancel())}>Отмена</p>
         </div>
     );
 }

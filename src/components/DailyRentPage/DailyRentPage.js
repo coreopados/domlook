@@ -45,7 +45,7 @@ const DailyRentPage = ({
   let dailyRentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
 
-  console.log(dailyRentAds)
+  // console.log(dailyRentAds)
 
   //по id
   if (idFilter) {
@@ -177,16 +177,14 @@ const DailyRentPage = ({
     dailyRentAds = dailyRentAds.filter((ad) => Date.parse(ad.post_date) >= lastWeek)
   } else if (Number(sort_date) === 0) {
     dailyRentAds = dailyRentAds.filter((ad) => Date.parse(ad.post_date) >= today)
+  } else if (sort_date === 'false') {
+    dailyRentAds = dailyRentAds.filter((ad) => ad)
   }
 
 
   const indexOfLastAd = currentPageDailyRent * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = dailyRentAds.slice(indexOfFirstAd, indexOfLastAd);
-
-  console.log(currentPageDailyRent)
-
-
 
 
   return (
@@ -196,6 +194,7 @@ const DailyRentPage = ({
         <div className="container">
           <div className="common-section__wrapper">
             <AsideFilters
+              idFilter={idFilter}
               typeFilter={typeFilter}
               priceFrom={priceFromFilter}
               priceTo={priceToFilter}
@@ -221,7 +220,7 @@ const DailyRentPage = ({
                   <Loader type="Puff" color="#313237" height={80} width={80} />
                 </div>
               )}
-              {isLoaded && <TopFilters match={match} totalAdsDailyRent={dailyRentAds.length} />}
+              {isLoaded && <TopFilters match={match} totalAdsDailyRent={dailyRentAds.length} sortPrice={sort_price} sortDate={sort_date} />}
               {isLoaded && <List ads={currentAds} match={match} sortPrice={sort_price} />}
               {(dailyRentAds.length > 9) && <PaginationDailyRent totalItems={dailyRentAds.length} />}
 

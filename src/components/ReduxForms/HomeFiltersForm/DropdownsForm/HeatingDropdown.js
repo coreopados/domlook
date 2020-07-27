@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     propHeatingFilterCreator
@@ -15,13 +15,13 @@ const HeatingDropdown = ({
         { id: 3, value: 'индивидуальное', label: 'индивидуальное' },
         { id: 4, value: 'автономное', label: 'автономное' },
     ];
-    const [selectedOption, setSelectedOption] = useState(heatingFilter);
+    // const [selectedOption, setSelectedOption] = useState(heatingFilter);
 
-    heatingFilterFunc(selectedOption)
+    // heatingFilterFunc(selectedOption)
     return (
         <select name="heating-filter" id="heating-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={heatingFilter}
+            onChange={e => heatingFilterFunc(e.target.value)}>
             {heating_options.map((o) => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}

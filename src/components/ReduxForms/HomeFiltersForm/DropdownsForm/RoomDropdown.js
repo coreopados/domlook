@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     roomFilterCreator
@@ -18,13 +18,13 @@ const RoomDropdown = ({
         { id: 6, value: '5', label: '5' },
         { id: 7, value: '6', label: '6' },
     ];
-    const [selectedOption, setSelectedOption] = useState(roomFilter);
+    // const [selectedOption, setSelectedOption] = useState(roomFilter);
 
-    roomFilterFunc(selectedOption)
+    // roomFilterFunc(selectedOption)
     return (
         <select name="room-filter" id="room-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={roomFilter}
+            onChange={e => roomFilterFunc(e.target.value)}>
             {rooms_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}

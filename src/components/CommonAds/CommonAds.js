@@ -159,12 +159,11 @@ const CommonAds = ({
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = commonAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  console.log(propRegionFilter)
-
+ 
 
   return (
     <main className="common-main" >
-      <Navigation pageName="Объявления" />
+      <Navigation pageName="Объявления" regionFilter={propRegionFilter} cityFilter={propCityFilter} districtFilter={propDistrictFilter} typeFilter={typeFilter} statusFilter={statusFilter} />
       <section className="common-section" >
         <div className="container" >
           <div className="common-section__wrapper" >

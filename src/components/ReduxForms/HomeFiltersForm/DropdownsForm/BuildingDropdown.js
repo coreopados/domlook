@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     propBuildingFilterCreator
@@ -15,14 +15,14 @@ const BuildingDropdown = ({
         { id: 3, value: 'Хрущевка', label: 'Хрущевка' },
         { id: 4, value: 'Сталинка', label: 'Сталинка' },
     ];
-    const [selectedOption, setSelectedOption] = useState(buildingFilter);
+    // const [selectedOption, setSelectedOption] = useState(buildingFilter);
 
-    propBuildingFilterFunc(selectedOption)
+    // propBuildingFilterFunc(selectedOption)
 
     return (
         <select name="building-filter" id="building-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={buildingFilter}
+            onChange={e => propBuildingFilterFunc(e.target.value)}>
             {build_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}

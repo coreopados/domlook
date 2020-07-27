@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     propStatusFilterCreator
@@ -9,7 +9,7 @@ const StatusDropdown = ({
     statusFilterFunc,
 }) => {
 
-    const [selectedOption, setSelectedOption] = useState(statusFilter);
+    // const [selectedOption, setSelectedOption] = useState(statusFilter);
 
     const status_options = [
         { id: 0, value: '', label: 'Не выбрано' },
@@ -18,12 +18,12 @@ const StatusDropdown = ({
         { id: 3, value: 'dailyrent', label: 'Посуточно' }
     ];
 
-    statusFilterFunc(selectedOption)
+    // statusFilterFunc(selectedOption)
 
     return (
         <select name="status-filter" id="status-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={statusFilter}
+            onChange={e => statusFilterFunc(e.target.value)}>
             {status_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}

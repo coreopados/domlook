@@ -48,7 +48,7 @@ const AsideFilters = ({
 
   const [filterById, setFilterById] = useState(false)
   const [addInfo, setStatusAddInfo] = useState(false)
-  console.log(statusFilter)
+
   return (
     <aside className="common-filters">
       <form className="common-filters-form">
@@ -75,7 +75,7 @@ const AsideFilters = ({
             <div className={filterById === false ? "searchById" : "searchById show"}>
 
               <FilterById idFilter={idFilter} cancel={e => setFilterById(false)} />
-              <p className="cancelSearchById" onClick={e => setFilterById(false)}>Отмена</p>
+
             </div>
 
           </div>

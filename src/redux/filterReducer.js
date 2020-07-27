@@ -73,11 +73,12 @@ const initialState = {
     isLogged: false,
     isLoggedStatus: false,
     sort_price: 'low-price',
-    sort_date: '',
+    sort_date: 'false',
+
 }
 export const filterReducer = (state = initialState, action) => {
 
-    console.log(initialState)
+    // console.log(initialState)
 
     switch (action.type) {
 
@@ -328,6 +329,7 @@ export const filterReducer = (state = initialState, action) => {
                 featuresArr: false,
                 typeTransaction: false,
                 idFilter: '',
+                sort_date: 'false'
             };
 
 

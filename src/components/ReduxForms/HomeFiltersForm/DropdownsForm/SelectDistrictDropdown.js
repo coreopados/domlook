@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     propDistrictFilterCreator
@@ -28,11 +28,11 @@ const SelectDistrictDropdown = ({
         districts = chengeddistricts[j];
     }
 
-    const [selectedOption, setSelectedOption] = useState(districtFilter);
+    // const [selectedOption, setSelectedOption] = useState(districtFilter);
 
 
     if (propRegionFilter !== '' && propCityFilter !== '') {
-        propDistrictFilterFunc(selectedOption)
+        propDistrictFilterFunc(districtFilter)
     } else {
         propDistrictFilterFunc('')
     }
@@ -42,15 +42,15 @@ const SelectDistrictDropdown = ({
         return (
             <select name="select-district-filter" id="select-district-filter"
                 value={""}
-                onChange={e => setSelectedOption(e.target.value)}>
+                onChange={e => propDistrictFilterFunc(e.target.value)}>
                 <option value='' >Выберите район</option>
             </select>
         );
     } else {
         return (
             <select name="select-district-filter" id="select-district-filter"
-                value={selectedOption}
-                onChange={e => setSelectedOption(e.target.value)}>
+                value={districtFilter}
+                onChange={e => propDistrictFilterFunc(e.target.value)}>
                 <option value="">Выберите район</option>
                 {districts.map((o, index) => (
                     <option value={o.name} key={index}>{o.name}</option>

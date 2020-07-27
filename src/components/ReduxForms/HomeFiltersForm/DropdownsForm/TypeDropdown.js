@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     typeFilterCreator
@@ -10,7 +10,7 @@ const TypeDropdown = ({
 
 }) => {
 
-    const [selectedOption, setSelectedOption] = useState(typeFilter);
+    // const [selectedOption, setSelectedOption] = useState(typeFilter);
 
     const type_options = [
         { id: 0, value: '', label: 'Не выбрано' },
@@ -19,12 +19,12 @@ const TypeDropdown = ({
         { id: 3, value: 'commerce', label: 'Коммерческая недвижимость' }
     ];
 
-    typeFilterFunc(selectedOption)
+    // typeFilterFunc(selectedOption)
 
     return (
         <select name="type-filter" id="type-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={typeFilter}
+            onChange={e => typeFilterFunc(e.target.value)}>
             {type_options.map((o, index) => (
                 <option value={o.value} key={index}>{o.label}</option>
             ))}

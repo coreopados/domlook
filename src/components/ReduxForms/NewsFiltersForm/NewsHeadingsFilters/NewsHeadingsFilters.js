@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import './NewsHeadingsFilters.scss';
 import clsx from 'clsx';
@@ -25,7 +25,7 @@ const NewsHeadingsFilters = ({
       <h3>Рубрики</h3>
       <ul >
         {categories.map((item, index) => {
-         
+
           return <Link to="/news">
             <li className={clsx((activeCategory === item.name) && 'active')} onClick={e => (filterCategoryNewsFunc(item.name), paginateNews(number))}
               key={index}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     propWallsFilterCreator
@@ -19,13 +19,13 @@ const WallsDropdown = ({
         { id: 7, value: 'кирпич', label: 'кирпич' },
         { id: 8, value: 'бутовый камень', label: 'бутовый камень' },
     ];
-    const [selectedOption, setSelectedOption] = useState(wallsFilter);
+    // const [selectedOption, setSelectedOption] = useState(wallsFilter);
 
-    propWallsFilterFunc(selectedOption)
+    // propWallsFilterFunc(selectedOption)
     return (
         <select name="wall-filter" id="wall-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={wallsFilter}
+            onChange={e => propWallsFilterFunc(e.target.value)}>
             {walls_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}

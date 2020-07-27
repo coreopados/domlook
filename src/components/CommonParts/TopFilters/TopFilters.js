@@ -25,12 +25,12 @@ const TopFilters = ({
   sortPrice,
   sortDate
 }) => {
+  console.log(sortPrice, sortDate)
 
-  // let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sell"), [ads]);
 
   const pageTitle = useRef(null);
 
-  //количество рбьявлений в зависимости от страницы
+  //количество обьявлений в зависимости от страницы
   const quantityAds = useMemo(() => {
     if (match.path === '/sale') {
       pageTitle.current = "Продажа";
@@ -92,12 +92,14 @@ const TopFilters = ({
 
         <div className="select-wrap">
             <DropdownPriceSort sortPrice={sortPrice} />
+
           </div>
         </div>
 
         <div className="common-top-filters__post-date">Период подачи
         <div className="select-wrap">
-            <DropdownDateSort sortDate={sortDate}/>
+            <DropdownDateSort sortDate={sortDate} />
+
           </div>
         </div>
       </div>
@@ -107,6 +109,7 @@ const TopFilters = ({
 const mapStateToProps = state => ({
   orientation: state.mainReducer.orientation,
   ads: state.mainReducer.ads
+
 });
 
 const mapDispatchToProps = dispatch => ({

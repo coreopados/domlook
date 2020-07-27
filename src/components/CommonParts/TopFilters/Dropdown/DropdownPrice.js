@@ -15,16 +15,12 @@ const DropdownPriceSort = ({
         { id: 2, value: 'hight-price', label: 'от дорогих к дешевым' }
     ];
 
-    const [selectedOption, setSelectedOption] = useState(price_options[0].value);
-
-    sortPriceFunc(selectedOption)
-
 
     return (
 
         <select name="top-filter-price" id="top-filter-price"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={sortPrice}
+            onChange={e => sortPriceFunc(e.target.value)}>
             {price_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}

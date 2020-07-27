@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     priceFromFilterCreator,
@@ -13,16 +13,16 @@ const PriceFromTo = ({
 }) => {
 
 
-    const [selectedOptionFrom, setSelectedOptionFrom] = useState(priceFrom);
-    const [selectedOptionTo, setSelectedOptionTo] = useState(priceTo);
+    // const [selectedOptionFrom, setSelectedOptionFrom] = useState(priceFrom);
+    // const [selectedOptionTo, setSelectedOptionTo] = useState(priceTo);
 
-    PriceFromFunc(selectedOptionFrom);
-    PriceToFunc(selectedOptionTo);
+    // PriceFromFunc(selectedOptionFrom);
+    // PriceToFunc(selectedOptionTo);
 
     return (
         <div className="wrap-price">
-            <input type="number" onChange={e => setSelectedOptionFrom(e.target.value)} value={selectedOptionFrom} placeholder="От" />
-            <input type="number" onChange={e => setSelectedOptionTo(e.target.value)} value={selectedOptionTo} placeholder="До" />
+            <input type="number" onChange={e => PriceFromFunc(e.target.value)} value={priceFrom} placeholder="От" />
+            <input type="number" onChange={e => PriceToFunc(e.target.value)} value={priceTo} placeholder="До" />
             <select name="" id="">
                 <option value="dollar">$</option>
                 <option value="euro">€</option>

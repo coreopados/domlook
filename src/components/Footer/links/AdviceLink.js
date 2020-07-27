@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../Footer.scss';
 import { NavLink } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -8,14 +8,14 @@ import { filterCategoryNewsCreator } from '../../../redux/actionCreators';
 
 const AdviceLink = ({ filterCategoryNewsFunc }) => {
 
-    const [selectedOption, setselectedOption] = useState('')
+    // const [selectedOption, setselectedOption] = useState('')
 
-    filterCategoryNewsFunc(selectedOption);
+    // filterCategoryNewsFunc(selectedOption);
     // activeCategoryFunc(selectedOption)
     return (
         <ul className="footer-list">
             {categories.map((item, index) => {
-                return <li className="footer-list__item" onClick={e => { setselectedOption(item.name) }}
+                return <li className="footer-list__item" onClick={e => { filterCategoryNewsFunc(item.name) }}
                     key={index}
                 >
                     <NavLink

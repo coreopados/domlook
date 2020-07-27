@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     floorFilterCreator
@@ -16,13 +16,13 @@ const FloorDropdown = ({
         { id: 4, value: '17', label: 'до 17 эт.' },
         { id: 5, value: '25', label: 'до 25 эт.' },
     ];
-    const [selectedOption, setSelectedOption] = useState(floorFilter);
+    // const [selectedOption, setSelectedOption] = useState(floorFilter);
 
-    floorFilterFunc(selectedOption)
+    // floorFilterFunc(selectedOption)
     return (
         <select name="floor-filter" id="floor-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={floorFilter}
+            onChange={e => floorFilterFunc(e.target.value)}>
             {floor_options.map(o => (
                 <option value={o.value} key={o.id}>{o.label}</option>
             ))}

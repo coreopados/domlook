@@ -191,6 +191,8 @@ const RentPage = ({
     rentAds = rentAds.filter((ad) => Date.parse(ad.post_date) >= lastWeek)
   } else if (Number(sort_date) === 0) {
     rentAds = rentAds.filter((ad) => Date.parse(ad.post_date) >= today)
+  } else if (sort_date === 'false') {
+    rentAds = rentAds.filter((ad) => ad)
   }
 
   const indexOfLastAd = currentPageRent * itemsPerPage;
@@ -232,7 +234,7 @@ const RentPage = ({
             )}
             {/* {console.log(statusFilter, typeFilter, propRegionFilter)} */}
             <div className="common-section__block">
-              <TopFilters match={match} totalAdsRent={rentAds.length} />
+              <TopFilters match={match} totalAdsRent={rentAds.length} sortPrice={sort_price} sortDate={sort_date} />
               {isLoading && (
                 <div className="loader-wrapper">
                   <Loader type="Puff" color="#313237" height={80} width={80} />

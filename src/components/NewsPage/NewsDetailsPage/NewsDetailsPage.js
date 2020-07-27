@@ -13,9 +13,8 @@ const NewsDetailsPage = ({
   isLoading,
   isLoaded,
   id,
-  filterCategoryNews
 }) => {
-  console.log(filterCategoryNews)
+
 
   if (id && id <= news.length) {
     return (
@@ -37,7 +36,7 @@ const NewsDetailsPage = ({
             <div className="container">
               <div className="news-details-page__wrapper">
                 <aside className="news-details-block-1">
-                  <NewsHeadingsFilters category={filterCategoryNews} />
+                  <NewsHeadingsFilters />
                   <div className="news-details-block-1__popular">
                     <h4 className="news-details-block-1__title">
                       Популярные новости
@@ -104,7 +103,6 @@ const mapStateToProps = (state, ownProps) => {
     id: ownProps.match.params.id ? Number(ownProps.match.params.id) : null,
     isLoaded: state.mainReducer.isLoaded,
     isLoading: state.mainReducer.isLoading,
-    // filterCategoryNews: state.filterReducer.filterCategoryNews,
     news: state.mainReducer.news,
     newsItem: (state.mainReducer.news && state.mainReducer.news.length > 0)
       ? state.mainReducer.news.find(ad => ad.id === id)

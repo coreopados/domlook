@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import {
     propRegionFilterCreator,
@@ -14,19 +14,24 @@ const SelectRegionDropdown = ({
     regionFilter
 }) => {
 
-    const [selectedOption, setSelectedOption] = useState(regionFilter);
+    // const [selectedOption, setSelectedOption] = useState(regionFilter);
 
-    propRegionFilterFunc(selectedOption)
+    // propRegionFilterFunc(selectedOption)
 
-    if (selectedOption === '') {
+    // if (selectedOption === '') {
+    //     propCityFilterFunc('');
+    //     propDistrictFilterFunc('');
+    // }
+
+    if (regionFilter === '') {
         propCityFilterFunc('');
         propDistrictFilterFunc('');
     }
 
     return (
         <select name="select-region-filter" id="select-region-filter"
-            value={selectedOption}
-            onChange={e => setSelectedOption(e.target.value)}>
+            value={regionFilter}
+            onChange={e => propRegionFilterFunc(e.target.value)}>
             <option value="" >Выберите область</option>
             {regions.region.map((o, index) => (
                 <option value={o.name} key={index}>{o.name}</option>
