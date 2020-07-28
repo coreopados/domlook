@@ -14,7 +14,7 @@ import { HomePageCities } from "./HomePageCities/HomePageCities";
 import { HomeAdsList } from "./HomeAdsList/HomeAdsList";
 import {
   handleLoadNewsAds,
-  setFavouritesCreator
+  // setFavouritesCreator
 } from "../../redux/actionCreators";
 import { filterStatusRentCreator, filterStatusSellCreator, filterTypeApartmentCreator, filterTypeHouseCreator } from "../../redux/actionFilterCreators";
 
@@ -34,7 +34,7 @@ const HomePage = ({
   typeFilter,
   featuresArr,
   propRegionFilter,
-  setFavourites,
+  // setFavourites,
   typeTransaction,
 
   totalAreaFilter,
@@ -52,13 +52,13 @@ const HomePage = ({
 
 
 
-  useEffect(() => {
-    const cachedFavourites = localStorage.getItem('favourites');
+  // useEffect(() => {
+  //   const cachedFavourites = localStorage.getItem('favourites');
 
-    if (cachedFavourites) {
-      setFavourites(JSON.parse(cachedFavourites));
-    }
-  }, []);
+  //   if (cachedFavourites) {
+  //     setFavourites(JSON.parse(cachedFavourites));
+  //   }
+  // }, []);
 
   const aptsAds = useMemo(
     () =>
@@ -258,7 +258,7 @@ const mapDispatchToProps = (dispatch) => ({
   filterStatusSell: () => dispatch(filterStatusSellCreator()),
   filterTypeApartment: () => dispatch(filterTypeApartmentCreator()),
   filterTypeHouse: () => dispatch(filterTypeHouseCreator()),
-  setFavourites: (ads) => dispatch(setFavouritesCreator(ads)),
+  // setFavourites: (ads) => dispatch(setFavouritesCreator(ads)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(HomePage);
