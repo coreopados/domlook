@@ -1,5 +1,6 @@
 
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -9,8 +10,10 @@ import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationRent } from "../CommonParts/Pagination/PaginationRentPage";
+import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 import About from "../CommonParts/About/About";
+import { resetPaginationCreator } from "../../redux/actionCreators";
 
 const RentPage = ({
   ads,
@@ -20,8 +23,10 @@ const RentPage = ({
   match,
   itemsPerPage,
   currentPageRent,
+  currentPage,
   sort_price,
   sort_date,
+  resetPagination,
 
   idFilter,
   typeFilter,
@@ -44,8 +49,15 @@ const RentPage = ({
   typeTransaction
 }) => {
 
+<<<<<<< HEAD
   console.log(featuresArr, typeTransaction)
+=======
+  const location = useLocation();
+>>>>>>> e621bea0538e8e3d2e9413b968ae67ed2897e1db
 
+  useEffect(() => {
+    resetPagination();
+  }, [location]);
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
@@ -198,7 +210,11 @@ const RentPage = ({
     rentAds = rentAds.filter((ad) => ad)
   }
 
-  const indexOfLastAd = currentPageRent * itemsPerPage;
+  // const indexOfLastAd = currentPageRent * itemsPerPage;
+  // const indexOfFirstAd = indexOfLastAd - itemsPerPage;
+  // const currentAds = rentAds.slice(indexOfFirstAd, indexOfLastAd);
+
+  const indexOfLastAd = currentPage * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = rentAds.slice(indexOfFirstAd, indexOfLastAd);
 
@@ -241,7 +257,8 @@ const RentPage = ({
               )}
               {isLoaded && <List ads={currentAds} match={match} sortPrice={sort_price} />}
 
-              {(rentAds.length > 9) && <PaginationRent currentPage={currentPageRent} totalItems={rentAds.length} />}
+              {/* (rentAds.length > 9) && <PaginationRent currentPage={currentPageRent} totalItems={rentAds.length} /> */}
+              {(rentAds.length > 9) && <Pagination currentPage={currentPageRent} totalItems={rentAds.length} />}
               <About title="Аренда недвижимости в Украине">
                 <p className="about__text">
                   Несмотря на то, что сегодня на рынке недвижимости существует
@@ -315,6 +332,7 @@ const mapStateToProps = (state) => ({
   // sort_by_date: state.filterByDateReducer.sort_by_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageRent: state.paginationReducer.currentPageRent,
+  currentPage: state.paginationReducer.currentPage,
 
   idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
@@ -337,9 +355,11 @@ const mapStateToProps = (state) => ({
   typeTransaction: state.filterReducer.typeTransaction,
 });
 
+const mapDispatchToProps = dispatch => ({
+  resetPagination: () => dispatch(resetPaginationCreator()),
+});
 
-
-const Enhanced = connect(mapStateToProps, null)(RentPage);
+const Enhanced = connect(mapStateToProps, mapDispatchToProps)(RentPage);
 
 export { Enhanced as RentPage };
 

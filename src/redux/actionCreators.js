@@ -15,6 +15,7 @@ import {
   PAGINATE_DAILYRENT,
   PAGINATE_NEWS,
   PAGINATE_COMMON,
+  RESET_PAGINATION,
 
   ACTIVE_MAIN_FORM,
   ACTIVE_REG_FORM,
@@ -28,7 +29,8 @@ import {
   ACTIVE_CATEGORY_NEWS,
   IS_LOGGED,
   IS_LOGGED_IN,
-  USER_ID
+  USER_ID,
+  PAGINATE,
 
 } from './constants';
 // import { loadAds } from '../api/loadAds';
@@ -166,6 +168,13 @@ export const paginateNewsCreator = number => ({
 export const paginateCommonCreator = number => ({
   type: PAGINATE_COMMON,
   payload: number,
+});
+export const paginateCreator = number => ({
+  type: PAGINATE,
+  payload: number,
+});
+export const resetPaginationCreator = () => ({
+  type: RESET_PAGINATION,
 });
 
 // логин попап
