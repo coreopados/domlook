@@ -54,7 +54,28 @@ const SalePage = ({
 
   useEffect(() => {
     resetPagination();
-  }, [location]);
+  }, [
+    location,
+    typeFilter,
+    typeFilter,
+    statusFilter,
+    cityFilter,
+    totalAreaFilter,
+    floorFilter,
+    roomsFilter,
+    propWallsFilter,
+    propOfferFilter,
+    propHeatingFilter,
+    propBuildingFilter,
+    propCeilingHeightFilter,
+    propRegionFilter,
+    propCityFilter,
+    propDistrictFilter,
+    priceFromFilter,
+    priceToFilter,
+    typeTransaction,
+    sort_price
+  ]);
 
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
