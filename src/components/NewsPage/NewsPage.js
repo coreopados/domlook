@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
-<<<<<<< HEAD
-import './NewsPage.scss';
-=======
 import { useLocation } from 'react-router-dom'
->>>>>>> e621bea0538e8e3d2e9413b968ae67ed2897e1db
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { NewsFiltersForm } from "../ReduxForms/NewsFiltersForm/NewsFiltersForm";
 import { NewsAdsList } from "./NewsAdsList/NewsAdsList";
-import { PaginationNews } from "../CommonParts/Pagination/PaginationNewsPage";
 import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { handleLoadNewsAds } from "../../redux/actionCreators";
 import About from "../CommonParts/About/About";
@@ -20,14 +15,13 @@ const NewsPage = ({
   news,
   match,
   itemsPerPage,
-  currentPageNews,
   currentPage,
   filterCategoryNews,
   loadData,
   resetPagination,
 }) => {
 
-  useEffect(() => { 
+  useEffect(() => {
     loadData();
   }, []);
 

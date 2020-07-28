@@ -6,7 +6,7 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { filterCategoryNewsCreator, activeMainFormCreator, activeRegFormCreator, handleLoadNewsAds, } from "../../redux/actionCreators";
+import { filterCategoryNewsCreator, activeMainFormCreator, activeRegFormCreator, handleLoadNewsAds, setMobMenuStatusCreator } from "../../redux/actionCreators";
 import { resetFilters } from "../../redux/actionHomeFilterCreators";
 import './Header.scss';
 import { propStatusFilterCreator } from '../../redux/actionHomeFilterCreators';
@@ -30,6 +30,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
   const [activeReg, setActiveReg] = useState(regform)
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [isLoggedd, setIsLoggedd] = useState(isLoggedStatus)
+  const [mobMenuStatus, setMobMenuStatus] = useState(false)
 
   useEffect(() => {
     const loginValue = localStorage.getItem('login');
@@ -279,7 +280,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
               </div>
             </NavLink>
 
-            <button className="header-nav__button mob-menu"><span></span></button>
+            <button className="header-nav__button mob-menu" onClick={e => setMobMenuStatus(!mobMenuStatus)}><span></span></button>
             {
               isLoggedd === true &&
               <NavLink to="/addAd" className="add__button-mobile">
@@ -294,7 +295,9 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
             }
           </div>
 
-          <div className="mobile-menu-wrap">
+
+
+          <div className={mobMenuStatus == true ? "mobile-menu-wrap show" : "mobile-menu-wrap"} >
             {isLoggedd === false &&
               <div className="header-top-section">
                 <div className="header-top-section__wrapper">

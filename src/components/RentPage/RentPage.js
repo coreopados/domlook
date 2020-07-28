@@ -49,11 +49,7 @@ const RentPage = ({
   typeTransaction
 }) => {
 
-<<<<<<< HEAD
-  console.log(featuresArr, typeTransaction)
-=======
   const location = useLocation();
->>>>>>> e621bea0538e8e3d2e9413b968ae67ed2897e1db
 
   useEffect(() => {
     resetPagination();
