@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import './NewsPage.scss';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";

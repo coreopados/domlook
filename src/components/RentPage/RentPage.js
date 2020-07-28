@@ -44,6 +44,7 @@ const RentPage = ({
   typeTransaction
 }) => {
 
+  console.log(featuresArr, typeTransaction)
 
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);

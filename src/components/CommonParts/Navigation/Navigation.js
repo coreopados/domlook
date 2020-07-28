@@ -27,7 +27,7 @@ const Navigation = ({
   cityFilter,
   districtFilter
 }) => {
-  console.log(statusFilter, typeFilter)
+  // console.log(statusFilter, typeFilter)
 
   return (
 
@@ -42,7 +42,7 @@ const Navigation = ({
           {/* status */}
           {pageName === "Продажа" && !statusFilter && <Link to="/sale" className="common-nav__link">Продажа</Link>}
           {pageName === "Аренда" && !statusFilter && <Link to="/rent" className="common-nav__link">Аренда</Link>}
-          {pageName === "Посуточно" && !statusFilter && <Link to="/dailyrent" className="common-nav__link">Посуточно</Link>}
+          {pageName === "Посуточно" && !statusFilter && <Link to="/dailyRent" className="common-nav__link">Посуточно</Link>}
           {pageName === "Избранное" && <Link to="/favourites" className="common-nav__link">Избранное</Link>}
 
 
@@ -94,7 +94,7 @@ const Navigation = ({
 
 
           {/* dailyrent */}
-          {statusFilter === "dailyRent" && pageName !== "Объявления" &&
+          {statusFilter === "dailyrent" && pageName !== "Объявления" &&
             <Link to={"/" + statusFilter} className="common-nav__link">
               <button
                 onClick={() => (resetFiltersFunc(), statusFilterFunc(statusFilter), typeFilterFunc(''), regionFilterFunc(''))}

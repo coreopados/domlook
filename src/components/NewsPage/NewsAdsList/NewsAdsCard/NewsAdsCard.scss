@@ -29,9 +29,15 @@
     }
   }
   &__photo-wrapper {
-    height: 350px;
+    max-height: 350px;
+    height: auto;
     width: 100%;
     margin-bottom: 32px;
+    overflow: hidden;
+    img{
+      object-position: center;
+      min-height: 205px;
+    }
   }
   &__photo {
     height: 100%;

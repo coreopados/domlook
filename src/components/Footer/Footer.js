@@ -64,12 +64,14 @@ const Footer = ({
                 </li>
               </ul>
             </div>
-            <div className="footer-cities">
-              <RegionLink propRegionFilter={propRegionFilter} />
-            </div>
-            <div className="footer-usefull-links">
-              < AdviceLink />
-              {/* activeCategory={activeCategory} */}
+            <div className="foot-wrap-link">
+              <div className="footer-cities">
+                <RegionLink propRegionFilter={propRegionFilter} />
+              </div>
+              <div className="footer-usefull-links">
+                < AdviceLink />
+                {/* activeCategory={activeCategory} */}
+              </div>
             </div>
           </div>
           <div className="footer-settings">

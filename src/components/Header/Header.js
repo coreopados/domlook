@@ -58,7 +58,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
       </div>
 
       <div className="container">
-        <div className="header__wrapper">
+        <div className="header__wrapper header-1">
 
           {isLoggedd === false &&
             <div className="header-top-section">
@@ -240,7 +240,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
 
             {
               isLoggedd === true &&
-              <NavLink to="/addAd">
+              <NavLink to="/addAd" className="add__button-desc">
                 <button
                   type="button"
                   className="header-nav__button"
@@ -250,17 +250,207 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
                 </button>
               </NavLink>
             }
+          </div>
+        </div>
+
+
+        <div className="header__wrapper header-2">
+
+
+
+
+          <div className="header-nav">
+            <NavLink
+              to="/"
+              // to={`${process.env.PUBLIC_URL}/`}
+              className="header-nav__logo-wrapper"
+            >
+              <div onClick={() => resetFilters()}>
+                <img
+                  src="/domlook/img/header/logo-header-1.png"
+                  alt="логотип"
+                  className="header-nav__logo-1"
+                />
+                <img
+                  src="/domlook/img/header/logo-header-2.png"
+                  alt="логотип"
+                  className="header-nav__logo-2"
+                />
+              </div>
+            </NavLink>
+
+            <button className="header-nav__button mob-menu"><span></span></button>
             {
-              isLoggedd === false &&
-              <button
-                type="button"
-                className="header-nav__button"
-                onClick={e => { setIsOpenModal(true) }}
-              >
-                + Добавить объявление
+              isLoggedd === true &&
+              <NavLink to="/addAd" className="add__button-mobile">
+                <button
+                  type="button"
+                  className="header-nav__button"
+                  onClick={e => { setIsOpenModal(true) }}
+                >
+                  +
+                </button>
+              </NavLink>
+            }
+          </div>
+
+          <div className="mobile-menu-wrap">
+            {isLoggedd === false &&
+              <div className="header-top-section">
+                <div className="header-top-section__wrapper">
+                  <NavLink
+                    to="/favourites"
+                    className="header-top-section__link"
+                  >
+                    <button
+                      type="button"
+                      className="header-top-section__button
+                header-top-section__button--favourites"
+                    >
+                      Избранное
               </button>
+                  </NavLink>
+                  <button
+                    onClick={e => { setIsOpenModal(true) }}
+                    type="button"
+                    className="header-top-section__button
+              header-top-section__button--sign-in-up"
+                  >
+                    Вход/Регистрация
+            </button>
+                </div>
+              </div>
             }
 
+            {isLoggedd === true &&
+              <div className="header-top-section">
+                <div className="header-top-section__wrapper-logged">
+                  <NavLink
+                    to="/rielters"
+                    className="header-top-section__link"
+                  >
+                    <button
+                      type="button"
+                      className="header-top-section__button header-top-section__button--spriel "
+                    >
+                      {/* <i class="fa fa-user"></i> */}
+                  Список риелтеров
+                  </button>
+                  </NavLink>
+
+                  <NavLink
+                    to="/privates"
+                    className="header-top-section__link"
+                  >
+                    <button
+                      type="button"
+                      className="header-top-section__button  header-top-section__button--s-ch"
+                    >
+                      {/* <i class="fa fa-plus-circle"></i> */}
+                  Список частников
+                  </button>
+                  </NavLink>
+
+                  <NavLink to="/addAd">
+                    <button
+
+                      type="button"
+                      className="header-top-section__button header-top-section__button--dob"
+                    >
+                      {/* <i class="fa fa-plus-circle"></i> */}
+                  Добавить объявление
+                  </button>
+                  </NavLink>
+                  <NavLink to="/objects">
+                    <button
+
+                      type="button"
+                      className="header-top-section__button header-top-section__button--mo"
+                    >
+                      {/* <i class="fa fa-th-list"></i> */}
+                  Мои объекты
+                  </button>
+                  </NavLink>
+                  <NavLink to="/favourites">
+                    <button
+
+                      type="button"
+                      className="header-top-section__button header-top-section__button--favourites"
+                    >
+                      {/* <i class="fa fa-plus-circle"></i> */}
+                  Избранное
+                  </button>
+                  </NavLink>
+                  <NavLink to="/profile">
+                    <button
+
+                      type="button"
+                      className="header-top-section__button header-top-section__button--profile"
+                    >
+                      {/* <i class="fa fa-plus-circle"></i> */}
+                  Профиль
+                  </button>
+                  </NavLink>
+                  <NavLink to="/">
+                    <button
+                      onClick={e => (setIsLoggedd(false), setIsOpenModal(false), localStorage.setItem('login', 'false'))}
+
+                      type="button"
+                      className="header-top-section__button header-top-section__button--exit"
+                    >
+                      <i className="fa fa-sign-out"></i>
+                  Выйти
+                  </button>
+                  </NavLink>
+                </div>
+              </div>
+            }
+            <nav className="navigation">
+              <ul className="navigation__list">
+                <li className="navigation__item">
+
+                  <NavLink
+                    to="/sale"
+                    // to={`${process.env.PUBLIC_URL}/sale`}
+                    className="navigation__link"
+                    activeClassName="navigation__link--active"
+                  > <button onClick={() => (resetFilters(), statusFilterFunc("sale"))}>Продажа</button>
+                  </NavLink>
+
+                </li>
+                <li className="navigation__item">
+                  <NavLink
+                    to="/rent"
+                    // to={`${process.env.PUBLIC_URL}/rent`}
+                    className="navigation__link"
+                    activeClassName="navigation__link--active"
+                  ><button onClick={() => (resetFilters(), statusFilterFunc("rent"))}> Аренда</button>
+
+                  </NavLink>
+                </li>
+                <li className="navigation__item">
+                  <NavLink
+                    to="/dailyRent"
+                    // to={`${process.env.PUBLIC_URL}/dailyRent`}
+                    className="navigation__link"
+                    activeClassName="navigation__link--active"
+                  ><button onClick={() => (resetFilters(), statusFilterFunc("dailyrent"))}>Посуточно</button>
+
+                  </NavLink>
+                </li>
+                <li className="navigation__item">
+                  <NavLink
+                    to="/news"
+                    // to={`${process.env.PUBLIC_URL}/news`}
+                    className="navigation__link"
+                    activeClassName="navigation__link--active"
+                    onClick={() => resetFilters()}
+                  >
+                    Новости рынка
+                </NavLink>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div >

@@ -24,17 +24,19 @@ const NewsHeadingsFilters = ({
     <div className="heading-filters">
       <h3>Рубрики</h3>
       <ul >
-        {categories.map((item, index) => {
+        <Link to="/news">
+          {categories.map((item, index) => {
 
-          return <li className={clsx((activeCategory === item.name) && 'active')} onClick={e => (filterCategoryNewsFunc(item.name), paginateNews(number))}
-            key={index}
-          >
-            <Link to="/news">
+            return <li className={clsx((activeCategory === item.name) && 'active')} onClick={e => (filterCategoryNewsFunc(item.name), paginateNews(number))}
+              key={index}
+            >
+
               {item.name}
-            </Link>
-          </li>
 
-        })}
+            </li>
+
+          })}
+        </Link>
       </ul>
     </div >
   );
