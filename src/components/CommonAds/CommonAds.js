@@ -53,7 +53,28 @@ const CommonAds = ({
 
   useEffect(() => {
     resetPagination();
-  }, [location]);
+  }, [
+    location,
+    typeFilter,
+    typeFilter,
+    statusFilter,
+    cityFilter,
+    totalAreaFilter,
+    floorFilter,
+    roomsFilter,
+    propWallsFilter,
+    propOfferFilter,
+    propHeatingFilter,
+    propBuildingFilter,
+    propCeilingHeightFilter,
+    propRegionFilter,
+    propCityFilter,
+    propDistrictFilter,
+    priceFromFilter,
+    priceToFilter,
+    typeTransaction,
+    sort_price
+  ]);
 
   // console.log(typeFilter, statusFilter)
   let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);

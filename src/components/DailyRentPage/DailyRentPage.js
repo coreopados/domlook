@@ -52,7 +52,28 @@ const DailyRentPage = ({
 
   useEffect(() => {
     resetPagination();
-  }, [location]);
+  }, [
+    location,
+    typeFilter,
+    typeFilter,
+    statusFilter,
+    cityFilter,
+    totalAreaFilter,
+    floorFilter,
+    roomsFilter,
+    propWallsFilter,
+    propOfferFilter,
+    propHeatingFilter,
+    propBuildingFilter,
+    propCeilingHeightFilter,
+    propRegionFilter,
+    propCityFilter,
+    propDistrictFilter,
+    priceFromFilter,
+    priceToFilter,
+    typeTransaction,
+    sort_price
+  ]);
 
   let dailyRentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
