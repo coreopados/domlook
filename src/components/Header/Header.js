@@ -52,7 +52,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
         <img
           src="/domlook/img/header/main-bg.png"
           alt="фон"
-          className="header__main-bg"
+          className={mobMenuStatus === true ? "header__main-bg big-img" : "header__main-bg"}
         />
         <div className="header__overlay-1" />
         <div className="header__overlay-2" />
@@ -245,11 +245,23 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
                 <button
                   type="button"
                   className="header-nav__button"
-                  onClick={e => { setIsOpenModal(true) }}
+                // onClick={e => { setIsOpenModal(true) }}
                 >
                   + Добавить объявление
                 </button>
               </NavLink>
+            }
+            {
+              isLoggedd === false &&
+
+              <button
+                type="button"
+                className="header-nav__button"
+                onClick={e => { setIsOpenModal(true) }}
+              >
+                + Добавить объявление
+                </button>
+
             }
           </div>
         </div>
@@ -292,6 +304,18 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
                   +
                 </button>
               </NavLink>
+            }
+            {
+              isLoggedd === false &&
+              // <NavLink to="/addAd" className="add__button-mobile">
+              <button
+                type="button"
+                className="header-nav__button"
+                onClick={e => { setIsOpenModal(true) }}
+              >
+                +
+                </button>
+              // </NavLink>
             }
           </div>
 

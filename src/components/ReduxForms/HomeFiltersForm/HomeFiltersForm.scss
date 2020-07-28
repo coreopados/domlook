@@ -8,20 +8,23 @@
     margin-bottom: 50px;
     color: #fff;
     font-size: 32px;
-    font-family: "HelveticaNeueCyr", sans-serif;
+    // font-family: "HelveticaNeueCyr", sans-serif;
     font-weight: normal;
     text-align: center;
+    text-shadow: 2px 2px 2px #0000006b;
+    font-weight: 300;
+    font-style: normal;
   }
 }
 .wrap-main-filter{
   min-height: 385px;
-  padding: 30px;
+  padding: 40px;
   background: #fff;
   border-radius: 10px;
   .home-filters-form {
 
     display:grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(170px,1fr));
     grid-gap:10px 2%;
     .block{
       display: flex;
@@ -47,14 +50,15 @@
           height: 41px;
           border-radius: 5px;
           background: url('/domlook/img/home-page/bo_pole.png') no-repeat;
-          background-size: cover;
-          background-position-y: -2px;
-          background-position-x: 0px;
+          // background-size: cover;
+          // background-position-y: -2px;
+          background-position:center right;
           box-shadow: 0;
           font-size: 14px;
           color: #414141;
           font-weight: 300;
           font-family: 'Roboto';
+          padding-right: 0;
   
         }
         .wrap-price{
@@ -83,7 +87,7 @@
           input:nth-of-type(2){
             max-width: 130px;
             width: 100%;
-            margin-left: 10px;
+            margin-left: 5px;
             
           }
   
@@ -225,4 +229,63 @@
   }
 
 }
+@media screen and (max-width: 1092px){
+  .wrap-main-filter {
+    margin-left: -35px;
+    margin-right: -35px;
+  }
+  .wrap-main-filter .home-filters-form .block label .wrap-price input{
+    max-width: 80px;
+  }
+}
 
+@media screen and (max-width: 768px){
+  .wrap-main-filter .home-filters-form{
+    grid-template-columns: repeat(3, minmax(170px,1fr));
+  }
+}
+
+@media screen and (max-width: 620px){
+  .wrap-main-filter .home-filters-form{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .wrap-main-filter .home-filters-form .block label .wrap-price input {
+    max-width: 100px;
+  }
+}
+@media screen and (max-width: 540px){
+  .wrap-main-filter .home-filters-form .block label .wrap-price input {
+    max-width: 115px;
+  }
+}
+
+
+@media screen and (max-width: 480px){
+  .wrap-main-filter .home-filters-form{
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .wrap-main-filter .home-filters-form .block{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 250px;
+  }
+}
+@media screen and (max-width: 360px){
+  .wrap-main-filter .home-filters-form .block label .wrap-price input {
+    max-width: 85px;
+}
+.wrap-main-filter .home-filters-form .block {
+  width: 95%;
+  margin: 0 auto;
+}
+}
+
+
+// .wrap-main-filter {
+//   min-height: 385px;
+//   padding: 30px;
+//   background: #fff;
+//   border-radius: 10px;
+//   margin-left: -20px;
+//   margin-right: -20px;
+// }
