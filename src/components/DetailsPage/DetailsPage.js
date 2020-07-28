@@ -9,17 +9,34 @@ import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { DetailsMap } from "../CommonParts/DetailsMap/DetailsMap";
 import DetailsFeatures from "./DetailsFeatures/DetailsFeatures.js";
 import { users } from "../../api/testUsers.json";
-import { addFavouriteCreator } from "../../redux/actionCreators";
+import {
+  addFavouriteCreator,
+  setFavouritesCreator,
+} from "../../redux/actionCreators";
 
 import ReactFancyBox from 'react-fancybox';
 import 'react-fancybox/lib/fancybox.css';
 import ImageGallery from 'react-image-gallery';
 
-
-const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, addFavourites }) => {
+const DetailsPage = ({
+  ad, 
+  ads, 
+  loadData, 
+  isLoaded, 
+  isLoading, 
+  id, 
+  favourites, 
+  addFavourites,
+  setFavourites 
+}) => {
   useEffect(() => {
     if (ad === null || ad === undefined) {
       loadData();
+    }
+    const cachedFavourites = localStorage.getItem('favourites');
+
+    if (cachedFavourites) {
+      setFavourites(JSON.parse(cachedFavourites));
     }
   }, []);
 
@@ -28,6 +45,13 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
       localStorage.setItem('favourites', JSON.stringify(favourites));
     }
   }, [favourites]);
+
+  const favouriteMatch = favourites.find(item => item.id === ad.id);
+  let favouriteChecker;
+
+  if (favouriteMatch) {
+    favouriteChecker = favouriteMatch.id === ad.id;
+  }
 
   const handleAddFavourites = (e) => {
     e.preventDefault();
@@ -38,7 +62,7 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
     }
   };
 
-
+  console.log(favourites)
 
   const calcPerSquareMeter = useCallback(() => {
     const total_area = Number(ad.total_area);
@@ -144,7 +168,7 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
                       className="details-full-info__action fav-button"
                       onClick={(e) => handleAddFavourites(e)}
                     >
-                      {!favourites.includes(ad) ? "Добавить в избранное" : "Добавлено"}
+                      {!favouriteChecker ? "Добавить в избранное" : "Добавлено"}
                       {/* {favourites.filter((elem) => elem.id === Number(`${adId()}`)) ? "Добавлено" : "Добавить в избранное"} */}
 
 
@@ -265,7 +289,7 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
                       <ImageGallery items={images()} showPlayButton={false} />
                     }
                     {images() == 0 &&
-                      < ReactFancyBox
+                      <ReactFancyBox
                         thumbnail={ad.imgUrl}
                         image={ad.imgUrl} />
                     }
@@ -386,7 +410,7 @@ const DetailsPage = ({ ad, ads, loadData, isLoaded, isLoading, id, favourites, a
         </section>
       )
       }
-    </main >
+    </main>
   );
   // }
   //  else {
@@ -417,6 +441,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   loadData: () => dispatch(handleLoadAds()),
   addFavourites: (ad) => dispatch(addFavouriteCreator(ad)),
+  setFavourites: (ads) => dispatch(setFavouritesCreator(ads)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(DetailsPage);
