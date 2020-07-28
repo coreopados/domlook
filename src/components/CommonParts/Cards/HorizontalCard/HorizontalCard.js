@@ -13,6 +13,13 @@ const HorizontalCard = ({ ad, addFavourites, favourites }) => {
     }
   }, [favourites]);
 
+  const favouriteMatch = favourites.find(item => item.id === ad.id);
+  let favouriteChecker;
+
+  if (favouriteMatch) {
+    favouriteChecker = favouriteMatch.id === ad.id;
+  }
+
   const handleAddFavourites = (e) => {
     e.preventDefault();
     const hasFavourites = favourites.findIndex((item) => item.id === ad.id);
@@ -50,7 +57,7 @@ const HorizontalCard = ({ ad, addFavourites, favourites }) => {
             <span className="horizontal-card__floor">{`${ad.floor}/${ad.total_floors}`}</span>
             <span className="horizontal-card__rooms">{ad.rooms}</span>
           </div>
-          {!favourites.includes(ad) ? (
+          {!favouriteChecker ? (
             <button
               type="button"
               className="horizontal-card__to-favourites"

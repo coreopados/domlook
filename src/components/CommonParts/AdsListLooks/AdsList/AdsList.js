@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "./AdsList.scss";
 import { HorizontalCard } from "../../Cards/HorizontalCard/HorizontalCard";
+import {
+  setFavouritesCreator,
+} from "../../../../redux/actionCreators";
 
+const AdsList = ({ ads, match, setFavourites }) => {
+  useEffect(() => {
+    const cachedFavourites = localStorage.getItem('favourites');
 
-export const AdsList = ({ ads, match }) => {
+    if (cachedFavourites) {
+      setFavourites(JSON.parse(cachedFavourites));
+    }
+  }, []);
 
   return (
 
@@ -17,7 +27,15 @@ export const AdsList = ({ ads, match }) => {
       ))}
     </div>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setFavourites: (ads) => dispatch(setFavouritesCreator(ads)),
+});
+
+const Enhanced = connect(null, mapDispatchToProps)(AdsList);
+
+export { Enhanced as AdsList };
 
 AdsList.propTypes = {
   ads: PropTypes.arrayOf(
@@ -39,4 +57,5 @@ AdsList.propTypes = {
   ).isRequired,
   match: PropTypes.shape().isRequired,
   // sort: PropTypes.func.isRequired,
+  setFavourites: PropTypes.func.isRequired,
 };
