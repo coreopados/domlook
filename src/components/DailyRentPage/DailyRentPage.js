@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -8,8 +9,11 @@ import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationDailyRent } from "../CommonParts/Pagination/PaginationDailyRentPage";
+import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 import About from "../CommonParts/About/About";
+import { resetPaginationCreator } from "../../redux/actionCreators";
+
 const DailyRentPage = ({
   ads,
   isLoaded,
@@ -17,9 +21,11 @@ const DailyRentPage = ({
   orientation,
   match,
   currentPageDailyRent,
+  currentPage,
   itemsPerPage,
   sort_price,
   sort_date,
+  resetPagination,
 
   idFilter,
   typeFilter,
@@ -41,6 +47,12 @@ const DailyRentPage = ({
   featuresArr,
   typeTransaction
 }) => {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    resetPagination();
+  }, [location]);
 
   let dailyRentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "dailyrent"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
@@ -182,7 +194,11 @@ const DailyRentPage = ({
   }
 
 
-  const indexOfLastAd = currentPageDailyRent * itemsPerPage;
+  // const indexOfLastAd = currentPageDailyRent * itemsPerPage;
+  // const indexOfFirstAd = indexOfLastAd - itemsPerPage;
+  // const currentAds = dailyRentAds.slice(indexOfFirstAd, indexOfLastAd);
+
+  const indexOfLastAd = currentPage * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = dailyRentAds.slice(indexOfFirstAd, indexOfLastAd);
 
@@ -222,7 +238,8 @@ const DailyRentPage = ({
               )}
               {isLoaded && <TopFilters match={match} totalAdsDailyRent={dailyRentAds.length} sortPrice={sort_price} sortDate={sort_date} />}
               {isLoaded && <List ads={currentAds} match={match} sortPrice={sort_price} />}
-              {(dailyRentAds.length > 9) && <PaginationDailyRent totalItems={dailyRentAds.length} />}
+              {/* (dailyRentAds.length > 9) && <PaginationDailyRent totalItems={dailyRentAds.length} /> */}
+              {(dailyRentAds.length > 9) && <Pagination totalItems={dailyRentAds.length} />}
 
               <About title="Посуточная аренда недвижимости">
                 <p className="common-about__description">
@@ -302,6 +319,7 @@ const mapStateToProps = (state) => ({
   sort_date: state.filterReducer.sort_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageDailyRent: state.paginationReducer.currentPageDailyRent,
+  currentPage: state.paginationReducer.currentPage,
   idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
@@ -323,7 +341,11 @@ const mapStateToProps = (state) => ({
   typeTransaction: state.filterReducer.typeTransaction,
 });
 
-const Enhanced = connect(mapStateToProps, null)(DailyRentPage);
+const mapDispatchToProps = dispatch => ({
+  resetPagination: () => dispatch(resetPaginationCreator()),
+});
+
+const Enhanced = connect(mapStateToProps, mapDispatchToProps)(DailyRentPage);
 
 export { Enhanced as DailyRentPage };
 

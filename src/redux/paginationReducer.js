@@ -4,6 +4,8 @@ import {
     PAGINATE_DAILYRENT,
     PAGINATE_NEWS,
     PAGINATE_COMMON,
+    PAGINATE,
+    RESET_PAGINATION
 } from './constants';
 
 export const initialState = {
@@ -13,6 +15,7 @@ export const initialState = {
     currentPageDailyRent: 1,
     currentPageNews: 1,
     currentPageCommon: 1,
+    currentPage: 1,
 };
 
 export const paginationReducer = (state = initialState, action) => {
@@ -48,6 +51,16 @@ export const paginationReducer = (state = initialState, action) => {
                 ...state,
                 currentPageNews: action.payload,
             };
+        case PAGINATE:
+            return {
+              ...state,
+              currentPage: action.payload,
+            }
+        case RESET_PAGINATION:
+          return {
+            ...state,
+            currentPage: 1,
+          }
         default:
             return state;
     }
