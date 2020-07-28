@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -8,8 +9,10 @@ import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationSale } from "../CommonParts/Pagination/PaginationSalePage";
+import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 // import { handleLoadAds } from "../../redux/actionCreators";
+import { resetPaginationCreator } from "../../redux/actionCreators";
 import About from "../CommonParts/About/About";
 
 const SalePage = ({
@@ -19,9 +22,11 @@ const SalePage = ({
   orientation,
   match,
   currentPageSale,
+  currentPage,
   itemsPerPage,
   sort_price,
   sort_date,
+  resetPagination,
 
   // loadData,
   idFilter,
@@ -45,12 +50,14 @@ const SalePage = ({
   typeTransaction
 }) => {
 
+  const location = useLocation();
 
+  useEffect(() => {
+    resetPagination();
+  }, [location]);
 
   let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
-
-
 
   //по id
   if (idFilter) {
@@ -183,8 +190,11 @@ const SalePage = ({
     saleAds = saleAds.filter((ad) => ad)
   }
 
+  // const indexOfLastAd = currentPageSale * itemsPerPage;
+  // const indexOfFirstAd = indexOfLastAd - itemsPerPage;
+  // const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
-  const indexOfLastAd = currentPageSale * itemsPerPage;
+  const indexOfLastAd = currentPage * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
@@ -223,7 +233,8 @@ const SalePage = ({
               < TopFilters match={match} totalAdsSale={saleAds.length} sortPrice={sort_price} sortDate={sort_date} />
               < List ads={currentAds} match={match} />
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
-              {(saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} />}
+              {/* (saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} /> */}
+              {(saleAds.length > 9) && <Pagination totalItems={saleAds.length} /> }
               < About title="Продажа жилья в Украине" >
                 <p className="about__text" >
                   Покупка или продажа всех видов недвижимости произойдет
@@ -297,6 +308,7 @@ const mapStateToProps = (state) => ({
   sort_date: state.filterReducer.sort_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageSale: state.paginationReducer.currentPageSale,
+  currentPage: state.paginationReducer.currentPage,
   idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
   statusFilter: state.filterReducer.statusFilter,
@@ -323,8 +335,11 @@ const mapStateToProps = (state) => ({
 //   loadData: () => dispatch(handleLoadAds())
 // })
 
+const mapDispatchToProps = dispatch => ({
+  resetPagination: () => dispatch(resetPaginationCreator()),
+});
 
-const Enhanced = connect(mapStateToProps, null)(SalePage);
+const Enhanced = connect(mapStateToProps, mapDispatchToProps)(SalePage);
 
 export { Enhanced as SalePage };
 

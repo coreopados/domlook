@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useLocation } from 'react-router-dom'
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -6,31 +7,43 @@ import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { NewsFiltersForm } from "../ReduxForms/NewsFiltersForm/NewsFiltersForm";
 import { NewsAdsList } from "./NewsAdsList/NewsAdsList";
 import { PaginationNews } from "../CommonParts/Pagination/PaginationNewsPage";
+import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { handleLoadNewsAds } from "../../redux/actionCreators";
 import About from "../CommonParts/About/About";
-
+import { resetPaginationCreator } from "../../redux/actionCreators";
 
 const NewsPage = ({
   news,
   match,
   itemsPerPage,
   currentPageNews,
+  currentPage,
   filterCategoryNews,
   loadData,
+  resetPagination,
 }) => {
 
-  useEffect(() => { loadData() }, [])
+  useEffect(() => { 
+    loadData();
+  }, []);
 
+  const location = useLocation();
+
+  useEffect(() => {
+    resetPagination();
+  }, [location]);
 
   if (filterCategoryNews !== '') {
     news = news.filter((post) => post.category === filterCategoryNews)
   }
 
-  const indexOfLastAd = currentPageNews * itemsPerPage;
+  // const indexOfLastAd = currentPageNews * itemsPerPage;
+  // const indexOfFirstAd = indexOfLastAd - itemsPerPage;
+  // const currentNewsPosts = news.slice(indexOfFirstAd, indexOfLastAd);
+
+  const indexOfLastAd = currentPage * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentNewsPosts = news.slice(indexOfFirstAd, indexOfLastAd);
-
-
 
   return (
     <main className="common-main">
@@ -41,7 +54,8 @@ const NewsPage = ({
             <NewsFiltersForm news={news} activeCategory={filterCategoryNews} />
             <div className="common-section__block">
               <NewsAdsList category={filterCategoryNews} filterCategoryNews={news} news={currentNewsPosts} match={match} />
-              {(news.length > 9) && <PaginationNews currentPageNews={currentPageNews} totalItems={news.length} />}
+              {/* (news.length > 9) && <PaginationNews currentPageNews={currentPageNews} totalItems={news.length} /> */}
+              {(news.length > 9) && <Pagination totalItems={news.length} />}
               <About title="Новости рынка недвижимости">
                 <p className="about__text">
                   На сайте DomLook.com вы можете ознакомиться с новостями рынка
@@ -96,12 +110,14 @@ const mapStateToProps = (state) => ({
   isLoading: state.mainReducer.isLoading,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageNews: state.paginationReducer.currentPageNews,
+  currentPage: state.paginationReducer.currentPage,
   filterCategoryNews: state.filterReducer.filterCategoryNews,
   state: state.filterCategoryReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadData: () => dispatch(handleLoadNewsAds()),
+  resetPagination: () => dispatch(resetPaginationCreator()),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(NewsPage);

@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
@@ -9,7 +10,9 @@ import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { PaginationCommon } from "../CommonParts/Pagination/PaginationCommonPage";
+import { Pagination } from "../CommonParts/Pagination/Pagination";
 import About from "../CommonParts/About/About";
+import { resetPaginationCreator } from "../../redux/actionCreators";
 
 
 const CommonAds = ({
@@ -19,9 +22,11 @@ const CommonAds = ({
   orientation,
   match,
   currentPageCommon,
+  currentPage,
   itemsPerPage,
   sort_price,
   sort_date,
+  resetPagination,
 
   idFilter,
   typeFilter,
@@ -43,6 +48,13 @@ const CommonAds = ({
   featuresArr,
   typeTransaction
 }) => {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    resetPagination();
+  }, [location]);
+
   // console.log(typeFilter, statusFilter)
   let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);
   const List = orientation === "vertical" ? AdsGrid : AdsList;
@@ -156,11 +168,13 @@ const CommonAds = ({
     commonAds = commonAds.filter((ad) => Date.parse(ad.post_date) >= today)
   }
 
-  const indexOfLastAd = currentPageCommon * itemsPerPage;
+  // const indexOfLastAd = currentPageCommon * itemsPerPage;
+  // const indexOfFirstAd = indexOfLastAd - itemsPerPage;
+  // const currentAds = commonAds.slice(indexOfFirstAd, indexOfLastAd);
+
+  const indexOfLastAd = currentPage * itemsPerPage;
   const indexOfFirstAd = indexOfLastAd - itemsPerPage;
   const currentAds = commonAds.slice(indexOfFirstAd, indexOfLastAd);
-
-
 
   return (
     <main className="common-main" >
@@ -194,18 +208,19 @@ const CommonAds = ({
               {isLoading && (<div className="loader-wrapper" >
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
-              {isLoaded && < TopFilters match={match} totalAdsCommon={commonAds.length} />}
-              {isLoaded && < List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_date} />}
+              {isLoaded && <TopFilters match={match} totalAdsCommon={commonAds.length} />}
+              {isLoaded && <List ads={currentAds} match={match} sortPrice={sort_price} sortDate={sort_date} />}
               { /* {isLoaded && <List ads={commonAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
-              {(commonAds.length > 9) && < PaginationCommon totalItems={commonAds.length} />}
-              < About title="Продажа жилья в Украине" >
-                <p className="about__text" >
+              {/* (commonAds.length > 9) && <PaginationCommon totalItems={commonAds.length} /> */}
+              {(commonAds.length > 9) && <Pagination totalItems={commonAds.length} />}
+              <About title="Продажа жилья в Украине">
+                <p className="about__text">
                   Покупка или продажа всех видов недвижимости произойдет
                   максимально быстро, если вы воспользуетесь базой объявлений,
                   размещенных на сайте DomLook.com.Здесь представлен широкий
                   выбор объявлений о продаже и покупке домов, квартир, гаражей,
                   дач, офисов и магазинов. </p>
-                <p className="about__text" >
+                <p className="about__text">
                   Вся информация очень удобно структурирована.Поэтому, в
                   зависимости от предпочтений, вы можете разместить предложение,
                   либо же осуществить поиск недвижимости на первичном или
@@ -214,7 +229,7 @@ const CommonAds = ({
                   купить
                   скромную квартиру без посредников, или продать элитный дом
                   через агентство. </p>
-                < p className="about__text" >
+                <p className="about__text">
                   Для того, чтобы зря не терять время на просмотр тех вариантов,
                   которые вам не подходят, заранее определитесь с районом, типом
                   дома, высотой потолков, этажом, количеством комнат и их
@@ -232,7 +247,7 @@ const CommonAds = ({
                   удобное для вас время.Естественно, за такую услугу следует
                   заплатить, однако она значительно облегчает реализацию
                   поставленных задач. </p>
-                < p className="about__text" >
+                <p className="about__text">
                   Если при покупке недвижимости вам сложно сориентироваться и
                   понять, где конкретно находится выставленная на продажу
                   квартира или дом, то следует воспользоваться поиском
@@ -240,14 +255,14 @@ const CommonAds = ({
                   метро, магазины, рынки и какова общая транспортная и
                   социальная инфраструктура района.
                 </p>
-                < p className="about__text" >
+                <p className="about__text">
                   Рассматривая те или иные варианты, не забывайте анализировать
                   и просчитывать все возможные плюсы и минусы приобретаемого
                   жилья.Посмотрите, в каком оно состоянии, требуется ли
                   проведение ремонта или даже перепланировки.Взвесьте свои силы
                   и финансовые возможности.
                 </p>
-                <p className="about__text" >
+                <p className="about__text">
                   В случае необходимости продажи любого типа недвижимости, мы
                   также к вашим услугам.Вам потребуется только поместить
                   объявление о продаже в каталоге сайта DomLook.com.и ждать
@@ -271,7 +286,7 @@ const mapStateToProps = (state) => ({
   sort_date: state.filterReducer.sort_date,
   itemsPerPage: state.paginationReducer.itemsPerPage,
   currentPageCommon: state.paginationReducer.currentPageCommon,
-
+  currentPage: state.paginationReducer.currentPage,
 
   idFilter: state.filterReducer.idFilter,
   typeFilter: state.filterReducer.typeFilter,
@@ -294,8 +309,11 @@ const mapStateToProps = (state) => ({
   typeTransaction: state.filterReducer.typeTransaction,
 });
 
+const mapDispatchToProps = dispatch => ({
+  resetPagination: () => dispatch(resetPaginationCreator()),
+});
 
-const Enhanced = connect(mapStateToProps, null)(CommonAds);
+const Enhanced = connect(mapStateToProps, mapDispatchToProps)(CommonAds);
 
 export { Enhanced as CommonAds };
 
