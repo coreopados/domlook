@@ -21,6 +21,9 @@ import RepairForm from './Form/RepairForm'
 const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin, resetFilters, activeMainFormFunc, activeRegFormFunc, mainform, regform, isLoaded, loadData, }) => {
   useEffect(() => {
     loadData();
+    activeMainFormFunc(activeLink);
+    activeRegFormFunc(activeReg);
+    setLoginStatus(isLoggedd);
   }, []);
 
 
@@ -42,9 +45,9 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
     }
   }, [isLoggedd]);
 
-  activeMainFormFunc(activeLink);
-  activeRegFormFunc(activeReg);
-  setLoginStatus(isLoggedd)
+  // activeMainFormFunc(activeLink);
+  // activeRegFormFunc(activeReg);
+  // setLoginStatus(isLoggedd);
 
   return (
     <header className="header">
@@ -559,7 +562,7 @@ const Header = ({ statusFilterFunc, setLoginStatus, isLoggedStatus, isShowLogin,
           </div>
         </div>
       }
-    </header >
+    </header>
 
   )
 };

@@ -31,11 +31,11 @@ const SelectDistrictDropdown = ({
     // const [selectedOption, setSelectedOption] = useState(districtFilter);
 
 
-    if (propRegionFilter !== '' && propCityFilter !== '') {
-        propDistrictFilterFunc(districtFilter)
-    } else {
-        propDistrictFilterFunc('')
-    }
+    // if (propRegionFilter !== '' && propCityFilter !== '') {
+    //     propDistrictFilterFunc(districtFilter)
+    // } else {
+    //     propDistrictFilterFunc('')
+    // }
 
 
     if (propCityFilter === "" || !propCityFilter) {

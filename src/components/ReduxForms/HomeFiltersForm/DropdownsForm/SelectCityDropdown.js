@@ -21,11 +21,11 @@ const SelectCityDropdown = ({
         obj = cities[i];
     }
 
-    if (propRegionFilter !== '') {
-        propCityFilterFunc(cityFilter)
-    } else {
-        propCityFilterFunc('')
-    }
+    // if (propRegionFilter !== '') {
+    //     propCityFilterFunc(cityFilter)
+    // } else {
+    //     propCityFilterFunc('')
+    // }
 
     if (propRegionFilter === "" || !propRegionFilter) {
         return (

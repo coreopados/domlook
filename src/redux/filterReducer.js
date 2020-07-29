@@ -277,15 +277,33 @@ export const filterReducer = (state = initialState, action) => {
             };
 
         case SET_FEATURES:
+          console.log(action.payload)
+          if(action.payload) {
+            
+          } else {
             return {
-                ...state,
-                featuresArr: action.payload,
+              ...state,
+              featuresArr: action.payload,
             };
+          }
+            
         case SET_TYPETRANSACTION:
+          if (action.payload) {
             return {
-                ...state,
-                typeTransaction: action.payload,
+              ...state,
+              // typeTransaction: action.payload,
+              typeTransaction: {
+                ...state.typeTransaction,
+                ...action.payload,
+              }
             };
+          } else {
+            return {
+              ...state,
+              typeTransaction: action.payload,
+            }
+          }
+            
 
 
 

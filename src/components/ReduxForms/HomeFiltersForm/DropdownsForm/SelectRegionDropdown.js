@@ -23,10 +23,10 @@ const SelectRegionDropdown = ({
     //     propDistrictFilterFunc('');
     // }
 
-    if (regionFilter === '') {
-        propCityFilterFunc('');
-        propDistrictFilterFunc('');
-    }
+    // if (regionFilter === '') {
+    //     propCityFilterFunc('');
+    //     propDistrictFilterFunc('');
+    // }
 
     return (
         <select name="select-region-filter" id="select-region-filter"

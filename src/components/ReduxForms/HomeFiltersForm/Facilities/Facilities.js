@@ -12,31 +12,42 @@ const Facilities = ({
 }) => {
 
   
-    const [x, setForm] = useState(Features);
+  // const [x, setForm] = useState(Features);
+
+  // console.log(Features);
 
 
-    const handler = (e) => {
-        const { target } = e;
-        const { id } = target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        if (value === true) {
-            setForm(f => ({ ...f, [id]: value }));
-        } else {
-            delete x[target.id]
-            const isEmpty = (x) => {
-                for (var key in x) {
-                    return false;
-                }
-                return true;
-            }
-            if (isEmpty(x)) {
-                setForm(false)
-            }
+  const handler = (e) => {
+    const { target } = e;
+    const { id } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    if (value === true) {
+      // setForm(f => ({ ...f, [id]: value }));
+      setFeaturesFunc({ [id]: value });
+    } else {
+      // delete x[target.id]
+      delete Features[target.id]
+      // const isEmpty = (x) => {
+      //     for (var key in x) {
+      //         return false;
+      //     }
+      //     return true;
+      // }
+      const isEmpty = Features => {
+        for (var key in Features) {
+            return false;
         }
-    };
+        return true;
+      }
+      console.log(isEmpty())
+      if (isEmpty(Features)) {
+        setFeaturesFunc(false);
+      }
+    }
+  };
 
-    setFeaturesFunc(x)
-
+    // setFeaturesFunc(x)
     return (
         <div className="parametrs">
             <p className="label-filter">Удобства:</p>
@@ -48,6 +59,12 @@ const Facilities = ({
                             id={"" + fac.name + ""}
                             value={"" + fac.name + ""}
                             onChange={handler}
+                            onClick={(e) => {
+                              // console.log(e.target.value);
+                              // console.log(e.target.checked);
+                              // setFeaturesFunc(false);
+                              // console.log(Features);
+                            }}
                         // checked={Features[fac.name]}
                         />
                         <label htmlFor={"" + fac.name + ""}>{fac.name}</label>
@@ -59,7 +76,7 @@ const Facilities = ({
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setFeaturesFunc: (ads) => dispatch(setFeaturesCreator(ads)),
+  setFeaturesFunc: (ads) => dispatch(setFeaturesCreator(ads)),
 });
 
 const Enhanced = connect(null, mapDispatchToProps)(Facilities);
