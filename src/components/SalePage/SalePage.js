@@ -8,7 +8,7 @@ import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
-import { PaginationSale } from "../CommonParts/Pagination/PaginationSalePage";
+// import { PaginationSale } from "../CommonParts/Pagination/PaginationSalePage";
 import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 // import { handleLoadAds } from "../../redux/actionCreators";
@@ -255,7 +255,7 @@ const SalePage = ({
               < List ads={currentAds} match={match} />
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {/* (saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} /> */}
-              {(saleAds.length > 9) && <Pagination totalItems={saleAds.length} /> }
+              {(saleAds.length > 9) && <Pagination totalItems={saleAds.length} />}
               < About title="Продажа жилья в Украине" >
                 <p className="about__text" >
                   Покупка или продажа всех видов недвижимости произойдет

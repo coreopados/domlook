@@ -9,7 +9,7 @@
   border-bottom: 1px solid $border-color-lightblue;
   &__wrapper {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(120px,1fr));
   }
 }
 
@@ -28,4 +28,11 @@
     font-size: 14px;
     text-align: center;
   }
+}
+
+@media screen and (max-width: 768px){
+  .secondary-info__wrapper {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap:20px;
+}
 }

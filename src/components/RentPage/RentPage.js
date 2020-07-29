@@ -9,7 +9,7 @@ import { Navigation } from "../CommonParts/Navigation/Navigation";
 import { TopFilters } from "../CommonParts/TopFilters/TopFilters";
 import { AdsGrid } from "../CommonParts/AdsListLooks/AdsGrid/AdsGrid";
 import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
-import { PaginationRent } from "../CommonParts/Pagination/PaginationRentPage";
+// import { PaginationRent } from "../CommonParts/Pagination/PaginationRentPage";
 import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 import About from "../CommonParts/About/About";

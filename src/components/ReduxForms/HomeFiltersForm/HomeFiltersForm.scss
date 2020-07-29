@@ -24,7 +24,7 @@
   .home-filters-form {
 
     display:grid;
-    grid-template-columns: repeat(4, minmax(170px,1fr));
+    grid-template-columns: repeat(4, minmax(170px, 250px));
     grid-gap:10px 2%;
     .block{
       display: flex;
@@ -241,39 +241,58 @@
 
 @media screen and (max-width: 768px){
   .wrap-main-filter .home-filters-form{
-    grid-template-columns: repeat(3, minmax(170px,1fr));
+    grid-template-columns: repeat(3, minmax(170px, 250px));
   }
+
 }
 
 @media screen and (max-width: 620px){
   .wrap-main-filter .home-filters-form{
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(170px, 250px));
   }
   .wrap-main-filter .home-filters-form .block label .wrap-price input {
     max-width: 100px;
   }
 }
-@media screen and (max-width: 540px){
-  .wrap-main-filter .home-filters-form .block label .wrap-price input {
-    max-width: 115px;
-  }
+@media screen and (max-width: 570px){
+
+.wrap-main-filter {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+.wrap-main-filter{
+  padding: 20px;
+}
+.homepage-cities__title{
+  text-align: center;
+}
 }
 
 
 @media screen and (max-width: 480px){
   .wrap-main-filter .home-filters-form{
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, minmax(170px, 250px));
+    justify-content: center;
   }
+  .wrap-main-filter .additional-block-wrap .additional-block .parametrs .facilities {
+    grid-template-columns: repeat(1, 1fr)!important;
+   
+}
   .wrap-main-filter .home-filters-form .block{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     max-width: 250px;
   }
+  .wrap-main-filter .home-filters-form .block label .wrap-price input {
+    max-width: 110px;
+}
+.wrap-main-filter .additional-block-wrap{
+  max-width: 250px;
+  margin: 50px auto 0;
+}
 }
 @media screen and (max-width: 360px){
-  .wrap-main-filter .home-filters-form .block label .wrap-price input {
-    max-width: 85px;
-}
+  
 .wrap-main-filter .home-filters-form .block {
   width: 95%;
   margin: 0 auto;

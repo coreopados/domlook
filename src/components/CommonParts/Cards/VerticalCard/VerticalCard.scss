@@ -100,3 +100,22 @@
     }
   }
 }
+
+
+@media screen and(max-width: 991px){
+  .vertical-card__info-wrapper{
+    max-height: 170px;
+  }
+  .vertical-card__specification{
+    justify-content: center;
+  }
+  .home-ads-list__wrapper{
+    grid-gap:10px;
+  }
+}
+@media screen and(max-width: 576px){
+  .vertical-card{
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
