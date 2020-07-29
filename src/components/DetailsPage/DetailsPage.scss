@@ -36,12 +36,35 @@
     @include flex-style(flex, column);
   }
   &__select-wrapper {
+    display: flex;
     margin-bottom: 10px;
   }
   &__price {
     margin-bottom: 10px;
     color: $orange-color;
     font-size: 36px;
+  }
+  &__price-select-wrapper {
+    margin-left: 10px;
+    position: relative;
+  }
+  &__price-select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 0;
+    top: 2px;
+    height: 100%;
+    pointer-events: none;
+    font-size: 13px;
+  }
+  &__price-select {
+    width: 40px;
+    font-size: 16px;
+    border: none;
+    text-align-last: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
   }
   &__square-meter {
     margin-bottom: 10px;

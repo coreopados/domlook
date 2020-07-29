@@ -83,5 +83,7 @@ export const IS_LOGGED_IN = "IS_LOGGED_IN";
 
 export const USER_ID = "USER_ID";
 
+export const SET_CURRENCY = 'SET_CURRENCY';
 
-
+export const EURO_RATIO = 0.85;
+export const UAH_RATIO = 27.7;

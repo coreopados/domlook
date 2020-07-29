@@ -2,9 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./VerticalCard.scss";
-import { removeFavouriteCreator } from "../../../../redux/actionCreators";
+import { 
+  removeFavouriteCreator,
+  priceCalculator,
+ } from "../../../../redux/actionCreators";
 
-const VerticalCard = ({ ad, match, favourites, removeFavourites }) => {
+const VerticalCard = ({
+  ad,
+  match,
+  favourites,
+  removeFavourites,
+  currency,
+ }) => {
   const handleRemoveFavourite = (e) => {
     e.preventDefault();
     const hasFavourites = favourites.findIndex((item) => item.id === ad.id);
@@ -30,7 +39,7 @@ const VerticalCard = ({ ad, match, favourites, removeFavourites }) => {
           <i className="fa fa-trash-o" />
         </button>
       ) : null}
-      <span className="vertical-card__price">{`$ ${ad.price}`}</span>
+      <span className="vertical-card__price">{priceCalculator(ad.price, currency)}</span>
       <div className="vertical-card__photo-wrapper">
         <img
           src={ad.imgUrl}
@@ -57,6 +66,7 @@ const VerticalCard = ({ ad, match, favourites, removeFavourites }) => {
 
 const mapStateToProps = (state) => ({
   favourites: state.mainReducer.favourites,
+  currency: state.mainReducer.currency,
 });
 
 const mapDispatchToProps = (dispatch) => ({

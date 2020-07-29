@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./HorizontalCard.scss";
-import { addFavouriteCreator } from "../../../../redux/actionCreators";
+import {
+  addFavouriteCreator,
+  priceCalculator,
+} from "../../../../redux/actionCreators";
 
-const HorizontalCard = ({ ad, addFavourites, favourites }) => {
-
-
+const HorizontalCard = ({
+  ad,
+  addFavourites,
+  favourites,
+  currency,
+}) => {
   useEffect(() => {
     if (favourites && favourites.length !== 0) {
       localStorage.setItem('favourites', JSON.stringify(favourites));
@@ -31,7 +37,7 @@ const HorizontalCard = ({ ad, addFavourites, favourites }) => {
 
   return (
     <article className="horizontal-card">
-      <span className="horizontal-card__price">{`$ ${ad.price}`}</span>
+      <span className="horizontal-card__price">{priceCalculator(ad.price, currency)}</span>
       <div className="horizontal-card__photo-wrapper">
         <img src={ad.imgUrl} className="horizontal-card__photo" alt="фото" />
       </div>
@@ -72,8 +78,9 @@ const HorizontalCard = ({ ad, addFavourites, favourites }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   favourites: state.mainReducer.favourites,
+  currency: state.mainReducer.currency,
 });
 
 const mapDispatchToProps = (dispatch) => ({
