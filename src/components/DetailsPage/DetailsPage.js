@@ -12,6 +12,8 @@ import { users } from "../../api/testUsers.json";
 import {
   addFavouriteCreator,
   setFavouritesCreator,
+  setCurrencyCreator,
+  priceCalculator,
 } from "../../redux/actionCreators";
 
 import ReactFancyBox from 'react-fancybox';
@@ -27,7 +29,9 @@ const DetailsPage = ({
   id, 
   favourites, 
   addFavourites,
-  setFavourites 
+  setFavourites,
+  currency,
+  setCurrency,
 }) => {
   useEffect(() => {
     if (ad === null || ad === undefined) {
@@ -62,8 +66,6 @@ const DetailsPage = ({
     }
   };
 
-  console.log(favourites)
-
   const calcPerSquareMeter = useCallback(() => {
     const total_area = Number(ad.total_area);
     const price = Number(ad.price);
@@ -91,8 +93,13 @@ const DetailsPage = ({
     return newArr
   })
 
+  const handleSelect = (e) => {
+    const { value } = e.target;
 
-  const [showTel, setShowTel] = useState(false)
+    setCurrency(value);
+  };
+
+  const [showTel, setShowTel] = useState(false);
 
   // if (id && id <= ads.length) {
   return (
@@ -120,9 +127,20 @@ const DetailsPage = ({
                     <div className="details-full-info__select-wrapper">
                       <span className="details-full-info__price-word">
                         Стоимость в
-                        </span>
+                      </span>
+                      <div className="details-full-info__price-select-wrapper">
+                        <select
+                          defaultValue={currency}
+                          className="details-full-info__price-select"
+                          onChange={e => handleSelect(e)}
+                        >
+                          <option value="UAH">грн</option>
+                          <option value="USD">$</option>
+                          <option value="EUR">€</option>
+                        </select>
+                      </div>
                     </div>
-                    <span className="details-full-info__price">{`$ ${ad.price}`}</span>
+                    <span className="details-full-info__price">{priceCalculator(ad.price, currency)}</span>
                     <span className="details-full-info__square-meter">{`$ ${calcPerSquareMeter()} за кв. м.`}</span>
                   </div>
                 </div>
@@ -220,7 +238,7 @@ const DetailsPage = ({
                     <Link to={'/' + id}>
                       <article className="vertical-card">
 
-                        <span className="vertical-card__price">100</span>
+                        <span className="vertical-card__price">{priceCalculator(ad.price, currency)}</span>
                         <div className="vertical-card__photo-wrapper">
                           <img
                             src={ad.imgUrl}
@@ -249,7 +267,7 @@ const DetailsPage = ({
                     <Link to={'/' + id}>
                       <article className="vertical-card">
 
-                        <span className="vertical-card__price">100</span>
+                        <span className="vertical-card__price">{priceCalculator(ad.price, currency)}</span>
                         <div className="vertical-card__photo-wrapper">
                           <img
                             src={ad.imgUrl}
@@ -435,6 +453,7 @@ const mapStateToProps = (state, ownProps) => {
       state.mainReducer.ads && state.mainReducer.ads.length > 0
         ? state.mainReducer.ads.find((ad) => ad.id === id)
         : null,
+    currency: state.mainReducer.currency,
   };
 };
 
@@ -442,6 +461,7 @@ const mapDispatchToProps = (dispatch) => ({
   loadData: () => dispatch(handleLoadAds()),
   addFavourites: (ad) => dispatch(addFavouriteCreator(ad)),
   setFavourites: (ads) => dispatch(setFavouritesCreator(ads)),
+  setCurrency: currency => dispatch(setCurrencyCreator(currency)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

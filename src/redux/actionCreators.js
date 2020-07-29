@@ -32,11 +32,13 @@ import {
   USER_ID,
   PAGINATE,
 
+  SET_CURRENCY,
+  EURO_RATIO,
+  UAH_RATIO,
 } from './constants';
 // import { loadAds } from '../api/loadAds';
 import adsData from '../api/testData.json';
 import newsData from '../api/testNewsData.json';
-
 
 export const UserIdCreator = id => ({
   type: USER_ID,
@@ -188,6 +190,11 @@ export const setLoginStatusCreator = status => ({
   payload: status,
 });
 
+// конвертация
+export const setCurrencyCreator = currency => ({
+  type: SET_CURRENCY,
+  payload: currency,
+});
 
 // export const handleLoad = () => {
 //   return (dispatch) => {
@@ -261,4 +268,18 @@ export const handleLoadNewsAds = () => {
 //   };
 // }
 
+export const priceCalculator = (adPrice, currency) => {
+  let euroConverted = Math.floor(adPrice * EURO_RATIO);
+  let uahConverted = Math.floor(adPrice * UAH_RATIO);
 
+  switch (currency) {
+    case 'USD':
+      return `$ ${Number(adPrice)}`;
+    case 'EUR':
+      return `€ ${Number(euroConverted)}`;
+    case 'UAH':
+      return `${Number(uahConverted)} грн`;
+    default:
+      return `$ ${Number(adPrice)}`;
+  }
+};

@@ -9,8 +9,10 @@ import {
   SET_FAVOURITES,
   SET_ABOUT_TEXT,
   SET_NEWS,
-  USER_ID
+  USER_ID,
+  SET_CURRENCY,
 } from './constants';
+import { act } from '@testing-library/react';
 
 const initialState = {
   isLoading: true,
@@ -21,13 +23,10 @@ const initialState = {
   showAllAbout: false,
   news: [],
   userId: '',
+  currency: 'USD',
 };
 
-
-
 export const mainReducer = (state = initialState, action) => {
-
-
   switch (action.type) {
     // user id
     case USER_ID:
@@ -35,7 +34,6 @@ export const mainReducer = (state = initialState, action) => {
         ...state,
         userId: action.payload,
       };
-
 
     case SET_ADS:
       return {
@@ -76,7 +74,7 @@ export const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         favourites: action.payload,
-      }
+      };
     case SET_ABOUT_TEXT:
       return {
         ...state,
@@ -87,10 +85,12 @@ export const mainReducer = (state = initialState, action) => {
         ...state,
         news: action.payload,
       };
-
-
+    case SET_CURRENCY:
+      return {
+        ...state,
+        currency: action.payload,
+      };
     default:
       return state;
-
   }
 };
