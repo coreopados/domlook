@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "./HorizontalCard.scss";
 import {
   addFavouriteCreator,
+  setCurrencyCreator,
   priceCalculator,
 } from "../../../../redux/actionCreators";
 
@@ -12,7 +13,16 @@ const HorizontalCard = ({
   addFavourites,
   favourites,
   currency,
+  setCurrency,
 }) => {
+  useEffect(() => {
+
+    const cachedCurrency = localStorage.getItem('currency');
+
+    if (cachedCurrency) {
+      setCurrency(JSON.parse(cachedCurrency));
+    }
+  }, []);
   useEffect(() => {
     if (favourites && favourites.length !== 0) {
       localStorage.setItem('favourites', JSON.stringify(favourites));
@@ -85,6 +95,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addFavourites: (ad) => dispatch(addFavouriteCreator(ad)),
+  setCurrency: currency => dispatch(setCurrencyCreator(currency)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(HorizontalCard);

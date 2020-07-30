@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./VerticalCard.scss";
 import { 
   removeFavouriteCreator,
+  setCurrencyCreator,
   priceCalculator,
  } from "../../../../redux/actionCreators";
 
@@ -13,7 +14,16 @@ const VerticalCard = ({
   favourites,
   removeFavourites,
   currency,
+  setCurrency,
  }) => {
+  useEffect(() => {
+
+    const cachedCurrency = localStorage.getItem('currency');
+
+    if (cachedCurrency) {
+      setCurrency(JSON.parse(cachedCurrency));
+    }
+  }, []);
   const handleRemoveFavourite = (e) => {
     e.preventDefault();
     const hasFavourites = favourites.findIndex((item) => item.id === ad.id);
@@ -71,6 +81,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeFavourites: (ad) => dispatch(removeFavouriteCreator(ad)),
+  setCurrency: currency => dispatch(setCurrencyCreator(currency)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(VerticalCard);

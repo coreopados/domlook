@@ -54,7 +54,7 @@ const Navigation = ({
 
           {/* news */}
           {pageName === "Новости" &&
-            <Link Link to="/news" className="common-nav__link">
+            <Link to="/news" className="common-nav__link">
               <button onClick={() => (resetFiltersFunc(), categoryFilterFunc(''))}>
                 Новости
             </button>
