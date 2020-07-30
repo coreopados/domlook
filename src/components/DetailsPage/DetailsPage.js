@@ -76,10 +76,24 @@ const DetailsPage = ({
     }
   };
 
-  const calcPerSquareMeter = useCallback(() => {
+  const calcPerSquareMeter = useCallback((currency) => {
     const total_area = Number(ad.total_area);
-    const price = Number(ad.price);
-    return Math.round(price / total_area);
+    const price = Number(priceCalculator(ad.price, currency)
+      .replace(/[^0-9]/g, ''));
+    const pricePerSquareMeter = ((price / total_area) - Math.floor(price / total_area) !== 0)
+      ? Number(price / total_area).toFixed(2)
+      : Number(price / total_area);
+
+    switch (currency) {
+      case 'USD':
+        return `$ ${pricePerSquareMeter}`;
+      case 'EUR':
+        return `€ ${pricePerSquareMeter}`;
+      case 'UAH':
+        return `${pricePerSquareMeter} грн.`;
+      default:
+        return `$ ${pricePerSquareMeter}`;
+    }
   });
 
   const userName = useCallback(() => {
@@ -151,7 +165,7 @@ const DetailsPage = ({
                       </div>
                     </div>
                     <span className="details-full-info__price">{priceCalculator(ad.price, currency)}</span>
-                    <span className="details-full-info__square-meter">{`$ ${calcPerSquareMeter()} за кв. м.`}</span>
+                    <span className="details-full-info__square-meter">{`${calcPerSquareMeter(currency)} за кв. м.`}</span>
                   </div>
                 </div>
                 <div className="details-full-info__block">
