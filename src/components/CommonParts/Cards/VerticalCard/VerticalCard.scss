@@ -119,3 +119,14 @@
     margin: 0 auto;
   }
 }
+
+@media screen and(max-width: 400px){
+  .vertical-card{
+    &__photo-wrapper {
+      height: 150px;
+    }
+    &__info-wrapper {
+      padding-bottom: 15px;
+    }
+  }
+}
