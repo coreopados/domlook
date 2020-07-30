@@ -37,10 +37,16 @@ const DetailsPage = ({
     if (ad === null || ad === undefined) {
       loadData();
     }
+
     const cachedFavourites = localStorage.getItem('favourites');
+    const cachedCurrency = localStorage.getItem('currency');
 
     if (cachedFavourites) {
       setFavourites(JSON.parse(cachedFavourites));
+    }
+
+    if (cachedCurrency) {
+      setCurrency(JSON.parse(cachedCurrency));
     }
   }, []);
 
@@ -48,7 +54,11 @@ const DetailsPage = ({
     if (favourites && favourites.length !== 0) {
       localStorage.setItem('favourites', JSON.stringify(favourites));
     }
-  }, [favourites]);
+
+    if (currency) {
+      localStorage.setItem('currency', JSON.stringify(currency));
+    }
+  }, [favourites, currency]);
 
   const favouriteMatch = favourites.find(item => item.id === ad.id);
   let favouriteChecker;
