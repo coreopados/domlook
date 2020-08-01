@@ -11,10 +11,16 @@ const Pagination = ({ totalItems, itemsPerPage, paginate, currentPage }) => {
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i += 1) {
     pageNumbers.push(i);
   }
+  // console.log(window.location.href.slice(window.location.href.length - 5))
 
   return (
 
-    <div className="common-pagination">
+    <div className={`
+    common-pagination 
+    ${window.location.href
+      .slice(window.location.href.length - 5) === '/news'
+      && 'common-pagination--news'}`}
+    >
       <div className="common-pagination__wrapper">
         <button
           type="button"

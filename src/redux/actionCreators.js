@@ -33,6 +33,9 @@ import {
   USER_ID,
   PAGINATE,
 
+  SET_FILTERS_OPEN,
+  SET_FILTERS_CLOSE,
+
   SET_CURRENCY,
   EURO_RATIO,
   UAH_RATIO,
@@ -195,6 +198,16 @@ export const setLoginStatusCreator = status => ({
 export const setCurrencyCreator = currency => ({
   type: SET_CURRENCY,
   payload: currency,
+});
+
+// боковой фильтр на моб устройствах
+
+export const setFilterOpenCreator = () => ({
+  type: SET_FILTERS_OPEN,
+});
+
+export const setFilterCloseCreator = () => ({
+  type: SET_FILTERS_CLOSE,
 });
 
 // export const handleLoad = () => {

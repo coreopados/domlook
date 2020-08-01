@@ -19,7 +19,9 @@ const AboutSection = ({
     : children;
 
   return (
-    <div className="container">
+    <div className={`${window.location.href
+      .slice(window.location.href.length - 5) !== '/news' && 'container'}`}
+    >
       <div className="about">
         <h4 className="about__title">
           {title}

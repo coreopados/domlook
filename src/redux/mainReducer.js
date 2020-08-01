@@ -11,6 +11,8 @@ import {
   SET_NEWS,
   USER_ID,
   SET_CURRENCY,
+  SET_FILTERS_OPEN,
+  SET_FILTERS_CLOSE,
 } from './constants';
 import { act } from '@testing-library/react';
 
@@ -24,6 +26,7 @@ const initialState = {
   news: [],
   userId: '',
   currency: 'USD',
+  isAsideFormOpen: false,
 };
 
 export const mainReducer = (state = initialState, action) => {
@@ -89,6 +92,16 @@ export const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         currency: action.payload,
+      };
+    case SET_FILTERS_OPEN:
+      return {
+        ...state,
+        isAsideFormOpen: true,
+      };
+    case SET_FILTERS_CLOSE:
+      return {
+        ...state,
+        isAsideFormOpen: false,
       };
     default:
       return state;

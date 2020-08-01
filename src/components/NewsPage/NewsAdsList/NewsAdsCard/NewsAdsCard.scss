@@ -29,8 +29,8 @@
     }
   }
   &__photo-wrapper {
-    max-height: 350px;
-    height: auto;
+    // max-height: 350px;
+    height: 350px;
     width: 100%;
     margin-bottom: 32px;
     overflow: hidden;
@@ -50,5 +50,29 @@
   }
   &__link {
     color: $secondary-button-color-darkblue;
+  }
+}
+
+@media (max-width: 600px) {
+  .news-card {
+    &__photo-wrapper {
+      height: 250px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .news-card {
+    &__photo-wrapper {
+      height: 200px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .news-card {
+    &__photo-wrapper {
+      height: 170px;
+    }
   }
 }

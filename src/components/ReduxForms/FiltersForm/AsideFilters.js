@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import withSizes from 'react-sizes';
 import './AsideFilters.scss';
 import { NavLink } from 'react-router-dom';
 
@@ -20,7 +22,7 @@ import { PriceFromTo } from '../HomeFiltersForm/DropdownsForm/PriceFromTo';
 import { Facilities } from '../HomeFiltersForm/Facilities/Facilities';
 import { TypeTransaction } from '../HomeFiltersForm/TypeTransaction/TypeTransaction';
 import { FilterById } from '../HomeFiltersForm/DropdownsForm/FilterById';
-
+import { setFilterCloseCreator } from '../../../redux/actionCreators';
 
 const AsideFilters = ({
   isLoaded,
@@ -35,6 +37,9 @@ const AsideFilters = ({
   features,
   transaction,
   idFilter,
+  onCloseFilters,
+  isMobile,
+  isAsideFormOpen,
 
   wallsFilter,
   heatingFilter,
@@ -49,8 +54,17 @@ const AsideFilters = ({
   const [filterById, setFilterById] = useState(false)
   const [addInfo, setStatusAddInfo] = useState(false)
 
+  console.log(isMobile, isAsideFormOpen);
+
   return (
-    <aside className="common-filters">
+    <aside className={`common-filters ${(isMobile && isAsideFormOpen) ? 'common-filters--show' : ''}`}>
+      <button
+        type="button"
+        className="common-filters__close-btn"
+        onClick={() => onCloseFilters()}
+      >
+        x
+      </button>
       <form className="common-filters-form">
 
         <div className="topFilter filter-section">
@@ -210,7 +224,12 @@ const AsideFilters = ({
             replace
             exact
           >
-            <button>Найти</button>
+            <button
+              type="button"
+              className="common-filters-form__submit"
+            >
+              Найти
+            </button>
           </NavLink>
           {/* <input type="Submit" value="Найти" /> */}
         </div>
@@ -218,10 +237,23 @@ const AsideFilters = ({
     </aside>
   )
 };
+
 const mapStateToProps = state => ({
   isLoaded: state.mainReducer.isLoaded,
-})
+  isAsideFormOpen: state.mainReducer.isAsideFormOpen,
+});
 
-const Enhanced = connect(mapStateToProps, null)(AsideFilters);
+const mapDispatchToProps = dispatch => ({
+  onCloseFilters: () => dispatch(setFilterCloseCreator()),
+});
+
+const mapSizesToProps = ({ width }) => ({
+  isMobile: width < 1200,
+});
+
+const Enhanced = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withSizes(mapSizesToProps),
+)(AsideFilters);
 
 export { Enhanced as AsideFilters };

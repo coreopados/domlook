@@ -3,6 +3,10 @@
 .common-pagination {
   margin: 0 0 20px;
   @include flex-style(flex, row, center, center);
+  &--news {
+    padding: 22px 20px 45px;
+    border-bottom: 1px solid $news-filters-border-color-grey;
+  }
   &__wrapper {
     @include flex-style(flex, row, center, center);
   }

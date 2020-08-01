@@ -17,6 +17,7 @@
   }
   &__wrapper {
     @include flex-style(flex, row, flex-start, center);
+    flex-wrap: wrap;
     height: 60px;
   }
   &__page-name {
@@ -34,5 +35,12 @@
       background: url("/domlook/img/common-section-icons/section-nav-arrow.png") no-repeat;
       background-size: 8px;
     }
+  }
+}
+
+@media (max-width: 1200px) {
+  .common-nav__wrapper {
+    max-width: 940px;
+    margin: 0 auto;
   }
 }

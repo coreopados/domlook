@@ -1,6 +1,8 @@
 import React, { useMemo, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
+import { compose } from 'redux';
+import withSizes from 'react-sizes';
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
@@ -12,7 +14,10 @@ import { AdsList } from "../CommonParts/AdsListLooks/AdsList/AdsList";
 import { Pagination } from "../CommonParts/Pagination/Pagination";
 import { AsideFilters } from "../../components/ReduxForms/FiltersForm/AsideFilters";
 // import { handleLoadAds } from "../../redux/actionCreators";
-import { resetPaginationCreator } from "../../redux/actionCreators";
+import {
+  resetPaginationCreator,
+  setVerticalOrientationCreator,
+} from "../../redux/actionCreators";
 import About from "../CommonParts/About/About";
 
 const SalePage = ({
@@ -27,6 +32,8 @@ const SalePage = ({
   sort_price,
   sort_date,
   resetPagination,
+  isMobile,
+  setVerticalOrientation,
 
   // loadData,
   idFilter,
@@ -74,11 +81,16 @@ const SalePage = ({
     priceFromFilter,
     priceToFilter,
     typeTransaction,
-    sort_price
+    sort_price,
   ]);
 
-  let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === "sale"), [ads]);
-  const List = orientation === "vertical" ? AdsGrid : AdsList;
+  let saleAds = useMemo(() => ads.filter((ad) => ad.prop_status === 'sale'), [ads]);
+
+  let List = orientation === 'vertical' ? AdsGrid : AdsList;
+
+  if (isMobile) {
+    List = AdsGrid;
+  }
 
   //по id
   if (idFilter) {
@@ -220,11 +232,18 @@ const SalePage = ({
   const currentAds = saleAds.slice(indexOfFirstAd, indexOfLastAd);
 
   return (
-    <main className="common-main" >
-      <Navigation pageName="Продажа" regionFilter={propRegionFilter} cityFilter={propCityFilter} districtFilter={propDistrictFilter} typeFilter={typeFilter} statusFilter={statusFilter} />
-      <section className="common-section" >
-        <div className="container" >
-          <div className="common-section__wrapper" >
+    <main className="common-main">
+      <Navigation 
+        pageName="Продажа"
+        regionFilter={propRegionFilter}
+        cityFilter={propCityFilter}
+        districtFilter={propDistrictFilter}
+        typeFilter={typeFilter}
+        statusFilter={statusFilter}
+      />
+      <section className="common-section">
+        <div className="container">
+          <div className="common-section__wrapper">
             <AsideFilters
               typeFilter={typeFilter}
               priceFrom={priceFromFilter}
@@ -251,19 +270,20 @@ const SalePage = ({
               {isLoading && (<div className="loader-wrapper" >
                 <Loader type="Puff" color="#313237" height={80} width={80} /> </div>)
               }
-              < TopFilters match={match} totalAdsSale={saleAds.length} sortPrice={sort_price} sortDate={sort_date} />
-              < List ads={currentAds} match={match} />
+              <TopFilters match={match} totalAdsSale={saleAds.length} sortPrice={sort_price} sortDate={sort_date} />
+              <List ads={currentAds} match={match} />
               { /* {isLoaded && <List ads={saleAds} match={match} sortPrice={sort_price} sortDate={sort_by_date} />} */}
               {/* (saleAds.length > 9) && < PaginationSale totalItems={saleAds.length} /> */}
               {(saleAds.length > 9) && <Pagination totalItems={saleAds.length} />}
-              < About title="Продажа жилья в Украине" >
-                <p className="about__text" >
+              <About title="Продажа жилья в Украине">
+                <p className="about__text">
                   Покупка или продажа всех видов недвижимости произойдет
                   максимально быстро, если вы воспользуетесь базой объявлений,
                   размещенных на сайте DomLook.com.Здесь представлен широкий
                   выбор объявлений о продаже и покупке домов, квартир, гаражей,
-                  дач, офисов и магазинов. </p>
-                <p className="about__text" >
+                  дач, офисов и магазинов.
+                </p>
+                <p className="about__text">
                   Вся информация очень удобно структурирована.Поэтому, в
                   зависимости от предпочтений, вы можете разместить предложение,
                   либо же осуществить поиск недвижимости на первичном или
@@ -271,8 +291,9 @@ const SalePage = ({
                   в центре города или на окраине;
                   купить
                   скромную квартиру без посредников, или продать элитный дом
-                  через агентство. </p>
-                < p className="about__text" >
+                  через агентство.
+                </p>
+                <p className="about__text">
                   Для того, чтобы зря не терять время на просмотр тех вариантов,
                   которые вам не подходят, заранее определитесь с районом, типом
                   дома, высотой потолков, этажом, количеством комнат и их
@@ -289,8 +310,9 @@ const SalePage = ({
                   с хозяевами, проверит документы и договорится о встречи в
                   удобное для вас время.Естественно, за такую услугу следует
                   заплатить, однако она значительно облегчает реализацию
-                  поставленных задач. </p>
-                < p className="about__text" >
+                  поставленных задач.
+                </p>
+                <p className="about__text">
                   Если при покупке недвижимости вам сложно сориентироваться и
                   понять, где конкретно находится выставленная на продажу
                   квартира или дом, то следует воспользоваться поиском
@@ -298,14 +320,14 @@ const SalePage = ({
                   метро, магазины, рынки и какова общая транспортная и
                   социальная инфраструктура района.
                 </p>
-                < p className="about__text" >
+                <p className="about__text">
                   Рассматривая те или иные варианты, не забывайте анализировать
                   и просчитывать все возможные плюсы и минусы приобретаемого
                   жилья.Посмотрите, в каком оно состоянии, требуется ли
                   проведение ремонта или даже перепланировки.Взвесьте свои силы
                   и финансовые возможности.
                 </p>
-                <p className="about__text" >
+                <p className="about__text">
                   В случае необходимости продажи любого типа недвижимости, мы
                   также к вашим услугам.Вам потребуется только поместить
                   объявление о продаже в каталоге сайта DomLook.com.и ждать
@@ -358,9 +380,17 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   resetPagination: () => dispatch(resetPaginationCreator()),
+  setVerticalOrientation: () => dispatch(setVerticalOrientationCreator()),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(SalePage);
+const mapSizesToProps = ({ width }) => ({
+  isMobile: width < 900,
+});
+
+const Enhanced = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withSizes(mapSizesToProps),
+)(SalePage);
 
 export { Enhanced as SalePage };
 

@@ -1,6 +1,8 @@
 import React, { useMemo, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
+import { compose } from 'redux';
+import withSizes from 'react-sizes';
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
@@ -27,6 +29,7 @@ const CommonAds = ({
   sort_price,
   sort_date,
   resetPagination,
+  isMobile,
 
   idFilter,
   typeFilter,
@@ -78,9 +81,11 @@ const CommonAds = ({
 
   // console.log(typeFilter, statusFilter)
   let commonAds = useMemo(() => ads.filter((ad) => ad), [ads]);
-  const List = orientation === "vertical" ? AdsGrid : AdsList;
+  let List = orientation === "vertical" ? AdsGrid : AdsList;
 
-
+  if (isMobile) {
+    List = AdsGrid;
+  }
 
   //по id
   if (idFilter) {
@@ -334,7 +339,14 @@ const mapDispatchToProps = dispatch => ({
   resetPagination: () => dispatch(resetPaginationCreator()),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(CommonAds);
+const mapSizesToProps = ({ width }) => ({
+  isMobile: width < 900,
+});
+
+const Enhanced = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withSizes(mapSizesToProps),
+)(CommonAds);
 
 export { Enhanced as CommonAds };
 

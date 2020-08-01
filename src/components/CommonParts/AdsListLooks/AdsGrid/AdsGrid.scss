@@ -6,3 +6,9 @@
   grid-gap: 15px 12px;
   margin-bottom: 50px;
 }
+
+@media (max-width: 900px) {
+  .ads-grid {
+    grid-template-columns: 1fr;
+  }
+}

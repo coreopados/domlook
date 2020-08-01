@@ -77,7 +77,7 @@ const HorizontalCard = ({
             <button
               type="button"
               className="horizontal-card__to-favourites"
-              onClick={(e) => handleAddFavourites(e)}
+              onClick={e => handleAddFavourites(e)}
             >
               Добавить в избранное
             </button>

@@ -7,6 +7,7 @@ import { VerticalCard } from '../../Cards/VerticalCard/VerticalCard';
 export const AdsGrid = ({ ads, match }) => {
 
   return (
+    // <div className="ads-grid-wrapper">
     <div className="ads-grid">
       {ads.map(ad => (
         <Link to={`${match.path}/${ad.id}`} key={ad.id} >
@@ -14,6 +15,7 @@ export const AdsGrid = ({ ads, match }) => {
         </Link>
       ))}
     </div>
+    // </div>
   );
 }
 

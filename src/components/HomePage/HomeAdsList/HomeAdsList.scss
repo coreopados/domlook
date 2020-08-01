@@ -37,39 +37,44 @@
   }
 }
 
-@media screen and (max-width: 1200px){
+@media screen and (max-width: 1200px) {
   .home-ads-list__wrapper {
     grid-template-columns: repeat(3, 1fr);
   }
-  .vertical-card__info-wrapper{
+
+  .vertical-card__info-wrapper {
     height: 170px;
   }
 }
 
-
-@media screen and (max-width: 991px){
-  .home-ads-list__title{
+@media screen and (max-width: 991px) {
+  .home-ads-list__title {
     font-size: 24px;
   }
-  
-  .home-ads-list__wrapper {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .home-ads-list__text{
+
+  .home-ads-list__text {
     font-size: 17px;
   }
 }
-@media screen and (max-width: 576px){
 
+@media (max-width: 900px) {
   .home-ads-list__wrapper {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
+}
+
+@media screen and (max-width: 576px) {
+
+  // .home-ads-list__wrapper {
+  //   grid-template-columns: repeat(1, 1fr);
+  // }
 
   .home-ads-list__title {
     font-size: 20px;
-}
-.home-ads-list__text{
-  font-size: 14px;
-}
+  }
+
+  .home-ads-list__text {
+    font-size: 14px;
+  }
 
 }
