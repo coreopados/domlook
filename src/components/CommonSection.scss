@@ -7,7 +7,7 @@
 .common-section {
   &__wrapper {
     @include flex-style(flex);
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
   }
   &__block {
     width: 100%;
@@ -40,5 +40,20 @@
   }
   .fa-caret-up {
     color: $secondary-button-color-darkblue;
+  }
+}
+
+@media (max-width: 1200px) {
+  .common-section {
+    &__wrapper {
+      flex-direction: column;
+    }
+    &__block {
+      max-width: 940px;
+      margin: 0 auto;
+      &--news {
+        max-width: 100%;
+      }
+    }
   }
 }

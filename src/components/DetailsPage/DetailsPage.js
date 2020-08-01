@@ -319,6 +319,33 @@ const DetailsPage = ({
                 </div>
               </aside>
               <div className="details-main-content">
+                <div className="details-main-header">
+                  <div className="details-main-header__box">
+                    <h3 className="details-main-header__title">{ad.title}</h3>
+                    <div className="details-main-header__select-wrapper">
+                      <span className="details-main-header__price-word">
+                        Стоимость в
+                      </span>
+                      <div className="details-main-header__price-select-wrapper">
+                        <select
+                          defaultValue={currency}
+                          className="details-main-header__price-select"
+                          onChange={e => handleSelect(e)}
+                        >
+                          <option value="UAH">грн</option>
+                          <option value="USD">$</option>
+                          <option value="EUR">€</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="details-main-header__box">
+                    <div className="details-main-header__price-wrapper">
+                      <span className="details-main-header__price">{priceCalculator(ad.price, currency)}</span>
+                      <span className="details-main-header__square-meter">{`${calcPerSquareMeter(currency)} за кв. м.`}</span>
+                    </div>
+                  </div>
+                </div>
                 <div className="details-slider">
                   <div className="details-slider__photo-wrapper">
                     {/* <img
@@ -330,10 +357,12 @@ const DetailsPage = ({
                     {images() !== 0 &&
                       <ImageGallery items={images()} showPlayButton={false} />
                     }
-                    {images() == 0 &&
+                    {images() == 0 && (
                       <ReactFancyBox
                         thumbnail={ad.imgUrl}
-                        image={ad.imgUrl} />
+                        image={ad.imgUrl}
+                      />
+                    )
                     }
                   </div>
                 </div>
@@ -397,6 +426,19 @@ const DetailsPage = ({
 
                   <DetailsFeatures ad={ad} />
                 }
+                <div className="details-owner">
+                  <h5 className="details-owner__title">
+                    Информация о продавце:
+                  </h5>
+                  <p className="details-owner__person-name">
+                    {`${userName()}`}
+                  </p>
+                  <p className="details-owner__phone">
+                    <a href={'tel:' + `${userPhone()}`}>
+                      {userPhone()}
+                    </a>
+                  </p>
+                </div>
                 <div className="details-location">
                   <h3 className="details-location__title">Местоположение</h3>
                   <div className="details-location__map">

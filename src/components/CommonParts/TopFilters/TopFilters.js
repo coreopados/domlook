@@ -6,7 +6,8 @@ import clsx from 'clsx';
 import './TopFilters.scss';
 import {
   setVerticalOrientationCreator,
-  setHorizontalOrientationCreator
+  setHorizontalOrientationCreator,
+  setFilterOpenCreator,
 } from '../../../redux/actionCreators';
 import { DropdownPriceSort } from "./Dropdown/DropdownPrice";
 import { DropdownDateSort } from "./Dropdown/DropdownDate";
@@ -21,6 +22,7 @@ const TopFilters = ({
   totalAdsRent,
   totalAdsDailyRent,
   totalAdsCommon,
+  onFormOpen,
 
   sortPrice,
   sortDate
@@ -63,6 +65,13 @@ const TopFilters = ({
       <div className="common-top-filters__block">
         <h3 className="common-top-filters__title">{pageTitle.current}</h3>
         <div className="common-top-filters__buttons-wrapper">
+          <button
+            type="button"
+            className="common-top-filters__show-filters-button"
+            onClick={() => onFormOpen()}
+          >
+            Параметры поиска
+          </button>
           <button
             onClick={setHorizontalOrientation}
             type="button"
@@ -108,19 +117,16 @@ const TopFilters = ({
 }
 const mapStateToProps = state => ({
   orientation: state.mainReducer.orientation,
-  ads: state.mainReducer.ads
-
+  ads: state.mainReducer.ads,
 });
 
 const mapDispatchToProps = dispatch => ({
   setHorizontalOrientation: () => dispatch(setHorizontalOrientationCreator()),
   setVerticalOrientation: () => dispatch(setVerticalOrientationCreator()),
+  onFormOpen: () => dispatch(setFilterOpenCreator()),
 });
 
-
-
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(TopFilters);
-
 
 export { Enhanced as TopFilters };
 

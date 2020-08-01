@@ -6,6 +6,7 @@ import {
   removeFavouriteCreator,
   setCurrencyCreator,
   priceCalculator,
+  addFavouriteCreator,
  } from "../../../../redux/actionCreators";
 
 const VerticalCard = ({
@@ -15,6 +16,7 @@ const VerticalCard = ({
   removeFavourites,
   currency,
   setCurrency,
+  addFavourites,
  }) => {
   useEffect(() => {
 
@@ -24,6 +26,11 @@ const VerticalCard = ({
       setCurrency(JSON.parse(cachedCurrency));
     }
   }, []);
+  useEffect(() => {
+    if (favourites && favourites.length !== 0) {
+      localStorage.setItem('favourites', JSON.stringify(favourites));
+    }
+  }, [favourites]);
   const handleRemoveFavourite = (e) => {
     e.preventDefault();
     const hasFavourites = favourites.findIndex((item) => item.id === ad.id);
@@ -37,6 +44,21 @@ const VerticalCard = ({
     localStorage.setItem('favourites', JSON.stringify(favArray));
   };
 
+  const favouriteMatch = favourites.find(item => item.id === ad.id);
+  let favouriteChecker;
+
+  if (favouriteMatch) {
+    favouriteChecker = favouriteMatch.id === ad.id;
+  }
+
+  const handleAddFavourites = (e) => {
+    e.preventDefault();
+    const hasFavourites = favourites.findIndex((item) => item.id === ad.id);
+
+    if (hasFavourites === -1) {
+      addFavourites([...favourites, ad]);
+    }
+  };
 
   return (
     <article className="vertical-card">
@@ -69,19 +91,29 @@ const VerticalCard = ({
           <span className="vertical-card__floor">{`${ad.floor}/${ad.total_floors}`}</span>
           <span className="vertical-card__rooms">{ad.rooms}</span>
         </div>
+        {!favouriteChecker ? (
+          <button
+            type="button"
+            className="vertical-card__to-favourites"
+            onClick={e => handleAddFavourites(e)}
+          >
+            Добавить в избранное
+          </button>
+        ) : <p>Добавлено</p>}
       </div>
     </article>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   favourites: state.mainReducer.favourites,
   currency: state.mainReducer.currency,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  removeFavourites: (ad) => dispatch(removeFavouriteCreator(ad)),
+const mapDispatchToProps = dispatch => ({
+  removeFavourites: ad => dispatch(removeFavouriteCreator(ad)),
   setCurrency: currency => dispatch(setCurrencyCreator(currency)),
+  addFavourites: ad => dispatch(addFavouriteCreator(ad)),
 });
 
 const Enhanced = connect(mapStateToProps, mapDispatchToProps)(VerticalCard);

@@ -99,23 +99,105 @@
       background: url("/domlook/img/card-icons/rooms-icon.png") no-repeat;
     }
   }
+  &__to-favourites {
+    color: $section-title-color-black;
+    font-size: 13px;
+    border-bottom: 1px solid $section-title-color-black;
+  }
 }
 
-
-@media screen and(max-width: 991px){
-  .vertical-card__info-wrapper{
+@media screen and(max-width: 991px) {
+  .vertical-card__info-wrapper {
     max-height: 170px;
   }
-  .vertical-card__specification{
+  .vertical-card__specification {
     justify-content: center;
   }
-  .home-ads-list__wrapper{
-    grid-gap:10px;
+  .home-ads-list__wrapper {
+    grid-gap: 10px;
   }
 }
-@media screen and(max-width: 576px){
-  .vertical-card{
-    max-width: 80%;
+
+@media (max-width: 900px) {
+  .vertical-card {
+    width: 70%;
     margin: 0 auto;
+    &__info-wrapper {
+      position: relative;
+      padding: 20px 10px 0;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+    &__photo-wrapper {
+      height: 300px;
+    }
+    &__title,
+    &__description {
+      flex-basis: 100%;
+      text-align: center;
+    }
+    &__specification {
+      height: 40px;
+      flex-basis: calc(100% + 20px);
+      align-items: center;
+      border-top: 1px solid $card-border-color-lightblue;
+      margin: 0 -10px;
+      align-self: flex-end;
+      justify-content: flex-start;
+      padding-left: 10px;
+      & + p {
+        font-size: 13px;
+        font-weight: bold;
+        position: absolute;
+        bottom: 12px;
+        right: 10px;
+        z-index: 1;
+      }  
+    }
+    &__to-favourites {
+      position: absolute;
+      bottom: 12px;
+      right: 10px;
+      z-index: 1;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .vertical-card {
+    &__photo-wrapper {
+      height: 250px;
+    }
+  }
+}
+@media screen and(max-width: 576px) {
+  .vertical-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and(max-width: 400px) {
+  .vertical-card {
+    &__photo-wrapper {
+      height: 150px;
+    }
+    &__info-wrapper {
+      padding-bottom: 30px;
+      height: 200px;
+      max-height: 200px;
+    }
+    &__specification {
+      justify-content: center;
+      & + p {
+        right: 50%;
+        transform: translateX(54%);
+      }
+    }
+    &__to-favourites {
+      right: 50%;
+      transform: translateX(54%);
+    }
   }
 }

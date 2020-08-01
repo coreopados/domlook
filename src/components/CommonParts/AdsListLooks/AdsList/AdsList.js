@@ -21,7 +21,7 @@ const AdsList = ({ ads, match, setFavourites }) => {
 
     <div className="rows-list">
       {ads.map((ad) => (
-        <Link to={`${match.path}/${ad.id}`} key={ad.id} >
+        <Link to={`${match.path}/${ad.id}`} key={ad.id}>
           <HorizontalCard ad={ad} />
         </Link>
       ))}

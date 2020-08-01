@@ -83,6 +83,9 @@ export const IS_LOGGED_IN = "IS_LOGGED_IN";
 
 export const USER_ID = "USER_ID";
 
+export const SET_FILTERS_OPEN = "SET_FILTERS_OPEN";
+export const SET_FILTERS_CLOSE = "SET_FILTERS_CLOSE";
+
 export const SET_CURRENCY = 'SET_CURRENCY';
 
 export const EURO_RATIO = 0.85;

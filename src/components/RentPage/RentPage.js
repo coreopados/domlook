@@ -2,6 +2,8 @@
 import React, { useMemo, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
+import { compose } from 'redux';
+import withSizes from 'react-sizes';
 import PropTypes from "prop-types";
 import "../CommonSection.scss";
 import Loader from "react-loader-spinner";
@@ -27,6 +29,7 @@ const RentPage = ({
   sort_price,
   sort_date,
   resetPagination,
+  isMobile,
 
   idFilter,
   typeFilter,
@@ -73,13 +76,15 @@ const RentPage = ({
     priceFromFilter,
     priceToFilter,
     typeTransaction,
-    sort_price
+    sort_price,
   ]);
 
   let rentAds = useMemo(() => ads.filter((ad) => ad.prop_status === "rent"), [ads]);
-  const List = orientation === "vertical" ? AdsGrid : AdsList;
+  let List = orientation === "vertical" ? AdsGrid : AdsList;
 
-
+  if (isMobile) {
+    List = AdsGrid;
+  }
 
   //по id
   if (idFilter) {
@@ -376,7 +381,14 @@ const mapDispatchToProps = dispatch => ({
   resetPagination: () => dispatch(resetPaginationCreator()),
 });
 
-const Enhanced = connect(mapStateToProps, mapDispatchToProps)(RentPage);
+const mapSizesToProps = ({ width }) => ({
+  isMobile: width < 900,
+});
+
+const Enhanced = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withSizes(mapSizesToProps),
+)(RentPage);
 
 export { Enhanced as RentPage };
 

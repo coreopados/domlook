@@ -50,7 +50,7 @@ const NewsPage = ({
         <div className="container">
           <div className="common-section__wrapper">
             <NewsFiltersForm news={news} activeCategory={filterCategoryNews} />
-            <div className="common-section__block">
+            <div className="common-section__block common-section__block--news">
               <NewsAdsList category={filterCategoryNews} filterCategoryNews={news} news={currentNewsPosts} match={match} />
               {/* (news.length > 9) && <PaginationNews currentPageNews={currentPageNews} totalItems={news.length} /> */}
               {(news.length > 9) && <Pagination totalItems={news.length} />}
