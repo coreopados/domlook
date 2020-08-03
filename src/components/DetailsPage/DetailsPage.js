@@ -72,9 +72,9 @@ const DetailsPage = ({
     const hasFavourites = favourites.findIndex((item) => item.id === ad.id);
 
     if (hasFavourites === -1) {
-      addFavourites([...favourites, ad]);
+      addFavourites([...favourites, ad])
     }
-  };
+  }
 
   const calcPerSquareMeter = useCallback((currency) => {
     const total_area = Number(ad.total_area);

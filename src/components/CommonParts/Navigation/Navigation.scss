@@ -18,7 +18,8 @@
   &__wrapper {
     @include flex-style(flex, row, flex-start, center);
     flex-wrap: wrap;
-    height: 60px;
+    // height: 60px;
+    padding: 20px 0;
   }
   &__page-name {
     position: relative;
@@ -42,5 +43,14 @@
   .common-nav__wrapper {
     max-width: 940px;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .common-nav {
+    margin-bottom: 0;
+    &__link {
+      padding-bottom: 10px;
+    }
   }
 }
