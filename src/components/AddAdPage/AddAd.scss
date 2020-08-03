@@ -291,6 +291,10 @@
   #ad-info .wrap-form {
     grid-template-columns: repeat(2, 1fr);
   }
+  #ad-info .wrap-form label {
+    width: 250px;
+    margin: 0 auto;
+  }
   .bottom-part-form {
     .description,
     .street-address {
@@ -321,10 +325,10 @@
   #ad-info .wrap-form {
     grid-template-columns: 1fr;
   }
-  #ad-info .wrap-form label {
-    width: 250px;
-    margin: 0 auto;
-  }
+  // #ad-info .wrap-form label {
+  //   width: 250px;
+  //   margin: 0 auto;
+  // }
   .bottom-part-form {
     .wrap-addintional-info {
       grid-template-columns: 1fr;
